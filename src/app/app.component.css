@@ -1,0 +1,51 @@
+.image {
+    width: 2.8rem;
+    height: 2.8rem;
+}
+
+.nav {
+    display: flex;
+}
+
+.navBar-brand {
+    display: flex;
+}
+
+.search {
+    border: none;
+    background-color: rgba(240, 239, 239, 0.879);
+    width: 40rem;
+    padding: 0.6rem;
+    border-radius: 1rem;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+    transform-origin: center;
+    margin-left: 16rem;
+}
+
+.search:focus {
+    width: 47rem;
+    border: 0.25rem solid rgb(159, 192, 245);
+    background-color: white;
+}
+.search::placeholder {
+    font: inherit;
+}
+
+.material-symbols-outlined {
+    font-size: 2rem;
+    color: gray;
+}
+
+.material-symbols-outlined:focus {
+    color: gray;
+}
+
+.search-btn {
+    margin-left: -3.8rem;
+    outline: none;
+}
+
+.search-btn:focus {
+    outline: none;
+}
