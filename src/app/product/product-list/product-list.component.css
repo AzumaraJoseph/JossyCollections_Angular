@@ -4,13 +4,6 @@
  
 }
 
-.display {
-    width: 16rem;
-    border-radius: 0.6rem;
-    background-color: white; 
-    max-height: min-content
-}
-
 .card:hover {
     transform: scale(1.02);
     transition: all 0.3s;
