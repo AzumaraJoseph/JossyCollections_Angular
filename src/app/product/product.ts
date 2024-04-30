@@ -1,0 +1,38 @@
+export interface Product {
+    id: string;
+    name: string;
+    description?: string;
+    highPrice: number;
+    lowPrice: number;
+    discountedHighPrice?: number;
+    discountedLowPrice?: number;
+    priceDiscountPercent?: number;
+    specification?: {
+        id: string;
+        model: string;
+        material: string;
+        shipping: boolean;
+
+    };
+    sold?: number;
+    tag?: string;
+    category?: string;
+    ratingsQuantity?: number;
+    ratingsAverage?: number;
+    images: string[];
+    color?: [
+        {
+            id: string;
+            color: string;
+            quantity: number;
+            discountPrice: number;
+            price: number;
+            colorImage: string;
+        }
+    ];
+    slug?: string;
+    imageCover?: string;
+    quantity?: number;
+
+}
+
