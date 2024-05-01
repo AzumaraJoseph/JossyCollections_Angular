@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 
@@ -9,12 +9,25 @@ import { ProductService } from '../product.service';
 })
 export class ProductListComponent implements OnInit {
   pageTitle!: string;
-  products$: Product[] | undefined
+  products$!: Product[] | undefined
+  @Input() rating!: number | null;
 
   constructor(private productService: ProductService) { }
 
+  ratingAvg(): number | null {
+    if (this.products$) {
+    this.products$?.map(product => {
+     return product.ratingsAverage
+     })
+    }
+    return null
+
+  }
+
   ngOnInit(): void {
     this.pageTitle = 'Products You May Love!';
+    this.rating = this.ratingAvg()
+
     this.productService.products$.subscribe(product => 
       this.products$ = product
     );

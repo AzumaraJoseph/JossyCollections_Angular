@@ -1,0 +1,41 @@
+.material-icons {
+    color: rgba(236, 229, 229, 0.879);
+    font-size: 1.15rem;
+}
+
+.rating {
+    align-items: center;
+    column-gap: 1rem;
+}
+
+.rating-average {
+    width: fit-content;
+    background-color: rgba(255, 255, 255, 0.997);
+    text-align: center;
+    border-radius: 8rem;
+}
+
+.rating-average .star-outer::before {
+    content: "\2605 \2605 \2605 \2605 \2605";
+    color: rgba(225, 223, 223, 0.984);
+}
+
+.rating-average .star-outer {
+    position: relative;
+    display: flex;
+    font-size: 1.3rem;
+}
+
+
+.rating-average .star-inner::before {
+    content: "\2605 \2605 \2605 \2605 \2605";
+    color: rgba(229, 173, 31, 0.995);
+
+}
+
+.rating-average .star-inner {
+    position: absolute;
+    /* top: 0;
+    left: 0; */
+    font-size: 1.3rem;
+}

@@ -5,97 +5,19 @@
     <div class="col-md-12 mt-4">
         <div class="row ms-5">
             <div class="card p-3 m-2" style="width: 16rem;" *ngFor="let product of products$ ">
-                <img src="/assets/img/250x250_{{product.imageCover}}" [style.width.px]="230" class="card-img-top" alt="Products Image">
+                <img src="/assets/img/250x250_{{product.imageCover}}" class="card-img-top" alt="Products Image">
                     
-                <div class="card-body p-4">
+                <div class="card-body p-0">
                     <p class="card-title fw-semibold" style="font-size: 14px;">{{product.name}}</p>
-                    <p class="card-text"><strong>${{product.highPrice}} - ${{product.lowPrice}}</strong></p>
-                    <div class="m-0">
-                        <span class="material-icons">grade</span>
-                        <span class="material-icons">grade</span>
-                        <span class="material-icons">grade</span>
-                        <span class="material-icons">grade</span>
-                        <span class="material-icons">grade</span>
+                    <p class="card-text mb-0"><strong>${{product.highPrice}} - ${{product.lowPrice}}</strong>
+                    </p>
+                    <div>
+                        <app-star></app-star>
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="display ms-3" style="background-color: white; max-height: min-content;">
-                <div class="col w-75 ms-auto me-auto">
-                    <div class="col">
-                        <img src="../../assets/img/slide_4.jpg" class="card-img-top" alt="Products image">
-                    </div>
-                    <div class="col">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="h6"><strong>$20.04 - $25.00</strong></p>
-                        <div class="m-0">
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="display ms-3" style="background-color: white; max-height: min-content;">
-                <div class="col w-75 ms-auto me-auto">
-                    <div class="col">
-                        <img src="../../assets/img/slide_4.jpg" class="card-img-top" alt="Products image">
-                    </div>
-                    <div class="col">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="h6"><strong>$20.04 - $25.00</strong></p>
-                        <div class="m-0">
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="display ms-3" style="background-color: white; max-height: min-content;">
-                <div class="col w-75 ms-auto me-auto">
-                    <div class="col">
-                        <img src="../../assets/img/slide_4.jpg" class="card-img-top" alt="Products image">
-                    </div>
-                    <div class="col">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="h6"><strong>$20.04 - $25.00</strong></p>
-                        <div class="m-0">
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="display ms-3" style="background-color: white; max-height: min-content;">
-                <div class="col w-75 ms-auto me-auto">
-                    <div class="col">
-                        <img src="../../assets/img/slide_4.jpg" class="card-img-top" alt="Products image">
-                    </div>
-                    <div class="col">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="h6"><strong>$20.04 - $25.00</strong></p>
-                        <div class="m-0">
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                            <span class="material-icons">grade</span>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
-    </div>
-            
+    </div>    
 </div>
 
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
