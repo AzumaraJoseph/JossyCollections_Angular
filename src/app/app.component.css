@@ -37,14 +37,14 @@ body {
     font: inherit;
 }
 
-.material-symbols-outlined {
+.material-icons {
     font-size: 2rem;
     color: rgba(128, 128, 128, 0.997);
     margin-top: 8px;
 }
 
 
-.material-symbols-outlined:focus {
+.material-icons:focus {
     color: gray;
 }
 

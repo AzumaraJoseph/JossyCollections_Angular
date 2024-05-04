@@ -1,4 +1,5 @@
 export interface Product {
+value: number;
     id: string;
     name: string;
     description?: string;
@@ -18,7 +19,7 @@ export interface Product {
     tag?: string;
     category?: string;
     ratingsQuantity?: number;
-    ratingsAverage?: number;
+    ratingsAverage: number;
     images: string[];
     color?: [
         {

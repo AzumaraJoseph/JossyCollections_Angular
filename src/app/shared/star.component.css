@@ -22,20 +22,83 @@
 
 .rating-average .star-outer {
     position: relative;
-    display: flex;
+    display: inline-block;
     font-size: 1.3rem;
 }
 
 
 .rating-average .star-inner::before {
     content: "\2605 \2605 \2605 \2605 \2605";
-    color: rgba(229, 173, 31, 0.995);
+    color: rgba(255, 183, 0, 0.995);
 
 }
 
-.rating-average .star-inner {
+.rating-average .star-inner   {
     position: absolute;
-    /* top: 0;
-    left: 0; */
+    top: 0;
+    left: 0;
     font-size: 1.3rem;
+    display: flex;
+    overflow: hidden;
 }
+
+
+/* 
+star-rating.component.css
+.star-rating {
+    font-size: 24px; /* Adjust size as needed 
+  } */
+  
+/* .star {
+color: gold; } */
+
+/* .partial-star {
+    overflow: hidden;
+    color: gold; 
+    overflow: hidden;
+    display: inline-block; 
+} */
+
+
+/* .star-container {
+    display: flex;
+    font-size: 24px;
+    width: 80%;
+  } */
+/*   
+  .full-stars {
+    color: gold;
+  } */
+  
+  /* .fractional-stars {
+    display: inline-block;
+    color: gold;
+    width: {{ getFractionalPart() * 100 }}%; 
+    overflow: hidden;
+  } */
+  
+
+  /* src/app/star-rating/star-rating.component.css */
+
+/* .star-container {
+    display: inline-flex;
+    align-items: center;
+    font-size: 24px;
+} */
+/*   
+.full-star {
+color: gold;
+position: relative;
+overflow: hidden;
+} */
+
+/* .partial-star {
+display: inline-block;
+white-space: nowrap;
+color: red;
+overflow: hidden;
+font-size: 24px;
+
+} */
+  
+.star {}

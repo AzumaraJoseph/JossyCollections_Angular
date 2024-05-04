@@ -1,5 +1,5 @@
 <div class="fluid-container" style="background-color: rgba(240, 239, 239, 0.879);">
-  <div class="navBar navBar-expand" style="background-color: white;">
+  <div class="navBar navBar-expand sticky-top" style="background-color: white;">
     <div class="row nav pb-2">
       <div class="col-md-6">
         <div class="navBar-brand mt-2 ms-5">
@@ -12,11 +12,15 @@
       <div class="col-md-6 d-flex">
         <input type="text" placeholder="Search Products" class="search mt-2">
         <button class="btn search-btn" type="button">
-          <i class="material-symbols-outlined">search</i>
+          <span class="material-icons">
+            search
+            </span>
+          <!-- <i class="material-symbols-outlined">search</i> -->
         </button>
       </div>
-    </div>
+    </div>    
   </div>
+
   <div class="col-md-11 p-4 ms-auto me-auto" >
     <div id="carouselid" class="carousel slide" data-ride="carousel" data-pause="false">
       <div class="carousel-indicators ">
@@ -45,7 +49,12 @@
       </div>   
     </div>
   </div>
+  
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+
+  
+  
 </div>
-<div>
-  <router-outlet></router-outlet>
-</div>
+

@@ -2,21 +2,28 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
+import { Product } from './product';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  
   private productsUrl = 'http://127.0.0.1:5000/api/v1/products';
 
   constructor(private http: HttpClient) { }
 
   products$ = this .http.get<any>(this.productsUrl).pipe(
     map(result => result.data.data),
-    tap( result=> console.log('Products', JSON.stringify(result))),
+    // tap( result=> console.log('Products', JSON.stringify(result))),
     catchError(this.handleError)
   );
+
+  product$ = (id: number) => this.http.get<any>(`${this.productsUrl}/${id}`).pipe(
+    map(result => result.data.data.id),
+    tap(data => console.log('Single Product: ', data)),
+    catchError(this.handleError)
+  )
+
 
 
   private handleError(err: HttpErrorResponse): Observable<never> {
