@@ -12,7 +12,7 @@
       <div class="col-md-6 d-flex">
         <input type="text" placeholder="Search Products" class="search mt-2">
         <button class="btn search-btn" type="button">
-          <span class="material-icons">
+          <span class="material-icons material">
             search
             </span>
           <!-- <i class="material-symbols-outlined">search</i> -->
@@ -54,7 +54,39 @@
     <router-outlet></router-outlet>
   </div>
 
-  
+  <footer class="footer d-flex justify-content-evenly" align="center" style="font-size: 13px;;" [ngClass]="{ 'hidden': isScrolledDown }">
+
+    <a class="footer-link" [routerLink]="['/home']" routerLinkActive="active">
+        <i class="material-icons footer-icon active">
+            home
+        </i>
+        <p class="mb-0">Home</p>
+    </a>
+    <a class="footer-link" [routerLink]="['/star']" routerLinkActive="active" >
+        <i class="material-icons footer-icon">
+            format_list_bulleted
+        </i>
+        <p class="mb-0">Category</p>
+    </a>
+    <a class="footer-link">
+        <i class="material-icons footer-icon">
+            shopping_cart
+        </i>
+        <p class="mb-0">Cart</p>
+    </a>
+    <a class="footer-link">
+        <i class="material-icons footer-icon">
+            shopping_bag
+        </i>
+        <p class="mb-0">Order</p>
+    </a>
+    <a class="footer-link">
+        <i class="material-icons footer-icon">
+            person_outline
+        </i>
+        <p class="mb-0">Account</p>
+    </a>        
+  </footer>
   
 </div>
 

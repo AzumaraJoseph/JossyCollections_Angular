@@ -4,7 +4,8 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { StarComponent } from './shared/star.component';
 
 const routes: Routes = [
-  { path: 'products', component: ProductListComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: ProductListComponent },
   { path: 'star', component: StarComponent }
 ];
 

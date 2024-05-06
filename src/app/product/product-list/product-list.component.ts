@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { catchError } from 'rxjs';
@@ -17,23 +17,23 @@ export class ProductListComponent implements OnInit {
 
 
 
-  isScrolledDown: boolean = false;
-  lastScrollTop: number = 0;
+  // isScrolledDown: boolean = false;
+  // lastScrollTop: number = 0;
 
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    const currentScroll = window.pageYOffset || document.documentElement.scrollTop
+  // @HostListener('window:scroll', [])
+  // onWindowScroll() {
+  //   const currentScroll = window.pageYOffset || document.documentElement.scrollTop
 
-    if (currentScroll > this.lastScrollTop) {
-      // Scroll down
-      this.isScrolledDown = true;
-    } else {
-      // Scroll up
-      this.isScrolledDown = false;
-    }
+  //   if (currentScroll > this.lastScrollTop) {
+  //     // Scroll down
+  //     this.isScrolledDown = true;
+  //   } else {
+  //     // Scroll up
+  //     this.isScrolledDown = false;
+  //   }
     
-    this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  }
+  //   this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+  // }
 
 
 
