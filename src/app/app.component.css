@@ -1,5 +1,5 @@
-body {
-    max-width: 120rem;
+.fluid-container {
+    width: 97rem;
     overflow: hidden;
 }
 
@@ -18,10 +18,11 @@ body {
 
 .search {
     border: none;
-    background-color: rgba(240, 239, 239, 0.879);
-    width: 40rem;
-    padding: 0.6rem;
+    background-color: rgba(245, 243, 243, 0.977);
+    width: 47rem;
+    padding: 0.5rem;
     border-radius: 1rem;
+    font-size: 0.85rem;
     outline: none;
     transition: all 0.3s ease-in-out;
     transform-origin: center;
@@ -29,7 +30,7 @@ body {
 }
 
 .search:focus {
-    width: 47rem;
+    width: 54rem;
     border: 0.25rem solid rgb(159, 192, 245);
     background-color: white;
 }
@@ -103,9 +104,8 @@ body {
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 100%;
+    width: 97rem;
     background-color: rgba(255, 250, 250, 0.975);
-    /* padding: 20px; */
     transition: transform 0.3s ease-in-out;
   }
   
