@@ -6,10 +6,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { ProductModule } from './product/product.module';
+import { ErrorPageComponent } from './error-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    ErrorPageComponent,
   ],
   imports: [
     BrowserModule,

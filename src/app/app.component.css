@@ -1,5 +1,5 @@
 .fluid-container {
-    width: 97rem;
+    /* width: 97rem; */
     overflow: hidden;
 }
 
@@ -12,6 +12,9 @@
     display: flex;
 }
 
+.navBar {
+    /* width: 100%; */
+}
 .navBar-brand {
     display: flex;
 }
@@ -63,7 +66,7 @@
 
 .img-fluid {
     width: 100%;
-    height: 37rem;
+    height: 37.7rem;
     border-radius: 10px;
 }
 
@@ -76,7 +79,6 @@
 }
 
 .carousel-inner {
-    /* height: 90rem; */
     width: 100%;
     overflow: hidden;
 }
@@ -88,11 +90,6 @@
 .carousel-indicators .active {
     background-color: rgba(90, 90, 175, 0.984);
 }
-/* 
-@keyframes slide-out {
-    0% { transform: translateX(0%); }
-    100% { transform: translateX(-100%); }
-} */
 
 @keyframes slide-in {
     0% { transform: translateX(100%); }
@@ -104,7 +101,7 @@
     position: fixed;
     bottom: 0;
     left: 0;
-    width: 97rem;
+    width: 100%;
     background-color: rgba(255, 250, 250, 0.975);
     transition: transform 0.3s ease-in-out;
   }

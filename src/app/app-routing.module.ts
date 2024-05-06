@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ProductListComponent } from './product/product-list/product-list.component';
 import { StarComponent } from './shared/star.component';
+import { ErrorPageComponent } from './error-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', component: ProductListComponent },
-  { path: 'star', component: StarComponent }
+  { path: 'star', component: StarComponent },
+  {path: '**', component: ErrorPageComponent }
 ];
 
 @NgModule({

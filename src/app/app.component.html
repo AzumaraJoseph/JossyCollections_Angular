@@ -1,92 +1,94 @@
-<div class="fluid-container" style="background-color: rgba(247, 247, 247, 0.982);">
-  <div class="navBar navBar-expand sticky-top" style="background-color: white;">
-    <div class="row nav pb-2">
-      <div class="col-md-5">
-        <div class="navBar-brand mt-2 ms-5">
-          <img src="../assets/img/apple-touch-icon.png" class="image me-3" alt="Brand">
-          <span class="col-md-2">
-            <strong class="h2 fst-italic">Jossy</strong>
-          </span>
-        </div>
+<div class="navBar navBar-expand fixed-top" style="background-color: white;">
+  <div class="row nav pb-2">
+    <div class="col-md-5">
+      <div class="navBar-brand mt-2 ms-5">
+        <img src="../assets/img/apple-touch-icon.png" class="image me-3" alt="Brand">
+        <span class="col-md-2">
+          <strong class="h2 fst-italic">Jossy</strong>
+        </span>
       </div>
-      <div class="col-md-7 d-flex">
-        <input type="text" placeholder="Search Products" class="search mt-2">
-        <button class="btn search-btn" type="button">
-          <span class="material-icons material">
-            search
-            </span>
-          <!-- <i class="material-symbols-outlined">search</i> -->
-        </button>
-      </div>
-    </div>    
-  </div>
-
-  <div class="col-md-11 p-4 ms-auto me-auto" >
-    <div id="carouselid" class="carousel slide" data-ride="carousel" data-pause="false">
-      <div class="carousel-indicators ">
-          <button type="button" data-target="#carouselid" data-slide-to="0" class="active size" ></button>
-          <button type="button" data-target="#carouselid" data-slide-to="1" class="size"></button>
-          <button type="button" data-target="#carouselid" data-slide-to="2" class="size"></button>
-          <button type="button" data-target="#carouselid" data-slide-to="3" class="size"></button>
-          <button type="button" data-target="#carouselid" data-slide-to="4" class="size"></button>
-      </div>
-      <div class="carousel-inner">
-        <div class="carousel-item active" > 
-            <img src="../../assets/img/slide_1.jpg" class="img-fluid" alt="Slide Logo">
-        </div>
-        <div class="carousel-item">
-            <img src="../../assets/img/slide_2.jpg" class="img-fluid" alt="Slide Logo">
-        </div>
-        <div class="carousel-item">
-            <img src="../../assets/img/slide_3.jpg" class="img-fluid" alt="Slide Logo">
-        </div>
-        <div class="carousel-item">
-            <img src="../../assets/img/slide_4.jpg" class="img-fluid" alt="Slide Logo">
-        </div>
-        <div class="carousel-item">
-            <img src="../../assets/img/slide_5.jpg" class="img-fluid" alt="Slide Logo">
-        </div>
-      </div>   
     </div>
-  </div>
-  
-  <div>
-    <router-outlet></router-outlet>
-  </div>
+    <div class="col-md-7 d-flex">
+      <input type="text" placeholder="Search Products" class="search mt-2">
+      <button class="btn search-btn" type="button">
+        <span class="material-icons material">
+          search
+          </span>
+        <!-- <i class="material-symbols-outlined">search</i> -->
+      </button>
+    </div>
+  </div>    
+</div>
 
-  <footer class="footer d-flex justify-content-evenly" align="center" style="font-size: 13px;;" [ngClass]="{ 'hidden': isScrolledDown }">
+<div class="fluid-container" style="background-color: rgba(247, 247, 247, 0.982);">
+    <div class="col-md-11 p-4 ms-auto me-auto" >
+      <div id="carouselid" class="carousel slide" data-ride="carousel" data-pause="false">
+        <div class="carousel-indicators ">
+            <button type="button" data-target="#carouselid" data-slide-to="0" class="active size" ></button>
+            <button type="button" data-target="#carouselid" data-slide-to="1" class="size"></button>
+            <button type="button" data-target="#carouselid" data-slide-to="2" class="size"></button>
+            <button type="button" data-target="#carouselid" data-slide-to="3" class="size"></button>
+            <button type="button" data-target="#carouselid" data-slide-to="4" class="size"></button>
+        </div>
+        <div class="carousel-inner">
+          <div class="carousel-item active" > 
+              <img src="../../assets/img/slide_1.jpg" class="img-fluid" alt="Slide Logo">
+          </div>
+          <div class="carousel-item">
+              <img src="../../assets/img/slide_2.jpg" class="img-fluid" alt="Slide Logo">
+          </div>
+          <div class="carousel-item">
+              <img src="../../assets/img/slide_3.jpg" class="img-fluid" alt="Slide Logo">
+          </div>
+          <div class="carousel-item">
+              <img src="../../assets/img/slide_4.jpg" class="img-fluid" alt="Slide Logo">
+          </div>
+          <div class="carousel-item">
+              <img src="../../assets/img/slide_5.jpg" class="img-fluid" alt="Slide Logo">
+          </div>
+        </div>   
+      </div>
+    </div>
+    
+    <div>
+      <router-outlet></router-outlet>
+    </div>
 
-    <a class="footer-link" [routerLink]="['/home']" routerLinkActive="active">
-        <i class="material-icons footer-icon active">
-            home
-        </i>
-        <p class="mb-0">Home</p>
-    </a>
-    <a class="footer-link" [routerLink]="['/star']" routerLinkActive="active" >
-        <i class="material-icons footer-icon">
-            format_list_bulleted
-        </i>
-        <p class="mb-0">Category</p>
-    </a>
-    <a class="footer-link">
-        <i class="material-icons footer-icon">
-            shopping_cart
-        </i>
-        <p class="mb-0">Cart</p>
-    </a>
-    <a class="footer-link">
-        <i class="material-icons footer-icon">
-            shopping_bag
-        </i>
-        <p class="mb-0">Order</p>
-    </a>
-    <a class="footer-link">
-        <i class="material-icons footer-icon">
-            person_outline
-        </i>
-        <p class="mb-0">Account</p>
-    </a>        
-  </footer>
-  
+    <div class="col">
+      <footer class="footer d-flex justify-content-evenly" align="center" style="font-size: 13px;;" [ngClass]="{ 'hidden': isScrolledDown }">
+      
+        <a class="footer-link" [routerLink]="['/home']" routerLinkActive="active">
+            <i class="material-icons footer-icon active">
+                home
+            </i>
+            <p class="mb-0">Home</p>
+        </a>
+        <a class="footer-link" [routerLink]="['/star']" routerLinkActive="active" >
+            <i class="material-icons footer-icon">
+                format_list_bulleted
+            </i>
+            <p class="mb-0">Category</p>
+        </a>
+        <a class="footer-link">
+            <i class="material-icons footer-icon">
+                shopping_cart
+            </i>
+            <p class="mb-0">Cart</p>
+        </a>
+        <a class="footer-link">
+            <i class="material-icons footer-icon">
+                shopping_bag
+            </i>
+            <p class="mb-0">Order</p>
+        </a>
+        <a class="footer-link">
+            <i class="material-icons footer-icon">
+                person_outline
+            </i>
+            <p class="mb-0">Account</p>
+        </a>        
+      </footer>
+    </div>
+
 </div>
 

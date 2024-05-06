@@ -16,27 +16,6 @@ export class ProductListComponent implements OnInit {
   constructor(private productService: ProductService) { }
 
 
-
-  // isScrolledDown: boolean = false;
-  // lastScrollTop: number = 0;
-
-  // @HostListener('window:scroll', [])
-  // onWindowScroll() {
-  //   const currentScroll = window.pageYOffset || document.documentElement.scrollTop
-
-  //   if (currentScroll > this.lastScrollTop) {
-  //     // Scroll down
-  //     this.isScrolledDown = true;
-  //   } else {
-  //     // Scroll up
-  //     this.isScrolledDown = false;
-  //   }
-    
-  //   this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
-  // }
-
-
-
   ngOnInit(): void {
     this.pageTitle = 'Products You May Love!';
 
@@ -47,8 +26,5 @@ export class ProductListComponent implements OnInit {
 
 
   }
-
-
   
-
 }

@@ -24,19 +24,3 @@
     outline: orange;
 
 }
-
-/* 
-.footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #f0f0f0;
-    padding: 20px;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .hidden {
-    transform: translateY(100%);
-  } */
-  
