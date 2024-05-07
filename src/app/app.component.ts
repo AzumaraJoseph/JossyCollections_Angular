@@ -7,6 +7,7 @@ import { Component, HostListener } from '@angular/core';
 })
 export class AppComponent {
   title = 'Jossy-Third-Project';
+  isSlider: boolean = true;
 
   
   isScrolledDown: boolean = false;
