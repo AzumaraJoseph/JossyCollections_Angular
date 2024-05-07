@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { ErrorPageComponent } from './error-page.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { StarComponent } from './shared/star.component';
+import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { StarComponent } from './shared/star.component';
     ProductListComponent,
     StarComponent,
     ErrorPageComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

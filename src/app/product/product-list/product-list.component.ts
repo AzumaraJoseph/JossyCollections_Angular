@@ -36,4 +36,8 @@ export class ProductListComponent implements OnInit {
 
   }
 
+  onProductChange(productId: string) {
+    this.productService.selectedProductChanged(productId);
+  }
+
 }

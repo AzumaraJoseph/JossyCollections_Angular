@@ -1,3 +1,6 @@
-.margin {
-    margin-top: 50px;
+.detail {
+    margin-top: 4.3rem;
+    padding: 0 2rem 0 2rem;
+    display: flex;
+    flex-direction: column;
 }

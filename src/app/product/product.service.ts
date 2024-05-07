@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, tap } from 'rxjs/operators';
-import { Observable, throwError } from 'rxjs';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, Subject, combineLatest, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,17 +11,34 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
+  selectedProductSubject = new BehaviorSubject<string>('0');
+  selectedProductAction = this.selectedProductSubject.asObservable();
+
   products$ = this.http.get<any>(this.productsUrl).pipe(
     map(result => result.data.data),
     tap( result=> console.log('Products', JSON.stringify(result))),
+    shareReplay(1),
     catchError(this.handleError)
   );
 
-  product$ = (id: number) => this.http.get<any>(`${this.productsUrl}/${id}`).pipe(
-    map(result => result.data.data.id),
-    tap(data => console.log('Single Product: ', data)),
-    catchError(this.handleError)
+  product$ = combineLatest([
+    this.products$,
+    this.selectedProductAction
+  ]).pipe(
+    map(([products, selectedProductId]) => {
+      return products.find((product: {id: string}) => product.id === selectedProductId)
+    })
   )
+
+  selectedProductChanged(id: string) {
+    this.selectedProductSubject.next(id);
+  }
+
+  // selectedProduct$ = (id: number) => this.http.get<any>(`${this.productsUrl}/${id}`).pipe(
+  //   map(result => result.data.data.id),
+  //   tap(data => console.log('Single Product: ', data)),
+  //   catchError(this.handleError)
+  // )
 
 
 
