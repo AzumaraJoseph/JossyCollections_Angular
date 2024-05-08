@@ -21,43 +21,42 @@
 </div>
 
 <div class="fluid-container" style="background-color: rgba(247, 247, 247, 0.982);">    
-    <div>
-      <router-outlet></router-outlet>
-    </div>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
 
-      <footer class="footer d-flex justify-content-evenly" align="center" style="font-size: 13px;;" [ngClass]="{ 'hidden': isScrolledDown }">
-      
-        <a class="footer-link" [routerLink]="['/products']" routerLinkActive="active">
-            <i class="material-icons footer-icon active">
-                home
-            </i>
-            <p class="mb-0">Home</p>
-        </a>
-        <a class="footer-link">
-            <i class="material-icons footer-icon">
-                format_list_bulleted
-            </i>
-            <p class="mb-0">Category</p>
-        </a>
-        <a class="footer-link">
-            <i class="material-icons footer-icon">
-                shopping_cart
-            </i>
-            <p class="mb-0">Cart</p>
-        </a>
-        <a class="footer-link">
-            <i class="material-icons footer-icon">
-                shopping_bag
-            </i>
-            <p class="mb-0">Order</p>
-        </a>
-        <a class="footer-link">
-            <i class="material-icons footer-icon">
-                person_outline
-            </i>
-            <p class="mb-0">Account</p>
-        </a>        
-      </footer>
-
+  <footer class="footer d-flex" align="center" style="font-size: 13px;" [ngClass]="{ 'hidden': isScrolledDown }">
+  
+    <a class="footer-link" [routerLink]="['/products']" routerLinkActive="active">
+        <i class="material-icons footer-icon active">
+            home
+        </i>
+        <p class="mb-0">Home</p>
+    </a>
+    <a class="footer-link">
+        <i class="material-icons footer-icon">
+            format_list_bulleted
+        </i>
+        <p class="mb-0">Category</p>
+    </a>
+    <a class="footer-link">
+        <i class="material-icons footer-icon">
+            shopping_cart
+        </i>
+        <p class="mb-0">Cart</p>
+    </a>
+    <a class="footer-link">
+        <i class="material-icons footer-icon">
+            shopping_bag
+        </i>
+        <p class="mb-0">Order</p>
+    </a>
+    <a class="footer-link">
+        <i class="material-icons footer-icon">
+            person_outline
+        </i>
+        <p class="mb-0">Account</p>
+    </a>        
+  </footer>
 </div>
 

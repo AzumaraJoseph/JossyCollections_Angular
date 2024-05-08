@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, shareReplay, tap } from 'rxjs/operators';
-import { BehaviorSubject, Observable, Subject, combineLatest, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, combineLatest, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +27,9 @@ export class ProductService {
   ]).pipe(
     map(([products, selectedProductId]) => {
       return products.find((product: {id: string}) => product.id === selectedProductId)
-    })
+    }),
+    shareReplay(1),
+    catchError(err => this.handleError(err))
   )
 
   selectedProductChanged(id: string) {

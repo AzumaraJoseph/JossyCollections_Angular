@@ -4,6 +4,7 @@
         >
         <h3 class="fs-4 p-2">Product Detail: {{product.name}}</h3>
         <div class="card-header" style="background-color: rgba(255, 255, 255, 0.993)">
+            <h3 class="fs-4 p-3 text-center">{{product.description}}</h3>
         <div class="card-img-top d-flex justify-content-center" >
                 <img src="/assets/img/800x800_{{product.imageCover}}" alt="Product Detail Image">
             </div>
@@ -11,23 +12,42 @@
 
         <div class="ps-5" style="background-color: rgba(255, 255, 255, 0.993)">
             <div>
-                <p class="fw-bold mb-1 mt-3" style="font-size: 1rem;">{{product.discountedLowPrice | currency: 'USD': 'symbol': '1.2-2' }}
-                    <ng-container *ngIf="product.discountedHighPrice !== product.discountedLowPrice">- {{product.discountedHighPrice | currency: 'USD': 'symbol': '1.2-2' }}</ng-container>
+                <p class="fw-bold mb-1 mt-3" 
+                    style="font-size: 1rem;">
+                    {{product.discountedLowPrice | currency: "USD": "symbol": "1.2-2" }}
+
+                    <ng-container *ngIf="product.discountedHighPrice !== product.discountedLowPrice">- {{product.discountedHighPrice | currency: "USD": "symbol": "1.2-2" }}</ng-container>
                 </p>
 
-                <span class="fw-bold text-decoration-line-through me-3" style="font-size: 1rem;">{{product.lowPrice | currency: 'USD': 'symbol': '1.2-2' }}
-                    <ng-container *ngIf="product.highPrice !== product.lowPrice">- {{product.highPrice | currency: 'USD': 'symbol': '1.2-2' }}</ng-container>
-                </span>
+                <div class="d-flex">
+                    <div class="fw-semibold text-decoration-line-through me-3"  style="font-size: 1rem; flex: 0 0 1;">
+                        {{product.lowPrice !== product.highPrice ? (product.lowPrice | currency: "USD": "symbol": "1.2-2"): "" }}
 
-                <span style="color: rgba(255, 0, 0, 0.982); font-size: 0.92rem;" *ngIf="product.priceDiscountPercent && product.priceDiscountPercent > 0">up to {{product.priceDiscountPercent}}% off</span>
+                        <ng-container>
+                            {{product.lowPrice === product.highPrice ? "$" + (product.highPrice).toFixed(2) : " - " + ( product.highPrice | currency: "USD": "symbol": "1.2-2")}}
+                        </ng-container>
+                    </div>
 
-                <p class="mt-1" style="color: rgba(255, 0, 0, 0.982); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity <=50">{{product.quantity && product.quantity > 0 && product.quantity <=50 ? 'Few Units Left' : ''}}</p>
+                    <div style="color: rgba(255, 0, 0, 0.982); font-size: 0.92rem;" *ngIf="product.priceDiscountPercent && product.priceDiscountPercent > 0">{{"up to " + product.priceDiscountPercent + "% off"}}</div>
+                </div>
 
-                <p class="mt-1" style="color: rgba(255, 0, 0, 0.993); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 50 && product.quantity <= 100">{{product.quantity && product.quantity > 50 && product.quantity <= 100 ? 'In Stock' : ''}}</p>
-
-                <p class="mt-1" style="color: rgba(255, 173, 21, 0.988); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 100 && product.quantity <= 200">{{product.quantity && product.quantity > 100 && product.quantity <= 200 ? 'In Stock' : ''}}
+                <p class="mt-1" 
+                [style.color]="getColors(product.quantity)" style="font-size: 0.8rem;" 
+                *ngIf="product.quantity">
+                {{product.quantity <= 80 ? product.quantity + " Units Left" : product.quantity <= 100 ? "Few Units Left" : product.quantity <= 150 ? "In Stock" : product.quantity <= 200 ? "In Stock" : product.quantity > 200 ? "In Stock" : ""}}
                 </p>
-                <p class="mt-1" style="color: rgba(0, 0, 0, 0.985); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 200">{{product.quantity && product.quantity > 200 ? 'In Stock' : ''}}</p>         
+
+                <!-- <p class="mt-1" style="color: rgba(255, 0, 0, 0.993); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 50 && product.quantity <= 100">{{product.quantity && product.quantity > 50 && product.quantity <= 100 ? "In Stock" : ""}}</p> -->
+
+                <!-- <p class="mt-1" style="color: rgba(255, 173, 21, 0.988); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 100 && product.quantity <= 200">{{product.quantity && product.quantity > 100 && product.quantity <= 200 ? "In Stock" : ""}}
+                </p> -->
+                <!-- <p class="mt-1" style="color: rgba(0, 0, 0, 0.985); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 200">{{product.quantity && product.quantity > 200 ? "In Stock" : ""}}</p>          -->
+            </div>
+            <div class="d-flex" style="align-items: center;">
+                <app-star></app-star>
+                <div class="ms-4">
+                    no reviews
+                </div>
             </div>
         </div>
     </div>
