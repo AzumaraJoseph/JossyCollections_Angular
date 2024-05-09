@@ -12,11 +12,9 @@
     display: flex;
 }
 
-.navBar {
-    /* width: 100%; */
-}
 .navBar-brand {
     display: flex;
+    /* cursor: pointer; */
 }
 
 .search {

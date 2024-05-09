@@ -16,7 +16,7 @@ export class ProductService {
 
   products$ = this.http.get<any>(this.productsUrl).pipe(
     map(result => result.data.data),
-    tap( result=> console.log('Products', JSON.stringify(result))),
+    // tap( result=> console.log('Products', JSON.stringify(result))),
     shareReplay(1),
     catchError(this.handleError)
   );
@@ -29,6 +29,11 @@ export class ProductService {
       return products.find((product: {id: string}) => product.id === selectedProductId)
     }),
     shareReplay(1),
+      // tap( result=> console.log('Product', JSON.stringify(result))),
+    // tap(product => {
+    //   return product.color
+    // }),
+    // tap( result=> console.log('Color', JSON.stringify(result))),
     catchError(err => this.handleError(err))
   )
 
@@ -41,7 +46,6 @@ export class ProductService {
   //   tap(data => console.log('Single Product: ', data)),
   //   catchError(this.handleError)
   // )
-
 
 
   private handleError(err: HttpErrorResponse): Observable<never> {

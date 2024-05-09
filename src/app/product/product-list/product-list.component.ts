@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { EMPTY, Observable, Subject, catchError, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -33,6 +33,17 @@ export class ProductListComponent implements OnInit {
         return EMPTY;
       })
     );
+
+    // this.products$ = this.productService.products$.pipe(
+    //   map(products => products.map((product: any) => {
+    //     return product.color
+    //   })),
+    //   tap(result => console.log(result)),
+    //   catchError(err => {
+    //     this.errorMessageSubject.next(err);
+    //     return EMPTY;
+    //   })
+    // );
 
   }
 

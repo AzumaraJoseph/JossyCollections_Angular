@@ -4,24 +4,24 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FormsModule } from '@angular/forms';
 import { ErrorPageComponent } from './error-page.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
-import { StarComponent } from './shared/star.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
+import { SharedModule } from './shared/shared.module';
+import { DialogueDirective } from './dialogue.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProductListComponent,
-    StarComponent,
     ErrorPageComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    DialogueDirective
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule,
+    SharedModule,
     // ProductModule,
     AppRoutingModule
   ],

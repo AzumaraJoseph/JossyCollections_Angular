@@ -2,20 +2,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StarComponent } from './star.component';
 import { FormsModule } from '@angular/forms';
+import { CollapsibleWellComponent } from './collapsible-well.component';
 
 
 
 @NgModule({
   declarations: [
-    StarComponent
+    StarComponent,
+    CollapsibleWellComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FormsModule,
   ],
   exports: [
-    StarComponent,
     CommonModule,
-    FormsModule
+    FormsModule,
+    StarComponent,
+    CollapsibleWellComponent
   ]
 })
 export class SharedModule { }

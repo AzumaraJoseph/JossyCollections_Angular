@@ -1,18 +1,17 @@
 <div class="fluid-container detail">
     <div class="card" 
-        style="background-color: rgba(247, 247, 247, 0.982);" *ngIf="product$ | async as product"
-        >
-        <h3 class="fs-4 p-2">Product Detail: {{product.name}}</h3>
+        style="background-color: rgba(245, 242, 242, 0.982);" *ngIf="product$ | async as product">
+        <h3 class="card-text fs-5 p-2">Product Detail: {{product.name}}</h3>
         <div class="card-header" style="background-color: rgba(255, 255, 255, 0.993)">
-            <h3 class="fs-4 p-3 text-center">{{product.description}}</h3>
-        <div class="card-img-top d-flex justify-content-center" >
-                <img src="/assets/img/800x800_{{product.imageCover}}" alt="Product Detail Image">
+            <h3 class="card-text fs-4 p-3 text-center">{{product.description}}</h3>
+            <div class="card-img-top d-flex justify-content-center" >
+                <img src="/assets/img/800x800_{{product.imageCover}}" class="img-fluid" alt="Product Detail Image">
             </div>
         </div>
 
-        <div class="ps-5" style="background-color: rgba(255, 255, 255, 0.993)">
+        <div class="card-text ps-5 pt-3 pb-3" style="background-color: rgba(255, 255, 255, 0.993)">
             <div>
-                <p class="fw-bold mb-1 mt-3" 
+                <p class="fw-bold mb-1 mt-2" 
                     style="font-size: 1rem;">
                     {{product.discountedLowPrice | currency: "USD": "symbol": "1.2-2" }}
 
@@ -31,9 +30,10 @@
                     <div style="color: rgba(255, 0, 0, 0.982); font-size: 0.92rem;" *ngIf="product.priceDiscountPercent && product.priceDiscountPercent > 0">{{"up to " + product.priceDiscountPercent + "% off"}}</div>
                 </div>
 
-                <p class="mt-1" 
+                <p class="mt-2 mb-1" 
                 [style.color]="getColors(product.quantity)" style="font-size: 0.8rem;" 
                 *ngIf="product.quantity">
+
                 {{product.quantity <= 80 ? product.quantity + " Units Left" : product.quantity <= 100 ? "Few Units Left" : product.quantity <= 150 ? "In Stock" : product.quantity <= 200 ? "In Stock" : product.quantity > 200 ? "In Stock" : ""}}
                 </p>
 
@@ -41,18 +41,95 @@
 
                 <!-- <p class="mt-1" style="color: rgba(255, 173, 21, 0.988); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 100 && product.quantity <= 200">{{product.quantity && product.quantity > 100 && product.quantity <= 200 ? "In Stock" : ""}}
                 </p> -->
-                <!-- <p class="mt-1" style="color: rgba(0, 0, 0, 0.985); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 200">{{product.quantity && product.quantity > 200 ? "In Stock" : ""}}</p>          -->
+                <!-- <p class="mt-1" style="color: rgba(0, 0, 0, 0.985); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 200">{{product.quantity && product.quantity > 200 ? "In Stock" : ""}}
+                </p>          -->
             </div>
             <div class="d-flex" style="align-items: center;">
                 <app-star></app-star>
                 <div class="ms-4">
-                    no reviews
+                    {{product.ratingsQuantity && product.ratingsQuantity > 0 ? product.ratingsQuantity + " reviews" : "No reviews yet"}} 
                 </div>
             </div>
         </div>
+
+        <div class="mt-2 ps-5 pe-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993)">
+            <h4 class="card-text">Colors</h4>
+            <div class="col-md-12 d-flex p-0" 
+            style="background-color: rgba(218, 216, 216, 0.993); height: 6.8rem;">
+                <div *ngFor="let color of product.color">
+                    <div class="card-img-top pt-2 ps-2">
+                        <img [ngStyle]="{'border': '1px solid black'}" [src]="'/assets/img/75x75_' + color.colorImage" class="p-2" alt="Product color">
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="mt-2 ps-5" 
+        style="background-color: rgba(255, 255, 255, 0.993)"
+        *ngIf="product.specification">
+            <collapsible-well>
+                <div well-title>
+                    <h4 class="mb-0">Specification</h4>
+                </div>
+                <div well-body>
+                    <h4 class="text-center">Product Specification</h4>
+                    <table class="table table-responsive">
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Model</td>
+                                <td>{{product.specification.model}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Material</td>
+                                <td>{{product.specification.material}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Shipping</td>
+                                <td>{{product.specification.shipping}}</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>Tags</td>
+                                <td>{{product.tag}}</td>
+                            </tr>
+                        </tbody>
+        
+                    </table>
+                </div>
+            </collapsible-well>
+        </div>
+
+
+        <!-- <div class="table-responsive mt-2" style="background-color: rgba(255, 255, 255, 0.993)">
+            <h4 class="text-center">Product Specification</h4>
+            <table class="table table-responsive">
+                <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>Loea! Consectetur vero ipsam iste.
+                        </td>
+                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta 
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>Loea! Consectetur vero ipsam iste.
+                        </td>
+                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta 
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div> -->
     </div>
 </div>
-
+<!--[ngStyle]="{'border': '1px solid black'}" src="/assets/img/75x75_product_66261fabd1ec1eb174f2bab4-1713777812246-black.jpeg" class="p-2" alt="Product color" 
+ <img src="/assets/img/75x75_{{image}}" class="card-img-top p-0" alt="Products Image">
+-->
 <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
     {{errorMessage}}
 </div>
