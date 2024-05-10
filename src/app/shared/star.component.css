@@ -10,7 +10,7 @@
 
 .rating-average {
     width: fit-content;
-    background-color: rgba(255, 255, 255, 0.997);
+    /* background-color: rgba(255, 255, 255, 0.997); */
     text-align: center;
     border-radius: 8rem;
 }

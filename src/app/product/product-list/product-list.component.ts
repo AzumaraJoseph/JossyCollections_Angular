@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, map, shareReplay, tap } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -27,6 +27,7 @@ export class ProductListComponent implements OnInit {
     // });
 
     this.products$ = this.productService.products$.pipe(
+      shareReplay(1),
       tap(result => console.log(result)),
       catchError(err => {
         this.errorMessageSubject.next(err);

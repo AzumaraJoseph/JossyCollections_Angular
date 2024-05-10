@@ -4,14 +4,14 @@ import { StarComponent } from './shared/star.component';
 import { ErrorPageComponent } from './error-page.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
-import { DialogueComponent } from './dialogue.component';
+import { DialogueComponent } from './product/dialogue.component';
 
 const routes: Routes = [
 
   { path: '', redirectTo: 'products', pathMatch: 'full' },
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailComponent },
-  { path: 'dialogue', component: DialogueComponent },
+  { path: 'products/:id/dialogue', component: DialogueComponent },
   { path: 'star', component: StarComponent },
   {path: '**', component: ErrorPageComponent }
 ];

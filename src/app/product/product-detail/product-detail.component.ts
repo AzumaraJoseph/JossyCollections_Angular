@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
-import { EMPTY, Observable, Subject, catchError, map, shareReplay, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, shareReplay, tap } from 'rxjs';
 import { Product } from '../product';
 import { ActivatedRoute } from '@angular/router';
 
@@ -27,15 +27,8 @@ export class ProductDetailComponent implements OnInit {
     });
 
     this.product$ = this.productService.product$.pipe(
-      // map(product => product.color),
-      // map(product => {
-      //   if(product) {
-      //     return product.color
-      //   }
-      // }),
       shareReplay(1),
       tap( result=> console.log('id: ', JSON.stringify(result))),
-
       catchError(err => {
         this.errorMessageSubject.next(err);
         return EMPTY;

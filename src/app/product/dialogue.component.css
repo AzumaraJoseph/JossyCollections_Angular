@@ -1,0 +1,28 @@
+
+.rating {
+    background-color: rgba(235, 232, 232, 0.974);
+    padding: 1.5rem ;
+    width: fit-content;
+    border-radius: 10px;
+    text-align: center;
+    align-self: center;
+}
+
+.rating-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.star {
+    margin: 0 2rem 0 2rem;
+    color: gold;
+    font-size: 1.2rem;
+}
+
+.content {
+    background-color: rgba(225, 221, 221, 0.974);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
