@@ -1,4 +1,4 @@
-<div class="fluid-container detail">
+<div class="fluid-container p-3 detail">
     <div class="card" 
         style="background-color: rgba(245, 242, 242, 0.982);" *ngIf="product$ | async as product">
         <h3 class="card-text fs-5 p-2">Product Detail: {{product.name}}</h3>
@@ -170,8 +170,8 @@
 
             <div style="background-color: rgba(225, 221, 221, 0.974);
             border-radius: 0.5rem;
-            padding: 0.5rem;
-            margin-bottom: 0.5rem;">
+            padding: 1rem;
+            margin-bottom: 1rem;">
                 <div class="d-flex justify-content-between fw-bold">
                     <span>Azumara Joseph</span>
                     <span>14th May, 2024</span>
@@ -194,7 +194,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-2">
-                        <div  style="background-color: blue; border-radius: 0.6rem; padding: 0.5rem;" 
+                        <div  style="border-radius: 0.6rem; padding: 0.5rem;" 
                         *ngIf="product$ | async as product">
                     
                             <div class="col-md-12 d-flex  flex-column">
@@ -287,16 +287,16 @@
         </div>
 
         <div class="ps-5">
-            <h4 >Related Products</h4>
+            <h4 class="mt-2">Related Products</h4>
 
-            <div class="col-md-12 mt-4">
+            <div class="col-md-12 mt-2">
                 <div class="row pb-3" *ngIf="relatedProduct$">
                     <div class="card similar p-2 m-2" style="width: 16rem;"
-                        *ngFor="let related of relatedProduct$ | async" >
+                        *ngFor="let related of relatedProduct$ | async" 
+                        (click)="openRelated(related.id); scrollTop()" >
                             
-                        <div class="card-body d-flex flex-column justify-content-between p-3" 
-                        
-                        [routerLink]="['/products', product.id]">
+                        <div class="card-body d-flex flex-column justify-content-between p-3">
+
                             <img [src]="'/assets/products/250x250_' + related.imageCover"
                             class="card-img-top p-0"
                             alt="Products Image">
@@ -336,42 +336,12 @@
                             <button class="cart-btn mt-2 btn   p-2 justify-content-center" title="Add item to cart">Add to Cart</button>
                         </div>               
                     </div>
-        
-                </div>
-            </div>
-        </div>
+                    
 
-        <!-- <div class="table-responsive mt-2" style="background-color: rgba(255, 255, 255, 0.993)">
-            <h4 class="text-center">Product Specification</h4>
-            <table class="table table-responsive">
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Loea! Consectetur vero ipsam iste.
-                        </td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta 
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Loea! Consectetur vero ipsam iste.
-                        </td>
-                        <td>Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta 
-                        </td>
-                    </tr>
-                </tbody>
+                    <!-- 
+-[ngStyle]="{'border': '1px solid black'}" src="/assets/img/75x75_product_66261fabd1ec1eb174f2bab4-1713777812246-black.jpeg" class="p-2" alt="Product color" 
+ <img src="/assets/img/75x75_{{image}}" class="card-img-top p-0" alt="Products Image"> -->
 
-            </table>
-        </div> -->
-    </div>
-</div>
-
-<!--[ngStyle]="{'border': '1px solid black'}" src="/assets/img/75x75_product_66261fabd1ec1eb174f2bab4-1713777812246-black.jpeg" class="p-2" alt="Product color" 
- <img src="/assets/img/75x75_{{image}}" class="card-img-top p-0" alt="Products Image">
--->
 <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
     {{errorMessage}}
 </div>
-
-
-

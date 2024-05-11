@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { EMPTY, Observable, Subject, catchError, empty, observable, shareReplay, tap } from 'rxjs';
 import { Product } from '../product';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-detail',
@@ -15,16 +15,18 @@ export class ProductDetailComponent implements OnInit {
 
   product$: Observable<Product> | undefined;
   relatedProduct$: Observable<Product[]> | undefined;
+
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
-  constructor(private productService: ProductService, private route: ActivatedRoute) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
 
     this.route.params.subscribe(params => {
       const id = params['id'];
       this.productService.selectedProductChanged(id);
+      // this.openRelated(id);
     });
 
 
@@ -34,7 +36,7 @@ export class ProductDetailComponent implements OnInit {
       catchError(err => {
         //tap( result=> console.log('related: ', JSON.stringify(result))),
         this.errorMessageSubject.next(err);
-        return EMPTY
+        return EMPTY;
       })
     );
 
@@ -60,12 +62,19 @@ export class ProductDetailComponent implements OnInit {
     //       return colors;
     //   }),
     //   tap(result => console.log('colors: ', JSON.stringify(result)))
-    // );
+    // );   
 
-    
+  }
 
-    
+  openRelated(id: string) {
+    // this.selectedProduct(id);
+    this.router.navigate(['/products', id]);
+  }
 
+  scrollTop(): void {
+    window.scrollTo(0, 0);
+
+    // To programmatically scroll the detail page to the top when a related product is clicked, you can use the window.scrollTo() method provided by the browser's window object. You can call this method with 0 as both the x and y coordinates to scroll the page to the top.
   }
 
   getColors(quantity: number): string {
