@@ -1,16 +1,16 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, shareReplay, tap } from 'rxjs/operators';
-import { BehaviorSubject, Observable, combineLatest, throwError } from 'rxjs';
+import { catchError, map, shareReplay, switchMap, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, combineLatest, of, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
   private productsUrl = 'http://127.0.0.1:5000/api/v1/products';
-  private reviewsUrl = 'http://127.0.0.1:5000/api/v1/user';
-
   private review = 'http://127.0.0.1:5000/api/v1/reviews';
+  // private relatedProductUrl = 'http://127.0.0.1:5000/api/v1/products/id/relatedProducts';
+
 
   constructor(private http: HttpClient) { }
 
@@ -38,6 +38,40 @@ export class ProductService {
   selectedProductChanged(id: string) {
     this.selectedProductSubject.next(id);
   }
+
+  // ralatedProductSubject = new BehaviorSubject<string>('0');
+  // relatedProductId$ = this.ralatedProductSubject.asObservable();
+
+  relatedProduct$ = combineLatest([
+    this.product$,
+    this.selectedProductAction
+  ]).pipe(
+    switchMap(([product, relatedProductId]) => {
+      // return product.related_products.find((relatedProduct: {id: string}) => relatedProduct.id === relatedProductId)
+
+      if(product.id) {
+        return this.http.get<any>(`${this.productsUrl}/${relatedProductId}/relatedProducts`).pipe(
+          map(data => data.data.products),
+          tap(related => console.log('relate: ' + JSON.stringify(related))),
+        )
+        
+      } else {
+        return of(null)
+      }
+      
+    }
+    
+  ),
+  
+
+)
+  
+  // this.http.get<any>(`${this.productsUrl} + ${id} + relatedProducts`).pipe(
+  //   map(data => data.data.data),
+  //   tap(related => console.log('related: ' + JSON.stringify(related)),
+  //   // catchError(err => this.handleError(err))
+  //   )
+  // ).subscribe()
 
   // userReviews$ = (id: number) => this.http.get<any>(`${this.reviewsUrl}/${id}/reviews`).pipe(
   //     tap(data => console.log('user review: ', data)),
