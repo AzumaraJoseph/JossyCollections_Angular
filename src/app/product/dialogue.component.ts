@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from './product.service';
-import { EMPTY, Observable, Subject, catchError, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, Subscription, catchError, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from './product';
 
@@ -11,6 +11,7 @@ import { Product } from './product';
 })
 export class DialogueComponent implements OnInit {
   product$: Observable<Product> | undefined;
+  sub!: Subscription;
 
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
@@ -23,6 +24,7 @@ export class DialogueComponent implements OnInit {
 
       if (id) {
         this.productService.selectedProductChanged(id);
+        this.sub = this.productService.userReviews$.subscribe()
       } else {
         console.error('No product id provided in route parameters');
       }
@@ -36,9 +38,8 @@ export class DialogueComponent implements OnInit {
         this.errorMessageSubject.next(err);
         return EMPTY
       })
-    )
+    ) 
 
-    
   }
 
   selectedProduct(id: string) {

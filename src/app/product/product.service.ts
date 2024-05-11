@@ -8,6 +8,9 @@ import { BehaviorSubject, Observable, combineLatest, throwError } from 'rxjs';
 })
 export class ProductService {
   private productsUrl = 'http://127.0.0.1:5000/api/v1/products';
+  private reviewsUrl = 'http://127.0.0.1:5000/api/v1/user';
+
+  private review = 'http://127.0.0.1:5000/api/v1/reviews';
 
   constructor(private http: HttpClient) { }
 
@@ -36,11 +39,23 @@ export class ProductService {
     this.selectedProductSubject.next(id);
   }
 
+  // userReviews$ = (id: number) => this.http.get<any>(`${this.reviewsUrl}/${id}/reviews`).pipe(
+  //     tap(data => console.log('user review: ', data)),
+
+  // )
+
+  userReviews$ = this.http.get<any>(this.review).pipe(
+    tap(data => console.log('user review: ', data)),
+
+)
+
   // selectedProduct$ = (id: number) => this.http.get<any>(`${this.productsUrl}/${id}`).pipe(
   //   map(result => result.data.data.id),
   //   tap(data => console.log('Single Product: ', data)),
   //   catchError(this.handleError)
   // )
+
+
 
 
   private handleError(err: HttpErrorResponse): Observable<never> {
