@@ -4,3 +4,43 @@
     display: flex;
     flex-direction: column;
 }
+
+
+
+.rating {
+    background-color: rgba(235, 232, 232, 0.974);
+    padding: 1.5rem ;
+    width: fit-content;
+    border-radius: 10px;
+    text-align: center;
+    align-self: center;
+}
+
+.rating-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.star {
+    margin-bottom: 0;
+    color: gold;
+    font-size: 1.2rem;
+}
+
+.content-body {
+    background-color: rgba(225, 221, 221, 0.974);
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.content-body:last-child {
+    margin-bottom: 0;
+}
+
+.modal-content .btn-close:focus,
+.modal-content .btn-close:active {
+    outline: none;
+}
+

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'collapsible-well',
-  template: `<div class="well pointer pt-3 pe-5 pb-3" (click)="toggleCollapsible()">
+  template: `<div class="well pt-3 pe-5 pb-3" (click)="toggleCollapsible()">
     <ng-content select="[well-title]" *ngIf="!visible"></ng-content>
     <ng-content select="[well-body]" *ngIf="visible"></ng-content>
   </div>
