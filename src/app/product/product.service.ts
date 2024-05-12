@@ -52,19 +52,14 @@ export class ProductService {
       if(product.id) {
         return this.http.get<any>(`${this.productsUrl}/${relatedProductId}/relatedProducts`).pipe(
           map(data => data.data.products),
-          tap(related => console.log('relate: ' + JSON.stringify(related))),
+          // tap(related => console.log('relate: ' + JSON.stringify(related))),
         )
         
       } else {
         return of(null)
       }
       
-    }
-    
-  ),
-  
-
-)
+    }));
   
   // this.http.get<any>(`${this.productsUrl} + ${id} + relatedProducts`).pipe(
   //   map(data => data.data.data),

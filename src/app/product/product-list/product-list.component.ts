@@ -15,10 +15,12 @@ export class ProductListComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
+
   constructor(private productService: ProductService) { }
 
 
   ngOnInit(): void {
+
     this.pageTitle = 'Products You May Love!';
 
     // this.productService.products$.subscribe({
@@ -46,10 +48,6 @@ export class ProductListComponent implements OnInit {
     //   })
     // );
 
-  }
-
-  onProductChange(productId: string) {
-    this.productService.selectedProductChanged(productId);
   }
 
 }
