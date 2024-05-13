@@ -35,16 +35,10 @@
     margin-bottom: 0.5rem;
 }
 
-.content-body:last-child {
-    margin-bottom: 0;
-}
-
 .modal-content .btn-close:focus,
 .modal-content .btn-close:active {
     outline: none;
 }
-
-
 
 .similar:hover {
     transform: scale(1.03);

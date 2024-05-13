@@ -1,14 +1,14 @@
-import { Component, HostListener } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'Jossy-Third-Project';
-  isSlider: boolean = true;
+  loading: boolean = true;
 
   
   isScrolledDown: boolean = false;
@@ -29,13 +29,34 @@ export class AppComponent {
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
 
-  constructor(private router: Router) {}
 
+  // checkRouterEvent(routerEvent: Event): void {
+  //   console.log(routerEvent);
+    
+  //   if (routerEvent instanceof NavigationStart) {
+  //     this.loading = true;
+  //   } 
+  //   if ( routerEvent instanceof NavigationEnd || routerEvent instanceof NavigationCancel || routerEvent instanceof NavigationError) {
+  //     this.loading = false;
+  //     window.scrollTo(0, 0); // Scroll to top on navigation
+  //   }
+  // }
+
+  constructor(private router: Router) {
+    
+  }
+  
   ngOnInit(): void {
-    this.router.events.subscribe(event => {
+    this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0); // Scroll to top on navigation
       }
-    });
+  
+      // this.checkRouterEvent(event);
+  
+    });   
   }
-}
+
+  
+} 
+ 

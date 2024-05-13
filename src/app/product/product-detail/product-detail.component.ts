@@ -14,6 +14,7 @@ export class ProductDetailComponent implements OnInit {
   Colors$: Observable<any[]> | undefined;
 
   product$: Observable<Product> | undefined;
+  selectProduct$: Observable<Product> | undefined;
   relatedProduct$: Observable<Product[]> | undefined;
 
   errorMessageSubject = new Subject<string>();
@@ -25,21 +26,30 @@ export class ProductDetailComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       const id = params['id'];
-      this.productService.selectedProductChanged(id);
+
+      this.selectedProduct(id);
+
       // this.openRelated(id);
+
+      this.selectProduct$ = this.productService.selectedProduct$(id).pipe(
+        catchError(err => {
+          this.errorMessageSubject.next(err);
+          return EMPTY
+        })
+      )
+
+
     });
 
 
-    // this.productService.relatedProduct$.subscribe()
-
-    this.product$ = this.productService.product$.pipe(
-      shareReplay(1),
-      // tap( result=> console.log('id: ', JSON.stringify(result))),
-      catchError(err => {
-        this.errorMessageSubject.next(err);
-        return EMPTY;
-      })
-    );
+    // this.product$ = this.productService.product$.pipe(
+    //   shareReplay(1),
+    //   // tap( result=> console.log('id: ', JSON.stringify(result))),
+    //   catchError(err => {
+    //     this.errorMessageSubject.next(err);
+    //     return EMPTY;
+    //   })
+    // );
 
     this.relatedProduct$ = this.productService.relatedProduct$.pipe(
       tap( result=> console.log('related: ', JSON.stringify(result))),
@@ -49,44 +59,35 @@ export class ProductDetailComponent implements OnInit {
       })
     );
 
-    // this.productColors$ = this.productService.products$.pipe(
-    //   map(products => {
-    //       const colors: any[] = [];
-    //       products.forEach((product: { color: any[]; }) => {
-    //           if (product.color) {
-    //               product.color.forEach(color => {
-    //                   colors.push(color);
-    //               });
-    //           }
-    //       });
-    //       return colors;
-    //   }),
-    //   tap(result => console.log('colors: ', JSON.stringify(result)))
-    // );   
 
   }
 
   openRelated(id: string) {
-    // this.selectedProduct(id);
     this.router.navigate(['/products', id]);
   }
+
+
+
+  //   // To programmatically scroll the detail page to the top when a related product is clicked, you can use the window.scrollTo() method provided by the browser's window object. You can call this method with 0 as both the x and y coordinates to scroll the page to the top. 
 
   // it has been implemented in the root app component
   // scrollTop(): void {
   //   window.scrollTo(0, 0);
 
-  //   // To programmatically scroll the detail page to the top when a related product is clicked, you can use the window.scrollTo() method provided by the browser's window object. You can call this method with 0 as both the x and y coordinates to scroll the page to the top.
-  // }
 
   getColors(quantity: number): string {
     if(quantity > 200) {
-      return 'black'
-    } else if(quantity > 150 && quantity <= 200) {
-      return 'orange'
+      return 'black';
+    } else if(quantity > 100 && quantity <= 200) {
+      return 'orange';
+    } else if(quantity === 0) {
+      return 'grey';
     } else {
-      return 'red'
+      return'red';
     }
   }
+
+  // No longer using this, cos im not using new behaviorsubject and next from the product service
 
   selectedProduct(id: string) {
     this.productService.selectedProductChanged(id);

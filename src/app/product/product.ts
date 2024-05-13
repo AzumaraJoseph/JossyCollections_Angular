@@ -20,7 +20,7 @@ value: number;
     category?: string;
     ratingsQuantity?: number;
     ratingsAverage: number;
-    images: string[];
+    images?: string[];
     color?: [
         {
             id: string;
@@ -34,6 +34,8 @@ value: number;
     slug?: string;
     imageCover?: string;
     quantity?: number;
+    reviewStat?: any;
+    reviews?: any
 
 }
 

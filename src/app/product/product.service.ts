@@ -24,6 +24,7 @@ export class ProductService {
     catchError(this.handleError)
   );
 
+  // There are some info in each product thats not included in the list of products
   product$ = combineLatest([
     this.products$,
     this.selectedProductAction
@@ -39,6 +40,12 @@ export class ProductService {
     this.selectedProductSubject.next(id);
   }
 
+  selectedProduct$ = (id: string) => this.http.get<any>(`${this.productsUrl}/${id}`).pipe(
+    map(result => result.data.data),
+    tap(res => console.log('productssssss: ', JSON.stringify(res))),
+    catchError(this.handleError)
+  )
+
   // ralatedProductSubject = new BehaviorSubject<string>('0');
   // relatedProductId$ = this.ralatedProductSubject.asObservable();
 
@@ -46,11 +53,11 @@ export class ProductService {
     this.product$,
     this.selectedProductAction
   ]).pipe(
-    switchMap(([product, relatedProductId]) => {
-      // return product.related_products.find((relatedProduct: {id: string}) => relatedProduct.id === relatedProductId)
+    switchMap(([product, selectedProductId]) => {
+      // return product.related_products.find((relatedProduct: {id: string}) => relatedProduct.id === selectedProductId)
 
       if(product.id) {
-        return this.http.get<any>(`${this.productsUrl}/${relatedProductId}/relatedProducts`).pipe(
+        return this.http.get<any>(`${this.productsUrl}/${selectedProductId}/relatedProducts`).pipe(
           map(data => data.data.products),
           // tap(related => console.log('relate: ' + JSON.stringify(related))),
         )
@@ -60,13 +67,6 @@ export class ProductService {
       }
       
     }));
-  
-  // this.http.get<any>(`${this.productsUrl} + ${id} + relatedProducts`).pipe(
-  //   map(data => data.data.data),
-  //   tap(related => console.log('related: ' + JSON.stringify(related)),
-  //   // catchError(err => this.handleError(err))
-  //   )
-  // ).subscribe()
 
   // userReviews$ = (id: number) => this.http.get<any>(`${this.reviewsUrl}/${id}/reviews`).pipe(
   //     tap(data => console.log('user review: ', data)),
@@ -77,13 +77,6 @@ export class ProductService {
     tap(data => console.log('user review: ', data)),
 
 )
-
-  // selectedProduct$ = (id: number) => this.http.get<any>(`${this.productsUrl}/${id}`).pipe(
-  //   map(result => result.data.data.id),
-  //   tap(data => console.log('Single Product: ', data)),
-  //   catchError(this.handleError)
-  // )
-
 
 
 

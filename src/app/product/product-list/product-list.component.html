@@ -84,7 +84,7 @@
 </div>
 
 <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
-    {{errorMessage}}
+    Error: {{errorMessage}}
 </div>
 <!-- 
 This part of the code is responsible for determining the scroll direction based on the comparison between the current scroll position (currentScroll) and the last known scroll position (this.lastScrollTop).
