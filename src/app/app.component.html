@@ -1,13 +1,11 @@
-<span class="fa fa-spinner spinner"
-        *ngIf="loading"></span>
 
   <nav class="navBar navBar-expand fixed-top" style="background-color: white; " >
     <div class="row nav pb-2" style="margin-bottom: 3px;">
       <div class="col-md-5">
         <div class="navBar-brand mt-2 ms-5"
-        [routerLink]="['/products']" >
+              [routerLink]="['/products']" >
           <img src="../assets/img/apple-touch-icon.png" class="image me-3" alt="Brand">
-          <span class="col-md-2">
+          <span class="col-md-2" style="cursor: pointer;">
             <strong class="h2 fst-italic">Jossy</strong>
           </span>
         </div>
@@ -23,7 +21,7 @@
       </div>
     </div>    
   </nav>
-  
+
 <div class="fluid-container" >
   <div>
     <router-outlet></router-outlet>

@@ -41,13 +41,6 @@
                 product.quantity > 100 && product.quantity <= 200 ? "In Stock" : 
                 product.quantity > 200 ? "In Stock" : ""}}
                 </p>
-
-                <!-- <p class="mt-1" style="color: rgba(255, 0, 0, 0.993); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 50 && product.quantity <= 100">{{product.quantity && product.quantity > 50 && product.quantity <= 100 ? "In Stock" : ""}}</p> -->
-
-                <!-- <p class="mt-1" style="color: rgba(255, 173, 21, 0.988); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 100 && product.quantity <= 200">{{product.quantity && product.quantity > 100 && product.quantity <= 200 ? "In Stock" : ""}}
-                </p> -->
-                <!-- <p class="mt-1" style="color: rgba(0, 0, 0, 0.985); font-size: 0.8rem;" *ngIf="product.quantity && product.quantity > 200">{{product.quantity && product.quantity > 200 ? "In Stock" : ""}}
-                </p>          -->
             </div>
             <div class="d-flex" style="align-items: center;">
                 <app-star></app-star>
@@ -62,12 +55,103 @@
             <div class="col-md-12 d-flex p-0" 
             style="background-color: rgba(218, 216, 216, 0.993); height: 6.8rem;">
                 <div *ngFor="let color of product.color">
-                    <div class="card-img-top pt-2 ps-2">
+                    <div class="card-img-top pt-2 ps-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#colorModal">
                         <img [ngStyle]="{'border': '1px solid black'}" [src]="'/assets/img/75x75_' + color.colorImage" class="p-2" alt="Product color">
                     </div>
                 </div>
             </div>
         </div>
+  
+        <!-- Modal -->
+        <div class="modal fade" id="colorModal" tabindex="-1" aria-labelledby="colorModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-4 fw-bold"
+                    style="margin-left: 45%;"
+                    id="colorModalLabel">
+                    Product Options</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body p-2">                    
+                    <div *ngIf="selectProduct$ | async as product">
+                        <div class="card-header p-0" style="background-color: rgba(255, 255, 255, 0.993)">
+                            <h3 class="card-text fs-4 p-2">Title: {{product.name}}</h3>
+                            <div class="d-flex justify-content-center p-2" >
+                                <img src="/assets/img/800x800_{{product.imageCover}}" class="img-fluid" alt="Product Detail Image">
+                            </div>
+                        </div>
+            
+                        <div class="card-text ps-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993)">
+                            <div>
+                                <p class="fw-bold mb-1 mt-2" 
+                                    style="font-size: 1rem;">
+                                    {{product.discountedLowPrice | currency: "USD": "symbol": "1.2-2" }}
+                
+                                    <ng-container *ngIf="product.discountedHighPrice !== product.discountedLowPrice">- {{product.discountedHighPrice | currency: "USD": "symbol": "1.2-2" }}</ng-container>
+                                </p>
+                
+                                <div class="d-flex">
+                                    <div class="fw-semibold text-decoration-line-through me-3"  style="font-size: 1rem; flex: 0 0 1;">
+                                        {{product.lowPrice !== product.highPrice ? (product.lowPrice | currency: "USD": "symbol": "1.2-2"): "" }}
+                
+                                        <ng-container>
+                                            {{product.lowPrice === product.highPrice ? "$" + (product.highPrice).toFixed(2) : " - " + ( product.highPrice | currency: "USD": "symbol": "1.2-2")}}
+                                        </ng-container>
+                                    </div>
+                
+                                    <div style="color: rgba(255, 0, 0, 0.982); font-size: 0.92rem;" *ngIf="product.priceDiscountPercent && product.priceDiscountPercent > 0">{{"up to " + product.priceDiscountPercent + "% off"}}
+                                    </div>
+                                </div>
+                
+                                <p class="mt-2 mb-1" 
+                                [style.color]="getColors(product.quantity)" style="font-size: 0.8rem;" 
+                                *ngIf="product.quantity">
+                
+                                {{product.quantity <= 80 ? product.quantity + " Units Left" : 
+                                product.quantity <= 100 ? "Few Units Left" : 
+                                product.quantity > 100 && product.quantity <= 200 ? "In Stock" : 
+                                product.quantity > 200 ? "In Stock" : ""}}
+                                </p>
+                            </div>
+                            <div class="d-flex" style="align-items: center;">
+                                <app-star></app-star>
+                                <div class="ms-4">
+                                    {{product.ratingsQuantity && product.ratingsQuantity > 0 ? product.ratingsQuantity + " reviews" : "No reviews yet"}} 
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="my-1">
+            
+                        <div class="ps-5 pe-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993)" *ngIf="product.color && product.color.length > 0">
+                            <div class="d-flex align-items-center mb-2">
+                                <h4 class="card-text mb-0">Colors: </h4>
+                                <span class="align-self-end fw-semibold ms-3" >{{product.color[index].color }}</span>
+                            </div>
+                            <div class="col-md-12 d-flex p-0" 
+                                style="background-color: rgba(218, 216, 216, 0.993); height: 6.8rem;">
+                                <div *ngFor="let color of product.color">
+                                    <div class="card-img-top pt-2 ps-2">
+                                        <img [ngStyle]="{'border': '1px solid black'}" [src]="'/assets/img/75x75_' + color.colorImage" class="p-2" alt="{{color.color}}">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
     
         <div class="mb-2 ps-5" 
         style="background-color: rgba(255, 255, 255, 0.993); cursor: pointer;"
@@ -107,39 +191,6 @@
             </collapsible-well>
         </div>
 
-        <!-- <div class="modal">
-            <div class="modal-dialog">
-                Reviews
-                <div class="col-md-12 mt-3">
-                    <div class="content">
-                        <div class="d-flex justify-content-between fw-bold">
-                            <span>Azumara Joseph</span>
-                            <span>14th May, 2024</span>
-                        </div>
-                        <app-star></app-star>
-                        <p class="mb-0">I likey</p>
-                    </div>
-                    <div class="content">
-                        <div class="d-flex justify-content-between fw-bold">
-                            <span>Stephen Azumara</span>
-                            <span>19th May, 2024</span>
-                        </div>
-                        <app-star></app-star>
-                        <p class="mb-0">I likey</p>
-                    </div>
-                    <div class="content">
-                        <div class="d-flex justify-content-between fw-bold">
-                            <span>Azumara Favor</span>
-                            <span>7th January, 2024</span>
-                        </div>
-                        <app-star></app-star>
-                        <p class="mb-0">I likey</p>
-                    </div>
-                </div>
-            </div>
-
-        </div> -->
-
 
         <!-- <div class="modal" tabindex="-1">
             <div class="modal-dialog">
@@ -163,7 +214,7 @@
         <div class="mb-2 ps-5 pe-5"
             style="background-color: rgba(255, 255, 255, 0.993); cursor: pointer;"
             data-bs-toggle="modal"
-            data-bs-target="#exampleModal">
+            data-bs-target="#reviewsModal">
 
             <div class="d-flex justify-content-between">
                 <div class="pt-2 pb-2">
@@ -186,16 +237,12 @@
             </div>
         </div>
 
-        <!-- OR trigger modal with: <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-            Open Popup Modal
-        </button> -->
-
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="reviewsModal" tabindex="-1" aria-labelledby="reviewsModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Reviews</h1>
+                        <h1 class="modal-title fs-5" id="reviewsModalLabel">Reviews</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body p-2">
@@ -263,46 +310,11 @@
                                             <app-star></app-star>
                                             <p class="mb-0">{{comment.comment }}</p>
                                         </div>
-                                        <!-- <div class="content-body">
-                                            <div class="d-flex justify-content-between fw-bold">
-                                                <span>Stephen Azumara</span>
-                                                <span>19th May, 2024</span>
-                                            </div>
-                                            <app-star></app-star>
-                                            <p class="mb-0">I likey</p>
-                                        </div>
-                                        <div class="content-body">
-                                            <div class="d-flex justify-content-between fw-bold">
-                                                <span>Azumara Favor</span>
-                                                <span>7th January, 2024</span>
-                                            </div>
-                                            <app-star></app-star>
-                                            <p class="mb-0">I likey</p>
-                                        </div>
-                                        <div class="content-body">
-                                            <div class="d-flex justify-content-between fw-bold">
-                                                <span>Azumara Favor</span>
-                                                <span>7th January, 2024</span>
-                                            </div>
-                                            <app-star></app-star>
-                                            <p class="mb-0">I likey</p>
-                                        </div>
-                                        <div class="content-body">
-                                            <div class="d-flex justify-content-between fw-bold">
-                                                <span>Azumara Favor</span>
-                                                <span>7th January, 2024</span>
-                                            </div>
-                                            <app-star></app-star>
-                                            <p class="mb-0">I likey</p>
-                                        </div> -->
                                     </div>
                                 </div>                    
                             </div>  
                         </div>
                     </div>
-                    <!-- <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -311,13 +323,11 @@
             <h4 class="mt-2">Related Products</h4>
 
             <div class="col-md-12 mt-2">
-                <div class="row pb-3" *ngIf="relatedProduct$">
+                <div class="row pb-3" *ngIf="relatedProducts$">
                     <div class="card similar p-2 m-2" style="width: 16rem;"
-                        *ngFor="let related of relatedProduct$ | async" 
-                        (click)="openRelated(related.id)" 
-                        >
+                        *ngFor="let related of relatedProducts$ | async">
                             
-                        <div class="card-body d-flex flex-column justify-content-between p-3">
+                        <div class="card-body d-flex flex-column justify-content-between p-3" (click)="openRelated(related.id)">
 
                             <img [src]="'/assets/products/250x250_' + related.imageCover"
                             class="card-img-top p-0"

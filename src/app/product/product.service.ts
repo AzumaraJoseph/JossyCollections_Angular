@@ -9,8 +9,6 @@ import { BehaviorSubject, Observable, combineLatest, of, throwError } from 'rxjs
 export class ProductService {
   private productsUrl = 'http://127.0.0.1:5000/api/v1/products';
   private review = 'http://127.0.0.1:5000/api/v1/reviews';
-  // private relatedProductUrl = 'http://127.0.0.1:5000/api/v1/products/id/relatedProducts';
-
 
   constructor(private http: HttpClient) { }
 
@@ -54,7 +52,6 @@ export class ProductService {
     this.selectedProductAction
   ]).pipe(
     switchMap(([product, selectedProductId]) => {
-      // return product.related_products.find((relatedProduct: {id: string}) => relatedProduct.id === selectedProductId)
 
       if(product.id) {
         return this.http.get<any>(`${this.productsUrl}/${selectedProductId}/relatedProducts`).pipe(
@@ -67,11 +64,6 @@ export class ProductService {
       }
       
     }));
-
-  // userReviews$ = (id: number) => this.http.get<any>(`${this.reviewsUrl}/${id}/reviews`).pipe(
-  //     tap(data => console.log('user review: ', data)),
-
-  // )
 
   userReviews$ = this.http.get<any>(this.review).pipe(
     tap(data => console.log('user review: ', data)),

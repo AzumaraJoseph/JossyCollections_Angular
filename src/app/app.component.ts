@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
+import { Event, NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +8,6 @@ import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStar
 })
 export class AppComponent implements OnInit {
   title = 'Jossy-Third-Project';
-  loading: boolean = true;
 
   
   isScrolledDown: boolean = false;
@@ -34,17 +33,15 @@ export class AppComponent implements OnInit {
   //   console.log(routerEvent);
     
   //   if (routerEvent instanceof NavigationStart) {
-  //     this.loading = true;
+  //     this.isLoading = true;
   //   } 
   //   if ( routerEvent instanceof NavigationEnd || routerEvent instanceof NavigationCancel || routerEvent instanceof NavigationError) {
-  //     this.loading = false;
+  //     this.isLoading = false;
   //     window.scrollTo(0, 0); // Scroll to top on navigation
   //   }
   // }
 
-  constructor(private router: Router) {
-    
-  }
+  constructor(private router: Router) { }
   
   ngOnInit(): void {
     this.router.events.subscribe((event: Event) => {

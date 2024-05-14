@@ -23,11 +23,6 @@ export class ProductListComponent implements OnInit {
 
     this.pageTitle = 'Products You May Love!';
 
-    // this.productService.products$.subscribe({
-    //   next: product => this.products$ = product,
-    //   error: catchError(err => this.errorMessage = err)
-    // });
-
     this.products$ = this.productService.products$.pipe(
       shareReplay(1),
       tap(result => console.log(result)),
@@ -36,17 +31,6 @@ export class ProductListComponent implements OnInit {
         return EMPTY;
       })
     );
-
-    // this.products$ = this.productService.products$.pipe(
-    //   map(products => products.map((product: any) => {
-    //     return product.color
-    //   })),
-    //   tap(result => console.log(result)),
-    //   catchError(err => {
-    //     this.errorMessageSubject.next(err);
-    //     return EMPTY;
-    //   })
-    // );
 
   }
 

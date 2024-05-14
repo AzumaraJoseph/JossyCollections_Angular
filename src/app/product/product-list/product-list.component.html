@@ -35,10 +35,10 @@
     <div class="col-md-12 mt-4">
         <div class="row ms-5 pb-3" *ngIf="products$">
             <div class="card p-2 m-2" style="width: 16rem;"
-                *ngFor="let product of products$ | async"
-                [routerLink]="['/products', product.id ]" >
+                *ngFor="let product of products$ | async">
                     
-                <div class="card-body d-flex flex-column justify-content-between p-3">
+                <div class="card-body d-flex flex-column justify-content-between p-3" 
+                [routerLink]="['/products', product.id ]">
                     <img [src]="'/assets/products/250x250_' + product.imageCover"
                     class="card-img-top p-0"
                     alt="Products Image">

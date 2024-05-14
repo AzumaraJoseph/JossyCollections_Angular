@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
-import { EMPTY, Observable, Subject, catchError, shareReplay, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
 import { Product } from '../product';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -10,12 +10,10 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-  productColors$: Observable<any[]> | undefined;
-  Colors$: Observable<any[]> | undefined;
-
   product$: Observable<Product> | undefined;
   selectProduct$: Observable<Product> | undefined;
-  relatedProduct$: Observable<Product[]> | undefined;
+  relatedProducts$: Observable<Product[]> | undefined;
+  index: number = 0;
 
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
@@ -32,6 +30,7 @@ export class ProductDetailComponent implements OnInit {
       // this.openRelated(id);
 
       this.selectProduct$ = this.productService.selectedProduct$(id).pipe(
+        shareReplay(1),
         catchError(err => {
           this.errorMessageSubject.next(err);
           return EMPTY
@@ -51,8 +50,9 @@ export class ProductDetailComponent implements OnInit {
     //   })
     // );
 
-    this.relatedProduct$ = this.productService.relatedProduct$.pipe(
-      tap( result=> console.log('related: ', JSON.stringify(result))),
+    this.relatedProducts$ = this.productService.relatedProduct$.pipe(
+      shareReplay(1),
+      // tap( result=> console.log('related: ', JSON.stringify(result))),
       catchError(err => {
         this.errorMessageSubject.next(err);
         return EMPTY;
