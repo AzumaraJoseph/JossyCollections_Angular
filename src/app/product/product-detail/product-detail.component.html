@@ -52,14 +52,17 @@
 
         <div class="mb-2 ps-5 pe-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993)">
             <h4 class="card-text">Colors</h4>
-            <div class="col-md-12 d-flex p-0" 
-            style="background-color: rgba(218, 216, 216, 0.993); height: 6.8rem;">
-                <div *ngFor="let color of product.color">
-                    <div class="card-img-top pt-2 ps-2"
-                    data-bs-toggle="modal"
-                    data-bs-target="#colorModal">
-                        <img [ngStyle]="{'border': '1px solid black'}" [src]="'/assets/img/75x75_' + color.colorImage" class="p-2" alt="Product color">
-                    </div>
+            <div class="col-md-12"
+                style="background-color: rgba(218, 216, 216, 0.993); display: flex; padding: 1rem;">
+
+                <div class="me-2" *ngFor="let color of product.color;">
+                        <img [ngStyle]="{'border': '1px solid black'}"
+                            data-bs-toggle="modal"
+                            data-bs-target="#colorModal"
+                            [src]="'/assets/img/75x75_' + color.colorImage" 
+                            class="img-fluid p-2" 
+                            alt="{{color.color}}"
+                        >
                 </div>
             </div>
         </div>
@@ -76,69 +79,69 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <div class="modal-body p-2">                    
-                    <div *ngIf="selectProduct$ | async as product">
-                        <div class="card-header p-0" style="background-color: rgba(255, 255, 255, 0.993)">
-                            <h3 class="card-text fs-4 p-2">Title: {{product.name}}</h3>
-                            <div class="d-flex justify-content-center p-2" >
-                                <img src="/assets/img/800x800_{{product.imageCover}}" class="img-fluid" alt="Product Detail Image">
-                            </div>
+                <div class="modal-body p-2"
+                *ngIf="product.color && product.color.length > 0" >                    
+                    <div class="card-header p-0" style="background-color: rgba(255, 255, 255, 0.993)">
+                        <h3 class="card-text fs-4 p-2">Title: {{ product.name }}</h3>
+                        <div class="d-flex justify-content-center p-2" *ngIf="product.color[selectColor].id" >
+                            <img [src]="'/assets/img/800x800_' + product.imageCover " class="img-fluid" alt="Product Detail Image">
                         </div>
+                    </div>
+        
+                    <div class="card-text ps-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993)">
+                        <div>
+                            <p class="fw-bold mb-1 mt-2" 
+                                style="font-size: 1rem;">
+                                {{product.discountedLowPrice | currency: "USD": "symbol": "1.2-2" }}
             
-                        <div class="card-text ps-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993)">
-                            <div>
-                                <p class="fw-bold mb-1 mt-2" 
-                                    style="font-size: 1rem;">
-                                    {{product.discountedLowPrice | currency: "USD": "symbol": "1.2-2" }}
-                
-                                    <ng-container *ngIf="product.discountedHighPrice !== product.discountedLowPrice">- {{product.discountedHighPrice | currency: "USD": "symbol": "1.2-2" }}</ng-container>
-                                </p>
-                
-                                <div class="d-flex">
-                                    <div class="fw-semibold text-decoration-line-through me-3"  style="font-size: 1rem; flex: 0 0 1;">
-                                        {{product.lowPrice !== product.highPrice ? (product.lowPrice | currency: "USD": "symbol": "1.2-2"): "" }}
-                
-                                        <ng-container>
-                                            {{product.lowPrice === product.highPrice ? "$" + (product.highPrice).toFixed(2) : " - " + ( product.highPrice | currency: "USD": "symbol": "1.2-2")}}
-                                        </ng-container>
-                                    </div>
-                
-                                    <div style="color: rgba(255, 0, 0, 0.982); font-size: 0.92rem;" *ngIf="product.priceDiscountPercent && product.priceDiscountPercent > 0">{{"up to " + product.priceDiscountPercent + "% off"}}
-                                    </div>
+                                <ng-container *ngIf="product.discountedHighPrice !== product.discountedLowPrice">- {{product.discountedHighPrice | currency: "USD": "symbol": "1.2-2" }}</ng-container>
+                            </p>
+            
+                            <div class="d-flex">
+                                <div class="fw-semibold text-decoration-line-through me-3"  style="font-size: 1rem; flex: 0 0 1;">
+                                    {{product.lowPrice !== product.highPrice ? (product.lowPrice | currency: "USD": "symbol": "1.2-2"): "" }}
+            
+                                    <ng-container>
+                                        {{product.lowPrice === product.highPrice ? "$" + (product.highPrice).toFixed(2) : " - " + ( product.highPrice | currency: "USD": "symbol": "1.2-2")}}
+                                    </ng-container>
                                 </div>
-                
-                                <p class="mt-2 mb-1" 
-                                [style.color]="getColors(product.quantity)" style="font-size: 0.8rem;" 
-                                *ngIf="product.quantity">
-                
-                                {{product.quantity <= 80 ? product.quantity + " Units Left" : 
-                                product.quantity <= 100 ? "Few Units Left" : 
-                                product.quantity > 100 && product.quantity <= 200 ? "In Stock" : 
-                                product.quantity > 200 ? "In Stock" : ""}}
-                                </p>
+            
+                                <div style="color: rgba(255, 0, 0, 0.982); font-size: 0.92rem;" *ngIf="product.priceDiscountPercent && product.priceDiscountPercent > 0">{{"up to " + product.priceDiscountPercent + "% off"}}
+                                </div>
                             </div>
-                            <div class="d-flex" style="align-items: center;">
-                                <app-star></app-star>
-                                <div class="ms-4">
-                                    {{product.ratingsQuantity && product.ratingsQuantity > 0 ? product.ratingsQuantity + " reviews" : "No reviews yet"}} 
-                                </div>
+            
+                            <p class="mt-2 mb-1" 
+                            [style.color]="getColors(product.quantity)" style="font-size: 0.8rem;" 
+                            *ngIf="product.quantity">
+            
+                            {{product.quantity <= 80 ? product.quantity + " Units Left" : 
+                            product.quantity <= 100 ? "Few Units Left" : 
+                            product.quantity > 100 && product.quantity <= 200 ? "In Stock" : 
+                            product.quantity > 200 ? "In Stock" : ""}}
+                            </p>
+                        </div>
+                        <div class="d-flex" style="align-items: center;">
+                            <app-star></app-star>
+                            <div class="ms-4">
+                                {{product.ratingsQuantity && product.ratingsQuantity > 0 ? product.ratingsQuantity + " reviews" : "No reviews yet"}} 
                             </div>
                         </div>
+                    </div>
 
-                        <hr class="my-1">
-            
-                        <div class="ps-5 pe-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993)" *ngIf="product.color && product.color.length > 0">
-                            <div class="d-flex align-items-center mb-2">
-                                <h4 class="card-text mb-0">Colors: </h4>
-                                <span class="align-self-end fw-semibold ms-3" >{{product.color[index].color }}</span>
-                            </div>
-                            <div class="col-md-12 d-flex p-0" 
-                                style="background-color: rgba(218, 216, 216, 0.993); height: 6.8rem;">
-                                <div *ngFor="let color of product.color">
-                                    <div class="card-img-top pt-2 ps-2">
-                                        <img [ngStyle]="{'border': '1px solid black'}" [src]="'/assets/img/75x75_' + color.colorImage" class="p-2" alt="{{color.color}}">
-                                    </div>
-                                </div>
+                    <hr class="my-1">
+        
+                    <div class="ps-5 pe-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993);">
+                        <div class="d-flex align-items-center mb-2">
+                            <h4 class="card-text mb-0">Colors: </h4>
+                            <span class="align-self-end fw-semibold ms-3" >{{product.color ? product.color[selectColor].color: '' }}</span>
+                        </div>
+                        <div class="col-md-12"
+                            style="background-color: rgba(218, 216, 216, 0.993); display: flex; padding: 1rem;">
+                            <div class="me-2"
+                                *ngFor="let color of product.color; let i = index"
+                                (click)="selectedColor(i)"
+                                [class.selected]="i === selectColor">
+                                <img [ngStyle]="{'border': '1px solid black'}" [src]="'/assets/img/75x75_' + color.colorImage" class="img-fluid p-2" alt="{{color.color}}">
                             </div>
                         </div>
                     </div>

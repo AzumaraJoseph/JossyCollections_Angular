@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
 import { Product } from '../product';
@@ -7,13 +7,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-product-detail',
   templateUrl: './product-detail.component.html',
-  styleUrls: ['./product-detail.component.css']
+  styleUrls: ['./product-detail.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductDetailComponent implements OnInit {
-  product$: Observable<Product> | undefined;
+  
+  // product$: Observable<Product> | undefined;
   selectProduct$: Observable<Product> | undefined;
   relatedProducts$: Observable<Product[]> | undefined;
-  index: number = 0;
+  selectColor: number = 0;
 
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
@@ -36,7 +38,6 @@ export class ProductDetailComponent implements OnInit {
           return EMPTY
         })
       )
-
 
     });
 
@@ -64,6 +65,10 @@ export class ProductDetailComponent implements OnInit {
 
   openRelated(id: string) {
     this.router.navigate(['/products', id]);
+  }
+
+  selectedColor(index: number) {
+    this.selectColor = index;
   }
 
 

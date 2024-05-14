@@ -62,7 +62,8 @@
 
 .similar:hover .cart-btn {
     visibility: visible;
-    /* outline: orange; */
-
 }
 
+.selected {
+    border: 1px solid red;
+}
