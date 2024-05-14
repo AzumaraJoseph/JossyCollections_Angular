@@ -1,4 +1,4 @@
-<div class="fluid-container p-3 detail">
+`<div class="fluid-container p-3 detail">
 
     <div class="card" 
         style="background-color: rgba(245, 242, 242, 0.982);" *ngIf="selectProduct$ | async as product">
@@ -6,7 +6,7 @@
         <div class="card-header" style="background-color: rgba(255, 255, 255, 0.993)">
             <h3 class="card-text fs-4 p-3 text-center">{{product.description}}</h3>
             <div class="card-img-top d-flex justify-content-center" >
-                <img src="/assets/img/800x800_{{product.imageCover}}" class="img-fluid" alt="Product Detail Image">
+                <img src="/assets/img-details/800x800_{{product.imageCover}}" class="img-fluid" alt="Product Detail Image">
             </div>
         </div>
 
@@ -59,7 +59,7 @@
                         <img [ngStyle]="{'border': '1px solid black'}"
                             data-bs-toggle="modal"
                             data-bs-target="#colorModal"
-                            [src]="'/assets/img/75x75_' + color.colorImage" 
+                            [src]="'/assets/img-details/75x75_' + color.colorImage" 
                             class="img-fluid p-2" 
                             alt="{{color.color}}"
                         >
@@ -84,7 +84,7 @@
                     <div class="card-header p-0" style="background-color: rgba(255, 255, 255, 0.993)">
                         <h3 class="card-text fs-4 p-2">Title: {{ product.name }}</h3>
                         <div class="d-flex justify-content-center p-2" *ngIf="product.color[selectColor].id" >
-                            <img [src]="'/assets/img/800x800_' + product.imageCover " class="img-fluid" alt="Product Detail Image">
+                            <img [src]="'/assets/img-details/800x800_' + product.imageCover " class="img-fluid" alt="Product Detail Image">
                         </div>
                     </div>
         
@@ -129,7 +129,7 @@
                     </div>
 
                     <hr class="my-1">
-        
+
                     <div class="ps-5 pe-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993);">
                         <div class="d-flex align-items-center mb-2">
                             <h4 class="card-text mb-0">Colors: </h4>
@@ -141,7 +141,7 @@
                                 *ngFor="let color of product.color; let i = index"
                                 (click)="selectedColor(i)"
                                 [class.selected]="i === selectColor">
-                                <img [ngStyle]="{'border': '1px solid black'}" [src]="'/assets/img/75x75_' + color.colorImage" class="img-fluid p-2" alt="{{color.color}}">
+                                <img [ngStyle]="{'border': '1px solid black'}" [src]="'/assets/img-details/75x75_' + color.colorImage" class="img-fluid p-2" alt="{{color.color}}">
                             </div>
                         </div>
                     </div>
@@ -326,7 +326,7 @@
             <h4 class="mt-2">Related Products</h4>
 
             <div class="col-md-12 mt-2">
-                <div class="row pb-3" *ngIf="relatedProducts$">
+                <div class="row pb-3">
                     <div class="card similar p-2 m-2" style="width: 16rem;"
                         *ngFor="let related of relatedProducts$ | async">
                             

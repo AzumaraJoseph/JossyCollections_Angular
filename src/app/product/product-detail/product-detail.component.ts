@@ -3,6 +3,7 @@ import { ProductService } from '../product.service';
 import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
 import { Product } from '../product';
 import { ActivatedRoute, Router } from '@angular/router';
+// import bootstrap from 'bootstrap'; // Import Bootstrap JavaScript (if not already imported)
 
 @Component({
   selector: 'app-product-detail',
@@ -11,7 +12,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductDetailComponent implements OnInit {
-  
+  // @ViewChild('exampleModal') modalElement!: any; // Use ViewChild to get a reference to the modal element
+
+
   // product$: Observable<Product> | undefined;
   selectProduct$: Observable<Product> | undefined;
   relatedProducts$: Observable<Product[]> | undefined;
@@ -40,7 +43,6 @@ export class ProductDetailComponent implements OnInit {
       )
 
     });
-
 
     // this.product$ = this.productService.product$.pipe(
     //   shareReplay(1),
@@ -71,14 +73,11 @@ export class ProductDetailComponent implements OnInit {
     this.selectColor = index;
   }
 
-
-
   //   // To programmatically scroll the detail page to the top when a related product is clicked, you can use the window.scrollTo() method provided by the browser's window object. You can call this method with 0 as both the x and y coordinates to scroll the page to the top. 
 
   // it has been implemented in the root app component
   // scrollTop(): void {
   //   window.scrollTo(0, 0);
-
 
   getColors(quantity: number): string {
     if(quantity > 200) {
@@ -98,4 +97,24 @@ export class ProductDetailComponent implements OnInit {
     this.productService.selectedProductChanged(id);
   }
 
+
+  // openModal() {
+  //   // Open the Bootstrap modal dialog
+  //   if (this.modalElement) {
+  //     const modal = new bootstrap.Modal(this.modalElement.nativeElement);
+  //     modal.show();
+  //   }
+  // }
+  
+  // closeModal() {
+  //   // Close the Bootstrap modal dialog
+  //   if (this.modalElement) {
+  //     const modal = new bootstrap.Modal(this.modalElement.nativeElement);
+  //     modal.hide();
+  //   }
+  // }
+  
+
 }
+
+
