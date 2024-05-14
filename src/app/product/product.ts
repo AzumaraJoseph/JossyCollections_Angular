@@ -15,7 +15,7 @@ value: number;
         shipping: boolean;
 
     };
-    sold?: number;
+    sold?: any;
     tag?: string;
     category?: string;
     ratingsQuantity?: number;
@@ -33,7 +33,7 @@ value: number;
     ];
     slug?: string;
     imageCover?: string;
-    quantity?: number;
+    quantity?: any;
     reviewStat?: any;
     reviews?: any
 

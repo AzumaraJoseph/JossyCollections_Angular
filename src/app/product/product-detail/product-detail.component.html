@@ -79,9 +79,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <div class="modal-body p-2"
-                *ngIf="product.color && product.color.length > 0" >                    
-                    <div class="card-header p-0" style="background-color: rgba(255, 255, 255, 0.993)">
+                <div class="modal-body p-2">                    
+                    <div class="card-header p-0" style="background-color: rgba(255, 255, 255, 0.993)" *ngIf="product.color && product.color.length > 0"  >
                         <h3 class="card-text fs-4 p-2">Title: {{ product.name }}</h3>
                         <div class="d-flex justify-content-center p-2" *ngIf="product.color[selectColor].id" >
                             <img [src]="'/assets/img-details/800x800_' + product.imageCover " class="img-fluid" alt="Product Detail Image">
@@ -145,6 +144,10 @@
                             </div>
                         </div>
                     </div>
+
+                    <span class="ps-5 me-2">Quantity: </span>
+                    <span class="me-4" *ngIf="product.quantity">({{ (product.quantity - product.sold) }}) Available</span>
+                    <span> | {{product.sold }} sold</span>
                 </div>
 
                 <div class="modal-footer">
