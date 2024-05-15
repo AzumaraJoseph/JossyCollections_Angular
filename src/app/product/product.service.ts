@@ -13,7 +13,7 @@ export class ProductService {
   constructor(private http: HttpClient) { }
 
   selectedProductSubject = new BehaviorSubject<string>('0');
-  selectedProductAction = this.selectedProductSubject.asObservable();
+  selectedProductAction$ = this.selectedProductSubject.asObservable();
 
   products$ = this.http.get<any>(this.productsUrl).pipe(
     map(result => result.data.data),
@@ -25,7 +25,7 @@ export class ProductService {
   // There are some info in each product thats not included in the list of products
   product$ = combineLatest([
     this.products$,
-    this.selectedProductAction
+    this.selectedProductAction$
   ]).pipe(
     map(([products, selectedProductId]) => {
       return products.find((product: {id: string}) => product.id === selectedProductId)
@@ -47,23 +47,28 @@ export class ProductService {
   // ralatedProductSubject = new BehaviorSubject<string>('0');
   // relatedProductId$ = this.ralatedProductSubject.asObservable();
 
-  relatedProduct$ = combineLatest([
-    this.product$,
-    this.selectedProductAction
-  ]).pipe(
-    switchMap(([product, selectedProductId]) => {
+  // relatedProduct$ = combineLatest([
+  //   this.product$,
+  //   this.selectedProductAction
+  // ]).pipe(
+  //   switchMap(([product, selectedProductId]) => {
 
-      if(product.id) {
-        return this.http.get<any>(`${this.productsUrl}/${selectedProductId}/relatedProducts`).pipe(
-          map(data => data.data.products),
-          // tap(related => console.log('relate: ' + JSON.stringify(related))),
-        )
+  //     if(product.id) {
+  //       return this.http.get<any>(`${this.productsUrl}/${selectedProductId}/relatedProducts`).pipe(
+  //         map(data => data.data.products),
+  //         // tap(related => console.log('relate: ' + JSON.stringify(related))),
+  //       )
         
-      } else {
-        return of(null)
-      }
+  //     } else {
+  //       return of(null)
+  //     }
       
-    }));
+  //   }));
+
+    relatedProduct$ = (id: string) => this.http.get<any>(`${this.productsUrl}/${id}/relatedProducts`).pipe(
+        map(data => data.data.products),
+        // tap(related => console.log('relate: ' + JSON.stringify(related))),
+    );
 
   userReviews$ = this.http.get<any>(this.review).pipe(
     tap(data => console.log('user review: ', data)),

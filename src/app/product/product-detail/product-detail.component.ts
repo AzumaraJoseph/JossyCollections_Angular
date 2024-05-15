@@ -30,7 +30,8 @@ export class ProductDetailComponent implements OnInit {
     this.route.params.subscribe(params => {
       const id = params['id'];
 
-      this.selectedProduct(id);
+      // This is no lnger relavant, cos i am not using new subject/behaviourSubject observables 
+      // this.selectedProduct(id);
 
       // this.openRelated(id);
 
@@ -41,6 +42,15 @@ export class ProductDetailComponent implements OnInit {
           return EMPTY
         })
       )
+
+      this.relatedProducts$ = this.productService.relatedProduct$(id).pipe(
+        shareReplay(1),
+        // tap( result=> console.log('related: ', JSON.stringify(result))),
+        catchError(err => {
+          this.errorMessageSubject.next(err);
+          return EMPTY;
+        })
+      );
 
     });
 
@@ -53,14 +63,7 @@ export class ProductDetailComponent implements OnInit {
     //   })
     // );
 
-    this.relatedProducts$ = this.productService.relatedProduct$.pipe(
-      shareReplay(1),
-      // tap( result=> console.log('related: ', JSON.stringify(result))),
-      catchError(err => {
-        this.errorMessageSubject.next(err);
-        return EMPTY;
-      })
-    );
+    
 
 
   }
@@ -93,9 +96,9 @@ export class ProductDetailComponent implements OnInit {
 
   // No longer using this, cos im not using new behaviorsubject and next from the product service
 
-  selectedProduct(id: string) {
-    this.productService.selectedProductChanged(id);
-  }
+  // selectedProduct(id: string) {
+  //   this.productService.selectedProductChanged(id);
+  // }
 
 
   // openModal() {
