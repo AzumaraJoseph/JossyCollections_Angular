@@ -3,6 +3,7 @@ import { ProductService } from './product/product.service';
 import { Product } from './product/product';
 import { EMPTY, Observable, Subject, catchError, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-order',
@@ -17,6 +18,8 @@ export class OrderComponent implements OnInit {
   countries$: Observable<any> | undefined;
   countries!: any[];
   selectedCountry: any | undefined;
+
+  receiverForm!: FormGroup; 
 
 
   errorMessageSuject = new Subject<string>();
@@ -44,6 +47,12 @@ export class OrderComponent implements OnInit {
     ).subscribe()
 
     console.log('selectedCountry: ', this.selectedCountry);
+
+
+
+  this.receiverForm = new FormGroup({
+    name: new FormControl()
+});
 
   }
 

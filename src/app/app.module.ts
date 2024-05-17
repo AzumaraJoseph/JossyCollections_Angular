@@ -11,6 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { DialogueDirective } from './dialogue.directive';
 import { DialogueComponent } from './product/dialogue.component';
 import { OrderComponent } from './order.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { OrderComponent } from './order.component';
     BrowserModule,
     HttpClientModule,
     SharedModule,
+    ReactiveFormsModule,
     // ProductModule,
     AppRoutingModule
   ],
