@@ -10,6 +10,7 @@ import { ProductDetailComponent } from './product/product-detail/product-detail.
 import { SharedModule } from './shared/shared.module';
 import { DialogueDirective } from './dialogue.directive';
 import { DialogueComponent } from './product/dialogue.component';
+import { OrderComponent } from './order.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { DialogueComponent } from './product/dialogue.component';
     ErrorPageComponent,
     ProductDetailComponent,
     DialogueDirective,
-    DialogueComponent
+    DialogueComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,

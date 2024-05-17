@@ -1,0 +1,132 @@
+<div class="fluid-container">
+    <div class="card" style="background-color: rgba(245, 242, 242, 0.982); margin-top: 4rem" >
+        <h4 class="card-text heading mb-0">Order Confirmation</h4>
+        <div class="row mt-2" style="background-color: rgba(255, 255, 255, 0.973)" >
+            <div class="col-md-6 ps-4 pe-0" style="background-color: rgba(255, 255, 255, 0.973)">
+                <div class="card-body">
+                    <h5>Best Travel Leather bag</h5>
+                    <img src="../assets/products/250x250_product_66260f401cb2adfd372ed0b8-1713770304255-cover.jpeg" style="height: 29rem;" class="img-fluid" alt="Product Detail Image">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="mb-3">
+                                <h6 class="mb-2">Color: <span>brown</span></h6>
+                                <h6 class="m-0">Price: <span class="fw-bold">$35.00</span></h6>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex">
+                                <button class="btn button"
+                                    (click)="decrement()" >
+                                    <span class="material-icons">
+                                        remove
+                                    </span>
+                                </button>
+                                <p class="mb-2 fs-5 fw-bold ps-3 pe-3" >{{quantity}}</p>
+                                <button class="btn button"
+                                    (click)="increment(10)">
+                                    <span class="material-icons">
+                                        add
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 ps-0 pe-4">
+                <div style="border: 1px solid black; border-radius: 6px; margin-top: 3.5rem;">
+                    <div class="card-header">
+                        <h5 class="mb-3" style="color: rgba(92, 90, 90, 0.977);">Order Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-4">Subtotal:</div>
+                            <div class="col-md-8  text-end">$35.00</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">Delivery:</div>
+                            <div class="col-md-8  text-end text-danger">Free</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">Estimated Tax:</div>
+                            <div class="col-md-8  text-end">$9.23</div>
+                        </div>
+                        <div class="row fw-bold">
+                            <div class="col-md-4">Total:</div>
+                            <div class="col-md-8  text-end">$44.23</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="row mb-5">
+
+                          
+                <div class="row mb-5">
+
+                    <!-- <div class="row mb-5">
+                        <div *ngIf="countries$ | async as countries">
+                          <select (change)="onCountryChange($any($event.target).value)">
+                            <option value="">Select Country</option>
+                            <option *ngFor="let country of countries" [value]="country">{{ country.name }}</option>
+                          </select>
+                          <select *ngIf="selectedCountry" (change)="onStateChange($any($event.target).value)">
+                            <option value="">Select State</option>
+                            <option *ngFor="let state of selectedCountry.states" [value]="state">{{ state.name }}</option>
+                          </select>
+                        </div>
+                    </div> -->
+
+                    <div class="row mb-5">
+                        <div>
+                          <select (change)="onCountryChange($any($event.target).value)">
+                            <option value="">Select Country</option>
+                            <option *ngFor="let country of countries" [value]="country">{{ country.name }}</option>
+                          </select>
+                          <select *ngIf="selectedCountry" (change)="onStateChange($any($event.target).value)">
+                            <option value="">Select State</option>
+                            <option *ngFor="let state of selectedCountry.states" [value]="state">{{ state.name }}</option>
+                          </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div *ngFor="let country of countries">
+                <h3>{{ country.name }}</h3>
+                <ul>
+                    <li *ngFor="let state of country.states">
+                        {{ state.name }}
+                    </li>
+                </ul>
+            </div>
+            
+
+
+            <!-- <div *ngFor="let country of countries">
+                <h3>{{ country.name }}</h3>
+                <ng-container *ngIf="country.states && country.states.length > 0; else noStates">
+
+                    <select>
+                        <option value="">Select State</option>
+                            <option *ngFor="let state of getCity()" [value]="state">{{state.name}}</option>
+                    </select>
+                    <!-- <ul>
+                        <li *ngFor="let state of getCity()">
+                            {{ state.name }}
+                        </li>
+                    </ul> --
+                </ng-container>
+                <ng-template #noStates>
+                    <p>No states available</p>
+                </ng-template>
+            </div> -->
+            
+
+
+  
+        </div>
+    </div>
+</div>

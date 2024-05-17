@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, shareReplay, switchMap, tap } from 'rxjs/operators';
-import { BehaviorSubject, Observable, combineLatest, of, throwError } from 'rxjs';
+import { catchError, map, shareReplay, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, combineLatest, throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,6 +9,9 @@ import { BehaviorSubject, Observable, combineLatest, of, throwError } from 'rxjs
 export class ProductService {
   private productsUrl = 'http://127.0.0.1:5000/api/v1/products';
   private review = 'http://127.0.0.1:5000/api/v1/reviews';
+  // private countries = 'https://countriesnow.space/api/v0.1/countries/population/cities';
+  private countries = 'https://countriesnow.space/api/v0.1/countries/states';
+
 
   constructor(private http: HttpClient) { }
 
@@ -20,6 +23,11 @@ export class ProductService {
     shareReplay(1),
     // tap( result=> console.log('Products', JSON.stringify(result))),
     catchError(this.handleError)
+  );
+
+  countryList = this.http.get<any>(this.countries).pipe(
+    map(res => res.data),
+    catchError(err => this.handleError(err))
   );
 
   // There are some info in each product thats not included in the list of products
@@ -40,7 +48,7 @@ export class ProductService {
 
   selectedProduct$ = (id: string) => this.http.get<any>(`${this.productsUrl}/${id}`).pipe(
     map(result => result.data.data),
-    tap(res => console.log('productssssss: ', JSON.stringify(res))),
+    tap(res => console.log('Single product: ', JSON.stringify(res))),
     catchError(this.handleError)
   )
 
@@ -49,7 +57,7 @@ export class ProductService {
 
   // relatedProduct$ = combineLatest([
   //   this.product$,
-  //   this.selectedProductAction
+  //   this.selectedProductAction$
   // ]).pipe(
   //   switchMap(([product, selectedProductId]) => {
 

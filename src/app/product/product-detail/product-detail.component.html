@@ -40,7 +40,7 @@
                     *ngIf="product.quantity">
 
                     {{product.quantity <= 80 ? product.quantity + " Units Left" : 
-                    product.quantity <= 100 ? "Few Units Left" : 
+                    product.quantity > 80 && product.quantity <= 100 ? "Few Units Left" : 
                     product.quantity > 100 && product.quantity <= 200 ? "In Stock" : 
                     product.quantity > 200 ? "In Stock" : ""}}
                 </p>
@@ -53,13 +53,13 @@
             </div>
         </div>
 
-        <div class="mb-2 ps-5 pe-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993)">
+        <div class="mb-2 ps-5 pe-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993); ">
             <h4 class="card-text">Colors</h4>
             <div class="col-md-12"
                 style="background-color: rgba(218, 216, 216, 0.993); display: flex; padding: 1rem;">
 
                 <div class="me-2" *ngFor="let color of product.color;">
-                        <img [ngStyle]="{'border': '1px solid black'}"
+                        <img Style="border: 1px solid black; cursor: pointer;"
                             data-bs-toggle="modal"
                             data-bs-target="#colorModal"
                             [src]="'/assets/img-details/75x75_' + color.colorImage" 
@@ -86,37 +86,35 @@
                     <div class="modal-body p-2"
                         *ngIf="product.color && product.color.length > 0" >                    
                         <div class="card-header p-0" style="background-color: rgba(255, 255, 255, 0.993)">
-                            <h3 class="card-text fs-4 p-2 ps-4">{{ product.name }}</h3>
+                            <h3 class="card-text fs-4 p-2 ps-3">{{ product.name }}</h3>
                             <div class="d-flex justify-content-center p-2" >
                                 <img [src]="'/assets/img-details/800x800_' + product.color[index].colorImage " class="img-fluid" alt="Product Detail Image">
                             </div>
                         </div>
             
-                        <div class="card-text ps-5 pt-2 pb-2">
-                            <div>
-                                <p class="fw-bold mb-1 mt-2" 
-                                    style="font-size: 1.3rem;">
-                                    {{product.color[index].discountPrice | currency: "USD": "symbol": "1.2-2" }}
-                                </p>
-                
-                                <p class="mt-2 mb-1" 
-                                [style.color]="getColors(product.quantity)" style="font-size: 0.8rem;" 
-                                *ngIf="product.quantity">
-                
-                                {{product.quantity <= 80 ? product.quantity + " Units Left" : 
-                                product.quantity <= 100 ? "Few Units Left" : 
-                                product.quantity > 100 && product.quantity <= 200 ? "In Stock" : 
-                                product.quantity > 200 ? "In Stock" : ""}}
-                                </p>
-                            </div>
+                        <div class="card-text ps-4 pt-2 pb-2">
+                            <p class="fw-bold mb-1 mt-2" 
+                                style="font-size: 1.3rem;">
+                                {{product.color[index].discountPrice | currency: "USD": "symbol": "1.2-2" }}
+                            </p>
+            
+                            <p class="mt-2 mb-1" 
+                            [style.color]="getColors(product.color[index].quantity)" style="font-size: 0.8rem;" 
+                            *ngIf="product.color[index].quantity">
+
+                                {{product.color[index].quantity <= 80 ? product.color[index].quantity + " Units Left" : 
+                                product.color[index].quantity > 80 && product.color[index].quantity <= 100 ? "Few Units Left" : 
+                                product.color[index].quantity > 100 && product.color[index].quantity <= 200 ? "In Stock" : 
+                                product.color[index].quantity > 200 ? "In Stock" : ""}}
+                            </p>
                         </div>
 
                         <hr class="my-1">
 
-                        <div class="ps-5 pe-5 pt-2 pb-2">
+                        <div class="ms-4 me-4 pt-2 pb-2">
                             <div class="d-flex align-items-center mb-2">
-                                <h4 class="card-text mb-0">Colors: </h4>
-                                <span class="align-self-end fw-semibold ms-3" >{{product.color ? product.color[index].color: '' }}</span>
+                                <p class="card-text mb-0 fw-semibold fs-4">Colors: </p>
+                                <span class="fw-semibold ms-3" >{{product.color ? product.color[index].color: '' }}</span>
                             </div>
                             <div class="col-md-12"
                                 style="background-color: rgba(218, 216, 216, 0.993); display: flex; padding: 1rem;">
@@ -124,23 +122,60 @@
                                     *ngFor="let color of product.color; let i = index"
                                     (click)="selectedColor(i)"
                                     [class.selected]="i === index">
-                                    <img [ngStyle]="{'border': '1px solid black'}" [src]="'/assets/img-details/75x75_' + color.colorImage" class="img-fluid p-2" alt="{{color.color}}">
+                                    <img Style="border: 1px solid black; cursor: pointer;" [src]="'/assets/img-details/75x75_' + color.colorImage" class="img-fluid p-2" alt="{{color.color}}">
                                 </div>
                             </div>
                         </div>
 
-                        <span class="ps-5 me-2">Quantity: </span>
-                        <span>({{ (product.color[index].quantity - product.sold) }}) Available</span>
-                        <br>
-                        <span class="ps-5 me-4">Sold: </span>
-                        <span>{{product.sold }}</span>
-                        
+                        <div class=" options" >
+                            <span class="fw-semibold" style="font-size: 1.1rem;" >Quantity: </span>
+                            <span>({{ (product.color[index].quantity - product.sold) }}) Available</span>
+                            <br>
+                            <div class="mt-2 mb-4">
+                                <span class="me-2 fw-semibold" style="font-size: 1.1rem;">Sold: </span>
+                                <span>{{ product.sold }}</span>
+                            </div>
+                            
+                            <div class="d-flex">
+                                <button class="btn button"
+                                    (click)="decrement()" >
+                                    <span class="material-icons">
+                                        remove
+                                    </span>
+                                </button>
+                                <p class="mb-2 fs-5 fw-bold ps-3 pe-3" >{{quantity}}</p>
+                                <button class="btn button"
+                                    (click)="increment(product.color[index].quantity)">
+                                    <span class="material-icons">
+                                        add
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                        <!-- <hr> -->
+                        <div class="col-md-6 ms-4 pt-2 pb-2">
+                            <span class="card-text mb-0 fw-semibold fs-5">Total Price: </span>
+                            <span class="card-text mb-0 fw-bold fs-3 ms-3">{{ quantity * product.color[index].discountPrice | currency: "USD": "symbol": "1.2-2" }}</span>
+                        </div>
                     </div>
 
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <div class="row ms-4 me-4">
+                        <div class="col-md-6 p-0"
+                            [routerLink]="['/products']" >
+                            <button type="button" class="btn navigateTo" style="background-color: #a3cef8; " data-bs-dismiss="modal">Add to Cart</button>
+                        </div>
+                        <div class="col-md-6 p-0">
+                            <button type="button" 
+                                class="btn navigateTo"
+                                style="background-color: #1976d2; color: white;"
+                                data-bs-dismiss="modal"
+                                [routerLink]="['/order']" >Buy Now
+                            </button>
+                        </div>
                     </div>
+                    <!-- <div class="modal-footer">
+                       
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -349,13 +384,13 @@
             
                                     <span style="font-size: 13px; color: rgba(238, 7, 7, 0.988);"
                                             *ngIf="related.priceDiscountPercent">
-                                        {{related.priceDiscountPercent}}% off
+                                        {{related.priceDiscountPercent + "% off"}}
                                     </span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-12 btn-hover">
-                            <button class="cart-btn mt-2 btn   p-2 justify-content-center" title="Add item to cart">Add to Cart</button>
+                            <button class="cart-btn mt-2 btn p-2 justify-content-center" title="Add item to cart">Add to Cart</button>
                         </div>               
                     </div>
                 </div>
@@ -365,5 +400,5 @@
 </div>
 
 <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
-    Error: {{errorMessage}}
+    {{"Error: " + errorMessage}}
 </div>

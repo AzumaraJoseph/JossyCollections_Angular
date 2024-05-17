@@ -1,5 +1,5 @@
 .detail {
-    margin-top: 4.3rem;
+    margin-top: 2rem;
     padding: 0 2rem 0 2rem;
     display: flex;
     flex-direction: column;
@@ -66,4 +66,29 @@
 
 .selected {
     border: 1px solid red;
+}
+
+.material-icons {
+    font-size: 2rem;
+    color: rgba(0, 0, 0, 0.981);
+    background-color: rgba(218, 216, 216, 0.993);
+}
+
+.button {
+    padding: 0;
+    border: none;
+}
+
+.options {
+    margin: 0 1.5rem;
+    padding: 1rem 0;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.977);
+}
+
+.navigateTo {
+    border-radius: 0;
+    padding: 1rem 0;
+    width: 100%;
+    font-weight: 700;
+    font-size: 0.9rem;
 }

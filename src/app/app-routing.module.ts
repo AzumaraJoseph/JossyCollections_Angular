@@ -5,6 +5,7 @@ import { ErrorPageComponent } from './error-page.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { DialogueComponent } from './product/dialogue.component';
+import { OrderComponent } from './order.component';
 
 const routes: Routes = [
 
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailComponent },
   { path: 'products/:id/dialogue', component: DialogueComponent },
+  { path: 'order', component: OrderComponent },
   { path: 'star', component: StarComponent },
   {path: '**', component: ErrorPageComponent }
 ];

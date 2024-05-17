@@ -19,6 +19,7 @@ export class ProductDetailComponent implements OnInit {
   selectProduct$: Observable<Product> | undefined;
   relatedProducts$: Observable<Product[]> | undefined;
   index: number = 0;
+  quantity: number = 1;
 
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
@@ -75,6 +76,15 @@ export class ProductDetailComponent implements OnInit {
   selectedColor(index: number) {
     this.index = index;
   }
+
+increment(add: number): void {
+  if (this.quantity < add) this.quantity += 1;
+}
+
+decrement(): void {
+  if(this.quantity > 1) this.quantity--;
+    
+ }
 
   //   // To programmatically scroll the detail page to the top when a related product is clicked, you can use the window.scrollTo() method provided by the browser's window object. You can call this method with 0 as both the x and y coordinates to scroll the page to the top. 
 
