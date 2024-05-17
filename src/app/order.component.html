@@ -60,73 +60,33 @@
             </div>
         </div>
         <div>
-            <div class="row mb-5">
 
                           
-                <div class="row mb-5">
-
-                    <!-- <div class="row mb-5">
-                        <div *ngIf="countries$ | async as countries">
-                          <select (change)="onCountryChange($any($event.target).value)">
-                            <option value="">Select Country</option>
-                            <option *ngFor="let country of countries" [value]="country">{{ country.name }}</option>
-                          </select>
-                          <select *ngIf="selectedCountry" (change)="onStateChange($any($event.target).value)">
-                            <option value="">Select State</option>
-                            <option *ngFor="let state of selectedCountry.states" [value]="state">{{ state.name }}</option>
-                          </select>
-                        </div>
-                    </div> -->
-
-                    <div class="row mb-5">
-                        <div>
-                          <select (change)="onCountryChange($any($event.target).value)">
-                            <option value="">Select Country</option>
-                            <option *ngFor="let country of countries" [value]="country">{{ country.name }}</option>
-                          </select>
-                          <select *ngIf="selectedCountry" (change)="onStateChange($any($event.target).value)">
-                            <option value="">Select State</option>
-                            <option *ngFor="let state of selectedCountry.states" [value]="state">{{ state.name }}</option>
-                          </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div *ngFor="let country of countries">
-                <h3>{{ country.name }}</h3>
-                <ul>
-                    <li *ngFor="let state of country.states">
-                        {{ state.name }}
-                    </li>
-                </ul>
-            </div>
-            
-
-
-            <!-- <div *ngFor="let country of countries">
-                <h3>{{ country.name }}</h3>
-                <ng-container *ngIf="country.states && country.states.length > 0; else noStates">
-
-                    <select>
-                        <option value="">Select State</option>
-                            <option *ngFor="let state of getCity()" [value]="state">{{state.name}}</option>
+            <div class="row mb-5">
+                <div class="col-md-3">
+                    <select (change)="onCountryChange($event)" >
+                    <option value="">Select Country</option>
+                    <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
                     </select>
-                    <!-- <ul>
-                        <li *ngFor="let state of getCity()">
-                            {{ state.name }}
-                        </li>
-                    </ul> --
-                </ng-container>
-                <ng-template #noStates>
-                    <p>No states available</p>
-                </ng-template>
-            </div> -->
-            
+                </div>
+                <div class="col-md-3">
+                    <select *ngIf="selectedCountry" style="width: 100%;">
+                    <option value="">Select State</option>
+                    <option *ngFor="let state of selectedCountry.states" [value]="state.name">{{ state.name }}</option>
+                    </select>
+                </div>
 
-
-  
+                <!-- <div>
+                    <div *ngFor="let country of countries">
+                        <h3>{{ country.name }}</h3>
+                        <ul>
+                            <li *ngFor="let state of country.states">
+                                {{ state.name }}
+                            </li>
+                        </ul>
+                    </div>
+                </div> -->
+            </div>  
         </div>
     </div>
 </div>

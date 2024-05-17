@@ -1,14 +1,13 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ProductService } from './product/product.service';
 import { Product } from './product/product';
-import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, tap } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
   styleUrls: ['./order.component.css'],
-  // changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OrderComponent implements OnInit {
 
@@ -16,7 +15,9 @@ export class OrderComponent implements OnInit {
   index: number = 0;
   quantity: number = 1;
   countries$: Observable<any> | undefined;
-  countries: any[] = [];
+  countries!: any[];
+  selectedCountry: any | undefined;
+
 
   errorMessageSuject = new Subject<string>();
   errorMessage$ = this.errorMessageSuject.asObservable();
@@ -30,53 +31,59 @@ export class OrderComponent implements OnInit {
 
     });
 
-    // countries!: any[] | undefined;
 
     this.productService.countryList.pipe(
-      map(res => res ),
       tap(countries => {
         this.countries = countries; // Assign the response to countries
       }),
-      tap(countries => console.log('countries: ', JSON.stringify(countries))),
+      // tap(countries => console.log('countries: ', JSON.stringify(countries))),
       catchError(err => {
         this.errorMessageSuject.next(err)
         return EMPTY
       })
     ).subscribe()
 
+    console.log('selectedCountry: ', this.selectedCountry);
+
   }
 
-  getCity() {
-    const country = this.countries.map(country => country.states.name)
-    return country
+  getCity(): any[] {
+    // const country = this.countries.map(country => country.states.name)
+    // return country
+    if (this.selectedCountry) {
+      // Assuming selectedCountry is an object with a 'states' property
+      return this.selectedCountry.states;
+    } else {
+      return []; // Return an empty array if no country is selected
+    }
+    
   }
-
-  // this.countries$ = this.productService.countryList.pipe(
-  //   map(res => res.map((each: { states: any; }) => each.states) ),
-  //   tap(countries => console.log('countries: ', JSON.stringify(countries))),
-  //   catchError(err => {
-  //     this.errorMessageSuject.next(err)
-  //     return EMPTY
-  //   })
-  // )
 
   
-increment(add: number): void {
-  if (this.quantity < add) this.quantity += 1;
-}
+  increment(add: number): void {
+    if (this.quantity < add) this.quantity += 1;
+  }
 
-decrement(): void {
-  if(this.quantity > 1) this.quantity--;
-    
- }
+  decrement(): void {
+    if(this.quantity > 1) this.quantity--;
+      
+  }
 
- selectedCountry: any;
- onCountryChange(country: any): void {
-  this.selectedCountry = country;
-}
 
-onStateChange(state: any): void {
-  // Implement this method if needed
-}
+  onStateChange(state: any): void {
+    // Implement this method if needed
+  }
 
+
+  
+  onCountryChange(event: Event): void {
+    const selectedState = (event.target as HTMLSelectElement).value;
+
+    if (selectedState) {
+      this.selectedCountry = this.countries.find((state: any) => state.name === selectedState);
+    }
+
+    console.log('selectedCountry: ', JSON.stringify(this.selectedCountry));
+
+  }
 }
