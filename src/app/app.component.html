@@ -1,7 +1,7 @@
 
   <nav class="navBar navBar-expand fixed-top" style="background-color: white; " >
-    <div class="row nav pb-2" style="margin-bottom: 3px;">
-      <div class="col-md-5">
+    <div class="row nav pb-2 align-items-center" style="margin-bottom: 3px;">
+      <div class="col-md-2">
         <div class="navBar-brand mt-2 ms-5"
               [routerLink]="['/products']" >
           <img src="../assets/products/apple-touch-icon.png" class="image me-3" alt="Brand">
@@ -19,6 +19,86 @@
           <!-- <i class="material-symbols-outlined">search</i> -->
         </button>
       </div>
+      <div class=" p-0" style="width: max-content;">
+        <div class="dropdown">
+          <div class="account" [ngClass]="{'clicked': isClicked}" data-bs-toggle="dropdown" aria-expanded="false" (click)="toggleArrow()" >
+            <span class="material-icons me-1" style="font-size: 29px; ">{{ isLoggedIn ? 'person' : 
+              'person_outline'
+               }}
+              <!-- person_outline -->
+            </span>
+            <button class="btn p-0 fw-semibold" type="button" >{{ isLoggedIn ? 'Hi, ' + currentUser : 'Account' }}</button>
+
+            <span class="material-icons ms-1">{{ isClicked ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</span>
+
+          </div>        
+          
+          <ul class="dropdown-menu dropdown-menu-light p-0" style="width: 200px; box-shadow: 1px 2px 6px rgba(132, 132, 132, 0.974);">
+            <div class="p-2" [routerLink]="['/login']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="router-link-active" >
+              <button class="btn " style="background-color: #f68b1e; padding: 10px; color: white; width: 100%;">SIGN IN</button>
+            </div>
+
+            <li ><hr class="dropdown-divider m-0"></li>
+
+            <li><a class="dropdown-item">
+              <div class="d-flex align-items-center">
+                <span class="material-icons" style="font-size: 25px; ">
+                  person_outline
+                </span>
+                <button class="btn">My Account</button>
+              </div>
+            </a></li>
+
+            <li><a class="dropdown-item">
+              <div class="d-flex align-items-center">
+                <span class="material-symbols-outlined" style="font-size: 22px; ">
+                  storefront
+                  </span>
+                <button class="btn">Orders</button>
+              </div>
+            </a></li>
+
+            <!-- <li><a class="dropdown-item" *ngIf="isLoggedIn">
+              <div class="d-flex align-items-center">
+                <span class="material-symbols-outlined" style="font-size: 22px; ">
+                  mail
+                </span>
+                <button class="btn">Inbox</button>
+              </div>
+            </a></li> -->
+
+            <li><a class="dropdown-item">
+              <div class="d-flex align-items-center">
+                <span class="material-symbols-outlined" style="font-size: 22px; ">
+                  favorite
+                </span>
+                <button class="btn">Saved items</button>
+              </div>
+            </a></li>
+            <!-- <li><a class="dropdown-item" *ngIf="isLoggedIn">
+              <div class="d-flex align-items-center">
+                <span class="material-symbols-outlined" style="font-size: 22px; ">
+                  credit_card_gear
+                </span>
+                <button class="btn">Voucher</button>
+              </div>
+            </a></li> -->
+          </ul>
+        </div>       
+      </div>
+
+      <div class="col-md-1 p-0" *ngIf="isLoggedIn">
+        <div class="cart">
+          <span class="position-relative material-symbols-outlined me-2">
+            shopping_cart
+            <span class="badge"> 1
+              <span class="visually-hidden">New alerts</span>
+            </span>
+          </span>
+          <button class="btn fw-semibold p-0" type="button">Cart
+          </button>
+        </div>
+      </div>
     </div>    
   </nav>
 
@@ -35,7 +115,7 @@
         </i>
         <p class="mb-0">Home</p>
     </a>
-    <a class="footer-link">
+    <a class="footer-link" >
         <i class="material-icons footer-icon">
             format_list_bulleted
         </i>
@@ -60,5 +140,7 @@
         <p class="mb-0">Account</p>
     </a>        
   </footer>
+
+
 </div>
 

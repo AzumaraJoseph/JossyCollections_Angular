@@ -1,5 +1,6 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
+import { AuthService } from './shared/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -41,8 +42,35 @@ export class AppComponent implements OnInit {
   //   }
   // }
 
-  constructor(private router: Router) { }
-  
+
+  onButtonClick(event: MouseEvent): void {
+    this.isClicked = !this.isClicked;
+    event.stopPropagation();
+  }
+
+  onDivClick(event: MouseEvent): void {
+    // Stop propagation to prevent the document click handler from triggering
+    event.stopPropagation();
+  }
+
+  @HostListener('document:click', ['$event'])
+  handleClickOutside(event: MouseEvent): void {
+    const clickedInside = this.elementRef.nativeElement.contains(event.target as Node);
+    if (!clickedInside) {
+      this.isClicked = false;
+    }
+  }
+
+
+  constructor(private router: Router, private elementRef: ElementRef, public auth: AuthService) { }
+  isClicked: boolean = false;
+
+  get isLoggedIn(): boolean {
+    return this.auth.isLoggedIn;
+  }
+
+  currentUser: string | undefined;
+
   ngOnInit(): void {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -52,8 +80,19 @@ export class AppComponent implements OnInit {
       // this.checkRouterEvent(event);
   
     });   
+
+     // Initialize the current user
+     if (this.auth.isLoggedIn) {
+      this.currentUser = this.auth.currentUser.name;
+    } else {
+      this.currentUser = 'Guest';
+    }
   }
 
+  toggleArrow(): void {
+    // this.arrow = this.arrow === 'keyboard_arrow_down' ? 'keyboard_arrow_up' : 'keyboard_arrow_down';
+    this.isClicked = !this.isClicked;
+    }
   
 } 
  

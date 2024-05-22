@@ -60,35 +60,13 @@
     visibility: hidden;
 }
 
+.cart-btn:active {
+    border: 1px solid orange;
+}
+
+
 .similar:hover .cart-btn {
     visibility: visible;
 }
 
-.selected {
-    border: 1px solid red;
-}
 
-.material-icons {
-    font-size: 2rem;
-    color: rgba(0, 0, 0, 0.981);
-    background-color: rgba(218, 216, 216, 0.993);
-}
-
-.button {
-    padding: 0;
-    border: none;
-}
-
-.options {
-    margin: 0 1.5rem;
-    padding: 1rem 0;
-    border-bottom: 2px solid rgba(0, 0, 0, 0.977);
-}
-
-.navigateTo {
-    border-radius: 0;
-    padding: 1rem 0;
-    width: 100%;
-    font-weight: 700;
-    font-size: 0.9rem;
-}

@@ -1,0 +1,73 @@
+.header {
+    margin: 0 auto;
+    width: fit-content;
+    margin-bottom: 1rem;
+}
+
+.material-icons {
+    border-radius: 50%;
+    font-size: 4rem;
+    background-color: #f68b1e;
+    color: white;
+    padding: 0;
+    text-align: center;
+    padding: 2px;
+}
+
+.center {
+    text-align: center;
+    font-size: 1.1rem;
+    margin-bottom: 2rem;
+}
+
+input {
+    border: none;
+    outline: 0.3px solid rgb(123, 123, 123);
+}
+
+
+input:focus {
+    outline: 2px solid #f68b1e;
+    box-shadow: none;
+
+}
+
+.button {
+    background-color: #f68b1e; 
+    text-align: center; 
+    margin-top: 3rem; 
+    /* padding: 0.5rem; */
+    border-radius: 4px;
+}
+
+.icon {
+    border-radius: 100%;
+    font-size: 1rem;
+    background-color: #f68b1e;
+    color: white;
+    padding: 2px;
+}
+
+a {
+    text-decoration: none;
+}
+
+label {
+    color: rgba(84, 83, 83, 0.978);
+}
+
+
+.form-floating:focus-within label {
+    color: #f68b1e; /* Change to your desired color */
+}
+
+/* 
+.custom-input {
+    border: none;
+    border-radius: 4px;
+
+}
+
+.custom-input:focus {
+    box-shadow: none;
+} */

@@ -48,7 +48,7 @@ export class ProductService {
 
   selectedProduct$ = (id: string) => this.http.get<any>(`${this.productsUrl}/${id}`).pipe(
     map(result => result.data.data),
-    tap(res => console.log('Single product: ', JSON.stringify(res))),
+    // tap(res => console.log('Single product: ', JSON.stringify(res))),
     catchError(this.handleError)
   )
 

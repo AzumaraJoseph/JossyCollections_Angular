@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
-import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, shareReplay, tap } from 'rxjs';
 import { Product } from '../product';
 import { ActivatedRoute, Router } from '@angular/router';
 // import bootstrap from 'bootstrap'; // Import Bootstrap JavaScript (if not already imported)
@@ -38,6 +38,8 @@ export class ProductDetailComponent implements OnInit {
 
       this.selectProduct$ = this.productService.selectedProduct$(id).pipe(
         shareReplay(1),
+        tap(product => console.log('single product: ', JSON.stringify(product))
+        ),
         catchError(err => {
           this.errorMessageSubject.next(err);
           return EMPTY
@@ -64,16 +66,13 @@ export class ProductDetailComponent implements OnInit {
     //   })
     // );
 
-    
-
-
   }
 
   openRelated(id: string) {
     this.router.navigate(['/products', id]);
   }
 
-  selectedColor(index: number) {
+  eachProduct(index: number) {
     this.index = index;
   }
 

@@ -51,9 +51,14 @@
     visibility: hidden;
 }
 
+.cart-btn:active {
+    border: 1px solid orange;
+}
+
 .card:hover .cart-btn {
     visibility: visible;
     /* outline: orange; */
 
 }
+
 

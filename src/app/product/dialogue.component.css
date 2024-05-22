@@ -26,3 +26,61 @@
     padding: 0.5rem;
     margin-bottom: 0.5rem;
 }
+
+.material-icons {
+    font-size: 2rem;
+    color: white;
+    height: 100%;
+    padding-top: 0.5rem;
+}
+
+.button {
+    padding: 0;
+    background-color: #f68b1e;
+}
+
+.button:active {
+    border: 1px solid #f68b1e;
+
+}
+
+.btn-remove {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-right: none; /* Remove the right border to make it look like it's joined to the next button */
+}
+
+/* Add button styles */
+.btn-add {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-left: none; /* Remove the left border to make it look like it's joined to the previous button */
+}
+
+.quantity {
+    margin: 0 1rem;
+    font-weight: 700;
+    font-size: 1.6rem;
+    align-self: center;
+    color: rgb(87, 87, 87);
+}
+
+.options {
+    margin: 0 1.5rem;
+    padding: 1rem 0 2rem;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.977);
+}
+
+.selected {
+    border: 1px solid red;
+}
+
+
+.navigateTo {
+    background-color: #f68b1e;
+    color: white;
+    padding: 0.8rem 0;
+    width: 100%;
+    font-weight: 700;
+    font-size: 0.9rem;
+}

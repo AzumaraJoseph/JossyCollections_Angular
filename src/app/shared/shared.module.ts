@@ -9,7 +9,7 @@ import { CollapsibleWellComponent } from './collapsible-well.component';
 @NgModule({
   declarations: [
     StarComponent,
-    CollapsibleWellComponent
+    CollapsibleWellComponent,
   ],
   imports: [
     CommonModule,

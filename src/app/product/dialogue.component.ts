@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from './product.service';
-import { EMPTY, Observable, Subject, Subscription, catchError, tap } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
 import { Product } from './product';
 
 @Component({
@@ -10,40 +8,41 @@ import { Product } from './product';
   styleUrls: ['./dialogue.component.css']
 })
 export class DialogueComponent implements OnInit {
+  @Input() indexer: any;
+  @Input() product: any;
+
   product$: Observable<Product> | undefined;
-  sub!: Subscription;
+  selectProduct$: Observable<Product> | undefined;
+  quantity: number = 1;
 
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
-  constructor(private productService: ProductService, private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      const id = params['id'];
-
-      if (id) {
-        this.productService.selectedProductChanged(id);
-        this.sub = this.productService.userReviews$.subscribe()
-      } else {
-        console.error('No product id provided in route parameters');
-      }
-
-      // this.productService.selectedProductChanged(id);
-    });
-
-    this.product$ = this.productService.product$.pipe(
-      tap(data => console.log('data: ', JSON.stringify(data))),
-      catchError(err => {
-        this.errorMessageSubject.next(err);
-        return EMPTY
-      })
-    ) 
 
   }
 
-  selectedProduct(id: string) {
-    this.productService.selectedProductChanged(id);
+  getColors(quantity: number): string {
+    if(quantity > 200) {
+      return 'black';
+    } else if(quantity > 100 && quantity <= 200) {
+      return 'orange';
+    } else if(quantity === 0) {
+      return 'grey';
+    } else {
+      return 'red';
+    }
   }
+
+increment(maxQuantity: number): void {
+  if (this.quantity < maxQuantity) this.quantity += 1;
+}
+
+decrement(): void {
+  if(this.quantity > 1) this.quantity--;
+    
+ }
 
 }

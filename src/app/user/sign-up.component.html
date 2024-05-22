@@ -1,0 +1,144 @@
+<div class="fluid-container" style="margin-top: 6rem;">
+    <div class="header">
+        <span class="material-icons">
+            star
+        </span>
+    </div>
+    <div style="margin: 0 auto; width: 32%;">
+        <div class="center">
+            <h5 class="fw-bold">Create your acount</h5>
+            <p style="color: rgba(84, 83, 83, 0.978);">Let's get started by creating your account. <br>
+            To keep your account safe, we need a strong password</p>
+        </div>
+        <div>
+            <form novalidate autocomplete="off" [formGroup]="signUpForm" (ngSubmit)="save()" >
+                <div class="form-floating form-group mb-4">
+                    <input type="text"
+                        class="form-control"
+                        id="fullNameId"
+                        formControlName="fullName"
+                        placeholder="User Name" 
+                        [ngClass]="{'is-invalid': (signUpForm.controls['fullName'].touched || signUpForm.get('fullName')?.dirty) && !signUpForm.get('fullName')?.valid }" >
+
+                    <label for="fullNameId">Full Name</label>
+                    <span class="invalid-feedback">
+                        <span *ngIf="signUpForm.controls['fullName']?.errors?.['required']">
+                            <em>Please enter your full name</em>
+                        </span>
+                        <span *ngIf="signUpForm.controls['fullName']?.errors?.['minlength']">
+                          Name must be longer than 3 characters
+                        </span>
+                    </span>
+                </div>
+
+                <div class="form-floating form-group mb-4">
+                    <input type="email"
+                        class="form-control" 
+                        id="emailId"
+                        formControlName="email"
+                        placeholder="Email" 
+                        [ngClass]="{'is-invalid': (signUpForm.controls['email'].touched || signUpForm.get('email')?.dirty) && !signUpForm.get('email')?.valid }" >
+
+                    <label for="emailId">Email</label>
+                    <span class="invalid-feedback">
+                        <span *ngIf="signUpForm.controls['email']?.errors?.['required']">
+                            <em>Please enter your email address</em>
+                        </span>
+                        <span *ngIf="signUpForm.controls['email']?.errors?.['email']">
+                          Enter a valid email address
+                        </span>
+                    </span>
+                </div>
+
+                <!--<div class="form-floating form-group mb-3">
+                    
+                    <div class="input-group">
+                        <input 
+                                 type="password"
+                               class="form-control"
+                               [type]="passwordFieldType"
+                               id="passwordId"
+                               formControlName="password"
+                               placeholder="Password"
+                               [ngClass]="{'is-invalid': (signUpForm.controls['password'].touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid }">
+                               
+                        <span class="input-group-text" (click)="togglePasswordVisibility()">
+                            <i class="material-icons">{{passwordFieldType === 'password' ? 'visibility' : 'visibility_off'}}</i>
+                        </span>
+                        
+                    </div>
+                    <div *ngIf="(signUpForm.controls['password'].touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid" class="invalid-feedback">
+                        Please enter a valid password.
+                    </div>
+                </div> -->
+
+                <div class="form-floating form-group mb-4">
+                    <input type="password" 
+                            class="form-control" 
+                            id="passwordId" 
+                            formControlName="password" 
+                            placeholder="Password" 
+                            [ngClass]="{'is-invalid': (signUpForm.controls['password'].touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid }" >
+
+                    <label for="passwordId">Password</label>
+
+                    <span class="invalid-feedback">
+                        <span *ngIf="signUpForm.controls['password']?.errors?.['required']">
+                            <em>Please enter your password</em>
+                        </span>
+                        <span *ngIf="signUpForm.controls['password']?.errors?.['minlength']">
+                          Password must be more than 6 characters
+                        </span>
+                    </span>
+                </div>
+
+                <div class="form-floating form-group mb-4">
+                    <input type="password" 
+                            class="form-control" 
+                            id="confirmPassword" 
+                            formControlName="confirmPassword" 
+                            placeholder="Confirm Password" 
+                            [ngClass]="{'is-invalid': (signUpForm.controls['confirmPassword'].touched || signUpForm.get('confirmPassword')?.dirty) && !signUpForm.get('confirmPassword')?.valid }" >
+                    <label for="confirmPassword">Confirm Password</label>
+                    <span class="invalid-feedback">
+                        <span *ngIf="signUpForm.controls['confirmPassword']?.errors?.['required']">
+                            <em>Please confirm your password</em>
+                        </span>
+                        <span *ngIf="signUpForm.controls['confirmPassword']?.errors?.['minlength']">
+                          Password must be more than 6 characters
+                        </span>
+                    </span>
+                </div>
+
+                <div class="form-floating form-group mb-4">
+                    <input type="number" 
+                            class="form-control" 
+                            id="phoneId" 
+                            formControlName="phone" 
+                            placeholder="Phone" 
+                            [ngClass]="{'is-invalid': (signUpForm.controls['phone'].touched || signUpForm.get('phone')?.dirty) && !signUpForm.get('phone')?.valid }" >
+                    <label for="phoneId">Phone</label>
+                    <span class="invalid-feedback">
+                        <span *ngIf="signUpForm.controls['phone']?.errors?.['required']">
+                            <em>Please enter your phone number</em>
+                        </span>
+                    </span>
+                </div>
+
+                <div class="button">
+                    <button class="btn fw-bold w-100 p-2" type="submit" [disabled]="!signUpForm.valid" style="color: white; font-size: 1rem; border: none;">Continue</button>
+                </div>
+            </form>
+
+            <p class="text-center mt-4 mb-4">By continuing you agree to Jossy's <br> <a href="">Terms and Conditions</a></p>
+
+            <p class="text-center mt-3">For further support, you may visit the Help Center or contact our customer service team.</p>
+                
+            <div class="header d-flex align-items-center mt-4">
+                <h5 class="mb-0 fw-bold me-1">JOSSY</h5>
+                <span class="material-icons icon">star</span>
+            </div>
+            
+        </div>
+    </div>
+</div>

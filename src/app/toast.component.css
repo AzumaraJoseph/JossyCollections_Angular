@@ -1,0 +1,14 @@
+/* 
+.toast {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.5s ease-in-out;
+  }
+  
+  .show {
+    visibility: visible;
+    opacity: 1;
+    /* Add any additional styles you want for the show state *
+    background-color: #343a40; /* Dark background *
+    color: #fff; /* White text *
+  }  */

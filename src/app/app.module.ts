@@ -12,6 +12,8 @@ import { DialogueDirective } from './dialogue.directive';
 import { DialogueComponent } from './product/dialogue.component';
 import { OrderComponent } from './order.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ToastComponent } from './toast.component';
+import { UserModule } from './user/user.module';
 
 @NgModule({
   declarations: [
@@ -21,15 +23,17 @@ import { ReactiveFormsModule } from '@angular/forms';
     ProductDetailComponent,
     DialogueDirective,
     DialogueComponent,
-    OrderComponent
+    OrderComponent,
+    ToastComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     SharedModule,
     ReactiveFormsModule,
+    UserModule,
     // ProductModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
