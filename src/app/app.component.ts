@@ -9,6 +9,12 @@ import { AuthService } from './shared/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'Jossy-Third-Project';
+  isClicked: boolean = false;
+  currentUser: string | undefined;
+
+  get isLoggedIn(): boolean {
+    return this.auth.isLoggedIn;
+  }
 
   
   isScrolledDown: boolean = false;
@@ -61,16 +67,8 @@ export class AppComponent implements OnInit {
     }
   }
 
-
   constructor(private router: Router, private elementRef: ElementRef, public auth: AuthService) { }
-  isClicked: boolean = false;
-
-  get isLoggedIn(): boolean {
-    return this.auth.isLoggedIn;
-  }
-
-  currentUser: string | undefined;
-
+  
   ngOnInit(): void {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
@@ -83,7 +81,7 @@ export class AppComponent implements OnInit {
 
      // Initialize the current user
      if (this.auth.isLoggedIn) {
-      this.currentUser = this.auth.currentUser.name;
+      this.currentUser = this.auth.currentUser?.name;
     } else {
       this.currentUser = 'Guest';
     }
@@ -94,5 +92,16 @@ export class AppComponent implements OnInit {
     this.isClicked = !this.isClicked;
     }
   
+    logOut(): void {
+      this.auth.logOut().subscribe(
+        () => {
+          this.router.navigate(['/login']);
+          console.log('Log out success');
+        }
+      );
+      // !this.isLoggedIn;
+      
+      
+    }
 } 
  

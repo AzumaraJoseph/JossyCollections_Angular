@@ -1,0 +1,38 @@
+.profile {
+    margin-bottom: 3px;
+}
+
+a {
+    text-decoration: none;
+    color: rgba(84, 83, 83, 0.968);
+    font-size: 0.95rem;
+}
+
+.title {
+    margin-bottom: 0.5rem;
+    font-size: 1.05rem;
+    color: rgba(65, 65, 65, 0.985);
+    font-weight: 700;
+}
+
+input {
+    outline: 0.2px solid rgba(222, 222, 222, 0.995);
+    padding: 0.6rem;
+}
+
+input:focus {
+    outline: 2px solid #f68b1e;
+    box-shadow: none;
+    border: none;
+}
+  
+
+.is-invalid {
+    border-color: red;
+  }
+  
+  .invalid-feedback {
+    color: red;
+    display: block;
+  }
+  

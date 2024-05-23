@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { EMPTY, Observable, Subject, catchError, shareReplay, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
 import { ToastComponent } from 'src/app/toast.component';
+declare let $: any;
 
 @Component({
   selector: 'app-product-list',
@@ -26,6 +27,7 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
 
+
     this.pageTitle = 'Products You May Love!';
 
     this.products$ = this.productService.products$.pipe(
@@ -38,6 +40,28 @@ export class ProductListComponent implements OnInit {
     );
 
   }
+
+  // ngAfterViewInit(): void {
+  //   // Initialize carousel
+  //   $('#carouselid').carousel();
+
+  // }
+
+  ngAfterViewInit(): void {
+    console.log('Initializing carousel');
+    setTimeout(() => {
+      const carouselElement = $('#carouselid');
+      if (carouselElement.length) {
+        console.log('Carousel element found:', carouselElement);
+        carouselElement.carousel({
+          interval: 2000 // Customize interval as needed
+        });
+      } else {
+        console.error('Carousel element not found');
+      }
+    }, 0);
+  }
+  
 
   // @ViewChild(ToastComponent) toast!: ToastComponent;
 

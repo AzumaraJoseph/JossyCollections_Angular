@@ -34,13 +34,16 @@
           </div>        
           
           <ul class="dropdown-menu dropdown-menu-light p-0" style="width: 200px; box-shadow: 1px 2px 6px rgba(132, 132, 132, 0.974);">
-            <div class="p-2" [routerLink]="['/login']" [routerLinkActiveOptions]="{exact: true}" routerLinkActive="router-link-active" >
+            <div class="p-2" 
+            [routerLink]="['/login']" 
+            [routerLinkActiveOptions]="{exact: true}" routerLinkActive="router-link-active" 
+            *ngIf="!isLoggedIn" >
               <button class="btn " style="background-color: #f68b1e; padding: 10px; color: white; width: 100%;">SIGN IN</button>
             </div>
 
-            <li ><hr class="dropdown-divider m-0"></li>
+            <li *ngIf="!isLoggedIn"><hr class="dropdown-divider m-0"></li>
 
-            <li><a class="dropdown-item">
+            <li [routerLink]="['/profile']" ><a class="dropdown-item">
               <div class="d-flex align-items-center">
                 <span class="material-icons" style="font-size: 25px; ">
                   person_outline
@@ -58,14 +61,14 @@
               </div>
             </a></li>
 
-            <!-- <li><a class="dropdown-item" *ngIf="isLoggedIn">
+            <li><a class="dropdown-item" *ngIf="isLoggedIn">
               <div class="d-flex align-items-center">
                 <span class="material-symbols-outlined" style="font-size: 22px; ">
                   mail
                 </span>
                 <button class="btn">Inbox</button>
               </div>
-            </a></li> -->
+            </a></li>
 
             <li><a class="dropdown-item">
               <div class="d-flex align-items-center">
@@ -75,14 +78,24 @@
                 <button class="btn">Saved items</button>
               </div>
             </a></li>
-            <!-- <li><a class="dropdown-item" *ngIf="isLoggedIn">
+            <li><a class="dropdown-item" *ngIf="isLoggedIn">
               <div class="d-flex align-items-center">
                 <span class="material-symbols-outlined" style="font-size: 22px; ">
                   credit_card_gear
                 </span>
                 <button class="btn">Voucher</button>
               </div>
-            </a></li> -->
+            </a></li>
+
+            <li *ngIf="isLoggedIn"><hr class="dropdown-divider m-0"></li>
+
+            <div class="p-1"
+              *ngIf="isLoggedIn" 
+              (click)="logOut()">
+              <button class="btn " style="background-color: white; padding: 10px; color: #f68b1e; width: 100%;">LOG OUT</button>
+            </div>
+
+
           </ul>
         </div>       
       </div>

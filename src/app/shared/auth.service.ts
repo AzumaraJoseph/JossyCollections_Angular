@@ -1,7 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, tap, throwError } from 'rxjs';
-import { Iuser } from '../user/user-model.component';
+import { Iuser } from '../user/user.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +10,11 @@ export class AuthService {
 
   private loginUrl = 'http://127.0.0.1:5000/api/v1/user/login';
   private signupUrl = 'http://127.0.0.1:5000/api/v1/user/signup';
+  private logOutUrl = 'http://127.0.0.1:5000/api/v1/user/logout';
 
   constructor(private http: HttpClient) { }
 
-  currentUser!: Iuser;
+  currentUser!: Iuser | null;
 
   login(email: string, password: string): Observable<Iuser> {
     const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
@@ -59,6 +60,17 @@ export class AuthService {
 
   get isLoggedIn(): boolean {
     return !!this.currentUser;
+  }
+
+  logOut() {
+    // update the ui of the logout
+    this.currentUser = null;
+
+        // update the server of the logout
+    const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) }
+    return this.http.post<Iuser>(this.logOutUrl, options);
+
+    // const logoutInfo = { email: this.currentUser.email, password: this.currentUser.password };
   }
 
   private handleError(err: HttpErrorResponse): Observable<never> {
