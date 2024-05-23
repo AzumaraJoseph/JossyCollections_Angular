@@ -36,7 +36,7 @@
                           <em>Please enter your full name</em>
                         </span>
                         <span class="invalid-feedback" *ngIf="signUpForm.controls['fullName'].errors?.['minlength']">
-                            Full name must be more than 8 characters
+                            Full name must be more than 3 characters
                         </span>
                     </div>
                 </div>
@@ -63,88 +63,51 @@
                         <span class="invalid-feedback" *ngIf="signUpForm.controls['email'].errors?.['required']">
                             <em>Please enter your email</em>
                         </span>
-                        <span class="invalid-feedback" *ngIf="signUpForm.controls['confirmPassword'].errors?.['email']">
-                            Please enter valid email address
+                        <span class="invalid-feedback" *ngIf="signUpForm.controls['email'].errors?.['email']">
+                            Please enter a valid email address
                         </span>
                     </div>
                 </div>
 
-                <!--<div class="form-floating form-group mb-3">
-                    
-                    <div class="input-group">
-                        <input 
-                                 type="password"
-                               class="form-control"
-                               [type]="passwordFieldType"
-                               id="passwordId"
-                               formControlName="password"
-                               placeholder="Password"
-                               [ngClass]="{'is-invalid': (signUpForm.controls['password'].touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid }">
-                               
-                        <span class="input-group-text" (click)="togglePasswordVisibility()">
-                            <i class="material-icons">{{passwordFieldType === 'password' ? 'visibility' : 'visibility_off'}}</i>
-                        </span>
-                        
-                    </div>
-                    <div *ngIf="(signUpForm.controls['password'].touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid" class="invalid-feedback">
-                        Please enter a valid password.
-                    </div>
-                </div> -->
-
-                <div class="form-floating form-group mb-4">
-                    <input type="password" 
-                            class="form-control" 
-                            id="passwordId" 
-                            formControlName="password" 
-                            placeholder="Password" 
-                            [ngClass]="{'is-invalid': (signUpForm.controls['password'].touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid }" >
-
-                    <label for="passwordId">Password</label>
-<!-- 
-                    <span class="invalid-feedback">
-                        <span *ngIf="signUpForm.controls['password']?.errors?.['required']">
-                            <em>Please enter your password</em>
-                        </span>
-                        <span *ngIf="signUpForm.controls['password']?.errors?.['minlength']">
-                          Password must be more than 6 characters
-                        </span>
-                    </span> -->
-
-                    <div *ngIf="(signUpForm.controls['password'].touched || signUpForm.controls['password'].dirty)  && !signUpForm.controls['password'].valid">
-                        <span class="invalid-feedback" *ngIf="signUpForm.controls['password'].errors?.['required']">
+                <div formGroupName="passwordGroup">
+                    <!-- Password Field -->
+                    <div class="form-floating form-group mb-4">
+                      <input type="password"
+                        class="form-control"
+                        id="passwordId"
+                        formControlName="password"
+                        placeholder="Password"
+                        [ngClass]="{'is-invalid': (signUpForm.get('passwordGroup.password')?.touched || signUpForm.get('passwordGroup.password')?.dirty) && !signUpForm.get('passwordGroup.password')?.valid }">
+                      <label for="passwordId">Password</label>
+                      <div *ngIf="(signUpForm.get('passwordGroup.password')?.touched || signUpForm.get('passwordGroup.password')?.dirty) && !signUpForm.get('passwordGroup.password')?.valid">
+                        <span class="invalid-feedback" *ngIf="signUpForm.get('passwordGroup.password')?.errors?.['required']">
                           <em>Please enter your password</em>
                         </span>
-                        <span class="invalid-feedback" *ngIf="signUpForm.controls['password'].errors?.['minlength']">
-                            Password must be more than 8 characters
+                        <span class="invalid-feedback" *ngIf="signUpForm.get('passwordGroup.password')?.errors?.['minlength']">
+                          Password must be more than 8 characters
                         </span>
+                      </div>
                     </div>
-                </div>
+                
+                    <!-- Confirm Password Field -->
+                    <div class="form-floating form-group mb-4">
+                      <input type="password"
+                        class="form-control"
+                        id="confirmPasswordId"
+                        formControlName="confirmPassword"
+                        placeholder="Confirm Password"
+                        [ngClass]="{'is-invalid': (signUpForm.get('passwordGroup.confirmPassword')?.touched || signUpForm.get('passwordGroup.confirmPassword')?.dirty) && (!signUpForm.get('passwordGroup.confirmPassword')?.valid || signUpForm.get('passwordGroup')?.errors?.['passwordMismatch']) }">
+                      <label for="confirmPasswordId">Confirm Password</label>
 
-                <div class="form-floating form-group mb-4">
-                    <input type="password" 
-                            class="form-control" 
-                            id="confirmPassword" 
-                            formControlName="confirmPassword" 
-                            placeholder="Confirm Password" 
-                            [ngClass]="{'is-invalid': (signUpForm.controls['confirmPassword'].touched || signUpForm.get('confirmPassword')?.dirty) && !signUpForm.get('confirmPassword')?.valid }" >
-                    <label for="confirmPassword">Confirm Password</label>
-
-                    <div *ngIf="(signUpForm.controls['confirmPassword'].touched || signUpForm.controls['confirmPassword'].dirty)  && !signUpForm.controls['confirmPassword'].valid">
-                        <span class="invalid-feedback" *ngIf="signUpForm.controls['confirmPassword'].errors?.['required']">
+                      <div *ngIf="(signUpForm.get('passwordGroup.confirmPassword')?.touched || signUpForm.get('passwordGroup.confirmPassword')?.dirty) && !signUpForm.get('passwordGroup.confirmPassword')?.valid">
+                        <span class="invalid-feedback" *ngIf="signUpForm.get('passwordGroup.confirmPassword')?.errors?.['required']">
                           <em>Please confirm password</em>
                         </span>
-                        <span class="invalid-feedback" *ngIf="signUpForm.controls['confirmPassword'].errors?.['minlength']">
-                            Password must be more than 8 characters
+                        <span class="invalid-feedback" *ngIf="signUpForm.get('passwordGroup')?.errors?.['passwordMismatch']">
+                          The confirmation password does not match
                         </span>
+                      </div>
                     </div>
-                    <!-- <span class="invalid-feedback">
-                        <span *ngIf="signUpForm.controls['confirmPassword']?.errors?.['required']">
-                            <em>Please confirm your password</em>
-                        </span>
-                        <span *ngIf="signUpForm.controls['confirmPassword']?.errors?.['minlength']">
-                          Password must be more than 6 characters
-                        </span>
-                    </span> -->
                 </div>
 
                 <div class="form-floating form-group mb-4">

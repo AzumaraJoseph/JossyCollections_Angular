@@ -62,10 +62,10 @@
 
                     <div *ngIf="(loginForm.controls['password'].touched || loginForm.controls['password'].dirty)  && !loginForm.controls['password'].valid">
                         <span class="invalid-feedback" *ngIf="loginForm.controls['password'].errors?.['required']">
-                          <em>Please enter your full name</em>
+                          <em>Please enter your password</em>
                         </span>
                         <span class="invalid-feedback" *ngIf="loginForm.controls['password'].errors?.['minlength']">
-                            Full name must be more than 8 characters
+                            Password must be more than 8 characters
                         </span>
                     </div>    
                 </div>

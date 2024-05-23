@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../shared/auth.service';
+import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../shared/auth.service';
 import { Router } from '@angular/router';
+// import { confirmPasswordValidator } from '../custom-validators';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -19,15 +21,26 @@ export class SignUpComponent implements OnInit {
   this.signUpForm = this.fb.group({
     fullName: ['', [Validators.required, Validators.minLength(3)]],
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(8)]],
-    confirmPassword: ['', [Validators.required, Validators.minLength(8)]],
+    passwordGroup: this.fb.group({
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassword: ['', Validators.required]
+    }),
     phone: ['', [Validators.required]]
-  })
+  });
+
+
+  
+
+
   }
 
   // togglePasswordVisibility(): void {
   //   this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
   // }
+
+  
+
+
 
   save() {
     const fullNameControl = this.signUpForm.controls['email'].value;
