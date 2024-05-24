@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/auth.service';
 import { Router } from '@angular/router';
+import { passwordsMatchValidator } from '../custom-validators';
 // import { confirmPasswordValidator } from '../custom-validators';
+
+
+
+
+
+
+
 
 
 @Component({
@@ -16,23 +24,81 @@ export class SignUpComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
 
+  // ngOnInit(): void {
+
+  // this.signUpForm = this.fb.group({
+  //   fullName: ['', [Validators.required, Validators.minLength(3)]],
+  //   email: ['', [Validators.required, Validators.email]],
+  //   passwordGroup: this.fb.group({
+  //     password: ['', [Validators.required, Validators.minLength(8)]],
+  //     confirmPassword: ['', Validators.required]
+  //   }),
+  //   phone: ['', [Validators.required]]
+  // });
+
+  // }
+
+
+  // ngOnInit(): void {
+
+  //   this.signUpForm = this.fb.group({
+  //     fullName: ['', [Validators.required, Validators.minLength(3)]],
+  //     email: ['', [Validators.required, Validators.email]],
+  //     password: ['', [Validators.required, Validators.minLength(8)]],
+  //     confirmPassword: ['', Validators.required],
+  //     phone: ['', [Validators.required]]
+  //   }, { validators: this.passwordsMatchValidator } );
+  
+  //   }
+  
+  passwordForm!: FormGroup;
+
+  userForm!: FormGroup;
+
   ngOnInit(): void {
-
-  this.signUpForm = this.fb.group({
-    fullName: ['', [Validators.required, Validators.minLength(3)]],
-    email: ['', [Validators.required, Validators.email]],
-    passwordGroup: this.fb.group({
+    this.signUpForm = this.fb.group({
+      fullName: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', Validators.required]
-    }),
-    phone: ['', [Validators.required]]
-  });
+    }, { validators: passwordsMatchValidator });
+  }
 
+  // passwordsMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
+  //   const password = control.get('password');
+  //   const confirmPassword = control.get('confirmPassword');
+  //   if (password && confirmPassword && password.value !== confirmPassword.value) {
+  //     return { passwordsMismatch: true };
+  //   }
+  //   return null;
+  // }
 
   
 
 
-  }
+
+
+  // ngOnInit(): void {
+  //   this.passwordForm = this.fb.group({
+  //     password: ['', [Validators.required, Validators.minLength(6)]],
+  //     confirmPassword: ['', Validators.required],
+  //   }, { validators: this.passwordsMatchValidator });
+  // }
+
+  // passwordsMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
+  //   const password = control.get('password');
+  //   const confirmPassword = control.get('confirmPassword');
+  //   if (password && confirmPassword && password.value !== confirmPassword.value) {
+  //     return { passwordsMismatch: true };
+  //   }
+  //   return null;
+  // }
+
+  
+
+
+
 
   // togglePasswordVisibility(): void {
   //   this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
