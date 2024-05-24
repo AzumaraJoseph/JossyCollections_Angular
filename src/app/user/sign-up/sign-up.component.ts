@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {  FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../shared/auth.service';
 import { Router } from '@angular/router';
 import { passwordsMatchValidator } from '../custom-validators';
@@ -60,10 +60,13 @@ export class SignUpComponent implements OnInit {
       fullName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
-    }, { validators: passwordsMatchValidator });
+      confirmPassword: ['', Validators.required],
+    }, { validators: passwordsMatchValidator('password', 'confirmPassword') });
   }
+
+
+
 
   // passwordsMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
   //   const password = control.get('password');

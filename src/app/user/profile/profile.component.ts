@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { passwordsMatchValidator } from '../custom-validators';
 
 @Component({
   selector: 'app-profile',
@@ -28,7 +29,7 @@ export class ProfileComponent implements OnInit {
       newPassword: ['', [ Validators.required, Validators.minLength(8) ]],
       confirmPassword: ['', [ Validators.required, Validators.minLength(8) ]],
 
-  });
+  }, { validators: passwordsMatchValidator } );
 
   console.log(this.profileForm.controls['newPassword']);
 

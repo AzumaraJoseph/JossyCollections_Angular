@@ -220,9 +220,13 @@
                                     </span>
                                 </div>
 
-                                <div *ngIf="(profileForm.controls['confirmPassword'].touched || profileForm.controls['confirmPassword'].dirty)  && !profileForm.controls['confirmPassword'].valid">
+                                <!-- <div *ngIf="(profileForm.controls['confirmPassword'].touched || profileForm.controls['confirmPassword'].dirty)  && !profileForm.controls['confirmPassword'].valid">
                                     <span class="invalid-feedback" *ngIf="profileForm.controls['confirmPassword'].errors?.['required']">
                                       <em>Please confirm password</em>
+                                    </span>
+                                </div> -->
+                                <div class="invalid-feedback" >
+                                    <span *ngIf="profileForm.hasError('passwordsMismatch') && profileForm.controls['confirmPassword'].touched">                                    <em>Confirm password does not match.</em>
                                     </span>
                                 </div>
                             </div>
