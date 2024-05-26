@@ -1,20 +1,22 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './shared/auth.service';
+import { Iuser } from './user/user.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {
   title = 'Jossy-Third-Project';
   isClicked: boolean = false;
-  currentUser: string | undefined;
+  currentUser: Iuser | null = null;
 
-  get isLoggedIn(): boolean {
-    return this.auth.isLoggedIn;
-  }
+  // get isLoggedIn(): boolean {
+  //   return this.auth.isLoggedIn;
+  // }
 
   
   isScrolledDown: boolean = false;
@@ -77,14 +79,53 @@ export class AppComponent implements OnInit {
   
       // this.checkRouterEvent(event);
   
-    });   
+    }); 
+
+    // currentUser: Iuser | null = null;
+
+    this.auth.currentUsera$.subscribe(user => {
+      if (user) {
+      this.currentUser = user;
+      }
+    });
+
+    this.auth.current().subscribe({
+      next: user => this.currentUser = user,
+      error: err => console.error('Failed to fetch current user:', err)
+    });    
+    // this.currentUser = this.auth.getCurrentUser()?.firstName;
+    // console.log('there is a user', this.currentUser)
+
+
+    
+    
 
      // Initialize the current user
-     if (this.auth.isLoggedIn) {
-      this.currentUser = this.auth.currentUser?.name;
-    } else {
-      this.currentUser = 'Guest';
-    }
+    //  if (this.auth.isLoggedIn) {
+    //   this.currentUser = this.auth.currentUser?.firstName
+    // } else {
+    //   // this.currentUser = 'Guest';
+    // }
+  }
+  // currentUser!: Iuser | null
+
+  // get isLoggedIn(): boolean {
+  //   return this.auth.isLoggedIn;
+  // }
+
+  // user() {
+  //   this.currentUser = this.auth.getCurrentUser()?.firstName
+    
+    
+  // }
+
+  get isLoggedIn(): boolean {
+    return this.auth.isLoggedIn;
+  }
+
+  get userName(): string | null {
+    return this.currentUser ? this.currentUser.firstName : null;
+
   }
 
   toggleArrow(): void {

@@ -1,9 +1,26 @@
-<div class="fluid-container" style="background-color: rgba(234, 234, 234, 0.982); margin-top: 10rem;"  >
+<div class="fluid-container" style="background-color: rgba(234, 234, 234, 0.982); margin-top: 4rem;"  >
     <div >
-        <div style="background-color: white; margin-bottom: 3rem;">
-            <h5>
+        <div style="background-color: white; margin-bottom: 2rem; padding: 1rem 4rem;">
+            <div class="d-flex mb-3">
+                <a class="d-flex " [routerLink]="['/products']" >
+                    <p class="mb-0" style="color: rgba(54, 54, 54, 0.995); font-family:sans-serif;">Home</p>
+                    <span class="material-icons" style="font-size: 1.3rem; color: rgba(168, 168, 168, 0.985);">
+                        navigate_next
+                    </span>
+                </a>
+                <a class="d-flex">
+                    <p class="mb-0" style="color: black; font-family:sans-serif;">My Account</p>
+                    <span class="material-icons" style="font-size: 1.3rem; color: rgba(168, 168, 168, 0.985);">
+                        navigate_next
+                    </span>
+                </a>
+                <a [routerLink]="['/user/profile']" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{ exact: true }" class="d-flex">
+                    <p class="mb-0" style="color: black; font-family:sans-serif;">My Profile</p>
+                </a>
+            </div>
+            <h2 class="fw-bold mb-0">
                 Account Information
-            </h5>
+            </h2>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-2 p-2 me-3" style="background-color: white; border-radius: 6px;" >
@@ -15,8 +32,10 @@
                     </div>
                     <div>
                         <p class="title" >My Profile</p>
-                        <div class="profile"><a href="">Account Information</a></div>
-                        <div class="profile"><a href="">Delivery Address</a></div>
+                        <div>
+                            <a [routerLink]="['/user/profile']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >Account Information</a>
+                        </div>
+                        <div [routerLink]="['/user/address']" ><a >Delivery Address</a></div>
                     </div>
                 </div>
                 <hr style="color: rgba(132, 131, 131, 0.985);">
@@ -28,8 +47,8 @@
                     </div>
                     <div>
                         <p class="title" >My Orders</p>
-                        <div class="profile"><a href="">Order History</a></div>
-                        <div class="profile"><a href="">Pending Ratings</a></div>
+                        <div><a href="">Order History</a></div>
+                        <div><a href="">Pending Ratings</a></div>
                     </div>
                 </div>
                 <hr style="color: rgba(132, 131, 131, 0.985);">
@@ -199,10 +218,6 @@
                                 </div>
                             </div>
 
-                            <!-- <div class="col-md-12 mb-4">
-                                <label for="confirmPasswordId" class="form-label mb-2">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirmPasswordId" formControlName="confirmPassword">
-                            </div> -->
                             <div class="col-md-12 mb-4">
                                 <label for="confirmPasswordId" class="form-label mb-2">Confirm Password</label>
 
@@ -213,25 +228,17 @@
                                         id="confirmPasswordId"
                                         formControlName="confirmPassword"
                                         placeholder="Confirm Password"
-                                        [ngClass]="{'is-invalid': (profileForm.controls['confirmPassword'].touched || profileForm.get('confirmPassword')?.dirty) && !profileForm.get('confirmPassword')?.valid }">
+                                        [ngClass]="{'is-invalid': (profileForm.controls['confirmPassword'].touched || profileForm.get('confirmPassword')?.dirty) && (!profileForm.get('confirmPassword')?.valid || profileForm.hasError('passwordsMismatch')) }">
                                            
                                     <span class="input-group-text" (click)="toggleConfirmPasswordVisibilty()" style="cursor: pointer;">
                                         <i class="material-icons">{{confirmPasswordVisible ? 'visibility' : 'visibility_off'}}</i>
                                     </span>
                                 </div>
 
-                                <!-- <div *ngIf="(profileForm.controls['confirmPassword'].touched || profileForm.controls['confirmPassword'].dirty)  && !profileForm.controls['confirmPassword'].valid">
-                                    <span class="invalid-feedback" *ngIf="profileForm.controls['confirmPassword'].errors?.['required']">
-                                      <em>Please confirm password</em>
-                                    </span>
-                                </div> -->
-                                <div class="invalid-feedback" >
-                                    <span *ngIf="profileForm.hasError('passwordsMismatch') && profileForm.controls['confirmPassword'].touched">                                    <em>Confirm password does not match.</em>
-                                    </span>
+                                <div class="invalid-feedback" *ngIf="profileForm.hasError('passwordsMismatch') && profileForm.controls['confirmPassword'].touched">                                    <em>Password does not match.</em>
                                 </div>
                             </div>
                 
-                           
                             <button class="btn button" [disabled]="!profileForm.valid">Save Changes</button>
 
                         </form>

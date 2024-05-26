@@ -5,6 +5,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { UserRoutingModule } from './user-routing.module';
 import { ProfileComponent } from './profile/profile.component';
+import { AddressComponent } from './address/address.component';
+import { CreateAddressComponent } from './address/create-address/create-address.component';
 
 
 
@@ -12,7 +14,9 @@ import { ProfileComponent } from './profile/profile.component';
   declarations: [
     SignUpComponent,
     LoginComponent,
-    ProfileComponent
+    ProfileComponent,
+    AddressComponent,
+    CreateAddressComponent
   ],
   imports: [
     ReactiveFormsModule,

@@ -77,7 +77,7 @@
                         id="confirmPasswordId"
                         formControlName="confirmPassword"
                         placeholder="Confirm Password"
-                        [ngClass]="{'is-invalid': (signUpForm.get('confirmPassword')?.touched || signUpForm.get('confirmPassword')?.dirty) && (!signUpForm.get('confirmPassword')?.valid || signUpForm.get('passwordGroup')?.errors?.['passwordMismatch']) }">
+                        [ngClass]="{'is-invalid': (signUpForm.get('confirmPassword')?.touched || signUpForm.get('confirmPassword')?.dirty) && (!signUpForm.get('confirmPassword')?.valid || signUpForm.hasError('passwordsMismatch')) }">
                       <label for="confirmPasswordId">Confirm Password</label>
 
                       <!-- <div *ngIf="(signUpForm.get('confirmPassword')?.touched || signUpForm.get('confirmPassword')?.dirty) && !signUpForm.get('confirmPassword')?.valid">
@@ -92,7 +92,7 @@
                           </span>
                       </div> -->
                       <div class="invalid-feedback" *ngIf="signUpForm.hasError('passwordsMismatch') && signUpForm.controls['confirmPassword'].touched">
-                          <em>Confirm password does not match.</em>
+                          <em>Password does not match.</em>
                       </div>
                     </div>
                   

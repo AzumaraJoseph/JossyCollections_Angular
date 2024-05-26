@@ -1,6 +1,7 @@
 export interface Iuser {
     id: string,
-    name?: string,
+    firstName: any,
+    lastName: string,
     email: string,
     password: string;
     confirmPassword: string;

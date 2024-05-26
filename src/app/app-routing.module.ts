@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'products/:id/dialogue', component: DialogueComponent },
   { path: 'order', component: OrderComponent },
   { path: 'star', component: StarComponent },
+  { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
   {path: '**', component: ErrorPageComponent }
 ];
 

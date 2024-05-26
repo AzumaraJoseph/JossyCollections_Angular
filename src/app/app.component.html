@@ -27,7 +27,7 @@
                }}
               <!-- person_outline -->
             </span>
-            <button class="btn p-0 fw-semibold" type="button" >{{ isLoggedIn ? 'Hi, ' + currentUser : 'Account' }}</button>
+            <button class="btn p-0 fw-semibold" type="button" >{{ isLoggedIn ? 'Hi, ' + ( userName   || 'Guest') : 'Account' }}</button>
 
             <span class="material-icons ms-1">{{ isClicked ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</span>
 
@@ -35,7 +35,7 @@
           
           <ul class="dropdown-menu dropdown-menu-light p-0" style="width: 200px; box-shadow: 1px 2px 6px rgba(132, 132, 132, 0.974);">
             <div class="p-2" 
-            [routerLink]="['/login']" 
+            [routerLink]="['/user/login']" 
             [routerLinkActiveOptions]="{exact: true}" routerLinkActive="router-link-active" 
             *ngIf="!isLoggedIn" >
               <button class="btn " style="background-color: #f68b1e; padding: 10px; color: white; width: 100%;">SIGN IN</button>
@@ -43,7 +43,7 @@
 
             <li *ngIf="!isLoggedIn"><hr class="dropdown-divider m-0"></li>
 
-            <li [routerLink]="['/profile']" ><a class="dropdown-item">
+            <li [routerLink]="['/user/profile']" ><a class="dropdown-item">
               <div class="d-flex align-items-center">
                 <span class="material-icons" style="font-size: 25px; ">
                   person_outline

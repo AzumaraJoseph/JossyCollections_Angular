@@ -56,6 +56,7 @@ export class SignUpComponent implements OnInit {
   userForm!: FormGroup;
 
   ngOnInit(): void {
+
     this.signUpForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
@@ -112,29 +113,31 @@ export class SignUpComponent implements OnInit {
 
 
   save() {
-    const fullNameControl = this.signUpForm.controls['email'].value;
-    const emailControl = this.signUpForm.controls['email'].value;
-    const passwordControl = this.signUpForm.controls['password'].value;
-    const confirmPasswordControl = this.signUpForm.controls['confirmPassword'].value;
-    const phoneControl = this.signUpForm.controls['phone'].value;
 
-    console.log(this.signUpForm.value);
+    if(this.signUpForm.valid) {
+
+      const fullNameControl = this.signUpForm.controls['email'].value;
+      const emailControl = this.signUpForm.controls['email'].value;
+      const passwordControl = this.signUpForm.controls['password'].value;
+      const confirmPasswordControl = this.signUpForm.controls['confirmPassword'].value;
+      const phoneControl = this.signUpForm.controls['phone'].value;
   
-    this.auth.signUp(fullNameControl, emailControl, passwordControl, confirmPasswordControl, phoneControl).subscribe(response => {
-      if (response) {
-        this.signUpForm.reset();
-        this.router.navigate(['/products']);
-        console.log('Sign up success');
-      } else {
-        console.error('sign up failed');
-      }
-    },
-    error => {
-      // Handle error response from the login API
-      console.error('An error occurred during login:', error);
+      console.log(this.signUpForm.value);
+    
+      this.auth.signUp(fullNameControl, emailControl, passwordControl, confirmPasswordControl, phoneControl).subscribe(response => {
+        if (response) {
+          this.signUpForm.reset();
+          this.router.navigate(['/products']);
+          console.log('Sign up success');
+        } else {
+          console.error('sign up failed');
+        }
+      },
+      error => {
+        // Handle error response from the login API
+        console.error('An error occurred during login:', error);
+      })
     }
-    )
-// res => console.log('signup: ', JSON.stringify(res))
   }
 
 }

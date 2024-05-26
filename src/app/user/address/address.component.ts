@@ -4,10 +4,10 @@ import { passwordsMatchValidator } from '../custom-validators';
 
 @Component({
   selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  templateUrl: './address.component.html',
+  styleUrls: ['./address.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class AddressComponent implements OnInit {
   profileForm!: FormGroup;
 
   // passwordFieldType!: string = 'password';
