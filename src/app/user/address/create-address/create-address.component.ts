@@ -33,7 +33,7 @@ export class CreateAddressComponent implements OnInit {
       })
     ).subscribe()
 
-    console.log('selectedCountry: ', this.selectedCountry);
+    console.log('selected: ', this.selectedCountry);
 
     
   }
@@ -49,7 +49,7 @@ export class CreateAddressComponent implements OnInit {
     const selectCountry = (event.target as HTMLSelectElement).value;
 
     if (selectCountry) {
-      this.selectedCountry = this.countries.find((state: any) => state.name === selectCountry);
+      this.selectedCountry = this.countries.find((country: any) => country.name === selectCountry);
     }
 
     console.log('selectedCountry: ', JSON.stringify(this.selectedCountry));

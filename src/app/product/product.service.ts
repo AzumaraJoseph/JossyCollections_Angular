@@ -27,6 +27,8 @@ export class ProductService {
 
   countryList = this.http.get<any>(this.countries).pipe(
     map(res => res.data),
+    tap(data => console.log('coutries:', JSON.stringify(data))
+    ),
     catchError(err => this.handleError(err))
   );
 
