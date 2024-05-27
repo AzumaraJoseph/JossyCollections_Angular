@@ -1,0 +1,30 @@
+.button {
+    padding: 0;
+    background-color: #f68b1e;
+}
+
+.button:active {
+    border: 1px solid #f68b1e;
+
+}
+/* 
+.btn-remove {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-right: none; /* Remove the right border to make it look like it's joined to the next button *
+}
+
+/* Add button styles *
+.btn-add {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    border-left: none; /* Remove the left border to make it look like it's joined to the previous button *
+} */
+
+.quantity {
+    margin: 0 0.6rem;
+    font-weight: 700;
+    font-size: 1.4rem;
+    align-self: center;
+    color: rgb(87, 87, 87);
+}

@@ -1,149 +1,160 @@
 <div class="fluid-container" style="background-color: rgba(234, 234, 234, 0.982); margin-top: 4rem;"  >
-    <div >
-        <div style="background-color: white; margin-bottom: 2rem; padding: 1rem 4rem;">
-            <div class="d-flex mb-3">
-                <a class="d-flex " [routerLink]="['/products']" >
-                    <p class="mb-0" style="color: rgba(54, 54, 54, 0.995); font-family:sans-serif;">Home</p>
-                    <span class="material-icons" style="font-size: 1.3rem; color: rgba(168, 168, 168, 0.985);">
-                        navigate_next
-                    </span>
-                </a>
-                <a class="d-flex">
-                    <p class="mb-0" style="color: black; font-family:sans-serif;">My Account</p>
-                    <span class="material-icons" style="font-size: 1.3rem; color: rgba(168, 168, 168, 0.985);">
-                        navigate_next
-                    </span>
-                </a>
-                <a [routerLink]="['/user/address/create']" routerLinkActive="router-link-active"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="d-flex">
-                    <p class="mb-0" style="color: black; font-family:sans-serif;">My Address</p>
-                </a>
-            </div>
-            <h2 class="fw-bold mb-0">
-                Delivery Address
-            </h2>
+    <div style="background-color: white; margin-bottom: 2rem; padding: 1rem 4rem;">
+        <div class="d-flex mb-3">
+            <a class="d-flex " [routerLink]="['/products']" >
+                <p class="mb-0" style="color: rgba(54, 54, 54, 0.995); font-family:sans-serif;">Home</p>
+                <span class="material-icons" style="font-size: 1.3rem; color: rgba(168, 168, 168, 0.985);">
+                    navigate_next
+                </span>
+            </a>
+            <a class="d-flex">
+                <p class="mb-0" style="color: black; font-family:sans-serif;">My Account</p>
+                <span class="material-icons" style="font-size: 1.3rem; color: rgba(168, 168, 168, 0.985);">
+                    navigate_next
+                </span>
+            </a>
+            <a [routerLink]="['/user/address/create']" routerLinkActive="router-link-active"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="d-flex">
+                <p class="mb-0" style="color: black; font-family:sans-serif;">My Address</p>
+            </a>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-2 p-2 me-3" style="background-color: white; border-radius: 6px;" >
-                <div class="d-flex " >
-                    <div class="me-3">
-                        <span class="material-symbols-outlined" style="font-size: 1.9rem;">
-                            account_circle
-                        </span>
-                    </div>
-                    <div>
-                        <p class="title" >My Profile</p>
-                        <div>
-                            <a [routerLink]="['/user/profile']" >Account Information</a>
-                        </div>
-                        <div><a [routerLink]="['/address/create']" routerLinkActive="active"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Delivery Address</a></div>
-                    </div>
+        <h2 class="fw-bold mb-0">
+            Delivery Address
+        </h2>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-3 col-sm-3 p-2 me-3" style="background-color: white; border-radius: 6px;" >
+            <div class="d-flex " >
+                <div class="me-3">
+                    <span class="material-symbols-outlined" style="font-size: 1.9rem;">
+                        account_circle
+                    </span>
                 </div>
-                <hr style="color: rgba(132, 131, 131, 0.985);">
-                <div class="d-flex" >
-                    <div class="me-3">
-                        <span class="material-symbols-outlined" style="font-size: 1.9rem;">
-                            shopping_bag
-                        </span>
-                    </div>
+                <div>
+                    <p class="title" >My Profile</p>
                     <div>
-                        <p class="title" >My Orders</p>
-                        <div><a href="">Order History</a></div>
-                        <div><a href="">Pending Ratings</a></div>
+                        <a [routerLink]="['/user/profile']" >Account Information</a>
                     </div>
-                </div>
-                <hr style="color: rgba(132, 131, 131, 0.985);">
-                <div class="d-flex" >
-                    <div class="me-3">
-                        <span class="material-symbols-outlined" style="font-size: 1.9rem;">
-                            account_balance_wallet
-                        </span>
-                        
-                    </div>
-                    <div>
-                        <p class="title" >My Wallet</p>
-                        <div class="profile"><a href="">Wallet</a></div>
-                    </div>
-                </div>
-                <hr style="color: rgba(132, 131, 131, 0.985);">
-                <div class="d-flex" >
-                    <div class="me-3">
-                        <span class="material-symbols-outlined" style="font-size: 1.9rem;">
-                            person_cancel
-                        </span>
-                    </div>
-                    <div>
-                        <p class="title" >Delete Account</p>
-                        <div class="profile"><a href="">Delete Account</a></div>
-                    </div>
+                    <div><a [routerLink]="['/address/create']" routerLinkActive="active"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Delivery Address</a></div>
                 </div>
             </div>
+            <hr style="color: rgba(132, 131, 131, 0.985);">
+            <div class="d-flex" >
+                <div class="me-3">
+                    <span class="material-symbols-outlined" style="font-size: 1.9rem;">
+                        shopping_bag
+                    </span>
+                </div>
+                <div>
+                    <p class="title" >My Orders</p>
+                    <div><a href="">Order History</a></div>
+                    <div><a href="">Pending Ratings</a></div>
+                </div>
+            </div>
+            <hr style="color: rgba(132, 131, 131, 0.985);">
+            <div class="d-flex" >
+                <div class="me-3">
+                    <span class="material-symbols-outlined" style="font-size: 1.9rem;">
+                        account_balance_wallet
+                    </span>
+                    
+                </div>
+                <div>
+                    <p class="title" >My Wallet</p>
+                    <div class="profile"><a href="">Wallet</a></div>
+                </div>
+            </div>
+            <hr style="color: rgba(132, 131, 131, 0.985);">
+            <div class="d-flex" >
+                <div class="me-3">
+                    <span class="material-symbols-outlined" style="font-size: 1.9rem;">
+                        person_cancel
+                    </span>
+                </div>
+                <div>
+                    <p class="title" >Delete Account</p>
+                    <div class="profile"><a href="">Delete Account</a></div>
+                </div>
+            </div>
+        </div>
 
-            <div class="col-md-7">
-                <div style="background-color: white; border-radius: 6px;" >
-                    <h5 class="mb-0 p-3">Add a New Address</h5>
-                    <hr style="color: rgba(123, 122, 122, 0.985); margin: 0;">
-                    <div style="padding: 1rem 2rem;">
+        <div class="col-md-7 col-sm-7">
+            <div style="background-color: white; border-radius: 6px; padding: 0.5rem;" >
+                <div class="d-flex align-items-center"  >
+                    <span class="material-icons" style="cursor: pointer;" [routerLink]="['/user/address']" >
+                        arrow_back
+                    </span>
+                    <h5 class="mb-0" style="padding: 0.5rem 1rem;">Add a New Address</h5>
+                </div>
+                <hr style="color: rgba(123, 122, 122, 0.985);">
+                <div style="padding: 0rem 1rem;">
 
-                        <div class="row" style="margin-top: 1.5rem;">
+                    <div class="row" style="margin-top: 1.5rem;">
 
-                            <div class="col-md-6">
-                                <div  class="form-group">
-                                    <input type="text" id="firstNameId" class="form-control" placeholder="Enter your First Name" />
-                                    <label for="firstNameId" class="form-label mb-0">Name</label>
+                        <div class="col-md-6  col-sm-6">
+                            <div  class="form-group">
+                                <input type="text" id="firstNameId" class="form-control" placeholder="Enter your First Name" />
+                                <label for="firstNameId" class="form-label mb-0">Name</label>
+                            </div>
+                            
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div  class="form-group">
+                                <input type="text" id="lastNameId" class="form-control" placeholder="Enter your Last Name" />
+                                <label for="lastNameId" class="form-label mb-0">Last Name</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12">
+                            <div  class="form-group">
+                                <input type="text" id="phoneId" class="form-control" placeholder="Enter your Phone Number" />
+                                <label for="phoneId" class="form-label mb-0">Phone Number</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12">
+                            <div  class="form-group">
+                                <input type="text" id="deliveryId" class="form-control" placeholder="Enter your Address" />
+                                <label for="deliveryId" class="form-label mb-0">Delivery Address</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12">
+                            <div  class="form-group">
+                                <select id="countryId" class="form-select form-select-lg mb-3" (change)="onCountryChange($event)" >
+                                    <option value="">Please select</option>
+                                    <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
+                                </select>
+                                <label for="countryId" class="form-label mb-0">Country</label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-sm-12">
+                            <div class="row" >
+                                <div class="col-md-6" >
+                                    <div  class="form-group">
+                                        <select [disabled]="!selectedCountry" id="stateId" class="form-select form-select-lg mb-3" (change)="onStateChange($event)" >
+                                            <option value="">Please select</option>
+                                            <option *ngFor="let state of selectedCountry?.states" [value]="state.name">{{ state.name }}</option>
+                                        </select>
+                                        <label for="stateId" class="form-label mb-0">City</label>
+                                    </div>
                                 </div>
                                 
-                            </div>
-                            <div class="col-md-6">
-                                <div  class="form-group">
-                                    <input type="text" id="lastNameId" class="form-control" placeholder="Enter your Last Name" />
-                                    <label for="lastNameId" class="form-label mb-0">Last Name</label>
+                                <div class="col-md-6">
+                                    <div  class="form-group">
+                                        <input type="text" id="deliveryId" class="form-control" placeholder="Enter your City" />
+                                        <label for="deliveryId" class="form-label mb-0">City</label>
+                                    </div>
                                 </div>
                             </div>
-
-                            <div class="col-md-12">
-                                <div  class="form-group">
-                                    <input type="text" id="phoneId" class="form-control" placeholder="Enter your Phone Number" />
-                                    <label for="phoneId" class="form-label mb-0">Phone Number</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div  class="form-group">
-                                    <input type="text" id="deliveryId" class="form-control" placeholder="Enter your Address" />
-                                    <label for="deliveryId" class="form-label mb-0">Delivery Address</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12">
-                                <div  class="form-group">
-                                    <select id="countryId" class="form-select form-select-lg mb-3" (change)="onCountryChange($event)" >
-                                        <option value="">Select Country</option>
-                                        <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
-                                    </select>
-                                    <label for="countryId" class="form-label mb-0">Country</label>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12" style="margin-bottom: 20rem;" >
-                                <div  class="form-group">
-                                    <select [disabled]="!selectedCountry" id="stateId" class="form-select form-select-lg mb-3" (change)="onStateChange($event)" >
-                                        <option value="">Select State</option>
-                                        <option *ngFor="let state of selectedCountry?.states" [value]="state.name">{{ state.name }}</option>
-                                    </select>
-                                    <label for="stateId" class="form-label mb-0">Country</label>
-                                </div>
-                            </div>
-
-                           
-                            <div class="col-md-12">
-                                <select *ngIf="selectedCountry" style="width: 100%;">
-                                <option value="">Select State</option>
-                                <option *ngFor="let state of selectedCountry?.states" [value]="state.name">{{ state.name }}</option>
-                                </select>
-                            </div>                           
                         </div>
-                    </div>                 
-                </div>
+                        <hr>
+                    
+                        <div class="d-flex justify-content-end" style="margin-bottom: 20rem;" >
+                            <button class="btn btn-primary" class="btn btn-sm address-btn"(click)="onSubmit()">SAVE</button>
+                        </div>
+                    </div>
+                </div>                 
             </div>
         </div>
     </div>

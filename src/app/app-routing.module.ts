@@ -6,6 +6,7 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { DialogueComponent } from './product/dialogue.component';
 import { OrderComponent } from './order.component';
+import { CartShellComponent } from './cart/cart-shell/cart-shell.component';
 
 const routes: Routes = [
 
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'order', component: OrderComponent },
   { path: 'star', component: StarComponent },
   { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
+  { path: 'cart', component: CartShellComponent },
   {path: '**', component: ErrorPageComponent }
 ];
 

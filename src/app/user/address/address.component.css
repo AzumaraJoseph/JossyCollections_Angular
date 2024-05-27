@@ -16,7 +16,6 @@
 
 .address-btn:hover {
     background-color: #fd9c3b;
-    transition: all 2s tra;
     transform: scale(1.05);
     transition: all .2s;
 }
@@ -24,7 +23,7 @@
 .address-btn:active {
     border: 2px solid #f68b1e;
     background-color: white;
-
+    box-shadow: none;
 }
 
 a {

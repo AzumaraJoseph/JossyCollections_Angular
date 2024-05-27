@@ -190,6 +190,11 @@
     
 }
 
+.dropdown-item:active, .dropdown-item .btn:active {
+    background-color: rgba(185, 185, 185, 0.974);
+    border: none;
+}
+
 .cart {
     display: flex;
     align-items: center;
@@ -208,4 +213,9 @@
 
 .cart .btn {
     color: inherit;
+    border: none;
+
 }
+
+
+
