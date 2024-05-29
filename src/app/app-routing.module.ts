@@ -10,7 +10,7 @@ import { CartShellComponent } from './cart/cart-shell/cart-shell.component';
 
 const routes: Routes = [
 
-  { path: '', redirectTo: 'products', pathMatch: 'full' },
+  { path: '', redirectTo: '/products', pathMatch: 'full' },
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailComponent },
   { path: 'products/:id/dialogue', component: DialogueComponent },
@@ -20,6 +20,7 @@ const routes: Routes = [
   { path: 'cart', component: CartShellComponent },
   {path: '**', component: ErrorPageComponent }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

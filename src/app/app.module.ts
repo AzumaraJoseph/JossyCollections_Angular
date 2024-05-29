@@ -44,11 +44,11 @@ import { CartTotalComponent } from './cart/cart-total/cart-total.component';
     // ProductModule,
     UserModule,
     AppRoutingModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
 
 

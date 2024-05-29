@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { passwordsMatchValidator } from '../custom-validators';
+import { AuthService } from 'src/app/auth.service';
+import { Router } from '@angular/router';
+import { Iuser } from '../user.component';
 
 @Component({
   selector: 'app-profile',
@@ -17,7 +19,7 @@ export class ProfileComponent implements OnInit {
   confirmPasswordVisible: boolean = false;
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -25,20 +27,24 @@ export class ProfileComponent implements OnInit {
       firstName: ['', [ Validators.required, Validators.minLength(3) ]],
       lastName: ['', [ Validators.required, Validators.maxLength(20) ]],
       email: ['', [ Validators.required, Validators.email ]],
-      currentPassword: ['', [ Validators.required, Validators.minLength(8) ]],
-      newPassword: ['', [ Validators.required, Validators.minLength(8) ]],
-      confirmPassword: ['', [ Validators.required ]],
+      phone: ['', [ Validators.required ]]
 
-  }, { validators: passwordsMatchValidator('newPassword', 'confirmPassword') } );
+  });
 
-  console.log(this.profileForm.controls['newPassword']);
+
+  this.auth.getCurrentUser().subscribe((user: Iuser) => {
+    this.profileForm.patchValue({
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone
+    })
+  })
+
+  // this.auth.updateUser().subscribe()
 
 
   }
-
-  // togglePasswordVisibility(): void {
-  //   this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
-  //  }
 
   
   toggleCurrentPasswordVisibilty(): void {
@@ -51,5 +57,18 @@ export class ProfileComponent implements OnInit {
 
   toggleConfirmPasswordVisibilty(): void {
     this.confirmPasswordVisible = !this.confirmPasswordVisible;
+  }
+
+  update() {
+    if(this.profileForm.valid) {
+      console.log('Form submitted:', this.profileForm.value);
+      
+      this.auth.updateUser(this.profileForm.value).subscribe(res => {
+        console.log('UpdateOneUser:', JSON.stringify(res));
+      })
+      this.router.navigate(['/products'])
+      console.log('Update successful');
+    }
+    
   }
 }

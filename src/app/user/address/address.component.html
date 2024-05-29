@@ -84,6 +84,66 @@
                     <hr style="color: rgba(123, 122, 122, 0.985); margin: 0;">
                     <div style="padding: 1rem 2rem;">
 
+                        <div class="card col-md-5" style="font-size: 0.9rem;">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <p class="mb-0">Default Address</p>
+                                <div class="d-flex">
+                                    <button class="btn d-flex align-items-center me-2 p-1">
+                                        <span class="material-symbols-outlined fs-6 me-1">
+                                            delete
+                                        </span>
+                                        <p class="m-0">Delete</p>
+                                    </button>
+                                    <button class="btn  d-flex align-items-center p-1" (click)="edit()" >
+                                        <span class="material-symbols-outlined fs-5 me-1" style="color:#f68b1e;">
+                                            edit_square
+                                        </span>
+                                        <p class="m-0">Edit</p>
+                                    </button>
+                                </div>
+                            </div>
+ 
+                            <div class="card-body p-3">
+                                <div class="d-flex">
+                                    <span class="material-symbols-outlined edit-btn">
+                                        person
+                                    </span>
+                                    <p class="card-text ms-3">{{currentUser ? currentUser.firstName : undefined }} {{currentUser ? currentUser.lastName : undefined}}</p>
+                                </div>
+
+                              
+                                <div *ngIf="currentUser && currentUser.addresses && currentUser.addresses.length > 0" class="d-flex mt-2 mb-2">
+                                    <span class="material-symbols-outlined edit-btn">
+                                      location_on
+                                    </span>
+                                    <p class="card-text ms-3">
+                                      {{ currentUser.addresses[0].street }}, {{ currentUser.addresses[0].city }}. {{ currentUser.addresses[0].state }}, {{ currentUser.addresses[0].country }}
+                                    </p>
+                                </div>
+                                  
+                                <div class="d-flex">
+                                    <span class="material-symbols-outlined edit-btn">
+                                        phone_in_talk
+                                    </span>
+                                    <p class="card-text ms-3">{{currentUser ? currentUser.phone : undefined }} </p>
+                                </div> 
+                            </div>
+
+                            <!-- <div class="card-body" *ngIf="currentUser">
+                                <div *ngFor="let address of currentUser.addresses" >
+                                    <div class="d-flex">
+                                        <span class="material-symbols-outlined edit-btn">
+                                            person
+                                        </span>
+                                        <p class="card-text ms-3">{{address.firstName }} {{address.lastName}}</p>
+                                    </div>
+                                </div>
+
+                            </div> -->
+                        </div>
+
+
+
                         <div class="col-md-8 book">
                             <div style=" width: min-content;">
                                 <img  src="../../../assets/products/notebook.0c73f0bb.svg" alt="Address book">
@@ -105,4 +165,10 @@
 </div>
 
 
+                                <!-- <div class="d-flex">
+                                    <span class="material-symbols-outlined">
+                                        location_on
+                                    </span>
+                                    <p class="card-text ms-3">{{currentUser ? currentUser.addresses[0].street : undefined }} {{currentUser ? ' ,' + currentUser.addresses[0].city : undefined }}{{currentUser ? ". " + currentUser.addresses[0].state : undefined }} {{currentUser ? ' , ' + currentUser.addresses[0].country : undefined }} </p>
+                                </div> -->
 

@@ -145,3 +145,13 @@ input:-webkit-autofill:active {
   box-shadow: none;
 
 }
+
+
+.is-invalid {
+  border-color: red;
+}
+
+.invalid-feedback {
+color: red;
+display: block;
+}

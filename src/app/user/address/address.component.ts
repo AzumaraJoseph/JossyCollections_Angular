@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordsMatchValidator } from '../custom-validators';
+import { AuthService } from 'src/app/auth.service';
+import { map, tap } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -9,15 +12,17 @@ import { passwordsMatchValidator } from '../custom-validators';
 })
 export class AddressComponent implements OnInit {
   profileForm!: FormGroup;
+  currentUser: any;
 
   // passwordFieldType!: string = 'password';
 
   currentPasswordVisible: boolean = false;
   newPasswordVisible: boolean = false;
   confirmPasswordVisible: boolean = false;
+  editMode: boolean =false;
 
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -34,6 +39,34 @@ export class AddressComponent implements OnInit {
   console.log(this.profileForm.controls['newPassword']);
 
 
+  this.auth.getCurrentUser().pipe(
+    // map(user => user.addresses),
+    tap(user => 
+      {
+        if(user) return this.currentUser = user;
+
+      }),
+    tap(res => console.log('Address user', JSON.stringify(res))
+    )
+  ).subscribe()
+
+
+  // this.auth.getCurrentUser().pipe(
+  //   map(user => user.addresses),
+  //   tap(user => 
+  //     {
+  //       if(user) return this.currentUser = user;
+
+  //     }),
+  //   tap(res => console.log('Address user', JSON.stringify(res))
+  //   )
+  // ).subscribe()
+
+  }
+
+  edit() {
+    this.editMode = true;
+    this.router.navigate(['/address/create'])
   }
 
   // togglePasswordVisibility(): void {

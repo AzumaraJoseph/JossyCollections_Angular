@@ -83,17 +83,12 @@
                     <h5 class="mb-0 p-3">Account Information</h5>
                     <hr style="color: rgba(123, 122, 122, 0.985); margin: 0;">
                     <div style="padding: 1rem 2rem;">
-                        <form novalidate autocomplete="off" [formGroup]="profileForm" >
+                        <form novalidate autocomplete="off" [formGroup]="profileForm" (ngSubmit)="update()" >
                             <div class="col-md-12 mb-4">
                                 <label for="firstNameId" class="form-label mb-2">First Name</label>
-                                <input type="text" class="form-control" id="firstNameId" formControlName="firstName" placeholder="Enter First Name"
+                                <input type="text" class="form-control" id="firstNameId" formControlName="firstName" placeholder="Enter your First Name"
                                 [ngClass]="{ 'is-invalid': (profileForm.controls['firstName'].touched || profileForm.controls['firstName'].dirty) && !profileForm.controls['firstName'].valid }" >
 
-                                <!-- <span class="invalid-feedback">
-                                    <span *ngIf="profileForm.controls['firstName']?.errors?.['required']"><em>Please enter first name</em> 
-                                    </span>
-                                    <span *ngIf="profileForm.controls['firstName']?.errors?.['minlength']">First name must be more than 3 characters</span>
-                                </span> -->
                                 <div *ngIf="(profileForm.controls['firstName'].touched || profileForm.controls['firstName'].dirty)  && !profileForm.controls['firstName'].valid">
                                     <span class="invalid-feedback" *ngIf="profileForm.controls['firstName'].errors?.['required']">
                                       <em>Please enter first name</em>
@@ -107,7 +102,7 @@
 
                             <div class="col-md-12 mb-4">
                                 <label for="lastNameId" class="form-label mb-2">Last Name</label>
-                                <input type="text" class="form-control" id="lastNameId" formControlName="lastName" placeholder="Enter Last Name"
+                                <input type="text" class="form-control" id="lastNameId" formControlName="lastName" placeholder="Enter your Last Name"
                                 [ngClass]="{ 'is-invalid': (profileForm.controls['lastName'].touched || profileForm.controls['lastName'].dirty) && !profileForm.controls['lastName'].valid }" >
 
                                 <div *ngIf="(profileForm.controls['lastName'].touched || profileForm.controls['lastName'].dirty)  && !profileForm.controls['lastName'].valid">
@@ -122,7 +117,7 @@
 
                             <div class="col-md-12 mb-4">
                                 <label for="emailId" class="form-label mb-2">Email</label>
-                                <input type="email" class="form-control" id="emailId" formControlName="email" placeholder="Enter Email Address"
+                                <input type="email" class="form-control" id="emailId" formControlName="email" placeholder="Enter your Email Address"
                                 [ngClass]="{ 'is-invalid': (profileForm.controls['email'].touched || profileForm.controls['email'].dirty) && !profileForm.controls['email'].valid }" >
 
                                 <div *ngIf="(profileForm.controls['email'].touched || profileForm.controls['email'].dirty)  && !profileForm.controls['email'].valid">
@@ -136,111 +131,18 @@
                             </div>
 
                             <div class="col-md-12 mb-4">
-                                <label for="currentPasswordId" class="form-label mb-2">Current Password</label>
+                                <label for="phoneId" class="form-label mb-2">Phone</label>
+                                <input type="email" class="form-control" id="phoneId" formControlName="phone" placeholder="Enter your Phone Number"
+                                [ngClass]="{ 'is-invalid': (profileForm.controls['phone'].touched || profileForm.controls['phone'].dirty) && !profileForm.controls['phone'].valid }" >
 
-                                <div class="input-group">
-                                    <input 
-                                        class="form-control"
-                                        [type]="currentPasswordVisible ? 'text' : 'password'"
-                                        id="currentPasswordId"
-                                        formControlName="currentPassword"
-                                        placeholder="Current Password"
-                                        [ngClass]="{'is-invalid': (profileForm.controls['currentPassword'].touched || profileForm.get('currentPassword')?.dirty) && !profileForm.get('currentPassword')?.valid }">
-                                           
-                                    <span class="input-group-text" (click)="toggleCurrentPasswordVisibilty()" style="cursor: pointer;">
-                                        <i class="material-icons">{{currentPasswordVisible ? 'visibility' : 'visibility_off'}}</i>
+                                <div *ngIf="(profileForm.controls['phone'].touched || profileForm.controls['phone'].dirty)  && !profileForm.controls['phone'].valid">
+                                    <span class="invalid-feedback" *ngIf="profileForm.controls['phone'].errors?.['required']">
+                                      <em>Please enter phone number</em>
                                     </span>
-                                    
-                                </div>
-                                <div *ngIf="(profileForm.controls['currentPassword'].touched || profileForm.controls['currentPassword'].dirty)  && !profileForm.controls['currentPassword'].valid">
-                                    <span class="invalid-feedback" *ngIf="profileForm.controls['currentPassword'].errors?.['required']">
-                                      <em>Please enter current password</em>
-                                    </span>
-                                    <span class="invalid-feedback" *ngIf="profileForm.controls['currentPassword'].errors?.['minlength']">
-                                        Password must be more than 8 charatcers
-                                    </span>
-                                </div>
-                            </div>
-
-                            <!-- <div class="col-md-12 mb-4">
-                                <label for="currentPasswordId" class="form-label mb-2">Current Password</label>
-                                <input type="password" class="form-control" id="currentPasswordId" formControlName="currentPassword"
-                                [ngClass]="{ 'is-invalid': (profileForm.controls['currentPassword'].touched || profileForm.controls['currentPassword'].dirty) && !profileForm.controls['currentPassword'].valid }" >
-
-                                <span class="invalid-feedback">
-                                    <span *ngIf="profileForm.controls['currentPassword']?.errors?.['required']"><em>Please enter current Password </em> 
-                                    </span>
-                                    <span *ngIf="profileForm.controls['currentPassword']?.errors?.['minlength']">Password must be more than 8 characters</span>
-                                </span>
-                            </div> -->
-
-                            <!-- <div class="col-md-12 mb-4">
-                                <label for="newPasswordId" class="form-label mb-2">New Password</label>
-                                <input type="password" class="form-control" id="newPasswordId" formControlName="newPassword"
-                                [ngClass]="{ 'is-invalid': (profileForm.controls['newPassword'].touched || profileForm.controls['newPassword'].dirty) && !profileForm.controls['newPassword'].valid }" >
-
-                                <span class="invalid-feedback">
-                                    <span *ngIf="profileForm.controls['newPassword']?.errors?.['required']"><em>Please enter new password </em> 
-                                    </span>
-                                    <span *ngIf="profileForm.controls['newPassword']?.errors?.['minlength']">Password must be more than 8 characters</span>
-                                </span>
-                            </div> -->
-
-                            <div class="col-md-12 mb-4">
-                                <label for="newPasswordId" class="form-label mb-2">New Password</label>
-                                <div class="input-group">
-                                    <input
-                                        class="form-control"
-                                        [type]="newPasswordVisible ?  'text' : 'password'"
-                                        id="newPasswordId"
-                                        formControlName="newPassword"
-                                        placeholder="New Password"
-                                        [ngClass]="{'is-invalid': (profileForm.controls['newPassword'].touched || profileForm.controls['newPassword'].dirty) && !profileForm.controls['newPassword'].valid }">
-                                            
-                                    <span class="input-group-text" (click)="toggleNewPasswordVisibilty()" style="cursor: pointer;">
-                                        <i class="material-icons">{{newPasswordVisible ? 'visibility' : 'visibility_off'}}</i>
-                                    </span>    
-                                </div>
-
-                                <!-- <span class="invalid-feedback">
-                                    <span *ngIf="profileForm.controls['newPassword']?.errors?.['required']"><em>Please enter new password </em> 
-                                    </span>
-                                    <span *ngIf="profileForm.controls['newPassword']?.errors?.['minlength']">Password must be more than 8 characters</span>
-                                </span> -->
-
-                                <div *ngIf="(profileForm.controls['newPassword'].touched || profileForm.controls['newPassword'].dirty)  && !profileForm.controls['newPassword'].valid">
-                                    <span class="invalid-feedback" *ngIf="profileForm.controls['newPassword'].errors?.['required']">
-                                      <em>Please enter new password</em>
-                                    </span>
-                                    <span class="invalid-feedback" *ngIf="profileForm.controls['newPassword'].errors?.['minlength']">
-                                      Password must be more than 8 characters
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="col-md-12 mb-4">
-                                <label for="confirmPasswordId" class="form-label mb-2">Confirm Password</label>
-
-                                <div class="input-group">
-                                    <input 
-                                        class="form-control"
-                                        [type]="confirmPasswordVisible ?  'text' : 'password'"
-                                        id="confirmPasswordId"
-                                        formControlName="confirmPassword"
-                                        placeholder="Confirm Password"
-                                        [ngClass]="{'is-invalid': (profileForm.controls['confirmPassword'].touched || profileForm.get('confirmPassword')?.dirty) && (!profileForm.get('confirmPassword')?.valid || profileForm.hasError('passwordsMismatch')) }">
-                                           
-                                    <span class="input-group-text" (click)="toggleConfirmPasswordVisibilty()" style="cursor: pointer;">
-                                        <i class="material-icons">{{confirmPasswordVisible ? 'visibility' : 'visibility_off'}}</i>
-                                    </span>
-                                </div>
-
-                                <div class="invalid-feedback" *ngIf="profileForm.hasError('passwordsMismatch') && profileForm.controls['confirmPassword'].touched">                                    <em>Password does not match.</em>
                                 </div>
                             </div>
                 
-                            <button class="btn button" [disabled]="!profileForm.valid">Save Changes</button>
-
+                            <button class="btn button" type="submit" [disabled]="!profileForm.valid">Save Changes</button>
                         </form>
                     </div>
                 </div>

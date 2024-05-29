@@ -1,78 +1,171 @@
-<div class="card" style="border: 1px solid #f68b1e; border-radius: 6px; margin-top: 2rem;" >
-    <div >
-        <div class="card-header">
-            <h5 class="mb-3" >Cart Summary</h5>
-        </div>
-        <div class="card-body">
-            <div class="row">
-                <div class="col-md-4">Subtotal:</div>
-                <div class="col-md-8  text-end">$35.00</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">Delivery:</div>
-                <div class="col-md-8  text-end text-danger">Free</div>
-            </div>
-            <div class="row">
-                <div class="col-md-4">Estimated Tax:</div>
-                <div class="col-md-8  text-end">$9.23</div>
-            </div>
-            <div class="row fw-bold">
-                <div class="col-md-4">Total:</div>
-                <div class="col-md-8  text-end">$44.23</div>
-            </div>
-        </div>
+<div class="card" style=" border-radius: 6px; margin-top: 2rem;" >
+    
+        <h5 class="m-0 p-3">Cart (2)</h5>
+        <hr>
 
-        <!--*ngIf="product$ | async as product"  -->
-        <div  >
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-10 d-flex align-items-center">
-                        <img src="../../../assets/img-details/800x800_product_6626172cb640fcbbfe326fed-1713772616435-black.jpeg" style="width: 7rem;" alt="">
-        
-                        <div style="padding: 0.8rem;">
-                            <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing</p>
-                            <p class="mb-0">Red</p>
-                            <div>
-                                <span style="font-size: 0.85rem; font-weight: 700;">JOSSY</span>
-                                <img src="../../../assets/products/paper-plane-3.png" style="width: 0.8rem; margin: 0 2px;" alt="">
-                                <span style="color: red; font-size: 0.85rem; font-family:Verdana, Geneva, Tahoma, sans-serif">EXPRESS</span>
-                            </div>
+    <!--*ngIf="product$ | async as product"  -->
+        <div class="card-body cart-item" >
+            <div class="row" style="padding: 0.8rem;" >
+                <div class="col-md-10 d-flex align-items-center p-0">
+                    <img src="../../../assets/img-details/800x800_product_6626172cb640fcbbfe326fed-1713772616435-black.jpeg" style="width: 5rem;" alt="">
+    
+                    <div style="padding: 0 0.8rem;">
+                        <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing</p>
+                        <p class="mb-0">Red</p>
+                        <div>
+                            <span style="font-size: 0.85rem; font-weight: 700;">JOSSY</span>
+                            <img src="../../../assets/products/paper-plane-3.png" style="width: 0.8rem; margin: 0 2px;" alt="">
+                            <span style="color: red; font-size: 0.85rem; font-family:Verdana, Geneva, Tahoma, sans-serif">EXPRESS</span>
                         </div>
                     </div>
-                    <div class="col-md-2 d-flex flex-column align-items-end">
-                        <p class="mb-0">N8,900</p>
-                        <div class="d-flex">
-                            <p class="mb-0 me-2" style="text-decoration-line: line-through; color: rgba(109, 109, 109, 0.967);">N24,500 
-                            </p>
-    
-                            <span style="color: red; background-color: #feecda; font-size: 0.92rem; padding: 1px 2px; border-radius: 4px;">-66%</span>
-                            
-                        </div>
+                </div>
+                <div class="col-md-2 d-flex flex-column align-items-end">
+                    <p class="mb-2 fw-bold">N8,900</p>
+                    <div class="d-flex">
+                        <p class="mb-0 me-2" style="text-decoration-line: line-through; color: rgba(109, 109, 109, 0.967);">N24,500 
+                        </p>
+
+                        <span style="color: red; background-color: #feecda; font-size: 0.92rem; padding: 1px 2px; border-radius: 4px;">-66%</span>
                         
                     </div>
+                    
                 </div>
-                <div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button class="btn button-delete d-flex align-items-center" style="color: #f68b1e;">
                     <span class="material-icons">
                         delete_outline
-                    </span> <span>REMOVE</span>
-                </div>
+                    </span>
+                    <span class="mb-0 ms-2 fw-semibold" style="font-size: 0.9rem;" >REMOVE</span>
+                </button>
 
                 <div class="d-flex" style="height: 2rem">
-                    <button [disabled]="quantity === 1" class="button btn btn-remove"
+                    <button [disabled]="quantity === 1" class="button-adjust btn"
                         (click)="decrement()" >
                         <span class="material-icons">
                             remove
                         </span>
                     </button>
                     <p class="quantity" >{{quantity}}</p>
-                    <button [disabled]="quantity === 10" class="button btn btn-add"
+                    <button [disabled]="quantity === 10" class="button-adjust btn"
                         (click)="increment(20)">
                         <span class="material-icons">
                             add
                         </span>
                     </button>
                 </div>
+
             </div>
         </div>
-    </div>
+
+        <div class="card-body cart-item" >
+            <div class="row" style="padding: 0.8rem;" >
+                <div class="col-md-10 d-flex align-items-center p-0">
+                    <img src="../../../assets/img-details/800x800_product_6626172cb640fcbbfe326fed-1713772616435-black.jpeg" style="width: 5rem;" alt="">
+    
+                    <div style="padding: 0 0.8rem;">
+                        <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing</p>
+                        <p class="mb-0">Red</p>
+                        <div>
+                            <span style="font-size: 0.85rem; font-weight: 700;">JOSSY</span>
+                            <img src="../../../assets/products/paper-plane-3.png" style="width: 0.8rem; margin: 0 2px;" alt="">
+                            <span style="color: red; font-size: 0.85rem; font-family:Verdana, Geneva, Tahoma, sans-serif">EXPRESS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex flex-column align-items-end">
+                    <p class="mb-2 fw-bold">N8,900</p>
+                    <div class="d-flex">
+                        <p class="mb-0 me-2" style="text-decoration-line: line-through; color: rgba(109, 109, 109, 0.967);">N24,500 
+                        </p>
+
+                        <span style="color: red; background-color: #feecda; font-size: 0.92rem; padding: 1px 2px; border-radius: 4px;">-66%</span>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button class="btn button-delete d-flex align-items-center" style="color: #f68b1e;">
+                    <span class="material-icons">
+                        delete_outline
+                    </span>
+                    <span class="mb-0 ms-2 fw-semibold" style="font-size: 0.9rem;" >REMOVE</span>
+                </button>
+
+                <div class="d-flex" style="height: 2rem">
+                    <button [disabled]="quantity === 1" class="button-adjust btn"
+                        (click)="decrement()" >
+                        <span class="material-icons">
+                            remove
+                        </span>
+                    </button>
+                    <p class="quantity" >{{quantity}}</p>
+                    <button [disabled]="quantity === 10" class="button-adjust btn"
+                        (click)="increment(20)">
+                        <span class="material-icons">
+                            add
+                        </span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="card-body cart-item" >
+            <div class="row" style="padding: 0.8rem;" >
+                <div class="col-md-10 d-flex align-items-center p-0">
+                    <img src="../../../assets/img-details/800x800_product_6626172cb640fcbbfe326fed-1713772616435-black.jpeg" style="width: 5rem;" alt="">
+    
+                    <div style="padding: 0 0.8rem;">
+                        <p class="mb-0">Lorem ipsum, dolor sit amet consectetur adipisicing</p>
+                        <p class="mb-0">Red</p>
+                        <div>
+                            <span style="font-size: 0.85rem; font-weight: 700;">JOSSY</span>
+                            <img src="../../../assets/products/paper-plane-3.png" style="width: 0.8rem; margin: 0 2px;" alt="">
+                            <span style="color: red; font-size: 0.85rem; font-family:Verdana, Geneva, Tahoma, sans-serif">EXPRESS</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex flex-column align-items-end">
+                    <p class="mb-2 fw-bold">N8,900</p>
+                    <div class="d-flex">
+                        <p class="mb-0 me-2" style="text-decoration-line: line-through; color: rgba(109, 109, 109, 0.967);">N24,500 
+                        </p>
+
+                        <span style="color: red; background-color: #feecda; font-size: 0.92rem; padding: 1px 2px; border-radius: 4px;">-66%</span>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <button class="btn button-delete d-flex align-items-center" style="color: #f68b1e;">
+                    <span class="material-icons">
+                        delete_outline
+                    </span>
+                    <span class="mb-0 ms-2 fw-semibold" style="font-size: 0.9rem;" >REMOVE</span>
+                </button>
+
+                <div class="d-flex" style="height: 2rem">
+                    <button [disabled]="quantity === 1" class="button-adjust btn"
+                        (click)="decrement()" >
+                        <span class="material-icons">
+                            remove
+                        </span>
+                    </button>
+                    <p class="quantity" >{{quantity}}</p>
+                    <button [disabled]="quantity === 10" class="button-adjust btn"
+                        (click)="increment(20)">
+                        <span class="material-icons">
+                            add
+                        </span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
 </div>

@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { EMPTY, Observable, Subject, catchError, tap } from 'rxjs';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
+import { AuthService } from 'src/app/auth.service';
 import { ProductService } from 'src/app/product/product.service';
+import { Iuser } from '../../user.component';
 
 @Component({
   selector: 'app-create-address',
@@ -16,9 +20,11 @@ export class CreateAddressComponent implements OnInit {
   errorMessageSuject = new Subject<string>();
   errorMessage$ = this.errorMessageSuject.asObservable();
 
+  addressForm!: FormGroup;
+
 
   
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
 
@@ -35,7 +41,28 @@ export class CreateAddressComponent implements OnInit {
 
     console.log('selected: ', this.selectedCountry);
 
-    
+    this.addressForm = this.fb.group({
+      street: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      state: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      firstName: '',
+      lastName: ''
+    })
+
+
+    this.auth.getCurrentUser().pipe(
+      map(user => user.addresses),
+      tap(addresses => console.log('addresses: ', JSON.stringify(addresses)))  
+    ).subscribe((user) => {
+      this.addressForm.patchValue({
+        street: user[0].street,
+        city: user[0].city,
+        // state: user[0].state,
+        country: user[0].country
+      })
+    })
+
   }
 
 
@@ -57,6 +84,23 @@ export class CreateAddressComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.addressForm.valid) {
+      console.log('Form submitted: ', JSON.stringify(this.addressForm.value));
+      const address = this.addressForm.value;
+      this.auth.createAddress(address).subscribe(
+        response => {
+          console.log('Address created successfully:', response);
+          this.addressForm.reset();
+          this.router.navigate(['/user/address'])
+        },
+        error => {
+          console.error('Error creating address:', error);
+        }
+      );
+    } else {
+      console.log('Form is invalid');
+    }
     
   }
+  
 }

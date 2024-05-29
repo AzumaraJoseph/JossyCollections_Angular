@@ -136,3 +136,84 @@
         </div>
     </div>
 </div>
+
+
+
+
+<!-- 
+<div class="col-md-12 mb-4">
+    <label for="currentPasswordId" class="form-label mb-2">Current Password</label>
+
+    <div class="input-group">
+        <input 
+            class="form-control"
+            [type]="currentPasswordVisible ? 'text' : 'password'"
+            id="currentPasswordId"
+            formControlName="currentPassword"
+            placeholder="Current Password"
+            [ngClass]="{'is-invalid': (profileForm.controls['currentPassword'].touched || profileForm.get('currentPassword')?.dirty) && !profileForm.get('currentPassword')?.valid }">
+               
+        <span class="input-group-text" (click)="toggleCurrentPasswordVisibilty()" style="cursor: pointer;">
+            <i class="material-icons">{{currentPasswordVisible ? 'visibility' : 'visibility_off'}}</i>
+        </span>
+        
+    </div>
+    <div *ngIf="(profileForm.controls['currentPassword'].touched || profileForm.controls['currentPassword'].dirty)  && !profileForm.controls['currentPassword'].valid">
+        <span class="invalid-feedback" *ngIf="profileForm.controls['currentPassword'].errors?.['required']">
+          <em>Please enter current password</em>
+        </span>
+        <span class="invalid-feedback" *ngIf="profileForm.controls['currentPassword'].errors?.['minlength']">
+            Password must be more than 8 charatcers
+        </span>
+    </div>
+</div>
+
+
+<div class="col-md-12 mb-4">
+    <label for="newPasswordId" class="form-label mb-2">New Password</label>
+    <div class="input-group">
+        <input
+            class="form-control"
+            [type]="newPasswordVisible ?  'text' : 'password'"
+            id="newPasswordId"
+            formControlName="newPassword"
+            placeholder="New Password"
+            [ngClass]="{'is-invalid': (profileForm.controls['newPassword'].touched || profileForm.controls['newPassword'].dirty) && !profileForm.controls['newPassword'].valid }">
+                
+        <span class="input-group-text" (click)="toggleNewPasswordVisibilty()" style="cursor: pointer;">
+            <i class="material-icons">{{newPasswordVisible ? 'visibility' : 'visibility_off'}}</i>
+        </span>    
+    </div>
+
+   
+
+    <div *ngIf="(profileForm.controls['newPassword'].touched || profileForm.controls['newPassword'].dirty)  && !profileForm.controls['newPassword'].valid">
+        <span class="invalid-feedback" *ngIf="profileForm.controls['newPassword'].errors?.['required']">
+          <em>Please enter new password</em>
+        </span>
+        <span class="invalid-feedback" *ngIf="profileForm.controls['newPassword'].errors?.['minlength']">
+          Password must be more than 8 characters
+        </span>
+    </div>
+</div>
+
+<div class="col-md-12 mb-4">
+    <label for="confirmPasswordId" class="form-label mb-2">Confirm Password</label>
+
+    <div class="input-group">
+        <input 
+            class="form-control"
+            [type]="confirmPasswordVisible ?  'text' : 'password'"
+            id="confirmPasswordId"
+            formControlName="confirmPassword"
+            placeholder="Confirm Password"
+            [ngClass]="{'is-invalid': (profileForm.controls['confirmPassword'].touched || profileForm.get('confirmPassword')?.dirty) && (!profileForm.get('confirmPassword')?.valid || profileForm.hasError('passwordsMismatch')) }">
+               
+        <span class="input-group-text" (click)="toggleConfirmPasswordVisibilty()" style="cursor: pointer;">
+            <i class="material-icons">{{confirmPasswordVisible ? 'visibility' : 'visibility_off'}}</i>
+        </span>
+    </div>
+
+    <div class="invalid-feedback" *ngIf="profileForm.hasError('passwordsMismatch') && profileForm.controls['confirmPassword'].touched">                                    <em>Password does not match.</em>
+    </div>
+</div> -->

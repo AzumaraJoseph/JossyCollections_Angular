@@ -1,12 +1,26 @@
-.button {
-    padding: 0;
+.button-adjust {
+    padding: 2px;
     background-color: #f68b1e;
 }
 
-.button:active {
+.button-adjust:active {
     border: 1px solid #f68b1e;
 
 }
+
+.button-adjust span {
+    color: white;
+}
+
+.button-delete {
+    background-color: white;
+}
+
+.button-delete:hover {
+    /* padding: 2px; */
+    background-color: #ffdfc0;
+}
+
 /* 
 .btn-remove {
     border-top-left-radius: 8px;
@@ -24,7 +38,17 @@
 .quantity {
     margin: 0 0.6rem;
     font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     align-self: center;
     color: rgb(87, 87, 87);
+}
+
+hr {
+    margin: 0;
+}
+
+.cart-item {
+    margin: 0 2rem 0 2rem;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(208, 208, 208, 0.97);
 }

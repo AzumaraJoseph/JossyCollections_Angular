@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../shared/auth.service';
+import { AuthService } from '../../auth.service';
 import { Router } from '@angular/router';
 import { Iuser } from '../user.component';
 
@@ -36,14 +36,13 @@ export class LoginComponent implements OnInit {
       console.log(this.loginForm.value);
   
       this.auth.login(emailControl, passwordControl).subscribe((user: Iuser) => {
-        console.log('Login pass:', user);
         this.currentUser = user;
         
           if (user && this.currentUser) {
             this.loginForm.reset();
             this.router.navigate(['/products']);
-            console.log('Login success');
-            console.log('Login:', this.currentUser);
+            // console.log('Login success');
+            console.log('Login res:', this.currentUser);
 
           } else {
             console.error('Login failed');

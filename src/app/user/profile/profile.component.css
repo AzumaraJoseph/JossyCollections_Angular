@@ -50,6 +50,11 @@ display: block;
     /* w-100 mt-2 fs-5 fw-bold" */
 }
 
+.button:active {
+    border: 2px solid #f68b1e;
+    /* background-color: black; */
+}
+
 .active {
     color: #f68b1e;
 }

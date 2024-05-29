@@ -48,16 +48,16 @@ export class ProductListComponent implements OnInit {
   // }
 
   ngAfterViewInit(): void {
-    console.log('Initializing carousel');
+    // console.log('Initializing carousel');
     setTimeout(() => {
       const carouselElement = $('#carouselid');
       if (carouselElement.length) {
-        console.log('Carousel element found:', carouselElement);
+        // console.log('Carousel element found:', carouselElement);
         carouselElement.carousel({
           interval: 2000 // Customize interval as needed
         });
       } else {
-        console.error('Carousel element not found');
+        // console.error('Carousel element not found');
       }
     }, 0);
   }
@@ -68,7 +68,7 @@ export class ProductListComponent implements OnInit {
 
   showToast(message: string) {
     // this.toast.showToast(message);
-    console.log('showToast method in ProductListComponent called'); // Debugging log
+    // console.log('showToast method in ProductListComponent called'); // Debugging log
     if (this.toast) {
       this.toast.showToast(message);
     }

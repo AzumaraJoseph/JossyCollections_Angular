@@ -96,3 +96,51 @@ export class OrderComponent implements OnInit {
 
   }
 }
+
+
+
+
+
+
+
+
+
+// currentPassword: ['', [ Validators.required, Validators.minLength(8) ]],
+//       newPassword: ['', [ Validators.required, Validators.minLength(8) ]],
+//       confirmPassword: ['', [ Validators.required ]],
+
+//   }, { validators: passwordsMatchValidator('newPassword', 'confirmPassword') } );
+// ngOnInit(): void {
+
+//   this.profileForm = this.fb.group({
+//     firstName: ['', [ Validators.required, Validators.minLength(3) ]],
+//     lastName: ['', [ Validators.required, Validators.maxLength(20) ]],
+//     email: ['', [ Validators.required, Validators.email ]],
+//     phone: ['', [ Validators.required ]],
+//     currentPassword: ['', [ Validators.required, Validators.minLength(8) ]],
+//     newPassword: ['', [ Validators.required, Validators.minLength(8) ]],
+//     confirmPassword: ['', [ Validators.required ]],
+
+// }, { validators: passwordsMatchValidator('newPassword', 'confirmPassword') } );
+
+// console.log(this.profileForm.controls['newPassword']);
+
+
+// }
+
+// // togglePasswordVisibility(): void {
+// //   this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
+// //  }
+
+
+// toggleCurrentPasswordVisibilty(): void {
+//   this.currentPasswordVisible = !this.currentPasswordVisible;
+// }
+
+// toggleNewPasswordVisibilty(): void {
+//   this.newPasswordVisible = !this.newPasswordVisible;
+// }
+
+// toggleConfirmPasswordVisibilty(): void {
+//   this.confirmPasswordVisible = !this.confirmPasswordVisible;
+// }
