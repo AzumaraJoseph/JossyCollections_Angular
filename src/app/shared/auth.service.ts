@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, map } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import { Iuser } from './user/user.component';
+import { Iuser } from '../user/user.component';
 
 @Injectable({
   providedIn: 'root'
@@ -56,7 +56,6 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
-
 
   logOut(): Observable<any> {
     // const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
@@ -139,12 +138,12 @@ export class AuthService {
     const item = totalAmount !== null ? {totalAmount: JSON.stringify(totalAmount)} : '' 
      return this.http.put<any>(this.getCartUrl, item, options).pipe(
       map(response => response.data),
-      tap(data => console.log('cartssssss: ', JSON.stringify(data))),
+      // tap(data => console.log('cartssssss: ', JSON.stringify(data))),
       catchError(this.handleError)
      )
   }
 
-  updateCart( itemId: string, newQuantity: number) {
+  updateCart( itemId: string, newQuantity: number): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };
     const body = { itemId, newQuantity }
@@ -157,7 +156,6 @@ export class AuthService {
     )
   }
 
-
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage: string;
     if (err.error instanceof ErrorEvent) {
@@ -168,4 +166,7 @@ export class AuthService {
     console.error(err);
     return throwError(() => errorMessage);
   }
+
+
+
 }

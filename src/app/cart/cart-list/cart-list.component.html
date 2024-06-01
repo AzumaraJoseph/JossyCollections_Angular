@@ -1,79 +1,103 @@
-<div class="card" style=" border-radius: 6px; margin-top: 2rem; " >
-    
-        <h5 class="card-header m-0 p-3">Cart ({{allCart.items.length}})</h5>
-        <hr>
-    <!--*ngIf="product$ | async as product"  -->
-        <div *ngIf="allCart.items.length; else noCart" >
-            <div class="card-body cart-item" *ngFor="let cart of allCart?.items; let i = index" >
-                <div class="row" style="padding: 0.8rem;" >
-                    <div class="col-md-10 d-flex align-items-center p-0" >
-                        <img [src]="'/assets/img-details/800x800_' + cart.image" class="me-3" style="width: 5rem;" alt="">
+<!-- <div class="row" style="background-color: rgba(246, 246, 246, 0.982); margin-top: 4rem;"> -->
+    <div style="border-radius: 6px; margin-top: 2rem; padding: 0 0.5rem;" >
+        <div class="card">
+            <h5 class="card-header m-0 p-3"  >Cart ({{allCart.items.length}})</h5>
+            <hr>
+            <div *ngIf="allCart.items.length; else noCart" >
+                <div class="card-body cart-item" *ngFor="let cart of allCart?.items; let i = index" >
+                    <div class="row" style="padding: 0.8rem;" >
+                        <div class="col-md-10 d-flex align-items-center p-0" >
+                            <img [src]="'/assets/img-details/800x800_' + cart.image" class="me-3" style="width: 5rem;" alt="">
+            
+                            <div style="padding: 0 0.8rem;">
+                                <p class="mb-0">{{cart.name}}</p>
+                                <p class="mb-0">{{cart.color}}</p>
+                                <p class="mb-0" 
+                                    [style.color]="getColors(cart.maxQuantity)"
+                                    style="font-size: 0.8rem;" 
+                                    *ngIf="cart.maxQuantity">
         
-                        <div style="padding: 0 0.8rem;">
-                            <p class="mb-0">{{cart.name}}</p>
-                            <p class="mb-0">{{cart.color}}</p>
-                            <p class="mb-0" 
-                                [style.color]="getColors(cart.maxQuantity)"
-                                style="font-size: 0.8rem;" 
-                                *ngIf="cart.maxQuantity">
-    
-                                {{cart.maxQuantity <= 30 ? cart.maxQuantity + " Units Left" : 
-                                cart.maxQuantity > 30 && cart.maxQuantity <= 70 ? "Few Units Left" : 
-                                cart.maxQuantity > 70 && cart.maxQuantity <= 110 ? "In Stock" : 
-                                cart.maxQuantity > 110 ? "In Stock" : ""}}
-                            </p>
-                            <div>
-                                <span style="font-size: 0.8rem; font-weight: 700;">JOSSY</span>
-                                <img src="../../../assets/products/paper-plane-3.png" style="width: 0.8rem; margin: 0 2px;" alt="">
-                                <span style="color: red; font-size: 0.7rem; font-family:Verdana, Geneva, Tahoma, sans-serif">EXPRESS</span>
+                                    {{cart.maxQuantity <= 30 ? cart.maxQuantity + " Units Left" : 
+                                    cart.maxQuantity > 30 && cart.maxQuantity <= 70 ? "Few Units Left" : 
+                                    cart.maxQuantity > 70 && cart.maxQuantity <= 110 ? "In Stock" : 
+                                    cart.maxQuantity > 110 ? "In Stock" : ""}}
+                                </p>
+                                <div>
+                                    <span style="font-size: 0.8rem; font-weight: 700;">JOSSY</span>
+                                    <img src="../../../assets/products/paper-plane-3.png" style="width: 0.8rem; margin: 0 2px;" alt="">
+                                    <span style="color: red; font-size: 0.7rem; font-family:Verdana, Geneva, Tahoma, sans-serif">EXPRESS</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2 d-flex flex-column align-items-end">
+                            <p class="mb-2 fw-bold fs-5">{{cart.discountPrice | currency: 'USD': 'symbol': '1.2' }}</p>
+                            <div class="d-flex">
+                                <p class="mb-0 me-2" style="text-decoration-line: line-through; font-size: 1.1rem; color: rgba(109, 109, 109, 0.967);">{{ cart.discountPrice !== cart.price ? (cart.price | currency: 'USD': 'symbol': '1.2') : '' }} 
+                                </p>
+        
+                                <span style="color: red; background-color: #feecda; font-size: 0.92rem; padding: 1px 2px; border-radius: 4px;">{{ cart.discountPrice !== cart.price ? (((cart.price - cart.discountPrice) / cart.price) * 100).toFixed() + '%' : '' }}</span>
+                                
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-2 d-flex flex-column align-items-end">
-                        <p class="mb-2 fw-bold fs-5">{{cart.discountPrice | currency: 'USD': 'symbol': '1.2' }}</p>
-                        <div class="d-flex">
-                            <p class="mb-0 me-2" style="text-decoration-line: line-through; font-size: 1.1rem; color: rgba(109, 109, 109, 0.967);">{{ cart.discountPrice !== cart.price ? (cart.price | currency: 'USD': 'symbol': '1.2') : '' }} 
-                            </p>
-    
-                            <span style="color: red; background-color: #feecda; font-size: 0.92rem; padding: 1px 2px; border-radius: 4px;">{{ cart.discountPrice !== cart.price ? (((cart.price - cart.discountPrice) / cart.price) * 100).toFixed() + '%' : '' }}</span>
-                            
+                    <div class="d-flex justify-content-between">
+                        <button class="btn button-delete d-flex align-items-center" style="color: #f68b1e;">
+                            <span class="material-icons">
+                                delete_outline
+                            </span>
+                            <span class="mb-0 ms-2 fw-semibold" style="font-size: 0.9rem;" >REMOVE</span>
+                        </button>
+        
+                        <div class="d-flex" style="height: 2rem">
+                            <button [disabled]="quantity === 0" class="button-adjust btn"
+                                (click)="decrement(cart._id)" >
+                                <span class="material-icons">
+                                    remove
+                                </span>
+                            </button>
+                            <p class="quantity" >{{ quantities[cart._id] }}</p>
+                            <button [disabled]="quantity === cart.maxQuantity" class="button-adjust btn"
+                                (click)="increment(cart._id, cart.maxQuantity)">
+                                <span class="material-icons">
+                                    add
+                                </span>
+                            </button>
                         </div>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between">
-                    <button class="btn button-delete d-flex align-items-center" style="color: #f68b1e;">
-                        <span class="material-icons">
-                            delete_outline
-                        </span>
-                        <span class="mb-0 ms-2 fw-semibold" style="font-size: 0.9rem;" >REMOVE</span>
-                    </button>
     
-                    <div class="d-flex" style="height: 2rem">
-                        <button [disabled]="quantity === 0" class="button-adjust btn"
-                            (click)="decrement(cart._id)" >
-                            <span class="material-icons">
-                                remove
-                            </span>
-                        </button>
-                        <p class="quantity" >{{ quantities[cart._id] }}</p>
-                        <button [disabled]="quantity === cart.maxQuantity" class="button-adjust btn"
-                            (click)="increment(cart._id, cart.maxQuantity)">
-                            <span class="material-icons">
-                                add
-                            </span>
-                        </button>
-                    </div>
+            </div>
+
+            <ng-template #noCart>
+                <div class="alert alert-danger mb-0">
+                  No cart found!!!
+                </div>
+            </ng-template>
+        </div>
+    </div>
+    
+    <!-- <div class="col-md-3" style="height: min-content; border-radius: 6px; margin-top: 2rem; padding: 0 0.5rem;" *ngIf="allCart.items.length" >
+        <div class="card" style="border: 1px solid #f68b1e;" >
+            <div class="card-header">
+                <h5 class="mb-0" >Cart Summary</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-4">Subtotal:</div>
+                    <div class="col-md-8  text-end">$35.00</div>
+                </div>
+
+                <div class="col-md-8">Shipping fee not added yet!</div> 
+
+                <div class="row fw-bold">
+                    <div class="col-md-4">Total:</div>
+                    <div class="col-md-8  text-end">{{allCart.cartSubtotal}}</div>
                 </div>
             </div>
-
         </div>
+    </div> -->
 
-        <ng-template #noCart>
-            <div class="alert alert-danger mb-0">
-              No cart found!!!
-            </div>
-        </ng-template>
-</div>
+<!-- </div> -->
 
 <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage" >
     Error: {{errorMessage}}

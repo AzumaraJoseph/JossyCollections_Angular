@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordsMatchValidator } from '../custom-validators';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/shared/auth.service';
 import { Observable, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 

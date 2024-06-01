@@ -2,9 +2,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/shared/auth.service';
 import { Product } from 'src/app/product/product';
 import { ProductService } from 'src/app/product/product.service';
+import { CartService } from 'src/app/shared/cart.service';
 
 @Component({
   selector: 'app-cart-list',
@@ -26,31 +27,31 @@ export class CartListComponent implements OnInit {
   errorMessage$ = this.errorMessageSuject.asObservable();
 
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private auth: AuthService, private cdr: ChangeDetectorRef, private router: Router) { }
+  constructor(private route: ActivatedRoute, private productService: ProductService, private auth: AuthService, private cdr: ChangeDetectorRef, private router: Router, private cartService: CartService) { }
 
   ngOnInit(): void {
 
-    this.route.params.subscribe(params => {
-      const id = params['id']
-      this.product$ = this.productService.selectedProduct$(id).pipe(
-        catchError(err => {
-          this.errorMessageSuject.next(err)
-          return EMPTY
-        })
-      )
+    // this.route.params.subscribe(params => {
+    //   const id = params['id']
+    //   this.product$ = this.productService.selectedProduct$(id).pipe(
+    //     catchError(err => {
+    //       this.errorMessageSuject.next(err)
+    //       return EMPTY
+    //     })
+    //   )
+    // });
 
-    });
 
-
-      // this.allCart$ = this.auth.getCart(null).pipe(
-      //   map(data => data),
-      //   tap(data => console.log('Cart Object: ', JSON.stringify(data))),
-      //   catchError(err => {
-      //     this.errorMessageSuject.next(err)
-      //     return EMPTY
-      //   })
-      // )
+    // this.allCart$ = this.auth.getCart(null).pipe(
+    //   map(data => data),
+    //   tap(data => console.log('Cart Object: ', JSON.stringify(data))),
+    //   catchError(err => {
+    //     this.errorMessageSuject.next(err)
+    //     return EMPTY
+    //   })
+    // )
     // 66599d85e1963ec543de2669
+
    this.loadCart()
 
   }
@@ -58,12 +59,13 @@ export class CartListComponent implements OnInit {
   loadCart() {
     this.auth.getCart(null).subscribe(data => {
       this.allCart = data;
+      this.cartService.updateCart(this.allCart.items)
 
       this.allCart.items.forEach((item: any) => {
         this.quantities[item._id] = item.quantity;
       });
 
-      console.log('hoist', JSON.stringify(this.allCart));
+      console.log('Cart list: ', JSON.stringify(this.allCart));
       
     });
   }
@@ -124,11 +126,23 @@ export class CartListComponent implements OnInit {
           // Update the quantity in the quantities dictionary
           this.quantities[itemId] = newQuantity;
         }
+
+      //  OR  const index = this.allCart.items.findIndex((item: any) => item._id === itemId);
+
+      //   // Remove the item using splice if it exists
+      //   if (index !== -1) {
+      //     this.allCart.items.splice(index, 1);
+      //   }
+      //   delete this.quantities[itemId];
+      // } else {
+      //   // Update the quantity in the quantities dictionary
+      //   this.quantities[itemId] = newQuantity;
+      // }
+
+      this.cartService.updateCart(this.allCart.items); // Update cart in CartService
         
         this.cdr.markForCheck(); // Manually trigger change detection
-  
-        // this.refreshComponent()
-        // this.cdr.detectChanges(); // Manually trigger change detection
+        this.loadCart();
       }),
       catchError(err => {
         this.errorMessageSuject.next(err)
@@ -138,22 +152,22 @@ export class CartListComponent implements OnInit {
   ).subscribe();
 }
 
-refreshComponent(): void {
-  const currentUrl = this.router.url;
-  this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-    this.router.navigate([currentUrl]);
-  });
-}
+// refreshComponent(): void {
+//   const currentUrl = this.router.url;
+//   this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+//     this.router.navigate([currentUrl]);
+//   });
+// }
 
-reload() {
-  this.auth.getCart(null).pipe(
-    map(data => data),
-    tap(data => console.log('onlyArray: ', JSON.stringify(data))),
-    catchError(err => {
-      this.errorMessageSuject.next(err)
-      return EMPTY
-    })
-  ).subscribe()}
+// reload() {
+//   this.auth.getCart(null).pipe(
+//     map(data => data),
+//     tap(data => console.log('onlyArray: ', JSON.stringify(data))),
+//     catchError(err => {
+//       this.errorMessageSuject.next(err)
+//       return EMPTY
+//     })
+//   ).subscribe()}
    
    getColors(quantity: number): string {
     if(quantity > 110) {

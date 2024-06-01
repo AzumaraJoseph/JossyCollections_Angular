@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/shared/auth.service';
 import { ProductService } from 'src/app/product/product.service';
 import { Iuser, address } from '../../user.component';
 

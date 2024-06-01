@@ -6,6 +6,7 @@ import { ProductListComponent } from './product/product-list/product-list.compon
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { DialogueComponent } from './dialogue.component';
 import { OrderComponent } from './order.component';
+// import { CartListComponent } from './cart/cart-list/cart-list.component';
 import { CartShellComponent } from './cart/cart-shell/cart-shell.component';
 
 const routes: Routes = [

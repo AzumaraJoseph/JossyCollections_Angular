@@ -3,7 +3,7 @@ import { ProductService } from '../product.service';
 import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
 import { Product } from '../product';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthService } from 'src/app/auth.service';
+import { AuthService } from 'src/app/shared/auth.service';
 // import bootstrap from 'bootstrap'; // Import Bootstrap JavaScript (if not already imported)
 
 @Component({

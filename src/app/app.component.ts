@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Event, NavigationEnd, Router } from '@angular/router';
-import { AuthService } from './auth.service';
+import { AuthService } from './shared/auth.service';
 import { Iuser } from './user/user.component';
-import { map, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
+import { CartService } from './shared/cart.service';
 
 @Component({
   selector: 'app-root',
@@ -14,6 +15,8 @@ export class AppComponent implements OnInit {
   title = 'Jossy-Third-Project';
   isClicked: boolean = false;
   currentUser: any;
+  cart$!: Observable<any>;
+  cartCount: any
 
   get isLoggedIn() {
     return this.auth.isLoggedIn;
@@ -42,7 +45,7 @@ export class AppComponent implements OnInit {
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
 
-  constructor(private router: Router, private elementRef: ElementRef, private auth: AuthService) { }
+  constructor(private router: Router, private elementRef: ElementRef, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService ) { }
   
   ngOnInit(): void {
     this.router.events.subscribe((event: Event) => {
@@ -52,7 +55,25 @@ export class AppComponent implements OnInit {
     }); 
 
     // this.currentUser = this.currentUser ? this.user.firstName
+
+  //   this.cart$ = this.auth.getCart(null).pipe(
+  //     map(data => data.items)
+      
+  //  )
+
+  this.cart$ = this.cartService.getCart()
+
+    // this.updateCartIcon()
   
+  }
+
+  updateCartIcon() {
+    return this.auth.getCart(null).subscribe(data =>{
+      this.cartCount = data.items.length
+      this.cdr.markForCheck(); // Manually trigger change detection
+      this.cdr.detectChanges()
+
+    })
   }
 
   toggleArrow(): void {

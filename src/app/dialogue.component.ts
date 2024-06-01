@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { Product } from './product/product';
-import { AuthService } from './auth.service';
+import { AuthService } from './shared/auth.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 declare let $: any;
