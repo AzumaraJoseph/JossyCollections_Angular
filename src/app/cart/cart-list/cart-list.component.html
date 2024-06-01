@@ -1,12 +1,12 @@
-<div class="card" style=" border-radius: 6px; margin-top: 2rem;" *ngIf="allCart$ | async as allCart" >
+<div class="card" style=" border-radius: 6px; margin-top: 2rem;" >
     
-        <h5 class="m-0 p-3">Cart ({{allCart.length}})</h5>
+        <h5 class="m-0 p-3">Cart ({{allCart.items.length}})</h5>
         <hr>
 
     <!--*ngIf="product$ | async as product"  -->
-        <div class="card-body cart-item" *ngFor="let cart of allCart" >
+        <div class="card-body cart-item" *ngFor="let cart of allCart?.items; let i = index" >
             <div class="row" style="padding: 0.8rem;" >
-                <div class="col-md-10 d-flex align-items-center p-0">
+                <div class="col-md-10 d-flex align-items-center p-0" >
                     <img [src]="'/assets/img-details/800x800_' + cart.image" class="me-3" style="width: 5rem;" alt="">
     
                     <div style="padding: 0 0.8rem;">
@@ -38,44 +38,32 @@
                         <span style="color: red; background-color: #feecda; font-size: 0.92rem; padding: 1px 2px; border-radius: 4px;">{{ cart.discountPrice !== cart.price ? (((cart.price - cart.discountPrice) / cart.price) * 100).toFixed() + '%' : '' }}</span>
                         
                     </div>
-                    
                 </div>
             </div>
-            <form autocomplete="off" novalidate #cartListForm="ngForm" (ngSubmit)="save(cartListForm)" >
-                <div class="d-flex justify-content-between">
-                    <button class="btn button-delete d-flex align-items-center" style="color: #f68b1e;">
+            <div class="d-flex justify-content-between">
+                <button class="btn button-delete d-flex align-items-center" style="color: #f68b1e;">
+                    <span class="material-icons">
+                        delete_outline
+                    </span>
+                    <span class="mb-0 ms-2 fw-semibold" style="font-size: 0.9rem;" >REMOVE</span>
+                </button>
+
+                <div class="d-flex" style="height: 2rem">
+                    <button [disabled]="quantity === 0" class="button-adjust btn"
+                        (click)="decrement(cart._id)" >
                         <span class="material-icons">
-                            delete_outline
+                            remove
                         </span>
-                        <span class="mb-0 ms-2 fw-semibold" style="font-size: 0.9rem;" >REMOVE</span>
                     </button>
-    
-                    <div class="d-flex" style="height: 2rem">
-                        <button [disabled]="quantity === 0" class="button-adjust btn"
-                            (click)="decrement()" >
-                            <span class="material-icons">
-                                remove
-                            </span>
-                        </button>
-                        <p class="quantity" >{{ quantity }}</p>
-                        <button [disabled]="quantity === cart.maxQuantity" class="button-adjust btn"
-                            (click)="increment(cart.maxQuantity)">
-                            <span class="material-icons">
-                                add
-                            </span>
-                        </button>
-                    </div>
-    
+                    <p class="quantity" >{{ quantities[cart._id] }}</p>
+                    <button [disabled]="quantity === cart.maxQuantity" class="button-adjust btn"
+                        (click)="increment(cart._id, cart.maxQuantity)">
+                        <span class="material-icons">
+                            add
+                        </span>
+                    </button>
                 </div>
-
-                <input type="text" hidden class="form-control" id="idId" [(ngModel)]="cart._id" name="id">
-
-                <input type="text" hidden class="form-control" id="quantityId" [(ngModel)]="quantity" name="quantity">
-                
-                <input type="text" hidden class="form-control" id="colorId" [(ngModel)]="cart.color" name="color">
-
-            </form>
-
+            </div>
         </div>
 </div>
 

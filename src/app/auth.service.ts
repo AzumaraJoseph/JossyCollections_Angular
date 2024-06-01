@@ -18,6 +18,7 @@ export class AuthService {
   private deleteAddressUrl = 'http://127.0.0.1:5000/api/v1/user/address';
   private createCartUrl = 'http://127.0.0.1:5000/api/v1/user/create-cart';
   private getCartUrl = 'http://127.0.0.1:5000/api/v1/user/get-cart';
+  private updateCartUrl = 'http://127.0.0.1:5000/api/v1/user/update-cart';
 
   currentUser!:any | null;
 
@@ -119,7 +120,7 @@ export class AuthService {
     )
   }
 
-  createCart(id: string, quantity: number, color: string): Observable<any> {
+  createCart(id: string, quantity: number, color?: string): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };
     const body = { cart: [{id, quantity, color}] };
@@ -132,15 +133,28 @@ export class AuthService {
     )
   }
 
-  getCart(itemId: string, quantity: number): Observable<any> {
+  getCart(totalAmount: number | null): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };
-    const item = {itemId, quantity }
+    const item = totalAmount !== null ? {totalAmount: JSON.stringify(totalAmount)} : '' 
      return this.http.put<any>(this.getCartUrl, item, options).pipe(
       map(response => response.data),
       tap(data => console.log('cartssssss: ', JSON.stringify(data))),
       catchError(this.handleError)
      )
+  }
+
+  updateCart( itemId: string, newQuantity: number) {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { headers, withCredentials: true };
+    const body = { itemId, newQuantity }
+    console.log(body);
+
+    return this.http.put<any>(this.updateCartUrl, body, options).pipe(
+      map(response => response.data),
+      tap(data => console.log('cart updated: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    )
   }
 
 
