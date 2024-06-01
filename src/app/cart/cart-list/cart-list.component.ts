@@ -51,11 +51,11 @@ export class CartListComponent implements OnInit {
       //   })
       // )
     // 66599d85e1963ec543de2669
-   this.load()
+   this.loadCart()
 
   }
 
-  load() {
+  loadCart() {
     this.auth.getCart(null).subscribe(data => {
       this.allCart = data;
 

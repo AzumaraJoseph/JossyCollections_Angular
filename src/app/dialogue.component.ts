@@ -85,7 +85,7 @@ closeModalAndNavigate() {
   // Use setTimeout to ensure the modal is fully closed before navigating
   setTimeout(() => {
     this.router.navigate(['/cart']);
-  }, 1000); // Adjust the timeout as needed
+  }, 1500); // Adjust the timeout as needed
 }
 
 // closeModalAndNavigate() {
