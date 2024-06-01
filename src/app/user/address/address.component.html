@@ -35,7 +35,7 @@
                         <div>
                             <a [routerLink]="['/user/profile']" >Account Information</a>
                         </div>
-                        <div><a [routerLink]="['/user/address']" routerLinkActive="active"  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Delivery Address</a></div>
+                        <div><a [routerLink]="['/user/address']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Delivery Address</a></div>
                     </div>
                 </div>
                 <hr style="color: rgba(132, 131, 131, 0.985);">
@@ -78,73 +78,75 @@
                 </div>
             </div>
 
-            <div class="col-md-7">
+            <div class="col-md-7" *ngIf="address$ | async as currentUser">
                 <div style="background-color: white; border-radius: 6px;" >
-                    <h5 class="mb-0 p-3">Delivery Address</h5>
+                    <div class="d-flex justify-content-between align-items-center p-3" >
+                        <h5 class="mb-0">Delivery Address</h5>
+                        <div class="col-md-2 text-center">
+                            <button [routerLink]="['/address/create']" routerLinkActive="router-link-active" *ngIf="currentUser.addresses.length > 0" class="btn add-address" type="button">Add Address</button>
+                        </div>
+                    </div>
+
                     <hr style="color: rgba(123, 122, 122, 0.985); margin: 0;">
-                    <div style="padding: 1rem 2rem;">
+                    <div style="padding: 1rem 2rem;"  >
 
-                        <div class="card col-md-5" style="font-size: 0.9rem;">
-                            <div class="card-header d-flex justify-content-between align-items-center">
-                                <p class="mb-0">Default Address</p>
-                                <div class="d-flex">
-                                    <button class="btn d-flex align-items-center me-2 p-1">
-                                        <span class="material-symbols-outlined fs-6 me-1">
-                                            delete
-                                        </span>
-                                        <p class="m-0">Delete</p>
-                                    </button>
-                                    <button class="btn  d-flex align-items-center p-1" (click)="edit()" >
-                                        <span class="material-symbols-outlined fs-5 me-1" style="color:#f68b1e;">
-                                            edit_square
-                                        </span>
-                                        <p class="m-0">Edit</p>
-                                    </button>
-                                </div>
-                            </div>
- 
-                            <div class="card-body p-3">
-                                <div class="d-flex">
-                                    <span class="material-symbols-outlined edit-btn">
-                                        person
-                                    </span>
-                                    <p class="card-text ms-3">{{currentUser ? currentUser.firstName : undefined }} {{currentUser ? currentUser.lastName : undefined}}</p>
-                                </div>
-
-                              
-                                <div *ngIf="currentUser && currentUser.addresses && currentUser.addresses.length > 0" class="d-flex mt-2 mb-2">
-                                    <span class="material-symbols-outlined edit-btn">
-                                      location_on
-                                    </span>
-                                    <p class="card-text ms-3">
-                                      {{ currentUser.addresses[0].street }}, {{ currentUser.addresses[0].city }}. {{ currentUser.addresses[0].state }}, {{ currentUser.addresses[0].country }}
-                                    </p>
-                                </div>
-                                  
-                                <div class="d-flex">
-                                    <span class="material-symbols-outlined edit-btn">
-                                        phone_in_talk
-                                    </span>
-                                    <p class="card-text ms-3">{{currentUser ? currentUser.phone : undefined }} </p>
-                                </div> 
-                            </div>
-
-                            <!-- <div class="card-body" *ngIf="currentUser">
-                                <div *ngFor="let address of currentUser.addresses" >
-                                    <div class="d-flex">
-                                        <span class="material-symbols-outlined edit-btn">
-                                            person
-                                        </span>
-                                        <p class="card-text ms-3">{{address.firstName }} {{address.lastName}}</p>
+                        <div >
+                            <div class="row">
+                                <div class="col-md-6 p-2" *ngFor="let address  of currentUser.addresses; let i = index" >
+                                    <div class="card" style="font-size: 0.9rem; padding: 0;" *ngIf="address" >
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <p class="mb-0 fs-6 fw-semibold">Address {{i + 1}}
+                                            </p>
+                                        </div>
+                                        <div class="card-body" style="padding: 0.5rem 0.7rem;" >
+                                             <!-- <div *ngIf="currentUser && currentUser.addresses && currentUser.addresses.length > 0" > -->
+                                            <div class="d-flex flex-column mt-2 mb-2"  >
+                                                <div class="d-flex">
+                                                    <span class="material-symbols-outlined edit-btn">
+                                                        person
+                                                    </span>
+                                                    <p class="card-text ms-3">{{ currentUser.firstName }} <ng-container >{{ currentUser.lastName }}</ng-container></p>
+                                                </div>
+        
+                                                <div class="d-flex">
+                                                    <span class="material-symbols-outlined edit-btn">
+                                                    location_on
+                                                    </span>
+                                                    <p class="card-text ms-3 mb-1">
+                                                    {{ address.street }}, <ng-container >{{ address.city }}.</ng-container> {{ address.state }}, {{ address.country }}
+                                                    </p>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <span class="material-symbols-outlined edit-btn">
+                                                        phone_in_talk
+                                                    </span>
+                                                    <p class="card-text ms-3">{{ currentUser.phone }} </p>
+                                                </div>
+                                                <div class="d-flex align-self-end">
+                                                    <button class="btn d-flex align-items-center me-2 p-1" (click)="deleteAddress(address._id)" >
+                                                        <span class="material-symbols-outlined me-1" style="font-size: 1rem;">
+                                                            delete
+                                                        </span>
+                                                        <p class="m-0 " style="font-size: 0.8rem;" >Delete</p>
+                                                    </button>
+                                                    <button class="btn  d-flex align-items-center p-1" (click)="editAddress()" >
+                                                        <span class="material-symbols-outlined fs-6 me-1" style="color:#f68b1e;">
+                                                            edit_square
+                                                        </span>
+                                                        <p class="m-0" style="font-size: 0.8rem;">Edit</p>
+                                                    </button>
+                                                </div>
+                                                <!-- <hr class="mt-2 mb-2"> -->
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                            </div> -->
+                            </div>
                         </div>
 
 
-
-                        <div class="col-md-8 book">
+    
+                        <div class="col-md-8 book" *ngIf="currentUser.addresses.length < 1" >
                             <div style=" width: min-content;">
                                 <img  src="../../../assets/products/notebook.0c73f0bb.svg" alt="Address book">
                                 
@@ -153,11 +155,15 @@
                                 <h6 class="mb-3 fw-bold" >You have not added any address yet!</h6>
                                 <p class="m-0">Add your shipping addresses here for a fast purchase experience! You will be able to add, modify or delete them at any time.</p>
                             </div>
-
+    
                             <a [routerLink]="['/address/create']" routerLinkActive="router-link-active"  class="btn btn-sm address-btn" >ADD NEW ADDRESS</a>
-
+    
                         </div>     
-                    </div>                 
+
+                    </div>
+
+
+
                 </div>
             </div>
         </div>

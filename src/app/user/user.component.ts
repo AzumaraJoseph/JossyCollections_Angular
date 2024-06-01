@@ -9,3 +9,11 @@ export interface Iuser {
     phone: number;
 
 }
+
+export interface address {
+    city: string;
+    country: string;
+    street: string;
+    state: string;
+
+}

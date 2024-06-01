@@ -19,10 +19,11 @@ export class AppComponent implements OnInit {
     return this.auth.isLoggedIn;
   }
 
-  get userName(): string | null {
-    return this.currentUser ? this.currentUser.firstName : null;
+  get user() {
+    return this.auth.currentUser;
   }
   
+
   isScrolledDown: boolean = false;
   lastScrollTop: number = 0;
 
@@ -50,11 +51,8 @@ export class AppComponent implements OnInit {
       }  
     }); 
 
-      this.auth.getCurrentUser().pipe(
-        // map(res => res.data.data),
-        map(res => this.currentUser = res),
-        tap(user => console.log('user:', JSON.stringify(user)))
-      ).subscribe();
+    // this.currentUser = this.currentUser ? this.user.firstName
+  
   }
 
   toggleArrow(): void {

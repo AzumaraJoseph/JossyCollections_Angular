@@ -8,8 +8,7 @@ import { ErrorPageComponent } from './error-page.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
 import { SharedModule } from './shared/shared.module';
-import { DialogueDirective } from './dialogue.directive';
-import { DialogueComponent } from './product/dialogue.component';
+import { DialogueComponent } from './dialogue.component';
 import { OrderComponent } from './order.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastComponent } from './toast.component';
@@ -26,7 +25,6 @@ import { CartTotalComponent } from './cart/cart-total/cart-total.component';
     ProductListComponent,
     ErrorPageComponent,
     ProductDetailComponent,
-    DialogueDirective,
     DialogueComponent,
     OrderComponent,
     ToastComponent,
@@ -49,6 +47,7 @@ import { CartTotalComponent } from './cart/cart-total/cart-total.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
 
 
 

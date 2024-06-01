@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
 import { AuthService } from 'src/app/auth.service';
 import { ProductService } from 'src/app/product/product.service';
-import { Iuser } from '../../user.component';
+import { Iuser, address } from '../../user.component';
 
 @Component({
   selector: 'app-create-address',
@@ -20,9 +20,14 @@ export class CreateAddressComponent implements OnInit {
   errorMessageSuject = new Subject<string>();
   errorMessage$ = this.errorMessageSuject.asObservable();
 
+  get user() {
+    return this.auth.getUser().pipe(
+      map(user => user.addresses),
+      tap(addresses => console.log('addressessssss: ', JSON.stringify(addresses)))
+    )
+  }
+
   addressForm!: FormGroup;
-
-
   
   constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router) { }
 
@@ -51,15 +56,10 @@ export class CreateAddressComponent implements OnInit {
     })
 
 
-    this.auth.getCurrentUser().pipe(
-      map(user => user.addresses),
-      tap(addresses => console.log('addresses: ', JSON.stringify(addresses)))  
-    ).subscribe((user) => {
+    this.user.subscribe((user) => {
       this.addressForm.patchValue({
         street: user[0].street,
         city: user[0].city,
-        // state: user[0].state,
-        country: user[0].country
       })
     })
 

@@ -26,6 +26,27 @@
     box-shadow: none;
 }
 
+.add-address {
+    background-color: #f68b1e;
+    color: white;
+    padding: 0.4rem; 
+    font-weight: 500;
+    box-shadow: 1px 1px 2px  rgb(55, 55, 55);
+}
+
+.add-address:hover {
+    background-color: #fd9c3b;
+    transform: scale(1.05);
+    transition: all .2s;
+}
+
+.add-address:active {
+    border: 1px solid #f68b1e;
+    background-color: white;
+    box-shadow: none;
+}
+
+
 a {
     text-decoration: none;
     color: rgba(84, 83, 83, 0.968);

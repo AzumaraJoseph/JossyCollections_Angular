@@ -15,6 +15,9 @@ export class AuthService {
   private currentUserUrl = 'http://127.0.0.1:5000/api/v1/user/getMe';
   private updateUserUrl = 'http://127.0.0.1:5000/api/v1/user/updateMe';
   private createAddressUrl = 'http://127.0.0.1:5000/api/v1/user/address';
+  private deleteAddressUrl = 'http://127.0.0.1:5000/api/v1/user/address';
+  private createCartUrl = 'http://127.0.0.1:5000/api/v1/user/create-cart';
+  private getCartUrl = 'http://127.0.0.1:5000/api/v1/user/get-cart';
 
   currentUser!:any | null;
 
@@ -28,23 +31,11 @@ export class AuthService {
     const loginInfo = { email, password };
 
     return this.http.post<any>(this.loginUrl, loginInfo, options).pipe(
-      // map(data=> data),
-      tap(data => this.currentUser = data),
+      map(data=> data.data),
+      map(data => this.currentUser = data),
       tap(data => {
         console.log('Login successful:', JSON.stringify(data));
       }),
-      catchError(this.handleError)
-    );
-  }
-
-  getCurrentUser(): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const options = { headers, withCredentials: true};
-  
-    return this.http.get<any>(this.currentUserUrl, options).pipe(
-      map(user => user.data.data),
-      tap(cur => this.currentUser = cur),
-      // tap(cur =>   console.log('Current user: ', JSON.stringify(cur))),
       catchError(this.handleError)
     );
   }
@@ -57,7 +48,9 @@ export class AuthService {
     const signupInfo = { name, email, password, confirmPassword, phone };
 
     return this.http.post<any>(this.signupUrl, signupInfo, options).pipe(
-      tap(data => console.log('signup: ', JSON.stringify(data))
+      map(data => data.data),
+      tap(data => this.currentUser = data),
+      tap(data => console.log('signup successful: ', JSON.stringify(data))
       ),
       catchError(this.handleError)
     );
@@ -80,10 +73,22 @@ export class AuthService {
     return !!this.currentUser;
   }
 
+  getUser(): Observable<any> {
+    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { withCredentials: true};
+  
+    return this.http.get<any>(this.currentUserUrl, options).pipe(
+      map(user => user.data.data),
+      tap(cur => this.currentUser = cur),
+      tap(cur =>   console.log('Current address: ', JSON.stringify(cur))),
+      catchError(this.handleError)
+    );
+  }
+
   updateUser(user: Iuser): Observable<any> {
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const options = { headers, withCredentials: true};
+    const options = { headers, withCredentials: true };
     const updateInfo = { ...this.currentUser, ...user };
 
     return this.http.patch<any>(this.updateUserUrl, updateInfo, options).pipe(
@@ -95,8 +100,49 @@ export class AuthService {
   createAddress(address: any): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true};
-    return this.http.post<any>(this.createAddressUrl, address, options).pipe(catchError(err => this.handleError(err)))
+
+    return this.http.post<any>(this.createAddressUrl, address, options).pipe(
+      map(response => response.data.data),
+      tap(data => this.currentUser = data),
+      tap(data => console.log('new address', JSON.stringify(data))),
+      catchError(err => this.handleError(err)))
   }
+
+  deleteAddress(id: any): Observable<void> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { headers, withCredentials: true};
+
+    return this.http.delete<any>(`${this.deleteAddressUrl}/${id}`, options).pipe(
+      // tap(() => this.currentUser = null ),
+      tap(data => console.log('address deleted: ', JSON.stringify(data))),
+      catchError(err => this.handleError(err))
+    )
+  }
+
+  createCart(id: string, quantity: number, color: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { headers, withCredentials: true };
+    const body = { cart: [{id, quantity, color}] };
+    console.log(body)
+
+    return this.http.post<any>(this.createCartUrl, body, options).pipe(
+      map(response => response.data),
+      // tap(data => console.log('cart: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    )
+  }
+
+  getCart(itemId: string, quantity: number): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { headers, withCredentials: true };
+    const item = {itemId, quantity }
+     return this.http.put<any>(this.getCartUrl, item, options).pipe(
+      map(response => response.data),
+      tap(data => console.log('cartssssss: ', JSON.stringify(data))),
+      catchError(this.handleError)
+     )
+  }
+
 
   private handleError(err: HttpErrorResponse): Observable<never> {
     let errorMessage: string;

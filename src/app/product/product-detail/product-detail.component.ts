@@ -1,8 +1,9 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
-import { EMPTY, Observable, Subject, catchError, shareReplay, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
 import { Product } from '../product';
 import { ActivatedRoute, Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
 // import bootstrap from 'bootstrap'; // Import Bootstrap JavaScript (if not already imported)
 
 @Component({
@@ -24,7 +25,7 @@ export class ProductDetailComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
 
@@ -38,8 +39,7 @@ export class ProductDetailComponent implements OnInit {
 
       this.selectProduct$ = this.productService.selectedProduct$(id).pipe(
         shareReplay(1),
-        tap(product => console.log('single product: ', JSON.stringify(product))
-        ),
+        // tap(product => console.log('single product: ', JSON.stringify(product))),
         catchError(err => {
           this.errorMessageSubject.next(err);
           return EMPTY
@@ -56,6 +56,7 @@ export class ProductDetailComponent implements OnInit {
       );
 
     });
+
 
     // this.product$ = this.productService.product$.pipe(
     //   shareReplay(1),

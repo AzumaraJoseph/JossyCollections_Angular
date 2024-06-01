@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordsMatchValidator } from '../custom-validators';
 import { AuthService } from 'src/app/auth.service';
-import { map, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -12,7 +12,14 @@ import { Router } from '@angular/router';
 })
 export class AddressComponent implements OnInit {
   profileForm!: FormGroup;
-  currentUser: any;
+  // currentUser: any;
+  // singleAddress$!: Observable<any>;
+  address$!: Observable<any>;
+  deleteAddress$!: Observable<any>;
+
+  // get currentUser() {
+  //   return this.auth.currentUser;
+  // }
 
   // passwordFieldType!: string = 'password';
 
@@ -39,16 +46,15 @@ export class AddressComponent implements OnInit {
   console.log(this.profileForm.controls['newPassword']);
 
 
-  this.auth.getCurrentUser().pipe(
+  this.address$ = this.auth.getUser().pipe(
     // map(user => user.addresses),
-    tap(user => 
-      {
-        if(user) return this.currentUser = user;
+    // tap(res => console.log('Address user', JSON.stringify(res)))
+  );
 
-      }),
-    tap(res => console.log('Address user', JSON.stringify(res))
-    )
-  ).subscribe()
+
+  // TO RELOAD THE COMPONENT ALONE AND NOT THE ENTIRE APP
+  // this.loadProduct();
+
 
 
   // this.auth.getCurrentUser().pipe(
@@ -64,9 +70,39 @@ export class AddressComponent implements OnInit {
 
   }
 
-  edit() {
+
+
+  
+  // loadProduct(): void {
+  //   // Replace this with your actual data fetching logic
+  //   this.addressService.getProduct().subscribe({
+  //     next: (data) => {
+  //       this.product = data;
+  //     },
+  //     error: (err) => {
+  //       console.error('Failed to load product', err);
+  //     }
+  //   });
+  // }
+
+  // reloadPage(): void {
+  //   this.loadProduct();  // Call loadProduct to refresh the data
+  // }
+
+
+
+
+
+  editAddress() {
     this.editMode = true;
     this.router.navigate(['/address/create'])
+  }
+  
+  deleteAddress(id: any) {
+    this.auth.deleteAddress(id).subscribe();
+    // window.refresh
+    // this.router.navigate(['/user/address'])
+    window.location.reload();
   }
 
   // togglePasswordVisibility(): void {

@@ -11,6 +11,11 @@ import { Iuser } from '../user.component';
 })
 export class ProfileComponent implements OnInit {
   profileForm!: FormGroup;
+  currentUser: any;
+
+  get user() {
+    return this.auth.currentUser;
+  }
 
   // passwordFieldType!: string = 'password';
 
@@ -32,14 +37,12 @@ export class ProfileComponent implements OnInit {
   });
 
 
-  this.auth.getCurrentUser().subscribe((user: Iuser) => {
     this.profileForm.patchValue({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      phone: user.phone
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      email: this.user.email,
+      phone: this.user.phone
     })
-  })
 
   // this.auth.updateUser().subscribe()
 

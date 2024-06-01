@@ -21,13 +21,12 @@
       </div>
       <div class=" p-0" style="width: max-content;">
         <div class="dropdown">
-          <div class="account" [ngClass]="{'clicked': isClicked}" data-bs-toggle="dropdown" aria-expanded="false" (click)="toggleArrow()" >
+          <div class="account" [ngClass]="{'clicked': isClicked}" data-bs-toggle="dropdown" aria-expanded="false" (click)="toggleArrow()">
             <span class="material-icons me-1" style="font-size: 29px; ">{{ isLoggedIn ? 'person' : 'person_outline' }}
             </span>
-            <button class="btn p-0 fw-semibold" type="button" >{{ isLoggedIn ? 'Hi, ' + ( userName   || 'Guest') : 'Account' }}</button>
+            <button class="btn p-0 fw-semibold" style="font-size: 1.1rem;" type="button" >{{ isLoggedIn ? 'Hi, ' + user?.firstName : 'Account' }}</button>
 
             <span class="material-icons ms-1">{{ isClicked ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</span>
-
           </div>        
           
           <ul class="dropdown-menu dropdown-menu-light p-0" style="width: 200px; box-shadow: 1px 2px 6px rgba(132, 132, 132, 0.974);">

@@ -4,7 +4,7 @@ import { StarComponent } from './shared/star.component';
 import { ErrorPageComponent } from './error-page.component';
 import { ProductListComponent } from './product/product-list/product-list.component';
 import { ProductDetailComponent } from './product/product-detail/product-detail.component';
-import { DialogueComponent } from './product/dialogue.component';
+import { DialogueComponent } from './dialogue.component';
 import { OrderComponent } from './order.component';
 import { CartShellComponent } from './cart/cart-shell/cart-shell.component';
 
