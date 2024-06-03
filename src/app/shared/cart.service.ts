@@ -26,5 +26,11 @@ export class CartService {
       map(items => items.reduce((total, item) => total + item.discountPrice * item.quantity, 0))
     );
   }
+
+  getTotalQuantity(): Observable<number> {
+    return this.cart$.pipe(
+      map(items => items.reduce((total, item) => total + item.quantity, 0))
+    );
+  }
   
 }

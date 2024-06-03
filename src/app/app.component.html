@@ -96,13 +96,13 @@
         </div>       
       </div>
      
-      <div class="col-md-1 p-0" *ngIf="cartCount">
+      <div class="col-md-1 p-0">
         <div class="cart" [routerLink]="['/cart']" >
           <span class="position-relative material-symbols-outlined me-2">
-            {{ cartCount.length !== 0 ? 'shopping_cart' : 'shopping_cart_off' }}
+            {{ cartCount > 0 ? 'shopping_cart' : 'shopping_cart_off' }}
 
             <!-- shopping_cart -->
-            <span class="badge"> {{ cartCount.totalQuantityOrdered }}
+            <span class="badge"> {{ cartCount }}
               <span class="visually-hidden">New alerts</span>
             </span>
           </span>

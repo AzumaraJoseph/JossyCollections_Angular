@@ -20,6 +20,7 @@ export class CartListComponent implements OnInit {
   quantities: { [key: string]: number } = {};
   itemId!: string;
   allCart!: any;
+  cartQuantity!: number
 
   cartListForm!: NgForm;
 
@@ -53,6 +54,12 @@ export class CartListComponent implements OnInit {
     // 66599d85e1963ec543de2669
 
    this.loadCart()
+
+   this.cartService.getTotalQuantity().subscribe(data => {this.cartQuantity = data
+    console.log('cart list quantity: ', JSON.stringify(data));
+    
+
+   })
 
   }
 

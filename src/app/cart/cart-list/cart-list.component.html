@@ -1,10 +1,10 @@
 <!-- <div class="row" style="background-color: rgba(246, 246, 246, 0.982); margin-top: 4rem;"> -->
     <div style="border-radius: 6px; margin-top: 2rem; padding: 0 0.5rem;" >
         <div class="card">
-            <h5 class="card-header m-0 p-3"  >Cart ({{ allCart.totalQuantityOrdered }})</h5>
+            <h5 class="card-header m-0 p-3"  >Cart ({{ cartQuantity }})</h5>
 
             <hr>
-            <div *ngIf="allCart.items?.length; else noCart" >
+            <div *ngIf="allCart?.items?.length; else noCart" >
                 <div class="card-body cart-item" *ngFor="let cart of allCart?.items; let i = index" >
                     <div class="row" style="padding: 0.8rem;" >
                         <div class="col-md-10 d-flex align-items-center p-0" >

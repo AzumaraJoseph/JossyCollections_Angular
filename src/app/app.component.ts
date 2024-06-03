@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   isClicked: boolean = false;
   currentUser: any;
   cart$!: Observable<any>;
-  cartCount: any
+  cartCount!: number
 
   get isLoggedIn() {
     return this.auth.isLoggedIn;
@@ -58,7 +58,11 @@ export class AppComponent implements OnInit {
 
     this.cartCounts()
 
-  // this.cart$ = this.cartService.getCart()
+  this.cartService.getTotalQuantity().subscribe(data => {
+    this.cartCount = data
+    console.log('cartBag', JSON.stringify(data));
+
+  })
 
     // this.updateCartIcon()
   
