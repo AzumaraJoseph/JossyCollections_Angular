@@ -135,7 +135,9 @@ export class AuthService {
   getCart(totalAmount: number | null): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };
-    const item = totalAmount !== null ? {totalAmount: JSON.stringify(totalAmount)} : '' 
+
+    const item = totalAmount !== null ? {totalAmount: JSON.stringify(totalAmount)} : '';
+
      return this.http.put<any>(this.getCartUrl, item, options).pipe(
       map(response => response.data),
       // tap(data => console.log('cartssssss: ', JSON.stringify(data))),
@@ -143,9 +145,10 @@ export class AuthService {
      )
   }
 
-  updateCart( itemId: string, newQuantity: number): Observable<any> {
+  updateCart(itemId: string, newQuantity: number): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };
+    
     const body = { itemId, newQuantity }
     console.log(body);
 

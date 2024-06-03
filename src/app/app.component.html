@@ -24,7 +24,7 @@
           <div class="account" [ngClass]="{'clicked': isClicked}" data-bs-toggle="dropdown" aria-expanded="false" (click)="toggleArrow()">
             <span class="material-icons me-1" style="font-size: 29px; ">{{ isLoggedIn ? 'person' : 'person_outline' }}
             </span>
-            <button class="btn p-0 fw-semibold" style="font-size: 1.1rem;" type="button" >{{ isLoggedIn ? 'Hi, ' + user?.firstName : 'Account' }}</button>
+            <button class="btn p-0 fw-semibold" style="font-size: 1.1rem; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-style: italic;" type="button" >{{ isLoggedIn ? 'Hi, ' + user?.firstName : 'Account' }}</button>
 
             <span class="material-icons ms-1">{{ isClicked ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</span>
           </div>        
@@ -95,12 +95,13 @@
           </ul>
         </div>       
       </div>
-      
-      <!-- *ngIf="isLoggedIn" -->
-      <div class="col-md-1 p-0" *ngIf="cart$ | async as cartCount" >
+     
+      <div class="col-md-1 p-0" *ngIf="cart$ | async as cartCount">
         <div class="cart" [routerLink]="['/cart']" >
           <span class="position-relative material-symbols-outlined me-2">
-            shopping_cart
+            {{ cartCount.length !== 0 ? 'shopping_cart' : 'shopping_cart_off' }}
+
+            <!-- shopping_cart -->
             <span class="badge"> {{cartCount.length}}
               <span class="visually-hidden">New alerts</span>
             </span>

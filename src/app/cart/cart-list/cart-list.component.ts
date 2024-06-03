@@ -141,7 +141,7 @@ export class CartListComponent implements OnInit {
 
       this.cartService.updateCart(this.allCart.items); // Update cart in CartService
         
-        this.cdr.markForCheck(); // Manually trigger change detection
+        // this.cdr.markForCheck(); // Manually trigger change detection
         this.loadCart();
       }),
       catchError(err => {
@@ -197,5 +197,29 @@ export class CartListComponent implements OnInit {
       response => console.log('Added to cart', JSON.stringify(response)),
       error => console.error('Error:', error)
     );
+  }
+
+  deleteProduct(itemId: string) {
+    this.auth.updateCart(itemId, 0).pipe(
+      tap(() => {
+        console.log('Cart updated');
+
+        const index = this.allCart.items.findIndex((item: any) => item._id === itemId);
+
+        if (index !== -1) {
+          this.allCart.items.splice(index, 1);
+        }
+        
+      this.cartService.updateCart(this.allCart.items); // Update cart in CartService
+        
+        this.cdr.markForCheck(); // Manually trigger change detection
+        this.loadCart();
+      }),
+      catchError(err => {
+        this.errorMessageSuject.next(err)
+        return EMPTY
+      }
+    )
+  ).subscribe();
   }
 }

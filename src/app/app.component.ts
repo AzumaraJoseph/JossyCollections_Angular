@@ -67,14 +67,15 @@ export class AppComponent implements OnInit {
   
   }
 
-  updateCartIcon() {
-    return this.auth.getCart(null).subscribe(data =>{
-      this.cartCount = data.items.length
-      this.cdr.markForCheck(); // Manually trigger change detection
-      this.cdr.detectChanges()
+  // updateCartIcon() {
+  //   return this.auth.getCart(null).subscribe(data =>{
+  //     this.cartCount = data.items.length
+  //     this.cdr.markForCheck(); // Manually trigger change detection
+  //     this.cdr.detectChanges()
 
-    })
-  }
+  //   })
+  // }
+
 
   toggleArrow(): void {
     this.isClicked = !this.isClicked;

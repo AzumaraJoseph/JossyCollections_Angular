@@ -1,18 +1,18 @@
 <div class="card" style="border: 1px solid #f68b1e; border-radius: 6px; margin-top: 2rem;" *ngIf="totalPrice$ | async as totalPrice" >
     <div >
         <div class="card-header">
-            <h5 class="mb-0" >Cart Summary</h5>
+            <h5 class="mb-0 p-2" >Cart Summary</h5>
         </div>
-        <div class="card-body">
+        <div class="card-body" style="padding: 0.8rem 1.3rem;">
             <div class="row">
                 <div class="col-md-4">Subtotal:</div>
-                <div class="col-md-8  text-end">{{totalPrice}}</div>
+                <div class="col-md-8  text-end">{{totalPrice | currency: 'USD': 'symbol': '1.2'}}</div>
             </div>
-            <div class="col-md-8">Shipping fee not yet added!</div>
+            <div class="col-md-8">No shipping fee added yet!</div>
                 
-            <div class="row fw-bold">
+            <div class="row fw-bold mt-2" style="font-size: 1.1rem;">
                 <div class="col-md-4">Total:</div>
-                <div class="col-md-8  text-end">{{totalPrice}}</div>
+                <div class="col-md-8  text-end">{{totalPrice | currency: 'USD': 'symbol': '1.2'}}</div>
             </div>
         </div>
     </div>
