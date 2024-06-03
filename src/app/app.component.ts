@@ -56,17 +56,25 @@ export class AppComponent implements OnInit {
 
     // this.currentUser = this.currentUser ? this.user.firstName
 
-  //   this.cart$ = this.auth.getCart(null).pipe(
-  //     map(data => data.items)
-      
-  //  )
+    this.cartCounts()
 
-  this.cart$ = this.cartService.getCart()
+  // this.cart$ = this.cartService.getCart()
 
     // this.updateCartIcon()
   
   }
 
+  cartCounts() {
+    this.auth.getCart(null).subscribe(cart => {
+      this.cartCount = cart
+      this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
+
+      console.log('cartBag', JSON.stringify(cart))
+
+    }
+      
+    )
+  }
   // updateCartIcon() {
   //   return this.auth.getCart(null).subscribe(data =>{
   //     this.cartCount = data.items.length

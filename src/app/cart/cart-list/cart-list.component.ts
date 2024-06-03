@@ -27,7 +27,7 @@ export class CartListComponent implements OnInit {
   errorMessage$ = this.errorMessageSuject.asObservable();
 
 
-  constructor(private route: ActivatedRoute, private productService: ProductService, private auth: AuthService, private cdr: ChangeDetectorRef, private router: Router, private cartService: CartService) { }
+  constructor(private route: ActivatedRoute, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService) { }
 
   ngOnInit(): void {
 
@@ -63,6 +63,8 @@ export class CartListComponent implements OnInit {
 
       this.allCart.items.forEach((item: any) => {
         this.quantities[item._id] = item.quantity;
+
+        this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
       });
 
       console.log('Cart list: ', JSON.stringify(this.allCart));
