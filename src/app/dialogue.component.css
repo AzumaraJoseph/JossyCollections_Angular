@@ -58,11 +58,13 @@
 } */
 
 .number {
-    margin: 0 0.6rem;
+    margin-bottom: 0;
     font-weight: 700;
     font-size: 1.6rem;
     align-self: center;
     color: rgb(87, 87, 87);
+    width: 40px;
+    text-align: center;
 }
 
 .options {

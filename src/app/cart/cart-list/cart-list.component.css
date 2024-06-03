@@ -1,6 +1,7 @@
 .button-adjust {
     padding: 2px;
     background-color: #f68b1e;
+    border-radius: 5px;
 }
 
 .button-adjust:active {
@@ -36,11 +37,13 @@
 } */
 
 .quantity {
-    margin: 0 0.6rem;
+    margin-bottom: 0;
     font-weight: 700;
     font-size: 1.3rem;
     align-self: center;
     color: rgb(87, 87, 87);
+    width: 35px;
+    text-align: center;
 }
 
 hr {
@@ -48,7 +51,7 @@ hr {
 }
 
 .cart-item {
-    margin: 0 2rem 0 2rem;
+    margin: 0 1.3rem;
     padding: 0.8rem 0;
     border-bottom: 1px solid rgba(208, 208, 208, 0.97);
 }

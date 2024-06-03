@@ -141,7 +141,7 @@ export class CartListComponent implements OnInit {
 
       this.cartService.updateCart(this.allCart.items); // Update cart in CartService
         
-        // this.cdr.markForCheck(); // Manually trigger change detection
+        this.cdr.markForCheck(); // Manually trigger change detection
         this.loadCart();
       }),
       catchError(err => {
@@ -209,7 +209,7 @@ export class CartListComponent implements OnInit {
         if (index !== -1) {
           this.allCart.items.splice(index, 1);
         }
-        
+
       this.cartService.updateCart(this.allCart.items); // Update cart in CartService
         
         this.cdr.markForCheck(); // Manually trigger change detection
