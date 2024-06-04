@@ -32,5 +32,15 @@ export class CartService {
       map(items => items.reduce((total, item) => total + item.quantity, 0))
     );
   }
+
+  private totalShippingFee: number = 0;
+
+  setTotalShippingFee(fee: number) {
+    this.totalShippingFee = fee;
+  }
+
+  getTotalShippingFee(): number {
+    return this.totalShippingFee;
+  }
   
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
@@ -14,14 +15,17 @@ export class CreateOrderComponent implements OnInit {
   cartItems$!: Observable<any>;
   total!: number;
   allCart: any;
-  shippingFee: number = 5.99;
+  // shippingFee: number = 5.99;
+
+  // totalShippingFee: number = 0;
+  shippingFeePerItem: number = 5.99;
 
   
   get currentUser() {
     return this.auth.currentUser
   }
 
-  constructor( private cartService: CartService, private auth: AuthService) { }
+  constructor( private cartService: CartService, private auth: AuthService, private router: Router) { }
 
 
   ngOnInit(): void {
@@ -40,12 +44,31 @@ export class CreateOrderComponent implements OnInit {
   loadCart() {
     this.auth.getCart(null).subscribe(data => {
       this.allCart = data;
-      this.cartService.updateCart(this.allCart.items)
-
-      console.log('Cart list: ', JSON.stringify(this.allCart));
+      // this.shippingFee
+      this.calculateTotalShippingFee()
+      
+      // console.log('Cart list: ', JSON.stringify(this.allCart));
       
     });
   }
+
+  calculateTotalShippingFee() {
+      const totalShippingFee = this.allCart.items.reduce((sum: number, item: { price: number; }) => {
+        return sum + (item.price < 40 ? this.shippingFeePerItem : 0);
+      }, 0);
+      console.log('shipping order: ', JSON.stringify(totalShippingFee));
+      
+  
+      return this.cartService.setTotalShippingFee(totalShippingFee);
+    }
+
+  // goToCartOrder() {
+  //   this.router.navigate(['/cart-order'], {
+  //     queryParams: {
+  //       totalShippingFee: this.totalShippingFee
+  //     }
+  //   });
+  // }
 
 
 }

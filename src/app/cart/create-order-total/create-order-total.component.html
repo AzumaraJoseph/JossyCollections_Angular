@@ -1,4 +1,4 @@
-<div class="card" style="border: 1px solid #f68b1e; border-radius: 6px; margin-top: 2rem;"  >
+<div class="card" style="border: 1px solid #f68b1e; border-radius: 6px; margin-top: 2rem;" *ngIf="orderTotal" >
     <div>
         <div class="card-header">
             <h5 class="mb-0 p-2" >Order Summary</h5>
@@ -11,18 +11,18 @@
             
             <div class="row">
                 <div class="col-md-4">Shipping fee:</div>
-                <div class="col-md-8 text-end">{{calculateTotalShippingFee() | currency: 'USD' : 'symbol' : '1.2' }}</div>
+                <div class="col-md-8 text-end">{{totalShippingFee | currency: 'USD' : 'symbol' : '1.2' }}</div>
             </div>
                 
-            <div class="row fw-bold" style="font-size: 1.1rem;">
+            <div class="row fw-bold" style="font-size: 1.1rem;"  >
                 <div class="col-md-4">Total:</div>
-                <div class="col-md-8  text-end"></div>
+                <div class="col-md-8  text-end">{{ totalShippingFee + orderTotal.cartSubtotal | currency: 'USD' : 'symbol' : '1.2' }}</div>
             </div>
         </div>
         <hr class="m-0">
 
         <div class="col-md-12">
-            <button class="btn checkOut">CHECKOUT()</button>
+            <button class="btn checkOut" (click)="placeOrder()" >CONFIRM ORDER</button>
         </div>
     </div>
 </div>

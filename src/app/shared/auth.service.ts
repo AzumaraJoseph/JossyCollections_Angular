@@ -19,6 +19,7 @@ export class AuthService {
   private createCartUrl = 'http://127.0.0.1:5000/api/v1/user/create-cart';
   private getCartUrl = 'http://127.0.0.1:5000/api/v1/user/get-cart';
   private updateCartUrl = 'http://127.0.0.1:5000/api/v1/user/update-cart';
+  private placeOrderUrl = 'http://127.0.0.1:5000/api/v1/order/checkout-session';
 
   currentUser!:any | null;
 
@@ -80,7 +81,7 @@ export class AuthService {
     return this.http.get<any>(this.currentUserUrl, options).pipe(
       map(user => user.data.data),
       tap(cur => this.currentUser = cur),
-      tap(cur =>   console.log('Current user: ', JSON.stringify(cur))),
+      // tap(cur =>   console.log('Current user: ', JSON.stringify(cur))),
       catchError(this.handleError)
     );
   }
@@ -136,11 +137,15 @@ export class AuthService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };
 
-    const item = totalAmount !== null ? {totalAmount: JSON.stringify(totalAmount)} : '';
+    // const item = totalAmount !== null ? {totalAmount: JSON.stringify(totalAmount)} : '';
+
+    const item = { totalAmount };
+
+    console.log('item: ', JSON.stringify(item))
 
      return this.http.put<any>(this.getCartUrl, item, options).pipe(
       map(response => response.data),
-      tap(data => console.log('cartssssss: ', JSON.stringify(data))),
+      // tap(data => console.log('cartssssss: ', JSON.stringify(data))),
       catchError(this.handleError)
      )
   }
@@ -155,6 +160,16 @@ export class AuthService {
     return this.http.put<any>(this.updateCartUrl, body, options).pipe(
       map(response => response.data),
       tap(data => console.log('cart updated: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    )
+  }
+
+  placeOrder(): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { headers, withCredentials: true };
+
+    return this.http.post<any>(this.placeOrderUrl, options).pipe(
+      map(data => data.res.url),
       catchError(this.handleError)
     )
   }
