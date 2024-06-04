@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   isClicked: boolean = false;
   currentUser: any;
   cart$!: Observable<any>;
-  cartCount!: number
+  cartCount!: number;
 
   get isLoggedIn() {
     return this.auth.isLoggedIn;

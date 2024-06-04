@@ -80,7 +80,7 @@ export class AuthService {
     return this.http.get<any>(this.currentUserUrl, options).pipe(
       map(user => user.data.data),
       tap(cur => this.currentUser = cur),
-      tap(cur =>   console.log('Current address: ', JSON.stringify(cur))),
+      tap(cur =>   console.log('Current user: ', JSON.stringify(cur))),
       catchError(this.handleError)
     );
   }
@@ -140,7 +140,7 @@ export class AuthService {
 
      return this.http.put<any>(this.getCartUrl, item, options).pipe(
       map(response => response.data),
-      // tap(data => console.log('cartssssss: ', JSON.stringify(data))),
+      tap(data => console.log('cartssssss: ', JSON.stringify(data))),
       catchError(this.handleError)
      )
   }
