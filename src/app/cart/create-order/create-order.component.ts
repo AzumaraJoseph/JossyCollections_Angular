@@ -71,4 +71,45 @@ export class CreateOrderComponent implements OnInit {
   // }
 
 
+
+  todaysDateRange(): string[] {
+    const date = new Date();
+    
+    // Today's date
+    const day = date.getDate();
+    const month = date.getMonth(); // January is 0!
+    const todayWithSuffix = `${this.getDaySuffix(day)} ${this.getMonthName(month)}`;
+    
+    // Date three days after today
+    const futureDate = new Date(date);
+    futureDate.setDate(date.getDate() + 3);
+    const futureDay = futureDate.getDate();
+    const futureMonth = futureDate.getMonth();
+    const futureWithSuffix = `${this.getDaySuffix(futureDay)} ${this.getMonthName(futureMonth)}`;
+    
+    return [`${todayWithSuffix} and ${futureWithSuffix}.`];
+  }
+  
+  getDaySuffix(day: number): string {
+    if (day > 10 && day < 20) return `${day}th`; // 11-19 are always "th"
+    switch (day % 10) {
+      case 1: return `${day}st`;
+      case 2: return `${day}nd`;
+      case 3: return `${day}rd`;
+      default: return `${day}th`;
+    }
+  }
+  
+  getMonthName(month: number): string {
+    const monthNames = [
+      "January", "February", "March", "April", "May", "June",
+      "July", "August", "September", "October", "November", "December"
+    ];
+    return monthNames[month];
+  }
+  
+  // Example usage:
+  // console.log(todaysDateRange()); // Outputs: ["6th June", "9th June"] if today is June 6th
+// console.log(todaysDateRange()); // Outputs: ["11th June", "14
+
 }

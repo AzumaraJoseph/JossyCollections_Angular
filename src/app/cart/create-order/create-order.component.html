@@ -16,7 +16,7 @@
 <div class="card" style="border-radius: 6px; margin-top: 1rem;"  >
     <div class="card-header" style="padding: 0.5rem 1rem; background-color: white ;">
         <h5 class="mb-0 fs-6 mb-2"  >ORDER DETAILS</h5>
-        <div style="font-size: 0.9rem; ">Delivery between 17th June and 19th June</div>
+        <div style="font-size: 0.9rem; ">Delivery between {{todaysDateRange()}}</div>
     </div>
 
     <div *ngIf="allCart?.items?.length;" >
