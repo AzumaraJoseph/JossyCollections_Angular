@@ -33,7 +33,7 @@
                         </div>
                         <div class="row">
                             <p class="col-md-3 mb-0">Amount:</p>
-                            <p class="col-md-6 mb-0 fw-bold" >{{ cart.discountPrice | currency: 'USD': 'symbol': '1.2' }} 
+                            <p class="col-md-6 mb-0 fw-bold" >{{ cart.discountPrice * cart.quantity | currency: 'USD': 'symbol': '1.2' }} 
                             </p>
                         </div>
                         <div class="row">
@@ -46,11 +46,10 @@
                         </div>
                         <div class="row">
                             <p class="col-md-3 mb-0">Shipping fee:</p>
-                            <p class="col-md-6 mb-0 fw-semibold text-danger" *ngIf="cart.discountPrice > 40">free</p>
-                            <p class="col-md-6 mb-0 fw-semibold " style="color: #f68b1e;" *ngIf="cart.discountPrice <= 40">{{ shippingFeePerItem }}</p>
+                            <p class="col-md-6 mb-0 fw-semibold text-danger" *ngIf="cart.discountPrice * cart.quantity > 55">free</p>
+                            <p class="col-md-6 mb-0 fw-bold " *ngIf="cart.discountPrice * cart.quantity <= 55">{{ shippingFeePerItem }}</p>
                         </div>
 
-                        
                         <div>
                             <span style="font-size: 0.8rem; font-weight: 700;">JOSSY</span>
                             <img src="../../../assets/products/paper-plane-3.png" style="width: 0.8rem; margin: 0 2px;" alt="">

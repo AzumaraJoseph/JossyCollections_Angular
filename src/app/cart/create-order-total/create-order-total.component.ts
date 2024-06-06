@@ -15,7 +15,6 @@ export class CreateOrderTotalComponent implements OnInit {
   orderTotal: any;
   totals!: number;
   totalShippingFee!: number;
-  // shippingFee: number = 5.99
   loadOrderTotal$!: Observable<any>
   stripePromise: Promise<Stripe | null>;
 
@@ -38,32 +37,17 @@ export class CreateOrderTotalComponent implements OnInit {
       this.user = data
     })
 
-    this.loadCart();
-
-    // this.totalShippingFee = this.cartService.getTotalShippingFee();
-    // this.totals = this.cartService.getTotal();
-
-    // this.totalShippingFee = this.cartService.getTotalShippingFee();
-    // console.log('hurrayyyy', this.totalShippingFee);
-    
-
-
-    // this.loadOrderTotal$ = this.auth.getCart(100).pipe(
-    //   map(data => data ),
-    //   tap(data => console.log('Order Total: ', JSON.stringify(data)))
-
-    // )
-
     this.totalShippingFee = this.cartService.getTotalShippingFee();
+    console.log('total', this.totalShippingFee);
+    
+   this.loadCart();
 
-      
     
   }
 
   loadCart() {
-    this.auth.getCart(23).subscribe(data => {
+    this.auth.getCart(this.totalShippingFee).subscribe(data => {
       this.orderTotal = data;
-      // this.calculateTotalShippingFee()
       console.log('Order total: ', JSON.stringify(this.orderTotal));
 
       console.log('shipping total: ', this.totalShippingFee);
@@ -74,31 +58,6 @@ export class CreateOrderTotalComponent implements OnInit {
       
     });
   }
-
-  // calculateTotalShippingFee(): number | null {
-
-  //   if (this.orderTotal && this.orderTotal.items) {
-  //     // Calculate the total shipping fee from the array items
-  //     const totalFromItems = this.orderTotal.items.reduce((total: number, item: any) => {
-  //         const fee = item.shippingFee || 0; // Ensure fee is a number, defaulting to 0 if not present
-  //         return total + (typeof fee === 'number' ? fee : 0);
-  //     }, 0);
-
-  //     // Add the hardcoded shipping fee to the total
-  //     return totalFromItems + this.shippingFee;
-  // }
-  //   return null
-  
-  // }
-
-
-  // placeOrder() {
-  //   this.auth.placeOrder().subscribe(
-  //     tap(response => {
-  //         console.log('Order placed successfully:', response);
-  //     })
-      
-  // );  }
 
   placeOrders() {
     this.auth.placeOrder().pipe(
