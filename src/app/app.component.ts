@@ -60,7 +60,7 @@ export class AppComponent implements OnInit {
 
   this.cartService.getTotalQuantity().subscribe(data => {
     this.cartCount = data
-    console.log('cartBag', JSON.stringify(data));
+    // console.log('cartBag', JSON.stringify(data));
 
   })
 
@@ -73,7 +73,7 @@ export class AppComponent implements OnInit {
       this.cartCount = cart
       this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
 
-      console.log('cartBag', JSON.stringify(cart))
+      // console.log('cartBag', JSON.stringify(cart))
 
     }
       

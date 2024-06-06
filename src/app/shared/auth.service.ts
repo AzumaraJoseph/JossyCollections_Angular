@@ -133,13 +133,13 @@ export class AuthService {
     )
   }
 
-  getCart(totalAmount: number | null): Observable<any> {
+  getCart(totalAmt: number | null): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };
 
     // const item = totalAmount !== null ? {totalAmount: JSON.stringify(totalAmount)} : '';
 
-    const item = { totalAmount };
+    const item = { totalAmt };
 
     console.log('item: ', JSON.stringify(item))
 
@@ -164,14 +164,30 @@ export class AuthService {
     )
   }
 
+  // placeOrder(): Observable<any> {
+  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+  //   const options = { headers, withCredentials: true };
+
+  //   return this.http.post<any>(this.placeOrderUrl, {}, options).pipe(
+  //     map(data => data.res.url),
+  //     catchError(this.handleError)
+  //   )
+  // }
+
   placeOrder(): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };
 
-    return this.http.post<any>(this.placeOrderUrl, options).pipe(
-      map(data => data.res.url),
+    return this.http.post<any>(this.placeOrderUrl, {}, options).pipe(
+      map((data) => {
+        if (data && data.res) {
+          return data;
+        } else {
+          throw new Error('Invalid response format');
+        }
+      }),
       catchError(this.handleError)
-    )
+    );
   }
 
   private handleError(err: HttpErrorResponse): Observable<never> {

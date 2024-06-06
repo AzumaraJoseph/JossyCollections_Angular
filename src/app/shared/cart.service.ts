@@ -10,8 +10,8 @@ export class CartService {
   private cartSubject = new BehaviorSubject<any[]>([]);
   cart$ = this.cartSubject.asObservable();
 
-  private allCartSubject = new BehaviorSubject<any>({});
-  allCart$ = this.cartSubject.asObservable();
+  // private allCartSubject = new BehaviorSubject<any>({});
+  // allCart$ = this.cartSubject.asObservable();
 
   updateCart(cart: any[]): void {
     this.cartSubject.next(cart);
