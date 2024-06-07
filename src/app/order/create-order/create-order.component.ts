@@ -53,24 +53,14 @@ export class CreateOrderComponent implements OnInit {
   }
 
   calculateTotalShippingFee() {
-      const totalShippingFee = this.allCart.items.reduce((sum: number, item: { price: number; }) => {
-        return sum + (item.price < 40 ? this.shippingFeePerItem : 0);
+      const totalShippingFee = this.allCart.items.reduce((sum: number, item: { discountPrice: number; quantity: number}) => {
+        return sum + (item.discountPrice * item.quantity <= 55 ? this.shippingFeePerItem : 0);
       }, 0);
       console.log('shipping order: ', JSON.stringify(totalShippingFee));
       
   
       return this.cartService.setTotalShippingFee(totalShippingFee);
     }
-
-  // goToCartOrder() {
-  //   this.router.navigate(['/cart-order'], {
-  //     queryParams: {
-  //       totalShippingFee: this.totalShippingFee
-  //     }
-  //   });
-  // }
-
-
 
   todaysDateRange(): string[] {
     const date = new Date();
@@ -108,8 +98,4 @@ export class CreateOrderComponent implements OnInit {
     return monthNames[month];
   }
   
-  // Example usage:
-  // console.log(todaysDateRange()); // Outputs: ["6th June", "9th June"] if today is June 6th
-// console.log(todaysDateRange()); // Outputs: ["11th June", "14
-
 }

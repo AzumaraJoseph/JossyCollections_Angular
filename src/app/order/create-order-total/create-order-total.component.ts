@@ -3,6 +3,7 @@ import { Observable, map, observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-create-order-total',
@@ -11,36 +12,42 @@ import { loadStripe, Stripe } from '@stripe/stripe-js';
 })
 export class CreateOrderTotalComponent implements OnInit {
 
-  user: any
+  user: any;
   orderTotal: any;
   totals!: number;
   totalShippingFee!: number;
-  loadOrderTotal$!: Observable<any>
+  loadOrderTotal$!: Observable<any>;
   stripePromise: Promise<Stripe | null>;
-
-  
-
   
   get currentUser() {
     return this.auth.currentUser
   }
 
-  constructor(private cartService: CartService, private auth: AuthService) {
+  constructor(private cartService: CartService, private auth: AuthService, private route: ActivatedRoute) {
     this.stripePromise = loadStripe(
       'pk_test_51OusquKAHvC2BbJggPo38R5ZkMpSs3mYled2GhhJEPZPSGmSEb32FXm6dw8F20bBLIra31Ju4H7SVCFLMG9yyP5J00b1G6HlKw'
     );
+    
    }
 
 
   ngOnInit(): void {
-    this.auth.getUser().subscribe(data => {
-      this.user = data
-    })
+    // this.route.params.subscribe(() => {
+    //   this.totalShippingFee = this.cartService.getTotalShippingFee();
+    // console.log('total', this.totalShippingFee);
+
+    //   this.loadCart();
+    // });
+
 
     this.totalShippingFee = this.cartService.getTotalShippingFee();
     console.log('total', this.totalShippingFee);
     
    this.loadCart();
+
+  //  this.loadOrderTotal$ =     this.auth.getCart(this.totalShippingFee).pipe(
+  //   tap(data => console.log('Order total: ', JSON.stringify(data)))
+  //  )
 
     
   }
@@ -53,8 +60,8 @@ export class CreateOrderTotalComponent implements OnInit {
       console.log('shipping total: ', this.totalShippingFee);
 
       
-      data.deliveryFee = this.totalShippingFee;
-      console.log('delivery ', JSON.stringify(data.deliveryFee));
+      this.totalShippingFee
+      console.log('delivery ', JSON.stringify(this.totalShippingFee));
       
     });
   }

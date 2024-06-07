@@ -71,9 +71,8 @@
     transition: transform 0.3s ease-in-out;
   }
   
-  .footer .active {
-    color: blue;
-  }
+
+
   .hidden {
     transform: translateY(100%);
   }
@@ -95,6 +94,15 @@
     padding: 0.3rem;
     cursor: pointer;
   }
+
+  .footer .active {
+    color: blue;
+  }
+
+ /* Apply the active class styling to the icon */
+.footer-link.active .footer-icon {
+    color: blue;
+}
 
 
   /* Spinner */

@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
       <app-create-order-total></app-create-order-total>
     </div>
   </div>
-`,  styleUrls: ['./create-order-shell.component.css']
+`
 })
 export class OrderShellComponent implements OnInit {
 

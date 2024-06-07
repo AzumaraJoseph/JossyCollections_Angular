@@ -8,8 +8,6 @@ import { ProfileComponent } from './profile/profile.component';
 import { AddressComponent } from './address/address.component';
 import { CreateAddressComponent } from './address/create-address/create-address.component';
 
-
-
 @NgModule({
   declarations: [
     SignUpComponent,

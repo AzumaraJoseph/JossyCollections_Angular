@@ -8,7 +8,7 @@ import { CreateAddressComponent } from './address/create-address/create-address.
 
 const routes: Routes = [
   { 
-    path: '', 
+    path: '',  
     children: [
       { path: 'login', component: LoginComponent },
       { path: 'signup', component: SignUpComponent },

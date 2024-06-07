@@ -53,13 +53,12 @@ export class CartListComponent implements OnInit {
     // )
     // 66599d85e1963ec543de2669
 
+    this.cartService.getTotalQuantity().subscribe(data => {this.cartQuantity = data
+     console.log('cart list quantity: ', JSON.stringify(data));
+    })
+
    this.loadCart()
 
-   this.cartService.getTotalQuantity().subscribe(data => {this.cartQuantity = data
-    console.log('cart list quantity: ', JSON.stringify(data));
-    
-
-   })
 
   }
 
@@ -78,35 +77,6 @@ export class CartListComponent implements OnInit {
       
     });
   }
-
-  // increment(maxQuantity: number): void {
-  //   // const item = this.allCart.items;
-  //   if (this.quantity < maxQuantity) this.quantity += 1;
-  //   // this.reload()
-  //   // window.location.reload()
-  //   // this.updateCart(item._id, item.quantity);
-  //   // this.refreshComponent()
-
-    
-
-  // }
-  
-  // decrement(): void {
-  //   // const item = this.allCart.items
-  //   if(this.quantity > 0) this.quantity--;
-
-  //     // this.updateCart(item._id, item.quantity);
-  //   // this.updateCart(item._id, ++item.quantity);
-
-  //   // this.reload()
-  //   // window.location.reload()
-  //   // this.reload();
-  //   // window.location.reload()
-  //   // this.updateCart(this.itemId, this.quantity);
-  //   // this.refreshComponent()
-
-      
-  // }
 
   increment(itemId: string, maxQuantity: number): void {
     if (this.quantities[itemId] < maxQuantity) {

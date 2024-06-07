@@ -1,0 +1,219 @@
+<div class="fluid-container" style="background-color: rgba(234, 234, 234, 0.982); margin-top: 4rem;"  >
+    <div style="background-color: white; margin-bottom: 2rem; padding: 1rem 4rem;">
+        <div class="d-flex mb-3">
+            <a class="d-flex " [routerLink]="['/products']" >
+                <p class="mb-0" style="color: rgba(54, 54, 54, 0.995); font-family:sans-serif;">Home</p>
+                <span class="material-icons" style="font-size: 1.3rem; color: rgba(168, 168, 168, 0.985);">
+                    navigate_next
+                </span>
+            </a>
+            <a class="d-flex">
+                <p class="mb-0" style="color: black; font-family:sans-serif;">My Account</p>
+                <span class="material-icons" style="font-size: 1.3rem; color: rgba(168, 168, 168, 0.985);">
+                    navigate_next
+                </span>
+            </a>
+            <a [routerLink]="['/order/history']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="d-flex">
+                <p class="mb-0" style="color: black; font-family:sans-serif;">My Order</p>
+            </a>
+        </div>
+        <h2 class="fw-bold mb-0">
+            Order History
+        </h2>
+    </div>
+    <div class="row justify-content-center">
+        
+        <div class="col-md-3 col-sm-3 p-2 me-3" style="background-color: white; border-radius: 6px; height: max-content;" >
+            <div class="d-flex " >
+                <div class="me-3">
+                    <span class="material-symbols-outlined" style="font-size: 1.9rem;">
+                        account_circle
+                    </span>
+                </div>
+                <div>
+                    <p class="title" >My Profile</p>
+                    <div>
+                        <a [routerLink]="['/user/profile']" >Account Information</a>
+                    </div>
+                    <div><a [routerLink]="['/address/create']" routerLinkActive="active">Delivery Address</a></div>
+                </div>
+            </div>
+            <hr style="color: rgba(132, 131, 131, 0.985);">
+            <div class="d-flex" >
+                <div class="me-3">
+                    <span class="material-symbols-outlined" style="font-size: 1.9rem;">
+                        shopping_bag
+                    </span>
+                </div>
+                <div>
+                    <p class="title" >My Orders</p>
+                    <div><a [routerLink]="['/order/history']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Order History</a></div>
+                    <div><a href="">Pending Ratings</a></div>
+                </div>
+            </div>
+            <hr style="color: rgba(132, 131, 131, 0.985);">
+            <div class="d-flex" >
+                <div class="me-3">
+                    <span class="material-symbols-outlined" style="font-size: 1.9rem;">
+                        account_balance_wallet
+                    </span>
+                    
+                </div>
+                <div>
+                    <p class="title" >My Wallet</p>
+                    <div class="profile"><a href="">Wallet</a></div>
+                </div>
+            </div>
+            <hr style="color: rgba(132, 131, 131, 0.985);">
+            <div class="d-flex" >
+                <div class="me-3">
+                    <span class="material-symbols-outlined" style="font-size: 1.9rem;">
+                        person_cancel
+                    </span>
+                </div>
+                <div>
+                    <p class="title" >Delete Account</p>
+                    <div class="profile"><a href="">Delete Account</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-5 col-sm-5">
+            <div class="card" style="background-color: rgba(234, 234, 234, 0.982);">
+                <h3 class="card-header fw-bold">Orders</h3>
+                <div style=" border-radius: 6px; padding: 0.5rem;" *ngIf="orderHistory$ | async as orders;">
+                    <div *ngFor="let order of orders">
+    
+                        <div class="card-body each-item mb-3" style="background-color: white; border-radius: 6px; padding: 0.5rem;" *ngFor="let each of order?.products;" >
+                            <div class="d-flex">
+    
+                                    <img [src]="'/assets/img-details/75x75_' + each.image" style=" margin-right: 0.6rem;" alt="{{each.name}}">
+                    
+                                    <div class=" align-content-center" style="padding: 0.6rem; font-size: 1rem;">
+                                        <div class=" mb-0">
+                                            ({{(each.name)}}) - {{each.color}}
+                                        </div>
+                                        
+                                        <p class=" mb-0 fw-bold" style="font-size: 0.95rem;">Order no: {{each._id}}</p>
+                                    </div>
+    
+                                    <button class="btn button-delete d-flex align-items-center" style="color: #f4a555;" >
+                                        <span class="mb-0 p-1 fw-bold" style="font-size: 1rem;" >RATE THIS PRODUCT</span>
+                                    </button>
+                            </div>
+                           
+                        </div>
+                
+                    </div>
+    
+                    <!--<div style="padding: 0rem 1rem;">                  
+                        <form novalidate autocomplete="off" [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+                            <div class="row" style="margin-top: 1.5rem;">
+    
+                                <div class="col-md-6  col-sm-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="firstNameId" formControlName="firstName" placeholder="Enter your First Name">
+                                        
+                                        <label for="firstNameId" class="form-label mb-0">First Name</label>
+    
+                                        <div *ngIf="(addressForm.controls['firsName']?.touched || addressForm.controls['firsName']?.dirty)  && !addressForm.controls['firsName'].valid">
+                                            <span class="invalid-feedback" *ngIf="addressForm.controls['firsName'].errors?.['required']">
+                                            <em>Please enter your first name</em>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div  class="form-group">
+                                        <input type="text" id="lastNameId" class="form-control" placeholder="Enter your Last Name" />
+                                        <label for="lastNameId" class="form-label mb-0">Last Name</label>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-12 col-sm-12">
+                                <div  class="form-group">
+                                    <input type="text" id="phoneId" class="form-control" placeholder="Enter your Phone Number" />
+                                    <label for="phoneId" class="form-label mb-0">Phone Number</label>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-12 col-sm-12">
+                                <div  class="form-group">
+                                    <input type="text" class="form-control" id="streetId" formControlName="street" placeholder="Enter your Address"
+                                    [ngClass]="{ 'is-invalid': (addressForm.controls['street'].touched || addressForm.controls['street'].dirty) && !addressForm.controls['street'].valid }" >
+                                    <label for="deliveryId" class="form-label mb-0">Delivery Address</label>
+    
+                                    <div *ngIf="(addressForm.controls['street'].touched || addressForm.controls['street'].dirty)  && !addressForm.controls['street'].valid">
+                                        <span class="invalid-feedback" *ngIf="addressForm.controls['street'].errors?.['required']">
+                                          <em>Please enter your address</em>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-12 col-sm-12">
+                                <div  class="form-group">
+                                    <select id="countryId" class="form-select form-select-lg" (change)="onCountryChange($event)" formControlName="country" >
+                                        <option value="">Please select</option>
+                                        <option *ngFor="let country of countries" [value]="country.name">{{ country.name }}</option>
+                                    </select>
+                                    <label for="countryId" class="form-label mb-0">Country</label>
+    
+                                    <div *ngIf="(addressForm.controls['country'].touched || addressForm.controls['country'].dirty)  && !addressForm.controls['country'].valid">
+                                        <span class="invalid-feedback" *ngIf="addressForm.controls['country'].errors?.['required']">
+                                          <em>Please select your country</em>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="col-md-12 col-sm-12">
+                                <div class="row" >
+                                    <div class="col-md-6" >
+                                        <div  class="form-group">
+                                            <select [disabled]="!selectedCountry" id="stateId" class="form-select form-select-lg" (change)="onStateChange($event)" formControlName="state" >
+                                                <option value="">Please select</option>
+                                                <option *ngFor="let state of selectedCountry?.states" [value]="state.name">{{ state.name }}</option>
+                                            </select>
+                                            <label for="stateId" class="form-label mb-0">State
+                                            </label>
+    
+                                            <div *ngIf="(addressForm.controls['state'].touched || addressForm.controls['state'].dirty)  && !addressForm.controls['state'].valid">
+                                                <span class="invalid-feedback" *ngIf="addressForm.controls['state'].errors?.['required']">
+                                                  <em>Please select your state</em>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div  class="form-group">
+                                            <input type="text" id="cityId" class="form-control" placeholder="Enter your City" formControlName="city" [ngClass]="{ 'is-invalid': (addressForm.controls['city'].touched || addressForm.controls['city'].dirty) && !addressForm.controls['city'].valid }" />
+                                            <label for="cityId" class="form-label mb-0">City</label>
+    
+                                            <div *ngIf="(addressForm.controls['city'].touched || addressForm.controls['city'].dirty)  && !addressForm.controls['city'].valid">
+                                                <span class="invalid-feedback" *ngIf="addressForm.controls['city'].errors?.['required']">
+                                                  <em>Please enter your city</em>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                        
+                            <div class="d-flex justify-content-end" style="margin-bottom: 20rem;" >
+                                <button class="btn btn-primary" class="btn btn-sm address-btn"(click)="onSubmit()">SAVE</button>
+                            </div>
+                        </form>
+    
+                    </div>-->             
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -18,9 +18,10 @@ import { CartListComponent } from './cart/cart-list/cart-list.component';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { CartShellComponent } from './cart/cart-shell/cart-shell.component';
 import { CartTotalComponent } from './cart/cart-total/cart-total.component';
-import { CreateOrderComponent } from './cart/create-order/create-order.component';
-import { OrderShellComponent } from './cart/create-order/order-shell.component';
-import { CreateOrderTotalComponent } from './cart/create-order-total/create-order-total.component';
+import { CreateOrderComponent } from './order/create-order/create-order.component';
+import { OrderShellComponent } from './order/order-shell.component';
+import { CreateOrderTotalComponent } from './order/create-order-total/create-order-total.component';
+import { OrderHistoryComponent } from './order/order-history/order-history.component';
 
 @NgModule({
   declarations: [
@@ -37,8 +38,9 @@ import { CreateOrderTotalComponent } from './cart/create-order-total/create-orde
     CartShellComponent,
     CartTotalComponent,
     CreateOrderComponent,
-    OrderShellComponent,
     CreateOrderTotalComponent,
+    OrderShellComponent,
+    OrderHistoryComponent,
   ],
   imports: [
     BrowserModule,

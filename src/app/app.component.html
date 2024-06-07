@@ -120,8 +120,8 @@
 
   <footer class="footer d-flex" align="center" style="font-size: 13px;" [ngClass]="{ 'hidden': isScrolledDown }">
   
-    <a class="footer-link" [routerLink]="['/products']" routerLinkActive="active">
-        <i class="material-icons footer-icon active">
+    <a class="footer-link" [routerLink]="['/products']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <i class="material-icons footer-icon" >
             home
         </i>
         <p class="mb-0">Home</p>
@@ -132,21 +132,21 @@
         </i>
         <p class="mb-0">Category</p>
     </a>
-    <a class="footer-link">
+    <a class="footer-link" [routerLink]="['/cart']" routerLinkActive="active">
         <i class="material-icons footer-icon">
             shopping_cart
         </i>
         <p class="mb-0">Cart</p>
     </a>
-    <a class="footer-link" [routerLink]="['/order']">
+    <a class="footer-link" [routerLink]="['/order']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
         <i class="material-icons footer-icon">
             shopping_bag
         </i>
         <p class="mb-0">Order</p>
     </a>
-    <a class="footer-link">
+    <a class="footer-link" [routerLink]="['login']" routerLinkActive="active">
         <i class="material-icons footer-icon">
-            person_outline
+            person
         </i>
         <p class="mb-0">Account</p>
     </a>        

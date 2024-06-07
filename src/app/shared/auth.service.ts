@@ -20,6 +20,8 @@ export class AuthService {
   private getCartUrl = 'http://127.0.0.1:5000/api/v1/user/get-cart';
   private updateCartUrl = 'http://127.0.0.1:5000/api/v1/user/update-cart';
   private placeOrderUrl = 'http://127.0.0.1:5000/api/v1/order/checkout-session';
+  private orderHistoryrUrl = 'http://127.0.0.1:5000/api/v1/order';
+
 
   currentUser!:any | null;
 
@@ -188,6 +190,17 @@ export class AuthService {
       }),
       catchError(this.handleError)
     );
+  }
+
+  orderHistory() {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { headers, withCredentials: true };
+
+    return this.http.get<any>(this.orderHistoryrUrl,options).pipe(
+      map(response => response.data.data),
+      tap(data => console.log('order history: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    )
   }
 
   private handleError(err: HttpErrorResponse): Observable<never> {
