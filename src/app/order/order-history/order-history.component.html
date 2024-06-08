@@ -81,29 +81,96 @@
         <div class="col-md-5 col-sm-5">
             <div class="card" style="background-color: rgba(234, 234, 234, 0.982);">
                 <h3 class="card-header fw-bold">Orders</h3>
+
+
+
+                
+                  
+
+
+
+
                 <div style=" border-radius: 6px; padding: 0.5rem;" *ngIf="orderHistory$ | async as orders;">
                     <div *ngFor="let order of orders">
     
-                        <div class="card-body each-item mb-3" style="background-color: white; border-radius: 6px; padding: 0.5rem;" *ngFor="let each of order?.products;" >
+                        <div class="card-body each-item mb-2" style="background-color: white; border-radius: 6px; padding: 0.5rem;" *ngFor="let each of order?.products; let i = index " >
                             <div class="d-flex">
     
-                                    <img [src]="'/assets/img-details/75x75_' + each.image" style=" margin-right: 0.6rem;" alt="{{each.name}}">
-                    
-                                    <div class=" align-content-center" style="padding: 0.6rem; font-size: 1rem;">
-                                        <div class=" mb-0">
-                                            ({{(each.name)}}) - {{each.color}}
-                                        </div>
-                                        
-                                        <p class=" mb-0 fw-bold" style="font-size: 0.95rem;">Order no: {{each._id}}</p>
+                                <img [src]="'/assets/img-details/75x75_' + each.image" style=" margin-right: 0.6rem;" alt="{{each.name}}">
+                
+                                <div class=" align-content-center" style="padding: 0.6rem; font-size: 1rem;">
+                                    <div class=" mb-0">
+                                        ({{each.name}}) - {{each.color}}
                                     </div>
-    
-                                    <button class="btn button-delete d-flex align-items-center" style="color: #f4a555;" >
-                                        <span class="mb-0 p-1 fw-bold" style="font-size: 1rem;" >RATE THIS PRODUCT</span>
-                                    </button>
+                                    
+                                    <p class=" mb-0 fw-bold" style="font-size: 0.95rem;">Order no: {{each._id}}</p>
+                                </div>
+
+                                <button class="btn button-delete d-flex align-items-center" 
+                                style="color: #f4a555;" 
+                                type="button" 
+                                data-bs-toggle="modal" 
+                                [attr.data-bs-target]="'#exampleModal' + each._id" >
+                                    <span class="mb-0 p-1 fw-bold" style="font-size: 1rem;" >RATE THIS PRODUCT</span>
+                                </button>
+
+                                <!-- Button trigger modal -->
+                                <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    Launch demo modal
+                                </button> -->
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" [id]="'exampleModal' + each._id" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5 fw-bold" id="exampleModalLabel">Rate and Review</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="row">
+                                                    <img [src]="'/assets/img-details/800x800_' + each.image" style="width: 7rem; height: 7rem; margin-right: 0.6rem;" alt="{{each.name}}">
+                                                    <div class="col-md-8">
+                                                        <p class="mb-0">{{each.name}}</p>
+                                                        <app-star [(rating)]="productRating"></app-star>
+                                                        <!-- <app-star [(rating)]="each.rating"></app-star> -->
+                                                        <div class="col-md-12 mt-2">
+                                                            <form #orderHistoryForm="ngForm" (ngSubmit)="save(orderHistoryForm)" >
+                                                                <div class="form-floating">
+                                                                    <textarea class="form-control"
+                                                                    type="text" placeholder="Leave a comment here" 
+                                                                    id="floatingTextarea" style="height: 5rem;"
+                                                                    [(ngModel)]="review.comment"
+                                                                    name="comment" ></textarea>
+                                                                    <label for="floatingTextarea" style="padding: 0.65rem;" >Comment</label>
+                                                                </div>
+                                                                
+                                                                <input hidden type="number" class="form-control" 
+                                                                [(ngModel)]="review.rating"
+                                                                name="rating">
+
+                                                                <input hidden type="text" class="form-control" 
+                                                                [(ngModel)]="each._id"
+                                                                name="id">
+                                                            </form>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                            </div>
+                                            <div class="modal-footer">
+                                            <button type="submit" (click)="save(orderHistoryForm)" class="btn btn-secondary fw-semibold" 
+                                            data-bs-dismiss="modal"
+                                            style="background-color: #f68b1e; border: none; padding: 0.5rem; font-size: 1rem;" >Submit your Review</button> 
+                                            <!--  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                            
                         </div>
-                
                     </div>
     
                     <!--<div style="padding: 0rem 1rem;">                  
@@ -211,6 +278,8 @@
     
                     </div>-->             
                 </div>
+
+
 
             </div>
 

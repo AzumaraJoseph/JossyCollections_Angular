@@ -1,4 +1,4 @@
-.material-icons {
+/* .material-icons {
     color: rgba(236, 229, 229, 0.879);
     font-size: 1.15rem;
 }
@@ -10,7 +10,6 @@
 
 .rating-average {
     width: fit-content;
-    /* background-color: rgba(255, 255, 255, 0.997); */
     text-align: center;
     border-radius: 8rem;
 }
@@ -40,65 +39,70 @@
     font-size: 1.3rem;
     display: flex;
     overflow: hidden;
+} */
+
+
+
+
+
+
+
+  
+/* .star-rating {
+  display: flex;
+  direction: row;
 }
 
+.star {
+  font-size: 2rem;
+  color: #ddd;
+  cursor: pointer;
+}
 
-/* 
-star-rating.component.css
+.star.filled {
+  color: #ffcc00;
+}
+
+.star.half-filled {
+  color: #ffcc00;
+  position: relative;
+}
+
+.star.half-filled::before {
+  content: '\u2605';
+  color: #ddd;
+  position: absolute;
+  left: 50%;
+  width: 50%;
+  overflow: hidden;
+} */
+
+
+
+
+
+
 .star-rating {
-    font-size: 24px; /* Adjust size as needed 
-  } */
-  
-/* .star {
-color: gold; } */
+  display: flex;
+  direction: row;
+}
 
-/* .partial-star {
-    overflow: hidden;
-    color: gold; 
-    overflow: hidden;
-    display: inline-block; 
-} */
+.star {
+  font-size: 2rem;
+  color: #ddd;
+  cursor: pointer;
+  position: relative;
+}
 
+.star.filled {
+  color: #ffcc00;
+}
 
-/* .star-container {
-    display: flex;
-    font-size: 24px;
-    width: 80%;
-  } */
-/*   
-  .full-stars {
-    color: gold;
-  } */
-  
-  /* .fractional-stars {
-    display: inline-block;
-    color: gold;
-    width: {{ getFractionalPart() * 100 }}%; 
-    overflow: hidden;
-  } */
-  
-
-  /* src/app/star-rating/star-rating.component.css */
-
-/* .star-container {
-    display: inline-flex;
-    align-items: center;
-    font-size: 24px;
-} */
-/*   
-.full-star {
-color: gold;
-position: relative;
-overflow: hidden;
-} */
-
-/* .partial-star {
-display: inline-block;
-white-space: nowrap;
-color: red;
-overflow: hidden;
-font-size: 24px;
-
-} */
-  
-.star {}
+.star.half-filled::before {
+  content: '\u2605';
+  color: #ffcc00;
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+}

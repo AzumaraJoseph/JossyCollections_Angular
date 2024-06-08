@@ -16,92 +16,6 @@ a {
 .active {
     color: #f68b1e;
 }  
-  
-.form-group {
-    position: relative;
-    margin-bottom: 2rem;
-}
-  
-.form-control, .form-select {
-    width: 100%;
-    padding: 0.7rem 1rem;
-    font-size: 1.1rem;
-    border: 1px solid #a0a0a0;
-    border-radius: 0.3rem;
-    line-height: 2rem;
-}
-  
-.form-control::placeholder {
-    color:  #a0a0a0;
-    font-size: 1rem;
-
-}
-  
-  
-.form-label {
-    position: absolute;
-    top: 0.75rem;
-    left: 0.5rem;
-    font-size: 1.2rem;
-    color: #5d5d5d;
-    background: white;
-    padding: 0 0.25rem;
-    transition: 0.2s;
-    pointer-events: none;
-}
-
-.form-label,
-.form-control:not(:placeholder-shown) + .form-label {
-    top: -0.6rem;
-    left: 1rem;
-    font-size: 0.75rem;
-    color: #333;
-}
-  
-.form-control:focus, .form-select:focus {
-    outline: 1px solid #f68b1e;
-    border: none;
-    box-shadow: none;
-    /* background-color: white; */
-
-}
-
-.form-control:focus + .form-label, .form-select:focus + .form-label {
-    color: orange; 
-}
-
-input:autofill {
-    /* -webkit-box-shadow: 0 0 0 1000px white inset !important; */
-    box-shadow: 0 0 0 1000px white inset !important;
-    background-color: white !important;
-}
-
-  
-.address-btn {
-    background-color: #f68b1e;
-    color: white;
-    padding: 0.7rem; 
-    font-weight: 700;
-    box-shadow: 1px 1px 2px  rgb(55, 55, 55);
-    width: fit-content;
-}
-
-.address-btn:active {
-    border: 2px solid #f68b1e;
-    background-color: white;
-    box-shadow: none;
-
-}
-
-
-.is-invalid {
-    border-color: red;
-}
-  
-.invalid-feedback {
-    color: red;
-    display: block;
-}
 
 .button-delete {
     padding: 0.5rem;
@@ -113,3 +27,24 @@ input:autofill {
     /* padding: 2px; */
     background-color: #ffdfc0;
 }
+
+
+textarea {
+    outline: 0.2px solid rgba(222, 222, 222, 0.995);
+    padding: 0.6rem;
+}
+
+textarea:focus {
+    outline: 1px solid #f68b1e;
+    border: none;
+    box-shadow: none;
+}
+
+
+
+
+
+
+
+
+  

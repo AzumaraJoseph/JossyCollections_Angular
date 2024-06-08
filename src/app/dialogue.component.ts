@@ -21,6 +21,7 @@ export class DialogueComponent implements OnInit {
   selectProduct$: Observable<Product> | undefined;
   quantity: number = 1;
 
+
   get isLoggedIn() {
     return this.auth.isLoggedIn;
   }

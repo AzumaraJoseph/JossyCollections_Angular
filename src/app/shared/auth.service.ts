@@ -21,6 +21,7 @@ export class AuthService {
   private updateCartUrl = 'http://127.0.0.1:5000/api/v1/user/update-cart';
   private placeOrderUrl = 'http://127.0.0.1:5000/api/v1/order/checkout-session';
   private orderHistoryrUrl = 'http://127.0.0.1:5000/api/v1/order';
+  private reviewUrl = 'http://127.0.0.1:5000/api/v1/products';
 
 
   currentUser!:any | null;
@@ -192,13 +193,24 @@ export class AuthService {
     );
   }
 
-  orderHistory() {
+  orderHistory(): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };
 
     return this.http.get<any>(this.orderHistoryrUrl,options).pipe(
       map(response => response.data.data),
-      tap(data => console.log('order history: ', JSON.stringify(data))),
+      // tap(data => console.log('order history: ', JSON.stringify(data))),
+      catchError(this.handleError)
+    )
+  }
+
+  reviewProduct(comment: string, rating: number, id: string): Observable<any> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    const options = { headers, withCredentials: true };
+    const body = { comment, rating }
+
+    return this.http.post<any>(`${this.reviewUrl}/${id}/review `, body, options).pipe(
+      map(response => response.data.data),
       catchError(this.handleError)
     )
   }

@@ -6,6 +6,12 @@
     <span class="material-icons">grade</span>
 </div> -->
 
+
+
+
+
+
+<!-- 
 <div class="rating">
     <div class="rating-average">
         <div class="star-outer">
@@ -13,142 +19,42 @@
             </div> 
         </div>
     </div>
+</div> -->
+
+
+
+
+
+
+<!-- <div class="star-rating" (mouseleave)="resetHover()">
+  <ng-container *ngFor="let star of stars; let index = index">
+    <span
+      class="star"
+      [class.filled]="star <= rating"
+      [class.half-filled]="star > rating && star - 1 < rating"
+      (click)="setRating(star)"
+      (mouseover)="setHoverRating(star)">
+      &#9733;
+    </span>
+  </ng-container>
+</div> -->
+
+
+
+<div class="star-rating">
+  <ng-container *ngFor="let star of stars; let index = index">
+    <span
+      class="star"
+      [ngClass]="{
+        'filled': isFilled(star),
+        'half-filled': isHalfFilled(star)
+      }"
+      (click)="setRating(star)"
+      (mouseover)="setHoverRating(star)"
+      (mouseleave)="resetHover()">
+      &#9733;
+    </span>
+  </ng-container>
 </div>
 
 
-
-
-<!-- 
-<script>
-    
-    ratingData = [
-        {
-        star: 5,
-        rating: 4.5
-        },
-        {
-        star: 4,
-        rating: 3.7
-        },
-        {
-        star: 3,
-        rating: 2.6
-        },
-        {
-        star: 2,
-        rating; 3.2
-        },
-        {
-        star: 1,
-        rating: 3.8
-        }
-        
-    ]
-
-    avgRating: number;
-    starWidth: number;
-    ratingData.forEach(rate => {
-        let totalRating, starRating
-
-        totalRating = rate.rating;
-        starRating = rate.rating * rate.star
-
-        // avgRating = starRating / ratingData.length.toFixed(1);
-        
-        // starWidth = (avgRating / 5) * 100 + '%';
-
-    },
-
-  )
-
-  avgRating = (starRating / totalRating).toFixed(1);
-  document.querySelector('.star-inner').style.width = (avgRating / 5) * 100 + '%';
-</script> -->
-
-<!-- rating.component.html -->
-<!-- <div *ngFor="let rating of products">
-    <div class="star-container">
-      <span *ngFor="let _ of getFilledStars(rating.ratingsAverage)">
-        ★
-      </span>
-      <span *ngIf="getPartialStar(rating.ratingsAverage)">☆</span>
-    </div>
-  </div> -->
-
-  <!-- star-rating.component.html -->
-<!-- <div class="star-rating">
-    <span class="star" *ngFor="let _ of getFullStars(3.4)">&#9733;</span>
-    <span class="partial-star" *ngIf="rating % 1 !== 0" [style.width]="getPartialStarWidth(3.4)">&#9734;</span>
-  </div> -->
-  
-  <!-- <div class="star-container">
-    <span class="full-stars">&#9733;</span>
-    <span class="fractional-stars">&#9733;</span>
-  </div> -->
-
-  <!-- star-rating.component.html -->
-<!-- <div class="star-container">
-    <span class="full-stars" *ngFor="let _ of Array(getFullStars())">&#9733;</span>
-    <span class="fractional-stars" [style.width]="getFractionalStarWidth()">&#9733;</span>
-  </div> -->
-
-  <!-- star-rating.component.html -->
-<!-- <div class="star-container">
-    <span class="full-stars" *ngFor="let _ of getFullStars()">&#9733;</span>
-    <span class="fractional-stars" [style.width]="getFractionalStarWidth()">&#9733;</span>
-  </div> -->
-
-
-  <!-- star-rating.component.html -->
-
-<!-- <div class="star-container">
-    <span *ngFor="let _ of getFullStars()" class="star full-star">&#9733;</span>
-    <span  class="star partial-star" [style.width.%]="getPartialStarWidth(3.8)">&#9733;</span>
-  </div> -->
-  
-
-
-
-  <!-- star-rating.component.html -->
-<!-- <div class="star-container">
-    <span class="star" *ngFor="let star of getStars()">
-      <ng-container *ngIf="star === 1">&#9733;</ng-container>
-      <ng-container *ngIf="star !== 1">&#9734;</ng-container> Display fractional part
-    </span>
-  </div> -->
-
-  <!-- star-rating.component.html -->
-<!-- <div class="star-container">
-    <span class="star" *ngFor="let star of getStars()">
-      <ng-container *ngIf="star.type === 'full'">&#9733;</ng-container>
-      <ng-container *ngIf="star.type === 'half'">&#9734;&#9733;</ng-container> Display half star
-    </span>
-  </div> -->
-
-  <!-- star-rating.component.html -->
-  <!-- <div class="col-md-1">
-      <div class="star-container">
-          <span class="star" *ngFor="let _ of getFullStars()">&#9733;</span>
-              <span class="partial-star" *ngIf="(rating % 1) !== 0" [style.width]="getPartialStarWidth()">&#9733;</span>
-        </div>
-  </div>
-   -->
-  
-  <!-- src/app/star-rating/star-rating.component.html -->
-
-<!-- <div class="star-container">
-        <span *ngFor="let star of getFullStars()" class="star full-star">&#9733;</span>
-        <span *ngIf="rating % 1" class="star partial-star" [ngStyle]="{'width': getPartialStarWidth()}">&#9733;</span>
-</div> -->
-  
-  
-  
-  
-  
-  
-  <!-- star-rating.component.html -->
-<!-- <div class="star-rating">
-    <span class="star" *ngFor="let _ of getFullStars(4.6)">&#9733;</span>
-    <span class="partial-star" *ngIf="rating % 1 !== 0" [style.width.%]="getPartialStarPercentage(4.6)">&#9734;</span>
-  </div> -->
-  
