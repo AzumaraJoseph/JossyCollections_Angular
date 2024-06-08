@@ -14,14 +14,14 @@ export class OrderHistoryComponent implements OnInit {
   orderHistoryForm!: NgForm;
 
   productRating: number = 0;
+  comment: string = ''
 
 
-  rating: number = 3;
-  review = {
-    comment: '',
-    rating: 3,
-    id: ''
-  };
+  // rating: number = 3;
+  // review = {
+  //   // rating: 3,
+  //   id: ''
+  // };
 
   orderHistory$!: Observable<any>;
 
@@ -68,16 +68,22 @@ export class OrderHistoryComponent implements OnInit {
 
     if (orderHistoryForm.valid) {
       console.log('Form submitted: ', JSON.stringify(orderHistoryForm.value));
+    // Handle form submission logic here
       this.reviewProduct(orderHistoryForm.value)
-      // orderHistoryForm.reset()
-      // Handle form submission logic here
+      // reset form leaving the id since its not part of the api body
+      this.resetForm()
     } else {
       console.log('Form is invalid');
     }
   }
 
-  reviewProduct(formData: any) {
+  reviewProduct(formData: any): void {
     this.auth.reviewProduct(formData.comment, formData.rating, formData.id).subscribe(response => console.log('User review: ', JSON.stringify(response)))
+  }
+
+  resetForm(): void {
+    this.comment = '',
+    this.productRating = 0
   }
 
 }

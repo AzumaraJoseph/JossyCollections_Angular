@@ -56,7 +56,9 @@
                             </ng-container>
                         </p>
                         <div>
-                            <app-star></app-star>
+                            <!-- <app-star [rating]="product.ratingsAverage"></app-star> -->
+
+                            <app-star [rating]="3.7"></app-star>
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <span *ngIf="product.discountedLowPrice && product.priceDiscountPercent"

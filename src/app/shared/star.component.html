@@ -11,7 +11,7 @@
 
 
 
-
+<!-- 
 <div class="rating">
     <div class="rating-average">
         <div class="star-outer">
@@ -19,6 +19,39 @@
             </div> 
         </div>
     </div>
+</div> -->
+
+
+
+
+<!-- 
+<div class="star-rating">
+  <ng-container *ngFor="let star of stars; let i = index">
+    <span class="star" [ngClass]="getStarClass(i)">
+      &#9733;
+    </span>
+  </ng-container>
+</div> -->
+
+
+
+<!-- 
+<div class="star-rating">
+  <ng-container *ngFor="let star of stars; let i = index">
+    <span class="star" [ngClass]="getStarClass(i)">
+      &#9733;
+    </span>
+  </ng-container>
+</div> -->
+
+
+
+<div class="star-rating">
+  <ng-container *ngFor="let star of stars; let i = index">
+    <span class="star" [ngClass]="getStarClass(i)" [style.width]="getStarWidth(i)">
+      &#9733;
+    </span>
+  </ng-container>
 </div>
 
 
