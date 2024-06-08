@@ -132,7 +132,7 @@
                                                     <img [src]="'/assets/img-details/800x800_' + each.image" style="width: 7rem; height: 7rem; margin-right: 0.6rem;" alt="{{each.name}}">
                                                     <div class="col-md-8">
                                                         <p class="mb-0">{{each.name}}</p>
-                                                        <app-star [(rating)]="productRating"></app-star>
+                                                        <app-star-review [(rating)]="productRating"></app-star-review>
                                                         <!-- <app-star [(rating)]="each.rating"></app-star> -->
                                                         <div class="col-md-12 mt-2">
                                                             <form #orderHistoryForm="ngForm" (ngSubmit)="save(orderHistoryForm)" >

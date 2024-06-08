@@ -11,7 +11,7 @@
 
 
 
-<!-- 
+
 <div class="rating">
     <div class="rating-average">
         <div class="star-outer">
@@ -19,7 +19,7 @@
             </div> 
         </div>
     </div>
-</div> -->
+</div>
 
 
 
@@ -40,21 +40,5 @@
 </div> -->
 
 
-
-<div class="star-rating">
-  <ng-container *ngFor="let star of stars; let index = index">
-    <span
-      class="star"
-      [ngClass]="{
-        'filled': isFilled(star),
-        'half-filled': isHalfFilled(star)
-      }"
-      (click)="setRating(star)"
-      (mouseover)="setHoverRating(star)"
-      (mouseleave)="resetHover()">
-      &#9733;
-    </span>
-  </ng-container>
-</div>
 
 

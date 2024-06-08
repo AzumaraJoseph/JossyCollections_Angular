@@ -1,0 +1,25 @@
+
+.star-rating {
+    display: flex;
+    direction: row;
+  }
+  
+  .star {
+    font-size: 2rem;
+    color: #ddd;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .star.filled {
+    color: #ffcc00;
+  }
+  
+  .star.half-filled::before {
+    content: '\u2605';
+    color: #ffcc00;
+    position: absolute;
+    left: 0;
+    width: 50%;
+    overflow: hidden;
+  }

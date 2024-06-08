@@ -1,4 +1,4 @@
-/* .material-icons {
+.material-icons {
     color: rgba(236, 229, 229, 0.879);
     font-size: 1.15rem;
 }
@@ -39,7 +39,7 @@
     font-size: 1.3rem;
     display: flex;
     overflow: hidden;
-} */
+}
 
 
 
@@ -82,27 +82,3 @@
 
 
 
-.star-rating {
-  display: flex;
-  direction: row;
-}
-
-.star {
-  font-size: 2rem;
-  color: #ddd;
-  cursor: pointer;
-  position: relative;
-}
-
-.star.filled {
-  color: #ffcc00;
-}
-
-.star.half-filled::before {
-  content: '\u2605';
-  color: #ffcc00;
-  position: absolute;
-  left: 0;
-  width: 50%;
-  overflow: hidden;
-}

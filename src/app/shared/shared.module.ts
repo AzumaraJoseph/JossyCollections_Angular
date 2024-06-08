@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { StarComponent } from './star.component';
 import { FormsModule } from '@angular/forms';
 import { CollapsibleWellComponent } from './collapsible-well.component';
+import { StarReviewComponent } from './star-review.component';
 
 
 
@@ -10,6 +11,7 @@ import { CollapsibleWellComponent } from './collapsible-well.component';
   declarations: [
     StarComponent,
     CollapsibleWellComponent,
+    StarReviewComponent,
   ],
   imports: [
     CommonModule,
@@ -19,6 +21,7 @@ import { CollapsibleWellComponent } from './collapsible-well.component';
     CommonModule,
     FormsModule,
     StarComponent,
+    StarReviewComponent,
     CollapsibleWellComponent
   ]
 })
