@@ -1,1 +1,74 @@
-<p>cart-shell works!</p>
+<div class="fluid-container" style="background-color: rgba(246, 246, 246, 0.982);">
+    <div class="row justify-content-center" style= "margin-top: 4rem; margin-bottom: 2rem;" >
+        <div class="col-md-7">
+          <app-cart-list></app-cart-list>
+        </div>
+        <div class="col-md-3">
+          <app-cart-total></app-cart-total>
+        </div>
+    </div>
+    
+    <div>
+        <div class="col-md-6 ps-4" style="margin-left: 2.5rem;">
+            <h4 class="mb-0">{{pageTitle}}</h4>
+        </div>
+    
+        <div class="col-md-12 mt-3">
+            <app-toast></app-toast>
+    
+            <div class="row ms-5 pb-3" *ngIf="products$ | async as products">
+                <div class="card p-2 m-2" style="width: 16rem;"
+                    *ngFor="let product of products">
+                        
+                    <div class="card-body d-flex flex-column justify-content-between p-3" 
+                        [routerLink]="['/products', product.id ]" >
+    
+                        <img [src]="'/assets/products/250x250_' + product.imageCover"
+                        class="card-img-top p-0"
+                        alt="Products Image">
+    
+                        <div>
+                            <p class="card-title fw-semibold mb-0" style="font-size: 14px;">{{product.name}}
+                            </p>
+                            <p class="card-text mb-0 fw-bold">{{product.discountedHighPrice | currency: 'USD': 'symbol': '1.2-2'}}
+                                <ng-container *ngIf="product.discountedHighPrice !== product.discountedLowPrice">
+                                    - {{product.discountedLowPrice  | currency: 'USD': 'symbol': '1.2-2'}}
+                                </ng-container>
+                            </p>
+                            <div>
+                                <app-star [rating]="product.ratingsAverage"></app-star>
+    
+                            </div>
+                            <div class="d-flex justify-content-between mt-2">
+                                <span *ngIf="product.discountedLowPrice && product.priceDiscountPercent"
+                                    style="font-size: 13px;">
+                                        {{ (product.discountedLowPrice * product.priceDiscountPercent / 100) | currency: 'USD': 'symbol': '1.2-2' }}
+                                    
+                                        <ng-container  *ngIf="product.discountedHighPrice !== product.discountedLowPrice">
+                                        
+                                        <span *ngIf="product.discountedHighPrice && product.priceDiscountPercent">
+                                            - {{ (product.discountedHighPrice * product.priceDiscountPercent / 100)  | currency: 'USD': 'symbol': '1.2-2' }}
+                                        </span>
+                                    </ng-container>
+                                </span>
+        
+                                <span style="font-size: 13px; color: rgba(238, 7, 7, 0.988);"
+                                        *ngIf="product.priceDiscountPercent">
+                                    {{product.priceDiscountPercent}}% off
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12 btn-hover">
+                        <button class="cart-btn mt-2 btn fw-semibold p-2 justify-content-center" title="Add item to cart">Add to Cart</button>
+                    </div>               
+                </div>
+    
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
+    Error: {{errorMessage}}
+</div>

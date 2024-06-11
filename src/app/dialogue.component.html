@@ -193,7 +193,11 @@
                             
                             <div class="col-md-1 p-0 flex-center"
                             style="border-radius: 0.8px; align-self: end;"  >
-                            <button type="button" (click)="closeModalAndNavigate();" class="btn navigateTo" [disabled]="!cartForm.valid" type="submit" >Add to Cart</button>
+                            <button type="button" 
+                                (click)="closeModalAndNavigate();" 
+                                class="btn navigateTo" 
+                                [disabled]="!cartForm.valid" 
+                                type="submit" >Add to Cart</button>
                             <!-- data-bs-dismiss="modal" data-bs-dismiss="modal" [routerLink]="['/cart']"-->
                             </div>
                         </div>

@@ -80,8 +80,8 @@
             </div>
 
             <div class="col-md-7">
-                <div style="background-color: white; border-radius: 6px;" *ngIf="address$ | async as currentUser" >
-                    <div class="d-flex justify-content-between align-items-center p-3" >
+                <div style="background-color: white; border-radius: 6px;" *ngIf="address$ | async as currentUser">
+                    <div class="d-flex justify-content-between align-items-center p-3">
                         <h5 class="mb-0">Delivery Address</h5>
                         <div class="col-md-2 text-center">
                             <button [routerLink]="['/address/create']" routerLinkActive="router-link-active" *ngIf="currentUser.addresses.length > 0" class="btn add-address" type="button">Add Address</button>
@@ -94,7 +94,7 @@
                         <div >
                             <div class="row">
                                 <div class="col-md-6 p-2" *ngFor="let address  of currentUser.addresses; let i = index" >
-                                    <div class="card" style="font-size: 0.9rem; padding: 0;" *ngIf="address" >
+                                    <div class="card" style="font-size: 0.9rem; padding: 0; height: 12rem;" *ngIf="address">
                                         <div class="card-header d-flex justify-content-between align-items-center">
                                             <p class="mb-0 fs-6 fw-semibold">Address {{i + 1}}
                                             </p>
@@ -124,13 +124,13 @@
                                                     <p class="card-text ms-3">{{ currentUser.phone }} </p>
                                                 </div>
                                                 <div class="d-flex align-self-end">
-                                                    <button class="btn d-flex align-items-center me-2 p-1" (click)="deleteAddress(address._id)" >
+                                                    <button class="button btn d-flex align-items-center me-2 p-1" (click)="deleteAddress(address._id)" >
                                                         <span class="material-symbols-outlined me-1" style="font-size: 1rem;">
                                                             delete
                                                         </span>
                                                         <p class="m-0 " style="font-size: 0.8rem;" >Delete</p>
                                                     </button>
-                                                    <button class="btn  d-flex align-items-center p-1" (click)="editAddress()" >
+                                                    <button class="button btn d-flex align-items-center p-1" (click)="editAddress()" >
                                                         <span class="material-symbols-outlined fs-6 me-1" style="color:#f68b1e;">
                                                             edit_square
                                                         </span>

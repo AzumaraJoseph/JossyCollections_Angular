@@ -1,188 +1,303 @@
-/* .material-icons {
-    color: rgba(236, 229, 229, 0.879);
-    font-size: 1.15rem;
-}
 
-.rating {
-    align-items: center;
-    column-gap: 1rem;
-}
-
-.rating-average {
-    width: fit-content;
-    text-align: center;
-    border-radius: 8rem;
-}
-
-.rating-average .star-outer::before {
-    content: "\2605 \2605 \2605 \2605 \2605";
-    color: rgba(225, 223, 223, 0.984);
-}
-
-.rating-average .star-outer {
-    position: relative;
-    display: inline-block;
-    font-size: 1.3rem;
-}
-
-
-.rating-average .star-inner::before {
-    content: "\2605 \2605 \2605 \2605 \2605";
-    color: rgba(255, 183, 0, 0.995);
-
-}
-
-.rating-average .star-inner   {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 1.3rem;
-    display: flex;
-    overflow: hidden;
-} */
-
-
-
-
-
-
-
-/* .star-rating {
+.star-rating {
   display: flex;
-  direction: row;
+}
+
+.star-container {
+  position: relative;
+  width: 19px; /* Adjust the size as needed */
+  height: 24px; /* Adjust the size as needed */
 }
 
 .star {
-  font-size: 2rem;
-  color: #ddd;
-  position: relative;
-}
-
-.star.filled {
-  color: #ffcc00;
-}
-
-.star.half-filled::before {
-  content: '\u2605';
-  color: #ffcc00;
+  font-size: 24px; /* Adjust the size as needed */
   position: absolute;
+  top: 0;
   left: 0;
-  width: 50%;
+}
+
+.full {
+  color: #ffcc00;
+  width: 100%;
   overflow: hidden;
 }
 
-.star.partial-filled::before {
-  content: '\u2605';
+.partial {
   color: #ffcc00;
-  position: absolute;
-  left: 0;
-  width: var(--partial-fill);
   overflow: hidden;
-} */
+}
+
+.empty {
+  color: #e8e8e8;
+  width: 100%;
+}
+
+
 
 
 
 /* 
-.star-rating {
+ .star-rating {
   display: flex;
-  direction: row;
+}
+
+.star-container {
+  position: relative;
+  width: 24px;
+  height: 24px;
 }
 
 .star {
-  font-size: 2rem;
-  color: #ddd;
-  position: relative;
-}
-
-.star.filled {
-  color: #ffcc00;
-}
-
-.star.half-filled::before {
-  content: '\u2605';
-  color: #ffcc00;
+  font-size: 24px;
   position: absolute;
-  left: 0;
-  width: 50%;
-  overflow: hidden;
-}
-
-.star.partial-filled::before {
-  content: '\u2605';
-  color: #ffcc00;
-  position: absolute;
-  left: 0;
-  width: var(--partial-fill);
-  overflow: hidden;
-} */
-
-
-
-
-
-.star-rating {
-  display: flex;
-  direction: row;
-}
-
-.star {
-  font-size: 2rem;
-  color: #ddd;
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-}
-
-.star::before {
-  content: '\u2605';
-  color: #ffcc00;
-  position: absolute;
-  left: 0;
   top: 0;
-  width: 100%;
-  overflow: hidden;
+  left: 0;
+}
+
+.empty {
+  color: #ddd;
   z-index: 1;
 }
 
+.full, .partial-star {
+  color: #ffcc00;
+  z-index: 2;
+}
+
+.partial-star {
+  overflow: hidden;
+  white-space: nowrap;
+}  */
 
 
 
-
-
-
-
-  
+/* star-rating.component.css */
 /* .star-rating {
+  font-size: 2em;
+  color: #ffc107;
+}
+
+.partial-star {
+  position: relative;
+  overflow: hidden;
+}
+
+.partial-star:before {
+  content: '\f005'; /* full star icon *
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+
+.partial-star:after {
+  content: '\f005'; /* full star icon *
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  overflow: hidden;
+  color: #fff; /* white color to cover the remaining star *
+} */
+/* 
+.star-rating {
   display: flex;
-  direction: row;
+}
+
+.star-rating .full {
+  color: gold;
+}
+
+.star-rating .half {
+  position: relative;
+  display: inline-block;
+  color: gold;
+}
+
+.star-rating .half::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: gold;
+}
+
+.star-rating .empty {
+  color: lightgray;
+} */
+
+/* 
+.star-rating {
+  display: flex;
+}
+
+.star-rating .full {
+  color: gold;
+}
+
+.star-rating .half {
+  position: relative;
+  display: inline-block;
+  color: lightgray; /* Background for the half star *
+}
+
+.star-rating .half .half-star {
+  position: absolute;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: gold;
+}
+
+.star-rating .partial {
+  position: relative;
+  display: inline-block;
+  color: lightgray; /* Background for the partial star *
+}
+
+.star-rating .partial .partial-star {
+  position: absolute;
+  left: 0;
+  width: 75%;
+  overflow: hidden;
+  color: gold;
+}
+
+.star-rating .empty {
+  color: lightgray;
+} */
+
+/* 
+.star-rating {
+  display: flex;
+}
+
+.star-rating .full {
+  color: gold;
+}
+
+.star-rating .three-quarters,
+.star-rating .half,
+.star-rating .quarter {
+  position: relative;
+  display: inline-block;
+  color: lightgray; /* Background for the partial star *
+}
+
+.star-rating .three-quarters .three-quarters-star,
+.star-rating .half .half-star,
+.star-rating .quarter .quarter-star {
+  position: absolute;
+  left: 0;
+  overflow: hidden;
+  color: gold;
+}
+
+.star-rating .three-quarters .three-quarters-star {
+  width: 75%;
+}
+
+.star-rating .half .half-star {
+  width: 50%;
+}
+
+.star-rating .quarter .quarter-star {
+  width: 25%;
+}
+
+.star-rating .empty {
+  color: lightgray;
+} */
+
+/* 
+.star-rating {
+  font-size: 24px;
 }
 
 .star {
-  font-size: 2rem;
-  color: #ddd;
-  cursor: pointer;
+  color: gold;
+  display: inline-block;
 }
 
-.star.filled {
-  color: #ffcc00;
+.full::before,
+.half::before {
+  content: "★";
 }
 
-.star.half-filled {
-  color: #ffcc00;
+.half::before {
   position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 50%;
 }
 
-.star.half-filled::before {
-  content: '\u2605';
-  color: #ddd;
-  position: absolute;
-  left: 50%;
-  width: 50%;
-  overflow: hidden;
+.empty::before {
+  content: "☆";
 } */
 
 
+/* .star-rating {
+  font-size: 24px;
+}
 
+.star {
+  color: gold;
+  display: inline-block;
+}
 
+.full::before,
+.half::before,
+.partial::before {
+  content: "★";
+}
 
+.half::before {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 50%;
+}
 
+.partial::before {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  width: 25%;
+}
+
+.empty::before {
+  content: "☆";
+} */
+
+/* 
+.star-rating {
+  display: inline-block;
+  font-size: 24px;
+}
+
+.star {
+  display: inline-block;
+  color: gold;
+}
+
+.half {
+  overflow: hidden;
+  display: inline-block;
+  position: relative;
+  color: gold;
+}
+
+.half::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  width: var(--width, 50%);
+  overflow: hidden;
+  color: gold;
+}
+
+.empty {
+  color: lightgray;
+} */

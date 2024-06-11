@@ -1,5 +1,4 @@
 `<div class="fluid-container p-3 detail">
-
     <div class="card" 
         style="background-color: rgba(241, 241, 241, 0.982);" *ngIf="selectProduct$ | async as product">
         <h3 class="card-text fs-5 p-2">Product Detail: {{product.name}}</h3>
@@ -46,7 +45,7 @@
                 </p>
             </div>
             <div class="d-flex" style="align-items: center;">
-                <app-star></app-star>
+                <app-star [rating]="product.ratingsAverage"></app-star>
                 <div class="ms-4">
                     {{product.ratingsQuantity && product.ratingsQuantity > 0 ? product.ratingsQuantity + " reviews" : "No reviews yet"}} 
                 </div>
@@ -56,7 +55,7 @@
         <div class="mb-2 ps-5 pe-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993); ">
             <h4 class="card-text">Colors</h4>
             <div class="col-md-12"
-                style="background-color: rgba(218, 216, 216, 0.993); display: flex; padding: 0.5rem;">
+                style="background-color: rgba(238, 238, 238, 0.977); display: flex; padding: 0.5rem;">
 
                 <!-- (click)="eachProduct(i)" -->
                 <div class="me-2" *ngFor="let color of product.color; let i = index;">
@@ -128,6 +127,8 @@
             </div>
           </div> -->
 
+
+
           <!-- Button trigger modal -->
         <div class="mb-2 ps-5 pe-5"
             style="background-color: rgba(255, 255, 255, 0.993); cursor: pointer;"
@@ -138,19 +139,20 @@
                 <div class="pt-2 pb-2">
                     <h4>Reviews({{product.ratingsQuantity}})</h4>
                 </div>
-                <app-star></app-star>
+                <app-star [rating]="product.ratingsAverage"></app-star>
             </div>
 
-            <div style="background-color: rgba(225, 221, 221, 0.974);
+            <div style="background-color: rgba(238, 238, 238, 0.977);
                 border-radius: 0.5rem;
                 padding: 0.8rem;
                 margin-bottom: 1rem;"
                 *ngIf="product.reviews.length > 0"  >
                 <div class="d-flex justify-content-between fw-bold">
-                    <span>{{ product.reviews[0].user.name }}</span>
+                    <span>{{ product.reviews[0].user.firstName }} {{ product.reviews[0].user.lastName }}</span>
+                    <span></span>
                     <span>{{ product.reviews[0].updatedAt | date: 'longDate' }}</span>
                 </div>
-                <app-star></app-star>
+                <app-star [rating]="product.reviews[0].rating"></app-star>
                 <p class="mb-0">{{ product.reviews[0].comment }}</p>
             </div>
         </div>
@@ -221,10 +223,10 @@
                                     *ngFor="let comment of product.reviews" >
                                     <div class="content">
                                         <div class="d-flex justify-content-between fw-bold">
-                                            <span>{{comment.user.name}}</span>
+                                            <span>{{comment.user.firstName}} {{comment.user.lastName}}</span>
                                             <span>{{comment.updatedAt | date: 'longDate' }}</span>
                                         </div>
-                                        <app-star></app-star>
+                                        <app-star [rating]="comment.rating"></app-star>
                                         <p class="mb-0">{{comment.comment }}</p>
                                     </div>
                                 </div>                    
@@ -258,7 +260,7 @@
                                     </ng-container>
                                 </p>
                                 <div>
-                                    <app-star></app-star>
+                                    <app-star [rating]="related.ratingsAverage"></app-star>
                                 </div>
                                 <div class="d-flex justify-content-between mt-2">
                                     <span *ngIf="related.discountedLowPrice && related.priceDiscountPercent"

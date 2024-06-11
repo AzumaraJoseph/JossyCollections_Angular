@@ -132,8 +132,13 @@
 
                             <div class="col-md-12 mb-4">
                                 <label for="phoneId" class="form-label mb-2">Phone</label>
-                                <input type="email" class="form-control" id="phoneId" formControlName="phone" placeholder="Enter your Phone Number"
-                                [ngClass]="{ 'is-invalid': (profileForm.controls['phone'].touched || profileForm.controls['phone'].dirty) && !profileForm.controls['phone'].valid }" >
+
+                                <input type="number" 
+                                    class="form-control" 
+                                    id="phoneId" 
+                                    formControlName="phone" 
+                                    placeholder="Enter your Phone Number"
+                                    [ngClass]="{ 'is-invalid': (profileForm.controls['phone'].touched || profileForm.controls['phone'].dirty) && !profileForm.controls['phone'].valid }" >
 
                                 <div *ngIf="(profileForm.controls['phone'].touched || profileForm.controls['phone'].dirty)  && !profileForm.controls['phone'].valid">
                                     <span class="invalid-feedback" *ngIf="profileForm.controls['phone'].errors?.['required']">
@@ -142,7 +147,7 @@
                                 </div>
                             </div>
                 
-                            <button class="btn button" type="submit" [disabled]="!profileForm.valid">Save Changes</button>
+                            <button class="btn button" type="submit" [disabled]="!profileForm.valid || profileForm.pristine" >Save Changes</button>
                         </form>
                     </div>
                 </div>

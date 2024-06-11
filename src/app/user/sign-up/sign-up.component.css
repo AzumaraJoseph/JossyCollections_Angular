@@ -1,7 +1,7 @@
 .header {
-    margin: 0 auto;
+    margin: 1rem auto;
     width: fit-content;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
 }
 
 .material-icons {
@@ -33,6 +33,13 @@ input:focus {
 
 }
 
+
+input:autofill {
+    /* -webkit-box-shadow: 0 0 0 1000px white inset !important; */
+    box-shadow: 0 0 0 1000px white inset !important;
+    background-color: white !important;
+}
+
 .is-invalid {
     border-color: red;
   }
@@ -45,7 +52,7 @@ input:focus {
 .button {
     background-color: #f68b1e; 
     text-align: center; 
-    margin-top: 3rem; 
+    margin-top: 1.3rem; 
     padding: 0.5rem;
     border-radius: 4px;
 }

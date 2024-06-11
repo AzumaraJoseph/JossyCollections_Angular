@@ -41,16 +41,16 @@ export class AuthService {
       tap(data => {
         console.log('Login successful:', JSON.stringify(data));
       }),
-      catchError(this.handleError)
+      catchError(err => this.handleError(err))
     );
   }
   
-  signUp(name: string, email: string, password: string, confirmPassword: string, phone: number): Observable<any> {
+  signUp(firstName: string, lastName: string, email: string, password: string, confirmPassword: string, phone: number): Observable<any> {
     // const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true};
-    const signupInfo = { name, email, password, confirmPassword, phone };
+    const signupInfo = { firstName, lastName, email, password, confirmPassword, phone };
 
     return this.http.post<any>(this.signupUrl, signupInfo, options).pipe(
       map(data => data.data),
@@ -219,12 +219,16 @@ export class AuthService {
     let errorMessage: string;
     if (err.error instanceof ErrorEvent) {
       errorMessage = `An error occurred: ${err.error.message}`;
+
     } else {
-      errorMessage = `Backend returned code ${err.status}: ${err.message}`;
+      // errorMessage =  `Backend returned code ${err.status}: ${err.error?.message || err.message}`;
+      errorMessage = err.error?.message || err.message;
     }
     console.error(err);
-    return throwError(() => errorMessage);
+    // return throwError(() => errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
+
 
 
 

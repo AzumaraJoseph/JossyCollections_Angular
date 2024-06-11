@@ -11,7 +11,6 @@ import { OrderShellComponent } from './order/order-shell.component';
 import { OrderHistoryComponent } from './order/order-history/order-history.component';
 
 const routes: Routes = [
-
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailComponent },
   { path: 'products/:id/dialogue', component: DialogueComponent },

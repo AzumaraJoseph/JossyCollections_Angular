@@ -29,7 +29,8 @@
 }
 
 .content {
-    background-color: rgba(225, 221, 221, 0.974);
+    /* background-color: rgba(225, 221, 221, 0.974); */
+    background-color: rgba(238, 238, 238, 0.977);
     border-radius: 0.5rem;
     padding: 0.5rem;
     /* margin-bottom: 0.5rem; */

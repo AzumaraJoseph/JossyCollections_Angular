@@ -56,9 +56,11 @@
                             </ng-container>
                         </p>
                         <div>
-                            <!-- <app-star [rating]="product.ratingsAverage"></app-star> -->
+                            <app-star [rating]="product.ratingsAverage"></app-star>
 
-                            <app-star [rating]="3.7"></app-star>
+                            <!-- <app-star [rating]="3.6"></app-star>
+                            <app-star [rating]="4.4"></app-star> -->
+
                         </div>
                         <div class="d-flex justify-content-between mt-2">
                             <span *ngIf="product.discountedLowPrice && product.priceDiscountPercent"
@@ -81,7 +83,7 @@
                     </div>
                 </div>
                 <div class="col-md-12 btn-hover">
-                    <button class="cart-btn mt-2 btn   p-2 justify-content-center" title="Add item to cart">Add to Cart</button>
+                    <button class="cart-btn mt-2 btn fw-semibold p-2 justify-content-center" title="Add item to cart">Add to Cart</button>
                 </div>               
             </div>
 

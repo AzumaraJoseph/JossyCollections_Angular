@@ -46,6 +46,11 @@
     box-shadow: none;
 }
 
+.button:active {
+    border: 1px solid #f68b1e;
+    background-color: white;
+    box-shadow: none;
+}
 
 a {
     text-decoration: none;

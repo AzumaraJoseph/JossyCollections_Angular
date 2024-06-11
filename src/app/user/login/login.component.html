@@ -1,10 +1,10 @@
-<div class="fluid-container" style="margin-top: 6rem;">
+<div class="fluid-container" style="margin-top: 5.7rem;">
     <div class="header">
         <span class="material-icons">
             star
         </span>
     </div>
-    <div style="margin: 0 auto; width: 32%;">
+    <div style="margin: 0 auto; width: 36%;">
         <div class="center">
             <h5 class="fw-bold">Welcome to Jossy</h5>
             <p style="color: rgba(84, 83, 83, 0.978);">Let's get started by creating your account. <br>
@@ -13,7 +13,7 @@
         <div>
             <form novalidate autocomplete="off" [formGroup]="loginForm" (ngSubmit)="save()">
 
-                <div class="form-floating form-group mb-4">
+                <div class="form-floating form-group mb-3">
                     <input type="email"
                         class="form-control" 
                         id="emailId"
@@ -22,14 +22,6 @@
                         [ngClass]="{'is-invalid': (loginForm.controls['email'].touched || loginForm.get('email')?.dirty) && !loginForm.get('email')?.valid }" >
 
                     <label for="emailId">Email</label>
-                    <!-- <span class="invalid-feedback">
-                        <span *ngIf="loginForm.controls['email']?.errors?.['required']">
-                            <em>Please enter your email address</em>
-                        </span>
-                        <span *ngIf="loginForm.controls['email']?.errors?.['email']">
-                          Enter a valid email address
-                        </span>
-                    </span> -->
                     
                     <div *ngIf="(loginForm.controls['email'].touched || loginForm.controls['email'].dirty)  && !loginForm.controls['email'].valid">
                         <span class="invalid-feedback" *ngIf="loginForm.controls['email'].errors?.['required']">
@@ -41,7 +33,7 @@
                     </div>    
                 </div>
 
-                <div class="form-floating form-group mb-4">
+                <div class="form-floating form-group mb-3">
                     <input type="password" 
                             class="form-control" 
                             id="passwordId" 
@@ -50,15 +42,6 @@
                             [ngClass]="{'is-invalid': (loginForm.controls['password'].touched || loginForm.controls['password'].dirty) && !loginForm.controls['password'].valid }" >
 
                     <label for="passwordId">Password</label>
-
-                    <!-- <span class="invalid-feedback">
-                        <span *ngIf="loginForm.controls['password'].errors?.['required']">
-                            <em>Please enter your password</em>
-                        </span>
-                        <span *ngIf="loginForm.controls['password'].errors?.['minlength']">
-                          Password must be more than 8 characters
-                        </span>
-                    </span> -->
 
                     <div *ngIf="(loginForm.controls['password'].touched || loginForm.controls['password'].dirty)  && !loginForm.controls['password'].valid">
                         <span class="invalid-feedback" *ngIf="loginForm.controls['password'].errors?.['required']">
@@ -69,19 +52,22 @@
                         </span>
                     </div>    
                 </div>
+                <div *ngIf="errorMessage$ | async as errorMessage" style="color: red;">{{errorMessage}}</div>
 
                 <div class="button">
                     <button class="btn fw-bold w-100 p-3" type="submit" [disabled]="!loginForm.valid" style="color: white; font-size: 1rem; border: none;">Continue</button>
                 </div>
             </form>
 
-            <p class="text-center mt-3">For further support, you may visit the Help Center or contact our customer service team.</p>
+            <p class="text-center mt-3 mb-3" style="font-size: 0.8rem;">By continuing you agree to Jossy's <br> <a href="">Terms and Conditions</a></p>
+
+            <p class="text-center mt-2" style="font-size: 0.93rem;">For further support, you may visit the Help Center or contact our customer service team.</p>
                 
-            <div class="header d-flex align-items-center mt-4">
+            <div class="header d-flex align-items-center">
                 <h5 class="mb-0 fw-bold me-1">JOSSY</h5>
                 <span class="material-icons icon">star</span>
             </div>
-            <p class="text-center mt-4">Don't have an account? <a [routerLink]="['/user/signup']" routerLinkActive="router-link-active" >Sign Up</a></p>
+            <p class="text-center mt-3">Don't have an account? <a [routerLink]="['/user/signup']" routerLinkActive="router-link-active" >Sign Up</a></p>
         </div>
     </div>
 </div>

@@ -4,7 +4,8 @@
             star
         </span>
     </div>
-    <div style="margin: 0 auto; width: 32%;">
+
+    <div style="margin: 0 auto; width: 36%;">
         <div class="center">
             <h5 class="fw-bold">Create your acount</h5>
             <p style="color: rgba(84, 83, 83, 0.978);">Let's get started by creating your account. <br>
@@ -15,22 +16,42 @@
                 <div class="form-floating form-group mb-4">
                     <input type="text"
                         class="form-control"
-                        id="fullNameId"
-                        formControlName="fullName"
-                        placeholder="User Name" 
-                        [ngClass]="{'is-invalid': (signUpForm.controls['fullName'].touched || signUpForm.get('fullName')?.dirty) && !signUpForm.get('fullName')?.valid }" >
+                        id="firstNameId"
+                        formControlName="firstName"
+                        placeholder="First Name" 
+                        [ngClass]="{'is-invalid': (signUpForm.controls['firstName'].touched || signUpForm.get('firstName')?.dirty) && !signUpForm.get('firstName')?.valid }" >
 
-                    <label for="fullNameId">Full Name</label>
+                    <label for="firstNameId">First Name</label>
 
-                    <div *ngIf="(signUpForm.controls['fullName'].touched || signUpForm.controls['fullName'].dirty)  && !signUpForm.controls['fullName'].valid">
-                        <span class="invalid-feedback" *ngIf="signUpForm.controls['fullName'].errors?.['required']">
-                          <em>Please enter your full name</em>
+                    <div *ngIf="(signUpForm.controls['firstName'].touched || signUpForm.controls['firstName'].dirty)  && !signUpForm.controls['firstName'].valid">
+                        <span class="invalid-feedback" *ngIf="signUpForm.controls['firstName'].errors?.['required']">
+                          <em>Please enter your first name</em>
                         </span>
-                        <span class="invalid-feedback" *ngIf="signUpForm.controls['fullName'].errors?.['minlength']">
-                            Full name must be more than 3 characters
+                        <span class="invalid-feedback" *ngIf="signUpForm.controls['firstName'].errors?.['minlength']">
+                            First name must be more than 3 characters
                         </span>
                     </div>
                 </div>
+
+                <div class="form-floating form-group mb-4">
+                  <input type="text"
+                      class="form-control"
+                      id="lastNameId"
+                      formControlName="lastName"
+                      placeholder="Last Name" 
+                      [ngClass]="{'is-invalid': (signUpForm.controls['lastName'].touched || signUpForm.get('lastName')?.dirty) && !signUpForm.get('lastName')?.valid }" >
+
+                  <label for="lastNameId">Last Name</label>
+
+                  <div *ngIf="(signUpForm.controls['lastName'].touched || signUpForm.controls['lastName'].dirty)  && !signUpForm.controls['lastName'].valid">
+                      <span class="invalid-feedback" *ngIf="signUpForm.controls['lastName'].errors?.['required']">
+                        <em>Please enter your last name</em>
+                      </span>
+                      <span class="invalid-feedback" *ngIf="signUpForm.controls['lastName'].errors?.['maxlength']">
+                          Last name must not exceed 10 characters
+                      </span>
+                  </div>
+              </div>
 
                 <div class="form-floating form-group mb-4">
                     <input type="email"
@@ -97,7 +118,7 @@
                     </div>
                   
 
-                <div class="form-floating form-group mb-4">
+                <div class="form-floating form-group mb-2">
                     <input type="number" 
                             class="form-control" 
                             id="phoneId" 
@@ -113,6 +134,8 @@
                     </div>
                     
                 </div>
+
+                <div *ngIf="errorMessage$ | async as errorMessage" style="color: red;" >{{ errorMessage }}</div>
 
                 <div class="button">
                     <button class="btn fw-bold w-100 p-2" type="submit" [disabled]="!signUpForm.valid" style="color: white; font-size: 1rem; border: none;">Continue</button>
@@ -162,14 +185,15 @@
             
 
 
-            <p class="text-center mt-4 mb-4">By continuing you agree to Jossy's <br> <a href="">Terms and Conditions</a></p>
+            <p class="text-center mt-3 mb-3" style="font-size: 0.8rem;">By continuing you agree to Jossy's <br> <a href="">Terms and Conditions</a></p>
 
-            <p class="text-center mt-3">For further support, you may visit the Help Center or contact our customer service team.</p>
+            <p class="text-center mt-2" style="font-size: 0.93rem;">For further support, you may visit the Help Center or contact our customer service team.</p>
                 
-            <div class="header d-flex align-items-center mt-4">
+            <div class="header d-flex align-items-center">
                 <h5 class="mb-0 fw-bold me-1">JOSSY</h5>
                 <span class="material-icons icon">star</span>
             </div>
+            <p class="text-center">Already have an account? <a [routerLink]="['/user/login']" routerLinkActive="router-link-active" >Log in</a></p>
             
         </div>
     </div>

@@ -1,76 +1,119 @@
-<!-- <div class="m-0">
-    <span class="material-icons">grade</span>
-    <span class="material-icons">grade</span>
-    <span class="material-icons">grade</span>
-    <span class="material-icons">grade</span>
-    <span class="material-icons">grade</span>
-</div> -->
 
+<div class="star-rating">
+  <ng-container *ngFor="let star of stars; let i = index">
+    <div class="star-container">
+      <div class="star empty">&#9733;</div>
 
-
-
-
-
-<!-- 
-<div class="rating">
-    <div class="rating-average">
-        <div class="star-outer">
-            <div class="star-inner" [style.width.%]="getPartialStarWidths()">
-            </div> 
-        </div>
+      <div class="star full" *ngIf="isFullStar(i)">&#9733;</div>
+      <div class="star partial" *ngIf="isPartialStar(i)" [ngStyle]="{'width': getPartialStarWidth()}">&#9733;</div>
+      <!-- <div class="star empty" *ngIf="isEmptyStar(i)">&#9733;</div> -->
     </div>
-</div> -->
-
-
-
-
-<!-- 
-<div class="star-rating">
-  <ng-container *ngFor="let star of stars; let i = index">
-    <span class="star" [ngClass]="getStarClass(i)">
-      &#9733;
-    </span>
-  </ng-container>
-</div> -->
-
-
-
-<!-- 
-<div class="star-rating">
-  <ng-container *ngFor="let star of stars; let i = index">
-    <span class="star" [ngClass]="getStarClass(i)">
-      &#9733;
-    </span>
-  </ng-container>
-</div> -->
-
-
-
-<div class="star-rating">
-  <ng-container *ngFor="let star of stars; let i = index">
-    <span class="star" [ngClass]="getStarClass(i)" [style.width]="getStarWidth(i)">
-      &#9733;
-    </span>
+    
   </ng-container>
 </div>
 
 
 
 
-
-
-<!-- <div class="star-rating" (mouseleave)="resetHover()">
-  <ng-container *ngFor="let star of stars; let index = index">
-    <span
-      class="star"
-      [class.filled]="star <= rating"
-      [class.half-filled]="star > rating && star - 1 < rating"
-      (click)="setRating(star)"
-      (mouseover)="setHoverRating(star)">
-      &#9733;
-    </span>
+<!-- 
+<div class="star-rating">
+  <ng-container *ngFor="let star of stars; let i = index">
+    <div class="star-container">
+      <div class="star empty">&#9733;</div>
+      <div class="star full" *ngIf="isFullStar(i)">&#9733;</div>
+      <div class="star partial" *ngIf="isPartialStar(i)">
+        <div class="partial-star" [ngStyle]="{'width': getPartialStarWidth()}">&#9733;</div>
+      </div>
+    </div>
   </ng-container>
 </div> -->
+
+
+
+<!-- star-rating.component.html -->
+<!-- <div class="star-rating">
+  <i class="fa fa-star" *ngFor="let star of [].constructor(this.fullStars)">&#9733;</i>
+  <i class="fa fa-star-half" *ngIf="halfStar">&#9733;</i>
+  <i class="fa fa-star partial-star" *ngIf="partialStar" [style.width]="partialStarWidth">&#9733;</i>
+</div> -->
+
+<!-- <div class="star-rating">
+  <ng-container *ngFor="let star of stars; let i = index">
+    <div class="star-container">
+      <span class="star full" *ngIf="star === 'full'">★</span>
+      <span class="star half" *ngIf="star === 'half'">
+        <span class="half-star">★</span>
+      </span>
+      <span class="star partial" *ngIf="star === 'partial'">
+        <span class="partial-star">★</span>
+      </span>
+      <span class="star empty" *ngIf="star === 'empty'">☆</span>
+    </div>
+  </ng-container>
+</div> -->
+
+
+<!-- <div class="star-rating">
+  <ng-container *ngFor="let star of stars; let i = index">
+    <span class="star full" *ngIf="star === 'full'">★</span>
+    <span class="star three-quarters" *ngIf="star === 'three-quarters'">
+      <span class="three-quarters-star">★</span>
+    </span>
+    <span class="star half" *ngIf="star === 'half'">
+      <span class="half-star">★</span>
+    </span>
+    <span class="star quarter" *ngIf="star === 'quarter'">
+      <span class="quarter-star">★</span>
+    </span>
+    <span class="star empty" *ngIf="star === 'empty'">☆</span>
+  </ng-container>
+</div> -->
+
+
+<!-- <div class="star-rating">
+  <span class="star" *ngFor="let star of stars">
+    <span [ngClass]="{
+      'full': rating >= star,
+      'half': rating >= star - 0.5 && rating < star,
+      'empty': rating < star - 0.5
+    }">
+      {{ rating >= star ? '★' : '☆' }}
+    </span>
+  </span>
+</div> -->
+
+
+
+
+
+
+<!-- <div class="star-rating">
+  <span class="star" *ngFor="let star of stars">
+    <span [ngClass]="{
+      'full': rating >= star,
+      'half': rating >= star - 0.5 && rating < star,
+      'partial': rating < star - 0.5 && rating >= star - 1
+    }">
+      {{ rating >= star ? '★' : (rating >= star - 0.5 ? '☆' : '☆') }}
+    </span>
+  </span>
+</div> -->
+
+
+<!-- <div class="star-rating">
+  <span class="star full" *ngFor="let _ of getFullStars(); let i = index">★</span>
+  <span class="star half" *ngIf="hasHalfStar()" [style.width]="getPartialStarWidth()">★</span>
+  <span class="star empty" *ngFor="let _ of getEmptyStars(); let i = index">☆</span>
+</div> -->
+
+
+<!-- <div class="star-rating">
+  <span class="star full" *ngFor="let _ of fullStars">★</span>
+  <span class="star half" *ngIf="partialStar" [style.width]="getPartialStarWidth()">★</span>
+  <span class="star empty" *ngFor="let _ of emptyStars">☆</span>
+</div> -->
+
+
 
 
 

@@ -1,7 +1,7 @@
 .header {
-    margin: 0 auto;
+    margin: 1rem auto;
     width: fit-content;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
 }
 
 .material-icons {
@@ -17,7 +17,7 @@
 .center {
     text-align: center;
     font-size: 1.1rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 input {
@@ -32,6 +32,13 @@ input:focus {
     border: none;
 }
 
+
+input:autofill {
+    /* -webkit-box-shadow: 0 0 0 1000px white inset !important; */
+    box-shadow: 0 0 0 1000px white inset !important;
+    background-color: white !important;
+}
+
 .is-invalid {
     border-color: red;
   }
@@ -44,7 +51,7 @@ input:focus {
 .button {
     background-color: #f68b1e; 
     text-align: center; 
-    margin-top: 3rem; 
+    margin-top: 1rem; 
     /* padding: 0.5rem; */
     border-radius: 4px;
 }

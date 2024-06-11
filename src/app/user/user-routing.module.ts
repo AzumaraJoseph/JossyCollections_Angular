@@ -7,16 +7,11 @@ import { AddressComponent } from './address/address.component';
 import { CreateAddressComponent } from './address/create-address/create-address.component';
 
 const routes: Routes = [
-  { 
-    path: '',  
-    children: [
-      { path: 'login', component: LoginComponent },
-      { path: 'signup', component: SignUpComponent },
-      { path: 'profile', component: ProfileComponent },
-      { path: 'address', component: AddressComponent },
-      { path: 'address/create', component: CreateAddressComponent }
-    ]
-  },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignUpComponent },
+  { path: 'profile', component: ProfileComponent },
+  { path: 'address', component: AddressComponent },
+  { path: 'address/create', component: CreateAddressComponent }
 ];
 
 @NgModule({

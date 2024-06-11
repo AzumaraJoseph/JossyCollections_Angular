@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordsMatchValidator } from '../custom-validators';
 import { AuthService } from 'src/app/shared/auth.service';
@@ -8,7 +8,8 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-profile',
   templateUrl: './address.component.html',
-  styleUrls: ['./address.component.css']
+  styleUrls: ['./address.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AddressComponent implements OnInit {
   profileForm!: FormGroup;
@@ -29,7 +30,7 @@ export class AddressComponent implements OnInit {
   editMode: boolean =false;
 
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
 
@@ -54,19 +55,6 @@ export class AddressComponent implements OnInit {
 
   // TO RELOAD THE COMPONENT ALONE AND NOT THE ENTIRE APP
   // this.loadProduct();
-
-
-
-  // this.auth.getCurrentUser().pipe(
-  //   map(user => user.addresses),
-  //   tap(user => 
-  //     {
-  //       if(user) return this.currentUser = user;
-
-  //     }),
-  //   tap(res => console.log('Address user', JSON.stringify(res))
-  //   )
-  // ).subscribe()
 
   }
 
@@ -99,15 +87,14 @@ export class AddressComponent implements OnInit {
   }
   
   deleteAddress(id: any) {
-    this.auth.deleteAddress(id).subscribe();
-    // window.refresh
-    // this.router.navigate(['/user/address'])
-    window.location.reload();
-  }
+    this.auth.deleteAddress(id).pipe(
+      tap(res => console.log('Address deleted', JSON.stringify(res))),
+      // tap(() => this.cdr.markForCheck())
+      tap(() => window.location.reload())
 
-  // togglePasswordVisibility(): void {
-  //   this.passwordFieldType = this.passwordFieldType === 'password' ? 'text' : 'password';
-  //  }
+    ).subscribe();    
+    // window.location.reload();
+  }
 
   
   toggleCurrentPasswordVisibilty(): void {

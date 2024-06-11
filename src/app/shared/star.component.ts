@@ -1,6 +1,5 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ProductService } from '../product/product.service';
-import { Product } from '../product/product';
+import { Component, Input, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-star',
@@ -10,43 +9,6 @@ import { Product } from '../product/product';
 export class StarComponent implements OnInit {
 
 
-  // constructor(private productService: ProductService) { }
-  
-
-  // products!: Product[];
-  // // starRating!: number;
-  // rating = 3.7;
-
-  // ngOnInit(): void {
-
-  //   }
-
-  //   getFullStar(): Array<number> {
-  //     return Array(Math.floor(this.rating));
-  //   }
-  
-  //   getPartialStarWidths(): string {
-  //     return `${(this.rating % 1) * 100}`;
-  //   }   
-    
-
-  //   getFullStars(): Array<number> {
-  //     return Array(Math.floor(this.rating));
-  //   }
-  
-   
-  //   getPartialStarWidth(rating: number): any {
-  //     // Calculate the width of a single star
-  //     const fractionalPart = rating % 1;
-  //     return (fractionalPart * 100) + '%'; // Calculate width for partial star
-  
-  //   }
-
-
-
-
-
-
   @Input() rating: number = 0;
   stars: number[] = [0, 1, 2, 3, 4];
 
@@ -54,83 +16,159 @@ export class StarComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  // getStarClass(index: number): string {
-  //   const fullStars = Math.floor(this.rating);
-  //   const partialStar = this.rating - fullStars;
+  isFullStar(index: number): boolean {
+    return index < Math.floor(this.rating);
+  }
 
-  //   if (index < fullStars) {
-  //     return 'filled';
-  //   } else if (index === fullStars) {
-  //     if (partialStar === 0.5) {
-  //       return 'half-filled';
-  //     } else if (partialStar > 0) {
-  //       const partialFillWidth = `${partialStar * 100}%`;
-  //       return `partial-filled" style="--partial-fill: ${partialFillWidth}`;
+  isPartialStar(index: number): boolean {
+    return index === Math.floor(this.rating) && this.rating % 1 !== 0;
+  }
+
+  isEmptyStar(index: number): boolean {
+    return index > Math.floor(this.rating);
+  }
+
+  getPartialStarWidth(): string {
+    return `${(this.rating % 1) * 100}%`;
+  }
+
+
+
+
+
+  // isFullStar(index: number): boolean {
+  //   return index < Math.floor(this.rating);
+  // }
+
+  // isPartialStar(index: number): boolean {
+  //   return index === Math.floor(this.rating) && this.rating % 1 !== 0;
+  // }
+
+  // getPartialStarWidth(): string {
+  //   return `${(this.rating % 1) * 100}%`;
+  // }
+
+
+
+  // get fullStars() {
+  //   return Math.floor(this.rating);
+  // }
+
+  // get halfStar() {
+  //   return this.rating % 1 >= 0.5;
+  // }
+
+  // get partialStar() {
+  //   return this.rating % 1 > 0 && this.rating % 1 < 0.5;
+  // }
+
+  // get partialStarWidth() {
+  //   return (this.rating % 1) * 100 + '%';
+  // }
+  
+  
+  // @Input() rating: number = 0;
+  // stars: string[] = [];
+  // stars: number[] = [1, 2, 3, 4, 5];
+
+  // ngOnChanges(changes: SimpleChanges): void {
+  //   if (changes['rating']) {
+  //     this.updateStars();
+  //   }
+  // }
+
+  // updateStars(): void {
+  //   this.stars = [];
+  //   const fullStars = Math.floor(this.rating);
+  //   const fraction = this.rating - fullStars;
+
+  //   for (let i = 1; i <= 5; i++) {
+  //     if (i <= fullStars) {
+  //       this.stars.push('full');
+  //     } else if (i === fullStars + 1 && fraction > 0) {
+  //       if (fraction > 0.75) {
+  //         this.stars.push('full');
+  //       } else if (fraction > 0.25) {
+  //         this.stars.push('partial');
+  //       } else {
+  //         this.stars.push('half');
+  //       }
+  //     } else {
+  //       this.stars.push('empty');
   //     }
   //   }
-
-  //   return '';
-  // }
-
-
-  getStarClass(index: number): string {
-    const fullStars = Math.floor(this.rating);
-    const partialStar = this.rating - fullStars;
-
-    if (index < fullStars) {
-      return 'filled';
-    } else if (index === fullStars && partialStar > 0) {
-      return 'partial-filled';
-    }
-
-    return '';
-  }
-
-  getStarWidth(index: number): string {
-    const fullStars = Math.floor(this.rating);
-    const partialStar = this.rating - fullStars;
-
-    if (index === fullStars) {
-      return `${partialStar * 100}%`;
-    }
-
-    return '100%';
-  }
-
-
-
-
-
-
-
-
-  //   @Input() rating: number = 0;
-  //   @Output() ratingChange: EventEmitter<number> = new EventEmitter<number>();
-
-  // stars: number[] = [1, 2, 3, 4, 5];
-  // hoverRating: number = 0;
-
-  // setRating(star: number) {
-  //   this.rating = star;
-  //   this.ratingChange.emit(this.rating);
-  // }
-
-  // setHoverRating(star: number) {
-  //   this.hoverRating = star;
-  // }
-
-  // resetHover() {
-  //   this.hoverRating = 0;
-  // }
-
-  // isFilled(star: number): boolean {
-  //   return star <= (this.hoverRating || this.rating);
   // }
 
 
 
-  
-  
 
+  // updateStars(): void {
+  //   this.stars = [];
+  //   const fullStars = Math.floor(this.rating);
+  //   const fraction = this.rating - fullStars;
+
+  //   for (let i = 1; i <= 5; i++) {
+  //     if (i <= fullStars) {
+  //       this.stars.push('full');
+  //     } else if (i === fullStars + 1 && fraction > 0) {
+  //       if (fraction >= 0.75) {
+  //         this.stars.push('three-quarters');
+  //       } else if (fraction >= 0.5) {
+  //         this.stars.push('half');
+  //       } else if (fraction >= 0.25) {
+  //         this.stars.push('quarter');
+  //       } else {
+  //         this.stars.push('empty');
+  //       }
+  //     } else {
+  //       this.stars.push('empty');
+  //     }
+  //   }
+  // }
+
+
+  // @Input() rating: number = 0;
+
+  // getFullStars(): number[] {
+  //   const fullStarsCount = Math.floor(this.rating);
+  //   return Array(fullStarsCount).fill(0);
+  // }
+
+  // hasHalfStar(): boolean {
+  //   return this.rating % 1 >= 0.5;
+  // }
+
+  // getPartialStarWidth(): string {
+  //   return ((this.rating % 1) * 100) + '%';
+  // }
+
+
+  // fullStars: number[] = [];
+  // partialStar: number | null = null;
+  // emptyStars: number[] = [];
+
+  // ngOnChanges() {
+  //   this.calculateStars();
+  // }
+
+  // calculateStars() {
+  //   this.fullStars = Array(Math.floor(this.rating)).fill(0);
+  //   const fractionalPart = this.rating % 1;
+
+  //   if (fractionalPart > 0.75) {
+  //     this.partialStar = 100; // Full star
+  //   } else if (fractionalPart > 0.25) {
+  //     this.partialStar = Math.round(fractionalPart * 100); // Partial star
+  //   } else {
+  //     this.partialStar = null; // No partial star
+  //   }
+
+  //   const totalStars = 5;
+  //   this.emptyStars = Array(totalStars - this.fullStars.length - (this.partialStar ? 1 : 0)).fill(0);
+  // }
+
+  // getPartialStarWidth(): string {
+  //   return `${this.partialStar}%`;
+  // }
 
   }
