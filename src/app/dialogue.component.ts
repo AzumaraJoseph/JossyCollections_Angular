@@ -58,6 +58,8 @@ decrement(): void {
  }
 
 
+
+
  save(cartForm: NgForm) {
   console.log(cartForm.value);
   
@@ -72,7 +74,7 @@ addCart(formData: any) {
   this.auth.createCart(formData.id, formData.quantity, formData.color).subscribe(
     response => {
       console.log('Added to cart', JSON.stringify(response))
-      // this.closeModalAndNavigate();
+      this.closeModalAndNavigate();
     },
     error => console.error('Error:', error)
   );

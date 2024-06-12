@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
 import { Product } from '../product';
@@ -13,14 +13,13 @@ import { AuthService } from 'src/app/shared/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductDetailComponent implements OnInit {
-  // @ViewChild('exampleModal') modalElement!: any; // Use ViewChild to get a reference to the modal element
 
-
-  // product$: Observable<Product> | undefined;
   selectProduct$: Observable<Product> | undefined;
   relatedProducts$: Observable<Product[]> | undefined;
   index: number = 0;
   quantity: number = 1;
+
+  stars: number[] = [5, 4, 3, 2, 1];
 
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
@@ -56,17 +55,6 @@ export class ProductDetailComponent implements OnInit {
       );
 
     });
-
-
-    // this.product$ = this.productService.product$.pipe(
-    //   shareReplay(1),
-    //   // tap( result=> console.log('id: ', JSON.stringify(result))),
-    //   catchError(err => {
-    //     this.errorMessageSubject.next(err);
-    //     return EMPTY;
-    //   })
-    // );
-
   }
 
   openRelated(id: string) {
@@ -103,6 +91,53 @@ decrement(): void {
       return 'red';
     }
   }
+
+
+  totalRatings(product: Product): number {
+    return product ?
+          product.reviewStat.star5 + 
+           product.reviewStat.star4 + 
+           product.reviewStat.star3 + 
+           product.reviewStat.star2 + 
+           product.reviewStat.star1
+           : 0
+  }
+
+
+  getRatingPercentage(product: Product, star: number): number {
+    const total = this.totalRatings(product);
+    if (total === 0) {
+      return 50;
+    }
+    console.log('rating total:' + total);
+    
+    return (product?.reviewStat[`star${star}`] / total) * 100;
+    
+  }
+  
+
+
+  // get totalRatings() {
+  //   if (!this.product) return 0;
+  //   const total = this.product.reviewStat.star5 + 
+  //                 this.product.reviewStat.star4 + 
+  //                 this.product.reviewStat.star3 + 
+  //                 this.product.reviewStat.star2 + 
+  //                 this.product.reviewStat.star1;
+  //   console.log('Total Ratings:', total);  // Debug log
+  //   return total;
+  // }
+
+  // getRatingPercentage(star: number): number {
+  //   const total = this.totalRatings;
+  //   if (!total || !this.product) {
+  //     return 0;
+  //   }
+  //   const percentage = (this.product.reviewStat[`star${star}`] / total) * 100;
+  //   console.log(`Percentage for star ${star}:`, percentage);  // Debug log
+  //   return percentage;
+  // }
+
 
   // No longer using this, cos im not using new behaviorsubject and next from the product service
 

@@ -6,7 +6,7 @@
             <hr>
             <div *ngIf="allCart?.items?.length; else noCart" >
                 <div class="card-body cart-item" *ngFor="let cart of allCart?.items; let i = index" >
-                    <div class="row" style="padding: 0.8rem;" >
+                    <div class="row" style="padding: 0.6rem 0.8rem;" >
                         <div class="col-md-10 d-flex align-items-center p-0" >
                             <img [src]="'/assets/img-details/800x800_' + cart.image" class="me-3" style="width: 5rem;" alt="">
             

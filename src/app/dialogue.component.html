@@ -162,14 +162,14 @@
                             </div>                         
 
                             <div class="d-flex" style="height: 2.8rem">
-                                <button [disabled]="quantity === 1" class="button btn"
+                                <button [disabled]="quantity === 1" type="button" class="button btn"
                                     (click)="decrement()" >
                                     <span class="material-icons">
                                         remove
                                     </span>
                                 </button>
                                 <p class="number" >{{quantity}}</p>
-                                <button [disabled]="quantity === product.color[indexer].quantity" class="button btn"
+                                <button [disabled]="quantity === product.color[indexer].quantity" type="button" class="button btn"
                                     (click)="increment(product.color[indexer].quantity)">
                                     <span class="material-icons">
                                         add
@@ -193,8 +193,7 @@
                             
                             <div class="col-md-1 p-0 flex-center"
                             style="border-radius: 0.8px; align-self: end;"  >
-                            <button type="button" 
-                                (click)="closeModalAndNavigate();" 
+                            <button type="button"                                 
                                 class="btn navigateTo" 
                                 [disabled]="!cartForm.valid" 
                                 type="submit" >Add to Cart</button>
@@ -209,28 +208,8 @@
             
         </div>
             
-    
-            <!--<div class="row ms-4 me-4">
-                <div class="col-md-6 p-0"
-                    [routerLink]="['/products']" >
-                    <button type="button" class="btn navigateTo" style="background-color: #a3cef8; " data-bs-dismiss="modal">Add to Cart</button>
-                </div>
-                <div class="col-md-6 p-0">
-                    <button type="button" 
-                        class="btn navigateTo"
-                        style="background-color: #1976d2; color: white;"
-                        data-bs-dismiss="modal"
-                        [routerLink]="['/order']" >Buy Now
-                    </button>
-                </div>
-            </div> -->
     </div>
 </div>
-
-
-
-
-
 
 <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
     {{errorMessage}}

@@ -8,7 +8,7 @@
 
 
 .rating {
-    background-color: rgba(235, 232, 232, 0.974);
+    background-color: rgba(238, 238, 238, 0.977);
     padding: 1.5rem ;
     width: fit-content;
     border-radius: 10px;
@@ -27,6 +27,11 @@
     color: gold;
     font-size: 1.2rem;
 }
+
+.progress-bar {
+    transition: width 0.6s ease;
+  }
+  
 
 .content {
     /* background-color: rgba(225, 221, 221, 0.974); */
