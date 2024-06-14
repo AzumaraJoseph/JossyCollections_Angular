@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, map, observable, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, map, observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
@@ -18,10 +18,14 @@ export class CreateOrderTotalComponent implements OnInit {
   totalShippingFee!: number;
   loadOrderTotal$!: Observable<any>;
   stripePromise: Promise<Stripe | null>;
+
+  errorMessageSubject = new Subject<string>();
+  errorMessage$: Observable<string> = this.errorMessageSubject.asObservable();
+
   
-  get currentUser() {
-    return this.auth.currentUser
-  }
+  // get currentUser() {
+  //   return this.auth.currentUser
+  // }
 
   constructor(private cartService: CartService, private auth: AuthService, private route: ActivatedRoute) {
     this.stripePromise = loadStripe(
@@ -70,12 +74,18 @@ export class CreateOrderTotalComponent implements OnInit {
     this.auth.placeOrder().pipe(
       tap((response) => {
         console.log('Order placed successfully:', response);
+      }),
+      catchError(error => {
+        console.error('Place Order error:', error.message);
+        const errorMessage = error.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(errorMessage);
+        return EMPTY;
       })
     ).subscribe(
-      () => {},
-      (error) => {
-        console.error('Order placement failed:', error);
-      }
+      // () => {},
+      // (error) => {
+      //   console.error('Order placement failed:', error);
+      // }
     );
   }
 

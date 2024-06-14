@@ -146,7 +146,11 @@
                                     </span>
                                 </div>
                             </div>
-                
+
+                            <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
+                                Error: {{errorMessage}}
+                            </div>
+                            
                             <button class="btn button" type="submit" [disabled]="!profileForm.valid || profileForm.pristine" >Save Changes</button>
                         </form>
                     </div>

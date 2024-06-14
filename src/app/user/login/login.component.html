@@ -4,10 +4,10 @@
             star
         </span>
     </div>
-    <div style="margin: 0 auto; width: 36%;">
+    <div style="margin: 0 auto; width: 39%;">
         <div class="center">
-            <h5 class="fw-bold">Welcome to Jossy</h5>
-            <p style="color: rgba(84, 83, 83, 0.978);">Let's get started by creating your account. <br>
+            <h5 class="fw-bold fs-4">Welcome to Jossy</h5>
+            <p style="color: rgba(84, 83, 83, 0.978); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; margin-bottom: 0; ">Let's get started by creating your account. <br>
             To keep your account safe, we need a strong password</p>
         </div>
         <div>
@@ -18,7 +18,7 @@
                         class="form-control" 
                         id="emailId"
                         formControlName="email"
-                        placeholder="Email" 
+                        placeholder="Enter Your Email" 
                         [ngClass]="{'is-invalid': (loginForm.controls['email'].touched || loginForm.get('email')?.dirty) && !loginForm.get('email')?.valid }" >
 
                     <label for="emailId">Email</label>
@@ -38,7 +38,7 @@
                             class="form-control" 
                             id="passwordId" 
                             formControlName="password" 
-                            placeholder="Password" 
+                            placeholder="Enter Your Password" 
                             [ngClass]="{'is-invalid': (loginForm.controls['password'].touched || loginForm.controls['password'].dirty) && !loginForm.controls['password'].valid }" >
 
                     <label for="passwordId">Password</label>
@@ -59,15 +59,15 @@
                 </div>
             </form>
 
-            <p class="text-center mt-3 mb-3" style="font-size: 0.8rem;">By continuing you agree to Jossy's <br> <a href="">Terms and Conditions</a></p>
+            <p class="text-center mt-3 mb-3" style="font-size: 0.8rem; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">By continuing you agree to Jossy's <br> <a href="">Terms and Conditions</a></p>
 
-            <p class="text-center mt-2" style="font-size: 0.93rem;">For further support, you may visit the Help Center or contact our customer service team.</p>
+            <p class="text-center mt-2" style="font-size: 0.93rem; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">For further support, you may visit the Help Center or contact our customer service team.</p>
                 
             <div class="header d-flex align-items-center">
-                <h5 class="mb-0 fw-bold me-1">JOSSY</h5>
+                <h5 class="mb-0 fw-bold me-1" >JOSSY</h5>
                 <span class="material-icons icon">star</span>
             </div>
-            <p class="text-center mt-3">Don't have an account? <a [routerLink]="['/user/signup']" routerLinkActive="router-link-active" >Sign Up</a></p>
+            <p class="text-center mt-3" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Don't have an account? <a [routerLink]="['/user/signup']" routerLinkActive="router-link-active" >Sign Up</a></p>
         </div>
     </div>
 </div>

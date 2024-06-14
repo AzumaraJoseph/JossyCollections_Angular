@@ -40,8 +40,10 @@ export class ProductDetailComponent implements OnInit {
         shareReplay(1),
         // tap(product => console.log('single product: ', JSON.stringify(product))),
         catchError(err => {
-          this.errorMessageSubject.next(err);
-          return EMPTY
+          console.error('Single Product error:', err.message);
+            const errorMessage = err.message || 'An unknown error occurred';
+            this.errorMessageSubject.next(errorMessage);
+          return EMPTY;
         })
       )
 
@@ -49,7 +51,9 @@ export class ProductDetailComponent implements OnInit {
         shareReplay(1),
         // tap( result=> console.log('related: ', JSON.stringify(result))),
         catchError(err => {
-          this.errorMessageSubject.next(err);
+          console.error('Related error:', err.message);
+            const errorMessage = err.message || 'An unknown error occurred';
+            this.errorMessageSubject.next(errorMessage);
           return EMPTY;
         })
       );

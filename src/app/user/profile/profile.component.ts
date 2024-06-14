@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Router } from '@angular/router';
 import { Iuser } from '../user.component';
+import { EMPTY, Subject, catchError, tap } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -11,11 +12,11 @@ import { Iuser } from '../user.component';
 })
 export class ProfileComponent implements OnInit {
   profileForm!: FormGroup;
-  currentUser: any;
+  // user: any;
 
-  get user() {
-    return this.auth.currentUser;
-  }
+  // get user() {
+  //   return this.auth.currentUser;
+  // }
 
   // passwordFieldType!: string = 'password';
 
@@ -23,10 +24,16 @@ export class ProfileComponent implements OnInit {
   newPasswordVisible: boolean = false;
   confirmPasswordVisible: boolean = false;
 
+  errorMessageSubject = new Subject<string>();
+  errorMessage$ = this.errorMessageSubject.asObservable();
+
+
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+
+    
 
     this.profileForm = this.fb.group({
       firstName: ['', [ Validators.required, Validators.minLength(3) ]],
@@ -37,15 +44,22 @@ export class ProfileComponent implements OnInit {
   });
 
 
+  this.auth.getUser().subscribe(response => {
+    const user = response
+    // console.log('tired', JSON.stringify(user));
+
     this.profileForm.patchValue({
-      firstName: this.user.firstName,
-      lastName: this.user.lastName,
-      email: this.user.email,
-      phone: this.user.phone
+      firstName: user.firstName ,
+      lastName: user.lastName,
+      email: user.email,
+      phone: user.phone
+
     })
+    
+  })
+    
 
   // this.auth.updateUser().subscribe()
-
 
   }
 
@@ -66,9 +80,15 @@ export class ProfileComponent implements OnInit {
     if(this.profileForm.valid) {
       console.log('Form submitted:', this.profileForm.value);
       
-      this.auth.updateUser(this.profileForm.value).subscribe(res => {
-        console.log('UpdateOneUser:', JSON.stringify(res));
+      this.auth.updateUser(this.profileForm.value).pipe(
+        tap(response => console.log('UpdateOneUser:', JSON.stringify(response))),
+       catchError(err => {
+        console.error('Profile error:', err.message);
+          const errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(errorMessage);
+        return EMPTY;
       })
+      ).subscribe()
       this.router.navigate(['/products'])
       console.log('Update successful');
     }

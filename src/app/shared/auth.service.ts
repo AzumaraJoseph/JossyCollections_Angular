@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, map } from 'rxjs';
+import { Observable, throwError, map, BehaviorSubject } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { Iuser } from '../user/user.component';
 
@@ -24,10 +24,17 @@ export class AuthService {
   private reviewUrl = 'http://127.0.0.1:5000/api/v1/products';
 
 
-  currentUser!:any | null;
+  private currentUserSubject: BehaviorSubject<Iuser| null>;
+  currentUser$: Observable<Iuser | null>;
 
+  redirectUrl?: string;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    const storedUser = localStorage.getItem('currentUser');
+    this.currentUserSubject = new BehaviorSubject<Iuser | null>(storedUser ? JSON.parse(storedUser) : null);
+    this.currentUser$ = this.currentUserSubject.asObservable();
+   }
+
 
   login(email: string, password: string): Observable<Iuser> {
     
@@ -36,8 +43,14 @@ export class AuthService {
     const loginInfo = { email, password };
 
     return this.http.post<any>(this.loginUrl, loginInfo, options).pipe(
-      map(data=> data.data),
-      map(data => this.currentUser = data),
+      // map(data=> data.data),
+      // map(data => this.currentUser = data),
+      tap(response => {
+        const user = response.data;
+        this.currentUserSubject.next(user);
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        return user;
+      }),
       tap(data => {
         console.log('Login successful:', JSON.stringify(data));
       }),
@@ -53,8 +66,15 @@ export class AuthService {
     const signupInfo = { firstName, lastName, email, password, confirmPassword, phone };
 
     return this.http.post<any>(this.signupUrl, signupInfo, options).pipe(
-      map(data => data.data),
-      tap(data => this.currentUser = data),
+      // map(data => data.data),
+      // tap(data => this.currentUser = data),
+      tap(response => {
+        const user = response.data;
+        this.currentUserSubject.next(user);
+        localStorage.setItem('currentUser', JSON.stringify(user));
+
+        return user;
+      }),
       tap(data => console.log('signup successful: ', JSON.stringify(data))
       ),
       catchError(this.handleError)
@@ -68,14 +88,19 @@ export class AuthService {
     const options = { headers, withCredentials: true};
 
     return this.http.post<any>(this.logOutUrl, {}, options).pipe(
-      tap(() => this.currentUser = null ),
+      // tap(() => this.currentUser = null ),
+      tap(() => {
+        this.currentUserSubject.next(null),
+        localStorage.removeItem('currentUser');
+    }),
       catchError(this.handleError)
     );
   }
 
-  get isLoggedIn() {
-    return !!this.currentUser;
+  get isLoggedIn(): boolean {
+    return !!this.currentUserSubject.value;
   }
+
 
   getUser(): Observable<any> {
     // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -83,8 +108,17 @@ export class AuthService {
   
     return this.http.get<any>(this.currentUserUrl, options).pipe(
       map(user => user.data.data),
-      tap(cur => this.currentUser = cur),
-      // tap(cur =>   console.log('Current user: ', JSON.stringify(cur))),
+      // tap(cur => this.currentUser = cur),
+
+      tap(response => {
+        const user = response;
+        this.currentUserSubject.next(user);
+        // localStorage.setItem('currentUser', JSON.stringify(user));
+        // console.log('Current user: ', JSON.stringify(user))
+        return user;
+      }),
+
+      tap(cur =>   console.log('Current user: ', JSON.stringify(cur))),
       catchError(this.handleError)
     );
   }
@@ -93,11 +127,15 @@ export class AuthService {
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };
-    const updateInfo = { ...this.currentUser, ...user };
+    const updateInfo = { ...this.currentUserSubject.value, ...user };
 
     return this.http.patch<any>(this.updateUserUrl, updateInfo, options).pipe(
       map(update => update.data.user),
       // tap(data => console.log('updateUser: ', JSON.stringify(data))),
+      tap(updatedUser => {
+        this.currentUserSubject.next(updatedUser);
+        // localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+      }),
     catchError(err => this.handleError(err)))
   }
 
@@ -106,8 +144,14 @@ export class AuthService {
     const options = { headers, withCredentials: true};
 
     return this.http.post<any>(this.createAddressUrl, address, options).pipe(
-      map(response => response.data.data),
-      tap(data => this.currentUser = data),
+      // map(response => response.data.data),
+      // tap(data => this.currentUser = data),
+
+      tap(response => {
+        const user = response.data.data;
+        this.currentUserSubject.next(user);
+        return user;
+      }),
       tap(data => console.log('new address', JSON.stringify(data))),
       catchError(err => this.handleError(err)))
   }
@@ -135,7 +179,6 @@ export class AuthService {
       catchError(this.handleError)
     )
   }
-
   getCart(totalAmt: number | null): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };

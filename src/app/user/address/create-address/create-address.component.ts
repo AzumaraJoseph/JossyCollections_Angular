@@ -17,8 +17,8 @@ export class CreateAddressComponent implements OnInit {
   countries!: any[];
   selectedCountry: any | undefined;
 
-  errorMessageSuject = new Subject<string>();
-  errorMessage$ = this.errorMessageSuject.asObservable();
+  errorMessageSubject = new Subject<string>();
+  errorMessage$ = this.errorMessageSubject.asObservable();
 
   get user() {
     return this.auth.getUser().pipe(
@@ -39,7 +39,7 @@ export class CreateAddressComponent implements OnInit {
       }),
       // tap(countries => console.log('countries: ', JSON.stringify(countries))),
       catchError(err => {
-        this.errorMessageSuject.next(err)
+        this.errorMessageSubject.next(err)
         return EMPTY
       })
     ).subscribe()
@@ -55,13 +55,43 @@ export class CreateAddressComponent implements OnInit {
       lastName: ''
     })
 
+    this.auth.getUser().pipe(
+      map(user => user?.addresses),
+      tap(addresses => console.log('addressessssss: ', JSON.stringify(addresses))),
+      tap(address => {
+        if (address.length > 0) {
+          this.addressForm.patchValue({ 
+            street: address[0].street,
+            city: address[0].city,
+            // state: address[0].state,
+            // country: address[0].country,
+            firstName: address[0].firstName,
+            lastName: address[0].lastName,
 
-    this.user.subscribe((user) => {
-      this.addressForm.patchValue({
-        street: user[0].street,
-        city: user[0].city,
+
+            
+          });
+        } else {
+          console.warn('No addresses found');
+        }
       })
-    })
+    ).subscribe(
+    //response => {
+    //   this.addressForm.patchValue({ 
+        
+    //     street: response[0]?.street,
+    //     city: response[0]?.city,
+    //   })
+    // }
+    )
+
+
+    // this.user.subscribe((user) => {
+    //   this.addressForm.patchValue({
+    //     street: user[0].street,
+    //     city: user[0].city,
+    //   })
+    // })
 
   }
 
@@ -87,15 +117,27 @@ export class CreateAddressComponent implements OnInit {
     if (this.addressForm.valid) {
       console.log('Form submitted: ', JSON.stringify(this.addressForm.value));
       const address = this.addressForm.value;
-      this.auth.createAddress(address).subscribe(
-        response => {
+      this.auth.createAddress(address).pipe(
+        tap(response => {
           console.log('Address created successfully:', response);
           this.addressForm.reset();
           this.router.navigate(['/user/address'])
-        },
-        error => {
-          console.error('Error creating address:', error);
-        }
+        }),
+        catchError(err => {
+          console.error('Create Address error:', err.message);
+            const errorMessage = err.message || 'An unknown error occurred';
+            this.errorMessageSubject.next(errorMessage);
+            return EMPTY;
+        })
+      ).subscribe(
+      //   response => {
+      //     console.log('Address created successfully:', response);
+      //     this.addressForm.reset();
+      //     this.router.navigate(['/user/address'])
+      //   },
+      //   error => {
+      //     console.error('Error creating address:', error);
+      //   }
       );
     } else {
       console.log('Form is invalid');

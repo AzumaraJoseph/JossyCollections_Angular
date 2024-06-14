@@ -16,6 +16,10 @@ export class OrderHistoryComponent implements OnInit {
   productRating: number = 0;
   comment: string = ''
 
+  errorMessageSubject = new Subject<string>();
+  errorMessage$: Observable<string> = this.errorMessageSubject.asObservable();
+
+
 
   // rating: number = 3;
   // review = {
@@ -25,8 +29,7 @@ export class OrderHistoryComponent implements OnInit {
 
   orderHistory$!: Observable<any>;
 
-  errorMessageSuject = new Subject<string>();
-  errorMessage$ = this.errorMessageSuject.asObservable();
+
   
   constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router) { }
 
@@ -35,6 +38,12 @@ export class OrderHistoryComponent implements OnInit {
 
     this.orderHistory$ = this.auth.orderHistory().pipe(
       // tap(orders => console.log('All orders: ', JSON.stringify(orders))),
+      catchError(err => {
+        console.error('Order History error:', err.message);
+          const errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(errorMessage);
+        return EMPTY;
+      })
     )
 
    

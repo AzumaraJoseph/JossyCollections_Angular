@@ -84,7 +84,7 @@
                     <div class="d-flex justify-content-between align-items-center p-3">
                         <h5 class="mb-0">Delivery Address</h5>
                         <div class="col-md-2 text-center">
-                            <button [routerLink]="['/address/create']" routerLinkActive="router-link-active" *ngIf="currentUser.addresses.length > 0" class="btn add-address" type="button">Add Address</button>
+                            <button [routerLink]="['/address/create']" routerLinkActive="router-link-active" *ngIf="currentUser.addresses?.length !== 0" class="btn add-address" type="button">Add Address</button>
                         </div>
                     </div>
 
@@ -145,7 +145,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-8 book" *ngIf="currentUser.addresses.length < 1" >
+                        <div class="col-md-8 book" *ngIf="currentUser.addresses?.length < 1" >
                             <div style=" width: min-content;">
                                 <img  src="../../../assets/products/notebook.0c73f0bb.svg" alt="Address book">
                                 
@@ -157,8 +157,7 @@
     
                             <a [routerLink]="['/address/create']" routerLinkActive="router-link-active"  class="btn btn-sm address-btn" >ADD NEW ADDRESS</a>
     
-                        </div>     
-
+                        </div>
                     </div>
 
 
@@ -167,6 +166,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
+    Error: {{errorMessage}}
 </div>
 
 

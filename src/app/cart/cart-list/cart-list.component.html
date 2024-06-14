@@ -4,7 +4,7 @@
             <h5 class="card-header m-0 p-3"  >Cart ({{ cartQuantity }})</h5>
 
             <hr>
-            <div *ngIf="allCart?.items?.length; else noCart" >
+            <div *ngIf="allCart?.items?.length;" >
                 <div class="card-body cart-item" *ngFor="let cart of allCart?.items; let i = index" >
                     <div class="row" style="padding: 0.6rem 0.8rem;" >
                         <div class="col-md-10 d-flex align-items-center p-0" >
@@ -69,38 +69,15 @@
     
             </div>
 
-            <ng-template #noCart>
+            <!-- <ng-template #noCart>
                 <div class="alert alert-danger mb-0">
                   No cart found!!!
                 </div>
-            </ng-template>
+            </ng-template> -->
+            <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage" >
+                Error: {{errorMessage}}
+            </div>
         </div>
+        
     </div>
-    
-    <!-- <div class="col-md-3" style="height: min-content; border-radius: 6px; margin-top: 2rem; padding: 0 0.5rem;" *ngIf="allCart.items.length" >
-        <div class="card" style="border: 1px solid #f68b1e;" >
-            <div class="card-header">
-                <h5 class="mb-0" >Cart Summary</h5>
-            </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-4">Subtotal:</div>
-                    <div class="col-md-8  text-end">$35.00</div>
-                </div>
 
-                <div class="col-md-8">Shipping fee not added yet!</div> 
-
-                <div class="row fw-bold">
-                    <div class="col-md-4">Total:</div>
-                    <div class="col-md-8  text-end">{{allCart.cartSubtotal}}</div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-<!-- </div> -->
-
-
-<div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage" >
-    Error: {{errorMessage}}
-</div>

@@ -5,20 +5,20 @@
         </span>
     </div>
 
-    <div style="margin: 0 auto; width: 36%;">
+    <div style="margin: 0 auto; width: 39%;">
         <div class="center">
-            <h5 class="fw-bold">Create your acount</h5>
-            <p style="color: rgba(84, 83, 83, 0.978);">Let's get started by creating your account. <br>
+            <h5 class="fw-bold fs-4">Create your Acount</h5>
+            <p style="color: rgba(84, 83, 83, 0.978); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; margin-bottom: 0;">Let's get started by creating your account. <br>
             To keep your account safe, we need a strong password</p>
         </div>
         <div>
         <form novalidate autocomplete="off" [formGroup]="signUpForm" (ngSubmit)="save()" >
-                <div class="form-floating form-group mb-4">
+                <div class="form-floating form-group mb-3">
                     <input type="text"
                         class="form-control"
                         id="firstNameId"
                         formControlName="firstName"
-                        placeholder="First Name" 
+                        placeholder=" Enter Your First Name" 
                         [ngClass]="{'is-invalid': (signUpForm.controls['firstName'].touched || signUpForm.get('firstName')?.dirty) && !signUpForm.get('firstName')?.valid }" >
 
                     <label for="firstNameId">First Name</label>
@@ -33,12 +33,12 @@
                     </div>
                 </div>
 
-                <div class="form-floating form-group mb-4">
+                <div class="form-floating form-group mb-3">
                   <input type="text"
                       class="form-control"
                       id="lastNameId"
                       formControlName="lastName"
-                      placeholder="Last Name" 
+                      placeholder=" Enter Your Last Name" 
                       [ngClass]="{'is-invalid': (signUpForm.controls['lastName'].touched || signUpForm.get('lastName')?.dirty) && !signUpForm.get('lastName')?.valid }" >
 
                   <label for="lastNameId">Last Name</label>
@@ -53,12 +53,12 @@
                   </div>
               </div>
 
-                <div class="form-floating form-group mb-4">
+                <div class="form-floating form-group mb-3">
                     <input type="email"
                         class="form-control" 
                         id="emailId"
                         formControlName="email"
-                        placeholder="Email" 
+                        placeholder=" Enter Your Email" 
                         [ngClass]="{'is-invalid': (signUpForm.controls['email'].touched || signUpForm.get('email')?.dirty) && !signUpForm.get('email')?.valid }" >
 
                     <label for="emailId">Email</label>
@@ -74,12 +74,12 @@
                     </div>
                 </div>
 
-                    <div class="form-floating form-group mb-4">
+                    <div class="form-floating form-group mb-3">
                       <input type="password"
                         class="form-control"
                         id="passwordId"
                         formControlName="password"
-                        placeholder="Password"
+                        placeholder=" Enter Your Password"
                         [ngClass]="{'is-invalid': (signUpForm.get('password')?.touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid }">
                       <label for="passwordId">Password</label>
                       <div *ngIf="(signUpForm.get('password')?.touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid">
@@ -92,12 +92,12 @@
                       </div>
                     </div>
                 
-                    <div class="form-floating form-group mb-4">
+                    <div class="form-floating form-group mb-3">
                       <input type="password"
                         class="form-control"
                         id="confirmPasswordId"
                         formControlName="confirmPassword"
-                        placeholder="Confirm Password"
+                        placeholder=" Enter Your Confirm Password"
                         [ngClass]="{'is-invalid': (signUpForm.get('confirmPassword')?.touched || signUpForm.get('confirmPassword')?.dirty) && (!signUpForm.get('confirmPassword')?.valid || signUpForm.hasError('passwordsMismatch')) }">
                       <label for="confirmPasswordId">Confirm Password</label>
 
@@ -123,7 +123,7 @@
                             class="form-control" 
                             id="phoneId" 
                             formControlName="phone" 
-                            placeholder="Phone" 
+                            placeholder=" Enter Your Phone" 
                             [ngClass]="{'is-invalid': (signUpForm.controls['phone'].touched || signUpForm.get('phone')?.dirty) && !signUpForm.get('phone')?.valid }" >
                     <label for="phoneId">Phone</label>
 
@@ -185,15 +185,15 @@
             
 
 
-            <p class="text-center mt-3 mb-3" style="font-size: 0.8rem;">By continuing you agree to Jossy's <br> <a href="">Terms and Conditions</a></p>
+            <p class="text-center mt-3 mb-3" style="font-size: 0.8rem; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">By continuing you agree to Jossy's <br> <a href="">Terms and Conditions</a></p>
 
-            <p class="text-center mt-2" style="font-size: 0.93rem;">For further support, you may visit the Help Center or contact our customer service team.</p>
+            <p class="text-center mt-2" style="font-size: 0.93rem; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">For further support, you may visit the Help Center or contact our customer service team.</p>
                 
             <div class="header d-flex align-items-center">
                 <h5 class="mb-0 fw-bold me-1">JOSSY</h5>
                 <span class="material-icons icon">star</span>
             </div>
-            <p class="text-center">Already have an account? <a [routerLink]="['/user/login']" routerLinkActive="router-link-active" >Log in</a></p>
+            <p class="text-center" style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Already have an account? <a [routerLink]="['/user/login']" routerLinkActive="router-link-active" >Log in</a></p>
             
         </div>
     </div>

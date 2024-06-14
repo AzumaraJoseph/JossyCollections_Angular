@@ -13,7 +13,6 @@ import { OrderComponent } from './order.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ToastComponent } from './toast.component';
 import { UserModule } from './user/user.module';
-import { CartComponent } from './cart/cart.component';
 import { CartListComponent } from './cart/cart-list/cart-list.component';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';
 import { CartShellComponent } from './cart/cart-shell/cart-shell.component';
@@ -32,7 +31,6 @@ import { OrderHistoryComponent } from './order/order-history/order-history.compo
     DialogueComponent,
     OrderComponent,
     ToastComponent,
-    CartComponent,
     CartListComponent,
     CartItemComponent,
     CartShellComponent,

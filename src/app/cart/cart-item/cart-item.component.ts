@@ -15,8 +15,8 @@ export class CartItemComponent implements OnInit {
 
   quantity = 1;
 
-  errorMessageSuject = new Subject<string>();
-  errorMessage$ = this.errorMessageSuject.asObservable();
+  private errorMessageSubject = new Subject<string>();
+  errorMessage$ = this.errorMessageSubject.asObservable();
 
 
   constructor(private route: ActivatedRoute, private productService: ProductService) { }
@@ -27,7 +27,9 @@ export class CartItemComponent implements OnInit {
       const id = params['id']
       this.product$ = this.productService.selectedProduct$(id).pipe(
         catchError(err => {
-          this.errorMessageSuject.next(err)
+          console.error('Cart Item error:', err.message);
+          const errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(errorMessage);          
           return EMPTY
         })
       )

@@ -4,6 +4,7 @@ import { AuthService } from './shared/auth.service';
 import { Iuser } from './user/user.component';
 import { Observable, map, tap } from 'rxjs';
 import { CartService } from './shared/cart.service';
+import { AuthGuard } from './auth.guard';
 
 @Component({
   selector: 'app-root',
@@ -17,15 +18,12 @@ export class AppComponent implements OnInit {
   currentUser: any;
   cart$!: Observable<any>;
   cartCount!: number;
+  user: any;
+  // isLoggedIn = false;
 
-  get isLoggedIn() {
+  get isLoggedIn(): boolean {
     return this.auth.isLoggedIn;
-  }
-
-  get user() {
-    return this.auth.currentUser;
-  }
-  
+  }  
 
   isScrolledDown: boolean = false;
   lastScrollTop: number = 0;
@@ -45,14 +43,32 @@ export class AppComponent implements OnInit {
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
 
-  constructor(private router: Router, private elementRef: ElementRef, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService ) { }
-  
+  constructor(private router: Router, private elementRef: ElementRef, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService, public authGuard: AuthGuard ) { }
+
+
+
   ngOnInit(): void {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0); // Scroll to top on navigation
       }  
     }); 
+
+
+     //Subscribe to currentUser$ to always have the latest user data
+    this.auth.currentUser$.subscribe(user => {
+      this.user = user;
+      // this.isLoggedIn;
+      console.log('User data:', JSON.stringify(this.user));
+    });
+
+
+    if (this.isLoggedIn) {
+      this.auth.getUser().subscribe(response => {
+        this.user = response
+        console.log('hahahahahaa', JSON.stringify(this.user));
+      })
+    }
 
     // this.currentUser = this.currentUser ? this.user.firstName
 
@@ -68,12 +84,14 @@ export class AppComponent implements OnInit {
   
   }
 
+  
+
   cartCounts() {
     this.auth.getCart(null).subscribe(cart => {
-      this.cartCount = cart
+      this.cartCount = cart.totalQuantityOrdered;
       this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
 
-      // console.log('cartBag', JSON.stringify(cart))
+      console.log('cartBag', JSON.stringify(cart))
 
     }
       
@@ -91,6 +109,14 @@ export class AppComponent implements OnInit {
 
   toggleArrow(): void {
     this.isClicked = !this.isClicked;
+  }
+
+  switch() {
+    if (this.isLoggedIn) {
+      this.router.navigate(['/cart']);
+    } else {
+      this.router.navigate(['/user/login']);
+    }
   }
   
   logOut(): void {

@@ -9,14 +9,15 @@ import { DialogueComponent } from './dialogue.component';
 import { CartShellComponent } from './cart/cart-shell/cart-shell.component';
 import { OrderShellComponent } from './order/order-shell.component';
 import { OrderHistoryComponent } from './order/order-history/order-history.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: 'products', component: ProductListComponent },
   { path: 'products/:id', component: ProductDetailComponent },
   { path: 'products/:id/dialogue', component: DialogueComponent },
   { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
-  { path: 'cart', component: CartShellComponent },
-  { path: 'order', component: OrderShellComponent },
+  { path: 'cart', component: CartShellComponent, canActivate: [ AuthGuard ] },
+  { path: 'order', component: OrderShellComponent, canActivate: [ AuthGuard ] },
   { path: 'order/history', component: OrderHistoryComponent },
   { path: 'star', component: StarComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },

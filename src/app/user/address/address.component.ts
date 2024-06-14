@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordsMatchValidator } from '../custom-validators';
 import { AuthService } from 'src/app/shared/auth.service';
-import { Observable, map, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Component({
@@ -29,6 +29,11 @@ export class AddressComponent implements OnInit {
   confirmPasswordVisible: boolean = false;
   editMode: boolean =false;
 
+  
+  errorMessageSubject = new Subject<string>();
+  errorMessage$ = this.errorMessageSubject.asObservable();
+
+
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private cdr: ChangeDetectorRef) { }
 
@@ -48,8 +53,14 @@ export class AddressComponent implements OnInit {
 
 
   this.address$ = this.auth.getUser().pipe(
-    // map(user => user.addresses),
-    // tap(res => console.log('Address user', JSON.stringify(res)))
+    map(user => user),
+    tap(res => console.log('Address user', JSON.stringify(res))),
+    catchError(err => {
+      console.error('Address error:', err.message);
+        const errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(errorMessage);
+      return EMPTY;
+    })
   );
 
 

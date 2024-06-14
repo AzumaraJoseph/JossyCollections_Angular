@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
@@ -13,7 +14,7 @@ export class CartTotalComponent implements OnInit {
   totalQuantity!: number;
 
 
-  constructor(private auth: AuthService, private cartService: CartService) { }
+  constructor(private auth: AuthService, private cartService: CartService, private router: Router) { }
 
   ngOnInit(): void {
     this.totalPrice$ = this.cartService.getTotalPrice().pipe(
@@ -23,5 +24,11 @@ export class CartTotalComponent implements OnInit {
     this.cartService.getTotalQuantity().subscribe(data => this.totalQuantity = data); // Subscribepipe to total price observable
  
   } 
+
+  routeToOrder() {
+    setTimeout(() => {
+          this.router.navigate(['/order']);
+        }, 1000); // Adjust the timeout as needed
+  }
 
 }

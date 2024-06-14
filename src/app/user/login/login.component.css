@@ -20,6 +20,10 @@
     margin-bottom: 1.5rem;
 }
 
+.form-control {
+    padding: 0.75rem;
+}
+
 input {
     /* border: none; */
     /* outline: 0.3px solid rgb(123, 123, 123); */

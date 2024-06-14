@@ -19,7 +19,7 @@
         </div>
         <hr class="m-0">
 
-        <div class="col-md-12" [routerLink]="['/order']" >
+        <div class="col-md-12" (click)="routeToOrder()" >
             <button class="btn checkOut">CHECKOUT({{totalQuantity}})</button>
         </div>
     </div>

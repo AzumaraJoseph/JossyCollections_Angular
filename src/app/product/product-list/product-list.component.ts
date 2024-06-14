@@ -34,7 +34,9 @@ export class ProductListComponent implements OnInit {
       shareReplay(1),
       // tap(result => console.log(result)),
       catchError(err => {
-        this.errorMessageSubject.next(err);
+        console.error('Login Caught error:', err.message);
+          const errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(errorMessage);
         return EMPTY;
       })
     );

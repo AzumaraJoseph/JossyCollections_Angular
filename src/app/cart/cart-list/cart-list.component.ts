@@ -24,8 +24,8 @@ export class CartListComponent implements OnInit {
 
   cartListForm!: NgForm;
 
-  errorMessageSuject = new Subject<string>();
-  errorMessage$ = this.errorMessageSuject.asObservable();
+  errorMessageSubject = new Subject<string>();
+  errorMessage$ = this.errorMessageSubject.asObservable();
 
 
   constructor(private route: ActivatedRoute, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService) { }
@@ -63,8 +63,10 @@ export class CartListComponent implements OnInit {
   }
 
   loadCart() {
-    this.auth.getCart(null).subscribe(data => {
-      this.allCart = data;
+    this.auth.getCart(null).pipe(
+      map(data => data),
+      tap(data => {
+        this.allCart = data;
       this.cartService.updateCart(this.allCart.items)
 
       this.allCart.items.forEach((item: any) => {
@@ -72,10 +74,15 @@ export class CartListComponent implements OnInit {
 
         this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
       });
-
-      console.log('Cart list: ', JSON.stringify(this.allCart));
-      
-    });
+      } ),
+      tap(data => console.log('Cart Object: ', JSON.stringify(data))),
+      catchError(err => {
+        console.error('Cart lIst error:', err.message);
+          const errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(errorMessage);
+        return EMPTY;
+      })
+    ).subscribe();
   }
 
   increment(itemId: string, maxQuantity: number): void {
@@ -124,7 +131,8 @@ export class CartListComponent implements OnInit {
         this.loadCart();
       }),
       catchError(err => {
-        this.errorMessageSuject.next(err)
+        const errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(errorMessage);
         return EMPTY
       }
     )
@@ -195,7 +203,9 @@ export class CartListComponent implements OnInit {
         this.loadCart();
       }),
       catchError(err => {
-        this.errorMessageSuject.next(err)
+        console.error('Load Cart error:', err.message);
+        const errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(errorMessage);
         return EMPTY
       }
     )

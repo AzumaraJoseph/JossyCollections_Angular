@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
 
@@ -20,10 +20,14 @@ export class CreateOrderComponent implements OnInit {
   // totalShippingFee: number = 0;
   shippingFeePerItem: number = 5.99;
 
+  errorMessageSubject = new Subject<string>();
+  errorMessage$: Observable<string> = this.errorMessageSubject.asObservable();
+
+
   
-  get currentUser() {
-    return this.auth.currentUser
-  }
+  // get currentUser() {
+  //   return this.auth.currentUser
+  // }
 
   constructor( private cartService: CartService, private auth: AuthService, private router: Router) { }
 
@@ -35,21 +39,29 @@ export class CreateOrderComponent implements OnInit {
 
     this.cartItems$ = this.auth.getUser();
 
-    console.log(this.currentUser);
+    // console.log(this.currentUser);
 
     this.loadCart()
     
   }
 
   loadCart() {
-    this.auth.getCart(null).subscribe(data => {
-      this.allCart = data;
+    this.auth.getCart(null).pipe(
+      tap(data => {
+        this.allCart = data;
       // this.shippingFee
       this.calculateTotalShippingFee()
       
       // console.log('Cart list: ', JSON.stringify(this.allCart));
       
-    });
+      } ),
+      catchError(err => {
+        console.error('Load Order error:', err.message);
+          const errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(errorMessage);
+        return EMPTY;
+      })
+    ).subscribe();
   }
 
   calculateTotalShippingFee() {
