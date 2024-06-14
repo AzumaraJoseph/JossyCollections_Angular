@@ -118,7 +118,7 @@ export class AuthService {
         return user;
       }),
 
-      tap(cur =>   console.log('Current user: ', JSON.stringify(cur))),
+      // tap(cur =>   console.log('Current user: ', JSON.stringify(cur))),
       catchError(this.handleError)
     );
   }
@@ -179,6 +179,7 @@ export class AuthService {
       catchError(this.handleError)
     )
   }
+
   getCart(totalAmt: number | null): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };
@@ -191,7 +192,7 @@ export class AuthService {
 
      return this.http.put<any>(this.getCartUrl, item, options).pipe(
       map(response => response.data),
-      // tap(data => console.log('cartssssss: ', JSON.stringify(data))),
+      tap(data => console.log('cartssssss: ', JSON.stringify(data))),
       catchError(this.handleError)
      )
   }

@@ -1,0 +1,30 @@
+.toast {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease-in-out;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: .8;
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  /* background-color: #51A351; */
+  /* background-color: #459a45; */
+  /* background-color: #48aa48; */
+  /* background-color: #43ad43; */
+  background-color: #3fa73f;
+  cursor: pointer;
+  box-shadow: 0 0 10px grey;
+
+  color: white; /* White text */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Transition on opacity and transform with a duration and easing */
+
+}
+
+.toast.show:hover {
+  opacity: 1;
+  transition: all .2s;
+  transform: scale(1.02);
+}

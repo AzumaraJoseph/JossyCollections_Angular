@@ -15,15 +15,10 @@
    -->
 
 
-   <div class="toast-container position-fixed top-0 end-0 p-3 w-100" style="z-index: 105; height: 6rem; margin-top: 7rem;">
-    <div class="toast" role="alert" aria-live="assertive" aria-atomic="true" [class.show]="show">
-      <div class="toast-header">
-        <strong class="me-auto">Notification</strong>
-        <button type="button" class="btn-close" aria-label="Close" (click)="hideToast()"></button>
-      </div>
+   <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 10000; margin-top: 4rem;">
+    <div class="toast toast-success" role="alert" aria-live="assertive" aria-atomic="true" [ngClass]="{'show': show}">
       <div class="toast-body">
-        <p>{{ message }}</p>
-        <p>Test message</p>
+        <p class="mb-0">{{ message }}</p>
       </div>
     </div>
   </div>

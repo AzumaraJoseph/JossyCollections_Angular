@@ -2,7 +2,8 @@ import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
-import { ToastComponent } from 'src/app/toast.component';
+import { ToastComponent } from 'src/app/shared/toast.component';
+import { ToastService } from 'src/app/shared/toast.service';
 declare let $: any;
 
 @Component({
@@ -22,7 +23,7 @@ export class ProductListComponent implements OnInit {
   errorMessage$ = this.errorMessageSubject.asObservable();
 
 
-  constructor(private productService: ProductService) { }
+  constructor(private productService: ProductService, private toastService: ToastService) { }
 
 
   ngOnInit(): void {
@@ -68,14 +69,19 @@ export class ProductListComponent implements OnInit {
   // @ViewChild(ToastComponent) toast!: ToastComponent;
 
 
-  showToast(message: string) {
-    // this.toast.showToast(message);
-    // console.log('showToast method in ProductListComponent called'); // Debugging log
-    if (this.toast) {
-      this.toast.showToast(message);
-    }
-    console.log(this.toast); // Debugging log
+  // showToast(message: string) {
+  //   // this.toast.showToast(message);
+  //   // console.log('showToast method in ProductListComponent called'); // Debugging log
+  //   if (this.toast) {
+  //     this.toast.showToast(message);
+  //   }
+  //   console.log(this.toast); // Debugging log
 
+  // }
+
+  showToast(message: string) {
+    console.log('showToast in ProductListComponent called with message:', message); // Debugging log
+    this.toastService.show(message);
   }
 
 }

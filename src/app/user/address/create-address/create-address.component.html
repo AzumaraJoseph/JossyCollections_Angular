@@ -196,7 +196,11 @@
                         </div>
                     </form>
 
-                </div>                 
+                </div>   
+                
+                <div class="alert alert-danger mb-0 mt-2" *ngIf="errorMessage$ | async as errorMessage">
+                    Error: {{errorMessage}}
+                </div>
             </div>
         </div>
     </div>
@@ -204,10 +208,6 @@
 
 
 
-
-  <style>
-    
-  </style>
 
 <body>
   

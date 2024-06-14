@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { EMPTY, Observable, Subject, catchError, map, observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
@@ -27,7 +27,7 @@ export class CreateOrderTotalComponent implements OnInit {
   //   return this.auth.currentUser
   // }
 
-  constructor(private cartService: CartService, private auth: AuthService, private route: ActivatedRoute) {
+  constructor(private cartService: CartService, private auth: AuthService, private route: ActivatedRoute, private cdr: ChangeDetectorRef) {
     this.stripePromise = loadStripe(
       'pk_test_51OusquKAHvC2BbJggPo38R5ZkMpSs3mYled2GhhJEPZPSGmSEb32FXm6dw8F20bBLIra31Ju4H7SVCFLMG9yyP5J00b1G6HlKw'
     );
@@ -36,13 +36,7 @@ export class CreateOrderTotalComponent implements OnInit {
 
 
   ngOnInit(): void {
-    // this.route.params.subscribe(() => {
-    //   this.totalShippingFee = this.cartService.getTotalShippingFee();
-    // console.log('total', this.totalShippingFee);
-
-    //   this.loadCart();
-    // });
-
+  
 
     this.totalShippingFee = this.cartService.getTotalShippingFee();
     console.log('total', this.totalShippingFee);
@@ -66,28 +60,30 @@ export class CreateOrderTotalComponent implements OnInit {
       
       this.totalShippingFee
       console.log('delivery ', JSON.stringify(this.totalShippingFee));
+
+      this.cdr.detectChanges()
       
     });
   }
 
-  placeOrders() {
-    this.auth.placeOrder().pipe(
-      tap((response) => {
-        console.log('Order placed successfully:', response);
-      }),
-      catchError(error => {
-        console.error('Place Order error:', error.message);
-        const errorMessage = error.message || 'An unknown error occurred';
-        this.errorMessageSubject.next(errorMessage);
-        return EMPTY;
-      })
-    ).subscribe(
-      // () => {},
-      // (error) => {
-      //   console.error('Order placement failed:', error);
-      // }
-    );
-  }
+  // placeOrders() {
+  //   this.auth.placeOrder().pipe(
+  //     tap((response) => {
+  //       console.log('Order placed successfully:', response);
+  //     }),
+  //     catchError(error => {
+  //       console.error('Place Order error:', error.message);
+  //       const errorMessage = error.message || 'An unknown error occurred';
+  //       this.errorMessageSubject.next(errorMessage);
+  //       return EMPTY;
+  //     })
+  //   ).subscribe(
+  //     // () => {},
+  //     // (error) => {
+  //     //   console.error('Order placement failed:', error);
+  //     // }
+  //   );
+  // }
 
 
   placeOrder() {

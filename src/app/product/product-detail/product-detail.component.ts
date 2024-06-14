@@ -4,6 +4,7 @@ import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
 import { Product } from '../product';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
+import { ToastService } from 'src/app/shared/toast.service';
 // import bootstrap from 'bootstrap'; // Import Bootstrap JavaScript (if not already imported)
 
 @Component({
@@ -24,7 +25,7 @@ export class ProductDetailComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
-  constructor(private productService: ProductService, private route: ActivatedRoute, private router: Router, private auth: AuthService) { }
+  constructor(private productService: ProductService, private toastService: ToastService, private route: ActivatedRoute, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
 
@@ -117,6 +118,11 @@ decrement(): void {
     
     return (product?.reviewStat[`star${star}`] / total) * 100;
     
+  }
+
+  showToast(message: string) {
+    console.log('showToast in ProductListComponent called with message:', message); // Debugging log
+    this.toastService.show(message);
   }
   
 

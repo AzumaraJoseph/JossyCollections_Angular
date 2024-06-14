@@ -47,50 +47,23 @@ export class AddressComponent implements OnInit {
       newPassword: ['', [ Validators.required, Validators.minLength(8) ]],
       confirmPassword: ['', [ Validators.required ]],
 
-  }, { validators: passwordsMatchValidator('newPassword', 'confirmPassword') } );
+    }, { validators: passwordsMatchValidator('newPassword', 'confirmPassword') } );
 
-  console.log(this.profileForm.controls['newPassword']);
-
-
-  this.address$ = this.auth.getUser().pipe(
-    map(user => user),
-    tap(res => console.log('Address user', JSON.stringify(res))),
-    catchError(err => {
-      console.error('Address error:', err.message);
-        const errorMessage = err.message || 'An unknown error occurred';
-        this.errorMessageSubject.next(errorMessage);
-      return EMPTY;
-    })
-  );
+    console.log(this.profileForm.controls['newPassword']);
 
 
-  // TO RELOAD THE COMPONENT ALONE AND NOT THE ENTIRE APP
-  // this.loadProduct();
+    this.address$ = this.auth.getUser().pipe(
+      map(user => user),
+      tap(res => console.log('Address user', JSON.stringify(res))),
+      catchError(err => {
+        console.error('Address error:', err.message);
+          const errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(errorMessage);
+        return EMPTY;
+      })
+    );
 
   }
-
-
-
-  
-  // loadProduct(): void {
-  //   // Replace this with your actual data fetching logic
-  //   this.addressService.getProduct().subscribe({
-  //     next: (data) => {
-  //       this.product = data;
-  //     },
-  //     error: (err) => {
-  //       console.error('Failed to load product', err);
-  //     }
-  //   });
-  // }
-
-  // reloadPage(): void {
-  //   this.loadProduct();  // Call loadProduct to refresh the data
-  // }
-
-
-
-
 
   editAddress() {
     this.editMode = true;
@@ -101,7 +74,10 @@ export class AddressComponent implements OnInit {
     this.auth.deleteAddress(id).pipe(
       tap(res => console.log('Address deleted', JSON.stringify(res))),
       // tap(() => this.cdr.markForCheck())
-      tap(() => window.location.reload())
+      // tap(() => this.cdr.detectChanges()),
+      // tap(() => this.address$.subscribe()),
+
+      tap(() => window.location.reload()),
 
     ).subscribe();    
     // window.location.reload();

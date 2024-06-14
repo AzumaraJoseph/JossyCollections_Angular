@@ -11,7 +11,7 @@ import { SharedModule } from './shared/shared.module';
 import { DialogueComponent } from './dialogue.component';
 import { OrderComponent } from './order.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ToastComponent } from './toast.component';
+import { ToastComponent } from './shared/toast.component';
 import { UserModule } from './user/user.module';
 import { CartListComponent } from './cart/cart-list/cart-list.component';
 import { CartItemComponent } from './cart/cart-item/cart-item.component';

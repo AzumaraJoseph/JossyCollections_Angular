@@ -59,14 +59,14 @@ export class AppComponent implements OnInit {
     this.auth.currentUser$.subscribe(user => {
       this.user = user;
       // this.isLoggedIn;
-      console.log('User data:', JSON.stringify(this.user));
+      // console.log('User data:', JSON.stringify(this.user));
     });
 
 
     if (this.isLoggedIn) {
       this.auth.getUser().subscribe(response => {
         this.user = response
-        console.log('hahahahahaa', JSON.stringify(this.user));
+        // console.log('hahahahahaa', JSON.stringify(this.user));
       })
     }
 
@@ -91,7 +91,7 @@ export class AppComponent implements OnInit {
       this.cartCount = cart.totalQuantityOrdered;
       this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
 
-      console.log('cartBag', JSON.stringify(cart))
+      // console.log('cartBag', JSON.stringify(cart))
 
     }
       

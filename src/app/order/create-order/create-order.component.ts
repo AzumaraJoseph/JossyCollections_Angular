@@ -52,7 +52,7 @@ export class CreateOrderComponent implements OnInit {
       // this.shippingFee
       this.calculateTotalShippingFee()
       
-      // console.log('Cart list: ', JSON.stringify(this.allCart));
+      console.log('Order list: ', JSON.stringify(this.allCart));
       
       } ),
       catchError(err => {
