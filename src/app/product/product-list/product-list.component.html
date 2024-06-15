@@ -38,10 +38,10 @@
 
         <div class="row ms-5 pb-3" *ngIf="products$ | async as products">
             <div class="card p-2 m-2" style="width: 16rem;"
-                *ngFor="let product of products" (click)="showToast('Toast clickeersss!')" >
+                *ngFor="let product of products">
                     
                 <div class="card-body d-flex flex-column justify-content-between p-3" 
-                (click)="showToast('Toast clickeersss!')" 
+                (click)="showToast(product.name)" 
                     [routerLink]="['/products', product.id ]" >
 
                     <img [src]="'/assets/products/250x250_' + product.imageCover"
@@ -57,7 +57,7 @@
                             </ng-container>
                         </p>
                         <div>
-                            <app-star [rating]="product.ratingsAverage"></app-star>
+                            <app-star [rating]="product.ratingsAverage" [title]="'rating ' + product.ratingsAverage"></app-star>
 
                             <!-- <app-star [rating]="3.6"></app-star>
                             <app-star [rating]="4.4"></app-star> -->

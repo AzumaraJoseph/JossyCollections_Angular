@@ -6,14 +6,34 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class ToastService {
-  private toastSubject = new Subject<string>();
-  toastState$ = this.toastSubject.asObservable();
+    // ---for stacking single toast---
 
-  shown = false;
+  // private toastSubject = new Subject<string>();
+  // toastState$ = this.toastSubject.asObservable();
+
+  // show(message: string) {
+  //   console.log('ToastService.show called with message:', message); // Debugging log
+  //   this.toastSubject.next(message);
+  // }
+
+
+
+
+  // ---for stacking multiple toast(s)---
+
+  private toastSubject = new Subject<string[]>();
+  toastState$ = this.toastSubject.asObservable();
+  private messages: string[] = [];
 
   show(message: string) {
     console.log('ToastService.show called with message:', message); // Debugging log
-    this.toastSubject.next(message);
+    this.messages.push(message);
+    this.toastSubject.next(this.messages);
+  }
+
+  remove(message: string) {
+    this.messages = this.messages.filter(m => m !== message);
+    this.toastSubject.next(this.messages);
   }
 
 }

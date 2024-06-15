@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { EMPTY, Observable, Subject, catchError, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-create-order',
@@ -15,6 +16,7 @@ export class CreateOrderComponent implements OnInit {
   cartItems$!: Observable<any>;
   total!: number;
   allCart: any;
+  // allCart: { items: Array<any> } = { items: [] }; // Initialize allCart with an empty items array
   // shippingFee: number = 5.99;
 
   // totalShippingFee: number = 0;
@@ -23,13 +25,15 @@ export class CreateOrderComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$: Observable<string> = this.errorMessageSubject.asObservable();
 
+  errorMessage: string = '';
+
 
   
   // get currentUser() {
   //   return this.auth.currentUser
   // }
 
-  constructor( private cartService: CartService, private auth: AuthService, private router: Router) { }
+  constructor( private cartService: CartService, private auth: AuthService, private router: Router, private toastService: ToastService) { }
 
 
   ngOnInit(): void {
@@ -56,9 +60,11 @@ export class CreateOrderComponent implements OnInit {
       
       } ),
       catchError(err => {
-        console.error('Load Order error:', err.message);
-          const errorMessage = err.message || 'An unknown error occurred';
-          this.errorMessageSubject.next(errorMessage);
+        this.errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(this.errorMessage);
+
+        console.error('Order history error:', this.errorMessage);
+        this.showToast(this.errorMessage)
         return EMPTY;
       })
     ).subscribe();
@@ -108,6 +114,11 @@ export class CreateOrderComponent implements OnInit {
       "July", "August", "September", "October", "November", "December"
     ];
     return monthNames[month];
+  }
+
+  showToast(message: string) {
+    console.log('showToast in OrderHistoryComponent called with message:', message); // Debugging log
+    this.toastService.show(message);
   }
   
 }

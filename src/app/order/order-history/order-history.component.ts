@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subject, map, tap, catchError, EMPTY, Observable } from 'rxjs';
 import { ProductService } from 'src/app/product/product.service';
 import { AuthService } from 'src/app/shared/auth.service';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-order-history',
@@ -19,6 +20,8 @@ export class OrderHistoryComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$: Observable<string> = this.errorMessageSubject.asObservable();
 
+  errorMessage: string = '';
+
 
 
   // rating: number = 3;
@@ -31,7 +34,7 @@ export class OrderHistoryComponent implements OnInit {
 
 
   
-  constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router) { }
+  constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService) { }
 
   ngOnInit(): void {
 
@@ -39,9 +42,11 @@ export class OrderHistoryComponent implements OnInit {
     this.orderHistory$ = this.auth.orderHistory().pipe(
       // tap(orders => console.log('All orders: ', JSON.stringify(orders))),
       catchError(err => {
-        console.error('Order History error:', err.message);
-          const errorMessage = err.message || 'An unknown error occurred';
-          this.errorMessageSubject.next(errorMessage);
+        this.errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(this.errorMessage);
+
+        console.error('Login error:', this.errorMessage);
+        this.showToast(this.errorMessage + ' history')
         return EMPTY;
       })
     )
@@ -93,6 +98,11 @@ export class OrderHistoryComponent implements OnInit {
   resetForm(): void {
     this.comment = '',
     this.productRating = 0
+  }
+
+  showToast(message: string) {
+    console.log('showToast in OrderHistoryComponent called with message:', message); // Debugging log
+    this.toastService.show(message);
   }
 
 }

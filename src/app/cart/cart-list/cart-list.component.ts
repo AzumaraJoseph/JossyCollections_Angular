@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 import { Product } from 'src/app/product/product';
 import { ProductService } from 'src/app/product/product.service';
 import { CartService } from 'src/app/shared/cart.service';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-cart-list',
@@ -27,8 +28,10 @@ export class CartListComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
+  errorMessage: string = '';
 
-  constructor(private route: ActivatedRoute, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService) { }
+
+  constructor(private route: ActivatedRoute, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService, private toastService: ToastService) { }
 
   ngOnInit(): void {
 
@@ -77,9 +80,11 @@ export class CartListComponent implements OnInit {
       } ),
       tap(data => console.log('Cart Object: ', JSON.stringify(data))),
       catchError(err => {
-        console.error('Cart lIst error:', err.message);
-          const errorMessage = err.message || 'An unknown error occurred';
-          this.errorMessageSubject.next(errorMessage);
+        this.errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(this.errorMessage);
+
+        console.error('Cart List error:', this.errorMessage);
+        this.showToast(this.errorMessage)
         return EMPTY;
       })
     ).subscribe();
@@ -169,22 +174,22 @@ export class CartListComponent implements OnInit {
   }
 
 
-   save(cartListForm: NgForm) {
-    console.log(cartListForm.value);
+  // save(cartListForm: NgForm) {
+  //   console.log(cartListForm.value);
     
-    if (cartListForm.valid) {
-      this.addCart(cartListForm.value);
-    } else {
-      console.error('Form is invalid');
-    }
-  }
+  //   if (cartListForm.valid) {
+  //     this.addCart(cartListForm.value);
+  //   } else {
+  //     console.error('Form is invalid');
+  //   }
+  // }
   
-  addCart(formData?: any) {
-    this.auth.createCart(formData.id, formData.quantity).subscribe(
-      response => console.log('Added to cart', JSON.stringify(response)),
-      error => console.error('Error:', error)
-    );
-  }
+  // addCart(formData?: any) {
+  //   this.auth.createCart(formData.id, formData.quantity).subscribe(
+  //     response => console.log('Added to cart', JSON.stringify(response)),
+  //     error => console.error('Error:', error)
+  //   );
+  // }
 
   deleteProduct(itemId: string) {
     this.auth.updateCart(itemId, 0).pipe(
@@ -210,5 +215,10 @@ export class CartListComponent implements OnInit {
       }
     )
   ).subscribe();
+  }
+
+  showToast(message: string) {
+    console.log('showToast in CartListComponent called with message:', message); // Debugging log
+    this.toastService.show(message);
   }
 }

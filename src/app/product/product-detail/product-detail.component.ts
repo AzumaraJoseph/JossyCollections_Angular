@@ -25,6 +25,8 @@ export class ProductDetailComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
+  errorMessage: string = '';
+
   constructor(private productService: ProductService, private toastService: ToastService, private route: ActivatedRoute, private router: Router, private auth: AuthService) { }
 
   ngOnInit(): void {
@@ -42,8 +44,9 @@ export class ProductDetailComponent implements OnInit {
         // tap(product => console.log('single product: ', JSON.stringify(product))),
         catchError(err => {
           console.error('Single Product error:', err.message);
-            const errorMessage = err.message || 'An unknown error occurred';
-            this.errorMessageSubject.next(errorMessage);
+          this.errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(this.errorMessage);
+          this.showToast(this.errorMessage)
           return EMPTY;
         })
       )
@@ -52,9 +55,10 @@ export class ProductDetailComponent implements OnInit {
         shareReplay(1),
         // tap( result=> console.log('related: ', JSON.stringify(result))),
         catchError(err => {
-          console.error('Related error:', err.message);
-            const errorMessage = err.message || 'An unknown error occurred';
-            this.errorMessageSubject.next(errorMessage);
+          console.error('Related Product error:', err.message);
+          this.errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(this.errorMessage);
+          this.showToast(this.errorMessage)
           return EMPTY;
         })
       );
@@ -62,7 +66,8 @@ export class ProductDetailComponent implements OnInit {
     });
   }
 
-  openRelated(id: string) {
+  openRelated(id: string, message: any) {
+    this.showToast(message)
     this.router.navigate(['/products', id]);
   }
 
@@ -121,7 +126,7 @@ decrement(): void {
   }
 
   showToast(message: string) {
-    console.log('showToast in ProductListComponent called with message:', message); // Debugging log
+    console.log('showToast in ProductDetailComponent called with message:', message); // Debugging log
     this.toastService.show(message);
   }
   

@@ -192,7 +192,7 @@ export class AuthService {
 
      return this.http.put<any>(this.getCartUrl, item, options).pipe(
       map(response => response.data),
-      tap(data => console.log('cartssssss: ', JSON.stringify(data))),
+      // tap(data => console.log('cartssssss: ', JSON.stringify(data))),
       catchError(this.handleError)
      )
   }

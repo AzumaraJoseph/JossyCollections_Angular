@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subject, shareReplay, catchError, EMPTY } from 'rxjs';
 import { Product } from 'src/app/product/product';
 import { ProductService } from 'src/app/product/product.service';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-cart-shell',
@@ -26,8 +27,10 @@ export class CartShellComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
+  errorMessage: string = '';
 
-  constructor(private productService: ProductService) { }
+
+  constructor(private productService: ProductService, private toastService: ToastService) { }
 
 
   ngOnInit(): void {
@@ -39,13 +42,20 @@ export class CartShellComponent implements OnInit {
       shareReplay(1),
       // tap(result => console.log(result)),
       catchError(err => {
-        console.error('Product List error:', err.message);
-          const errorMessage = err.message || 'An unknown error occurred';
-          this.errorMessageSubject.next(errorMessage);
+        this.errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(this.errorMessage);
+
+        console.error('CartListRecommended error:', this.errorMessage);
+        this.showToast(this.errorMessage)
         return EMPTY;
       })
     );
 
+  }
+
+  showToast(message: string) {
+    console.log('showToast in LoginComponent called with message:', message); // Debugging log
+    this.toastService.show(message);
   }
 
 }

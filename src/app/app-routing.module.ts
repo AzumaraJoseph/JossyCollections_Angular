@@ -18,12 +18,11 @@ const routes: Routes = [
   { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule) },
   { path: 'cart', component: CartShellComponent, canActivate: [ AuthGuard ] },
   { path: 'order', component: OrderShellComponent, canActivate: [ AuthGuard ] },
-  { path: 'order/history', component: OrderHistoryComponent },
+  { path: 'order/history', component: OrderHistoryComponent, canActivate: [ AuthGuard ] },
   { path: 'star', component: StarComponent },
   { path: '', redirectTo: '/products', pathMatch: 'full' },
   {path: '**', component: ErrorPageComponent }
 ];
-
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

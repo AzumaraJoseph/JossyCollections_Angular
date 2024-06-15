@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { passwordsMatchValidator } from '../custom-validators';
 import { tap, catchError, EMPTY, Observable, Subject } from 'rxjs';
 import { Iuser } from '../user.component';
+import { ToastService } from 'src/app/shared/toast.service';
 // import { confirmPasswordValidator } from '../custom-validators';
 
 
@@ -26,7 +27,9 @@ export class SignUpComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$: Observable<string> = this.errorMessageSubject.asObservable();
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
+  errorMessage: string = '';
+
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService) { }
 
   // ngOnInit(): void {
 
@@ -104,6 +107,7 @@ export class SignUpComponent implements OnInit {
         tap((user: Iuser) => {
           if (user) {
             this.signUpForm.reset();
+            this.showToast('SignUp successful')
             this.router.navigate(['/products']);
             console.log('Sign up success');
             this.errorMessageSubject.next(''); // Clear error message on successful login
@@ -111,14 +115,21 @@ export class SignUpComponent implements OnInit {
             console.error('sign up failed');
           }
         }),
-        catchError(error => {
-          console.error('Sign up error:', error.message);
-          const errorMessage = error.message || 'An unknown error occurred';
-          this.errorMessageSubject.next(errorMessage);
+        catchError(err => {
+          this.errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(this.errorMessage);
+          
+          console.error('Sign up error:', this.errorMessage);
+          this.showToast(this.errorMessage)
           return EMPTY;
         })
       ).subscribe();
     }
+  }
+
+  showToast(message: string) {
+    console.log('showToast in SignUpComponent called with message:', message); // Debugging log
+    this.toastService.show(message);
   }
 
 }

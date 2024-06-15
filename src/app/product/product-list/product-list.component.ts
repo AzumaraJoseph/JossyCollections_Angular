@@ -22,6 +22,8 @@ export class ProductListComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
+  errorMessage: string = '';
+
 
   constructor(private productService: ProductService, private toastService: ToastService) { }
 
@@ -35,9 +37,11 @@ export class ProductListComponent implements OnInit {
       shareReplay(1),
       // tap(result => console.log(result)),
       catchError(err => {
-        console.error('Login Caught error:', err.message);
-          const errorMessage = err.message || 'An unknown error occurred';
-          this.errorMessageSubject.next(errorMessage);
+          this.errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(this.errorMessage);
+          
+          console.error('Product error:', this.errorMessage);
+          this.showToast(this.errorMessage)
         return EMPTY;
       })
     );

@@ -19,7 +19,7 @@
         <div style="font-size: 0.9rem; ">Delivery between {{todaysDateRange()}}</div>
     </div>
 
-    <div *ngIf="allCart.items;" >
+    <!-- <div *ngIf="allCart;" > -->
         <div class="card-body cart-item" *ngFor="let cart of allCart.items; let i = index" >
             <div class="row" style="padding: 0.8rem;" >
 
@@ -61,9 +61,10 @@
            
         </div>
 
-    </div>
-</div>
+    <!-- </div> -->
 
-<div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
-    Error: {{errorMessage}}
+    <!-- <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
+        Error: {{errorMessage}}
+    </div> -->
+
 </div>
