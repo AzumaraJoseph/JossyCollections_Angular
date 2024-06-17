@@ -1,5 +1,5 @@
 
-<div class="fluid-container ps-3 pe-3" style="background-color: rgba(246, 246, 246, 0.982)">
+<div class="fluid-container" style="background-color: rgba(246, 246, 246, 0.982)">
     <div class="col-md-12 slider ">
         <div id="carouselid" class="carousel slide" data-ride="carousel" data-pause="false">
           <div class="carousel-indicators ">
@@ -29,15 +29,15 @@
         </div>
     </div>
 
-    <div class="col-md-6 ms-4 ps-4">
-        <h3>{{pageTitle}}</h3>
+    <div class="col-md-6 list-title">
+        <h3 class="mb-0">{{pageTitle}}</h3>
     </div>
     <!-- <app-toast></app-toast> -->
 
-    <div class="col-md-12 mt-4">
+    <div class="col-md-12 mt-3">
 
-        <div class="row ms-5 pb-3" *ngIf="products$ | async as products">
-            <div class="card p-2 m-2" style="width: 16rem;"
+        <div class="row  pb-3" *ngIf="products$ | async as products">
+            <div class="card p-2"
                 *ngFor="let product of products">
                     
                 <div class="card-body d-flex flex-column justify-content-between p-3" 
