@@ -114,7 +114,7 @@ export class AuthService {
         const user = response;
         this.currentUserSubject.next(user);
         // localStorage.setItem('currentUser', JSON.stringify(user));
-        // console.log('Current user: ', JSON.stringify(user))
+        console.log('Current user: ', JSON.stringify(user))
         return user;
       }),
 

@@ -18,6 +18,7 @@ export class AddressComponent implements OnInit {
   // singleAddress$!: Observable<any>;
   address$!: Observable<any>;
   deleteAddress$!: Observable<any>;
+  addresses: any[] =[];
 
   // get currentUser() {
   //   return this.auth.currentUser;
@@ -57,11 +58,16 @@ export class AddressComponent implements OnInit {
 
     this.address$ = this.auth.getUser().pipe(
       map(user => user),
-      tap(res => {
-         console.log('Address user', JSON.stringify(res));
+      // tap(addresses => {
+      //    console.log('Address user', JSON.stringify(addresses));
 
-         if (res.addresses.length === 0) this.showToast('No address found')
+      //    if (addresses.length === 0) this.showToast('No address found')
 
+      //   }),
+        tap(response => {
+          this.addresses = response.addresses;
+          if (this.addresses.length === 0) this.showToast('No address found');
+          this.cdr.markForCheck();
         }),
       catchError(err => {
         this.errorMessage = err.message || 'An unknown error occurred';
@@ -78,22 +84,23 @@ export class AddressComponent implements OnInit {
     this.router.navigate(['/address/create'])
   }
   
-  deleteAddress(id: any, address: any) {
+  deleteAddress(id: any) {
     this.auth.deleteAddress(id).pipe(
-      tap(res => console.log('Address deleted', JSON.stringify(res))),
-      // tap(() => this.cdr.markForCheck())
-      // tap(() => this.cdr.detectChanges()),
-      // tap(() => this.address$.subscribe()),
+      tap(res => {
+        console.log('Address deleted', JSON.stringify(res));
+        this.addresses = this.addresses.filter(address => address._id !== id);
+        this.showToast('One address deleted successfully');
+        this.cdr.markForCheck();
+      }),
+      // tap(() => {
+      //   if (address) this.showToast('One address deleted successfully'),
+      //   // (address === 0 ? 'No address found' : 'One address deleted')
 
-      tap(() => {
-        if (address) this.showToast('One address deleted successfully'),
-        // (address === 0 ? 'No address found' : 'One address deleted')
-
-        window.location.reload();
-        // this.showToast('One address deleted')
+      //   window.location.reload();
+      //   // this.showToast('One address deleted')
         
 
-      })
+      // })
     ).subscribe();    
     // window.location.reload();
   }
