@@ -84,7 +84,7 @@
                     <div class="d-flex justify-content-between align-items-center p-3">
                         <h5 class="mb-0">Delivery Address</h5>
                         <div class="col-md-2 text-center">
-                            <button [routerLink]="['/address/create']" routerLinkActive="router-link-active" *ngIf="currentUser.addresses?.length !== 0" class="btn add-address" type="button">Add Address</button>
+                            <button [routerLink]="['/address/create']" routerLinkActive="router-link-active" *ngIf="currentUser.addresses?.length !== 0" class="btn add-address" type="button" (click)="showToast('Add a new address')" >Add Address</button>
                         </div>
                     </div>
 
@@ -124,7 +124,7 @@
                                                     <p class="card-text ms-3">{{ currentUser.phone }} </p>
                                                 </div>
                                                 <div class="d-flex align-self-end">
-                                                    <button class="button btn d-flex align-items-center me-2 p-1" (click)="deleteAddress(address._id)" >
+                                                    <button class="button btn d-flex align-items-center me-2 p-1" (click)="deleteAddress(address._id, currentUser.addresses?.length)" >
                                                         <span class="material-symbols-outlined me-1" style="font-size: 1rem;">
                                                             delete
                                                         </span>
@@ -155,7 +155,7 @@
                                 <p class="m-0">Add your shipping addresses here for a fast purchase experience! You will be able to add, modify or delete them at any time.</p>
                             </div>
     
-                            <a [routerLink]="['/address/create']" routerLinkActive="router-link-active"  class="btn btn-sm address-btn" >ADD NEW ADDRESS</a>
+                            <a [routerLink]="['/address/create']" routerLinkActive="router-link-active"  class="btn btn-sm address-btn" (click)="showToast('Add a new address')" >ADD NEW ADDRESS</a>
     
                         </div>
                     </div>
@@ -164,9 +164,6 @@
                     <div class="alert alert-danger mb-0 mt-2" *ngIf="errorMessage$ | async as errorMessage">
                         Error: {{errorMessage}}
                     </div>
-                    
-
-
                 </div>
             </div>
         </div>

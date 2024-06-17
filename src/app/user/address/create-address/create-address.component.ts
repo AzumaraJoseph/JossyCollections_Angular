@@ -5,6 +5,7 @@ import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { ProductService } from 'src/app/product/product.service';
 import { Iuser, address } from '../../user.component';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-create-address',
@@ -20,6 +21,8 @@ export class CreateAddressComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
+  errorMessage: string = '';
+
   get user() {
     return this.auth.getUser().pipe(
       map(user => user.addresses),
@@ -29,7 +32,7 @@ export class CreateAddressComponent implements OnInit {
 
   addressForm!: FormGroup;
   
-  constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router) { }
+  constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService) { }
 
   ngOnInit(): void {
 
@@ -119,15 +122,18 @@ export class CreateAddressComponent implements OnInit {
       const address = this.addressForm.value;
       this.auth.createAddress(address).pipe(
         tap(response => {
-          console.log('Address created successfully:', response);
+          console.log('Address added successfully:', response);
           this.addressForm.reset();
-          this.router.navigate(['/user/address'])
+          this.router.navigate(['/user/address']);
+          this.showToast('New address added successfully')
         }),
         catchError(err => {
-          console.error('Create Address error:', err.message);
-            const errorMessage = err.message || 'An unknown error occurred';
-            this.errorMessageSubject.next(errorMessage);
-            return EMPTY;
+          this.errorMessage = err.message || 'An unknown error occurred';
+          this.errorMessageSubject.next(this.errorMessage);
+
+          console.error('Create address error:', this.errorMessage);
+          this.showToast(this.errorMessage)
+          return EMPTY;
         })
       ).subscribe(
       //   response => {
@@ -145,4 +151,9 @@ export class CreateAddressComponent implements OnInit {
     
   }
   
+  
+  showToast(message: string) {
+    console.log('showToast in createAddressComponent called with message:', message); // Debugging log
+    this.toastService.show(message);
+  }
 }

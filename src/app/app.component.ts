@@ -2,9 +2,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Host
 import { Event, NavigationEnd, Router } from '@angular/router';
 import { AuthService } from './shared/auth.service';
 import { Iuser } from './user/user.component';
-import { Observable, map, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
 import { CartService } from './shared/cart.service';
 import { AuthGuard } from './auth.guard';
+import { ToastService } from './shared/toast.service';
 
 @Component({
   selector: 'app-root',
@@ -20,6 +21,11 @@ export class AppComponent implements OnInit {
   cartCount!: number;
   user: any;
   // isLoggedIn = false;
+
+  errorMessageSubject = new Subject<string>();
+  errorMessage$: Observable<string> = this.errorMessageSubject.asObservable();
+
+  errorMessage: string = '';
 
   get isLoggedIn(): boolean {
     return this.auth.isLoggedIn;
@@ -43,7 +49,7 @@ export class AppComponent implements OnInit {
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
 
-  constructor(private router: Router, private elementRef: ElementRef, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService, public authGuard: AuthGuard ) { }
+  constructor(private router: Router, private elementRef: ElementRef, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService, private toastService: ToastService ) { }
 
 
 
@@ -87,15 +93,23 @@ export class AppComponent implements OnInit {
   
 
   cartCounts() {
-    this.auth.getCart(null).subscribe(cart => {
+    this.auth.getCart(null).pipe(
+      tap(cart => {
       this.cartCount = cart.totalQuantityOrdered;
       this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
 
       // console.log('cartBag', JSON.stringify(cart))
 
-    }
-      
-    )
+    }),
+    catchError(err => {
+      this.errorMessage = err.message || 'An unknown error occurred';
+      this.errorMessageSubject.next(this.errorMessage);
+
+      console.error('Cart count error:', this.errorMessage);
+      // this.showToast(this.errorMessage)
+      return EMPTY;
+    })
+    ).subscribe();
   }
   // updateCartIcon() {
   //   return this.auth.getCart(null).subscribe(data =>{
@@ -127,5 +141,13 @@ export class AppComponent implements OnInit {
       }
     ); 
   }
+
+  showToast(message: string) {
+    console.log('showToast in CartIconComponent called with message:', message); // Debugging log
+    if (this.cartCount > 0) {
+      this.toastService.show(message);
+    }
+  }
+  
 } 
  

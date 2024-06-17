@@ -4,6 +4,7 @@ import { passwordsMatchValidator } from '../custom-validators';
 import { AuthService } from 'src/app/shared/auth.service';
 import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-profile',
@@ -33,9 +34,11 @@ export class AddressComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
+  errorMessage: string = '';
 
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private cdr: ChangeDetectorRef) { }
+
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private cdr: ChangeDetectorRef, private toastService: ToastService) { }
 
   ngOnInit(): void {
 
@@ -54,12 +57,17 @@ export class AddressComponent implements OnInit {
 
     this.address$ = this.auth.getUser().pipe(
       map(user => user),
-      tap(res => console.log('Address user', JSON.stringify(res))),
+      tap(res => {
+         console.log('Address user', JSON.stringify(res));
+
+         if (res.addresses.length === 0) this.showToast('No address found')
+
+        }),
       catchError(err => {
-        console.error('Address error:', err.message);
-          const errorMessage = err.message || 'An unknown error occurred';
-          this.errorMessageSubject.next(errorMessage);
-        return EMPTY;
+        this.errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(this.errorMessage);
+
+        console.error('Address error:', this.errorMessage);        return EMPTY;
       })
     );
 
@@ -70,15 +78,22 @@ export class AddressComponent implements OnInit {
     this.router.navigate(['/address/create'])
   }
   
-  deleteAddress(id: any) {
+  deleteAddress(id: any, address: any) {
     this.auth.deleteAddress(id).pipe(
       tap(res => console.log('Address deleted', JSON.stringify(res))),
       // tap(() => this.cdr.markForCheck())
       // tap(() => this.cdr.detectChanges()),
       // tap(() => this.address$.subscribe()),
 
-      tap(() => window.location.reload()),
+      tap(() => {
+        if (address) this.showToast('One address deleted successfully'),
+        // (address === 0 ? 'No address found' : 'One address deleted')
 
+        window.location.reload();
+        // this.showToast('One address deleted')
+        
+
+      })
     ).subscribe();    
     // window.location.reload();
   }
@@ -94,5 +109,10 @@ export class AddressComponent implements OnInit {
 
   toggleConfirmPasswordVisibilty(): void {
     this.confirmPasswordVisible = !this.confirmPasswordVisible;
+  }
+
+  showToast(message: string) {
+    console.log('showToast in LoginComponent called with message:', message); // Debugging log
+    this.toastService.show(message);
   }
 }

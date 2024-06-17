@@ -128,42 +128,51 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <div class="row">
-                                                    <img [src]="'/assets/img-details/800x800_' + each.image" style="width: 7rem; height: 7rem; margin-right: 0.6rem;" alt="{{each.name}}">
-                                                    <div class="col-md-8">
-                                                        <p class="mb-0">{{each.name}}</p>
-                                                        <app-star-review [(rating)]="productRating"></app-star-review>
-                                                        <!-- <app-star [(rating)]="each.rating"></app-star> -->
-                                                        <div class="col-md-12 mt-2">
-                                                            <form #orderHistoryForm="ngForm" (ngSubmit)="save(orderHistoryForm)" >
-                                                                <div class="form-floating">
-                                                                    <textarea class="form-control"
-                                                                    type="text" placeholder="Leave a comment here" 
-                                                                    id="floatingTextarea" style="height: 5rem;"
-                                                                    [(ngModel)]="comment"
-                                                                    name="comment" ></textarea>
-                                                                    <label for="floatingTextarea" style="padding: 0.65rem;" >Comment</label>
-                                                                </div>
+                                                <form #orderHistoryForm="ngForm" (ngSubmit)="save(orderHistoryForm)" >
+                                                    <div class="row">
+                                                        <img [src]="'/assets/img-details/800x800_' + each.image" style="width: 7rem; height: 7rem; margin-right: 0.6rem;" alt="{{each.name}}">
+                                                        <div class="col-md-9">
+                                                            <p class="mb-0">{{each.name}}</p>
+                                                            <app-star-review [(rating)]="productRating"></app-star-review>
+                                                            <!-- <app-star [(rating)]="each.rating"></app-star> -->
+                                                            <div class="col-md-12 mt-2">
                                                                 
-                                                                <input hidden type="number" class="form-control" 
-                                                                [(ngModel)]="productRating"
-                                                                name="rating">
+                                                                    <div class="form-floating">
+                                                                        <textarea class="form-control"
+                                                                        type="text" placeholder="Leave a comment here" 
+                                                                        id="floatingTextarea" style="height: 5rem;"
+                                                                        [(ngModel)]="comment"
+                                                                        name="comment" ></textarea>
+                                                                        <label for="floatingTextarea" style="padding: 0.65rem;" >Comment</label>
+                                                                    </div>
+                                                                    
+                                                                    <input hidden type="number" class="form-control" 
+                                                                    [(ngModel)]="productRating"
+                                                                    name="rating">
 
-                                                                <input hidden type="text" class="form-control" 
-                                                                [(ngModel)]="each.product"
-                                                                name="id">
-                                                            </form>
+                                                                    <input hidden type="text" class="form-control" 
+                                                                    [(ngModel)]="each.product"
+                                                                    name="id">
 
+                                                                    <!-- <div class="modal-footer">
+                                                                        <button type="submit" class="btn fw-semibold" 
+                                                                        data-bs-dismiss="modal"
+                                                                        style="background-color: #f68b1e; border: none; padding: 0.5rem; color: white; font-size: 1rem;" >Submit your Review</button> 
+                                                                    </div> -->
+                                                                    
+                                                            
+
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                             
-                                            </div>
-                                            <div class="modal-footer">
-                                            <button type="submit" (click)="save(orderHistoryForm)" class="btn btn-secondary fw-semibold" 
-                                            data-bs-dismiss="modal"
-                                            style="background-color: #f68b1e; border: none; padding: 0.5rem; font-size: 1rem;" >Submit your Review</button> 
-                                            <!--  -->
+                                                    <div class="modal-footer btn fw-bold" style="padding: 0.5rem 0;">
+                                                        <button type="submit" (click)="showToast('Product review was successful')"
+                                                        data-bs-dismiss="modal"
+                                                        style="background-color: #f68b1e; border: none; padding: 0.5rem; color: white; font-size: 1rem;" >Submit your Review</button> 
+                                                    
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>

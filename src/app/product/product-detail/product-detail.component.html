@@ -46,7 +46,10 @@
                 </p>
             </div>
             <div class="d-flex" style="align-items: center;">
-                <app-star [rating]="product.ratingsAverage" [title]="'rating ' + product.ratingsAverage" style="cursor: pointer;"></app-star>
+                <div style="width: fit-content;">
+                    <app-star [rating]="product.ratingsAverage" [title]="'rating ' + product.ratingsAverage" style="cursor: pointer;"></app-star>
+
+                </div>
                 <div class="ms-4">
                     {{product.ratingsQuantity && product.ratingsQuantity > 0 ? product.ratingsQuantity + " reviews" : "No reviews yet"}} 
                 </div>
@@ -56,7 +59,7 @@
         <div class="mb-2 ps-5 pe-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993); ">
             <h4 class="card-text">Colors</h4>
             <div class="col-md-12"
-                style="background-color: rgba(238, 238, 238, 0.977); display: flex; padding: 0.5rem;">
+                style="background-color: rgba(237, 237, 237, 0.98); display: flex; padding: 0.5rem;">
 
                 <!-- (click)="eachProduct(i)" -->
                 <div class="me-2" *ngFor="let color of product.color; let i = index;">
@@ -120,10 +123,13 @@
                 <div class="pt-2 pb-2">
                     <h4 class="mb-0">Reviews({{product.ratingsQuantity}})</h4>
                 </div>
-                <app-star [rating]="product.ratingsAverage" [title]="'rating ' + product.ratingsAverage"></app-star>
+                <div style="width: fit-content;">
+                    <app-star [rating]="product.ratingsAverage" [title]="'rating ' + product.ratingsAverage"></app-star>
+                </div>
             </div>
 
-            <div style="background-color: rgba(238, 238, 238, 0.977);
+            <!-- background-color: rgba(238, 238, 238, 0.977); -->
+            <div style="background-color: rgb(237 237 237 / 98%);
                 border-radius: 0.5rem;
                 padding: 0.8rem;
                 margin-bottom: 1rem;"
@@ -133,8 +139,11 @@
                     <span></span>
                     <span>{{ product.reviews[0].updatedAt | date: 'longDate' }}</span>
                 </div>
-                <app-star [rating]="product.reviews[0].rating" [title]="'rating ' + product.reviews[0].rating"></app-star>
-                <p class="mb-0">{{ product.reviews[0].comment }}</p>
+                <div style="width: fit-content; margin-bottom: 4px;">
+                    <app-star [rating]="product.reviews[0].rating" [title]="'rating ' + product.reviews[0].rating"></app-star>
+
+                </div>
+                <p class="mb-0" style="width: fit-content;">{{ product.reviews[0].comment }}</p>
             </div>
         </div>
 
@@ -219,7 +228,10 @@
                                             <span>{{comment.user.firstName}} {{comment.user.lastName}}</span>
                                             <span>{{comment.updatedAt | date: 'longDate' }}</span>
                                         </div>
-                                        <app-star [rating]="comment.rating" [title]="'rating ' + comment.rating" style="cursor: pointer;"></app-star>
+                                        <div style="width: fit-content;">
+                                            <app-star [rating]="comment.rating" [title]="'rating ' + comment.rating" style="cursor: pointer;"></app-star>
+
+                                        </div>
                                         <p class="mb-0 mt-1">{{comment.comment }}</p>
                                     </div>
                                 </div>                    
@@ -252,7 +264,7 @@
                                         - {{related.discountedLowPrice  | currency: 'USD': 'symbol': '1.2-2'}}
                                     </ng-container>
                                 </p>
-                                <div>
+                                <div style="width: fit-content;">
                                     <app-star [rating]="related.ratingsAverage" [title]="'rating ' + related.ratingsAverage"></app-star>
                                 </div>
                                 <div class="d-flex justify-content-between mt-2">

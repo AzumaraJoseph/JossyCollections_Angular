@@ -29,7 +29,8 @@
 }
 
 .empty {
-  color: #e8e8e8;
+  /* color: #e8e8e8; */
+  color: #dedede;
   width: 100%;
 }
 

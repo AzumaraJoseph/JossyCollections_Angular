@@ -119,7 +119,7 @@ export class CreateOrderTotalComponent implements OnInit {
   }
 
   showToast(message: string) {
-    console.log('showToast in LoginComponent called with message:', message); // Debugging log
+    console.log('showToast in OrderTotalComponent called with message:', message); // Debugging log
     this.toastService.show(message);
   }
 
