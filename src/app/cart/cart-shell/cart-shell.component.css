@@ -17,7 +17,7 @@
 }
 
 .cart-btn {
-    background-color: orange;
+    background-color: #f68b1e;
     color: rgba(255, 255, 255, 0.982);
     width: 95%;
     border-radius: 0.7rem;
@@ -25,13 +25,44 @@
 }
 
 .cart-btn:active {
-    border: 1px solid orange;
+    border: 1px solid #f68b1e;
 }
 
 .card:hover .cart-btn {
     visibility: visible;
     /* outline: orange; */
 
+}
+
+@media (max-width: 577px) {
+    .card-align {
+        padding-left: 1.2rem !important;
+        padding-right: 1.2rem !important;
+    }
+
+    .card-align-title {
+        margin: 0 0 0.7rem !important;
+        padding: 0 !important;
+    }
+
+
+    .card {
+        width: 100% !important;
+        margin: 0 0 0.7rem 0 !important;
+    }
+
+    .row {
+        margin-bottom: 0 !important;
+    }
+
+    .row-align {
+        margin-left: 0 !important;
+        padding-right: 0.9rem !important;
+    }
+
+    .card-text {
+        font-size: 1rem !important;
+    }
 }
 
 

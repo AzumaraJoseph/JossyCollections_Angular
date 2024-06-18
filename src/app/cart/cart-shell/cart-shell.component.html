@@ -1,5 +1,5 @@
 <div class="fluid-container" style="background-color: rgba(246, 246, 246, 0.982);">
-    <div class="row justify-content-center" style= "margin-top: 4rem; margin-bottom: 2rem;" >
+    <div class="row justify-content-center" style= "margin-top: 4rem; margin-bottom: 1rem;" >
         <div class="col-md-7">
           <app-cart-list></app-cart-list>
         </div>
@@ -8,15 +8,15 @@
         </div>
     </div>
     
-    <div>
-        <div class="col-md-6 ps-4 mb-3" style="margin-left: 2.5rem;">
-            <h4 class="mb-0">{{pageTitle}}</h4>
+    <div class="card-align">
+        <div class="col-md-6 ps-4 mb-2 card-align-title" style="margin-left: 2.5rem;">
+            <h4 class="card-text mb-0">{{pageTitle}}</h4>
         </div>
     
         <div class="col-md-12">
             <app-toast></app-toast>
     
-            <div class="row ms-5 pb-3" *ngIf="products$ | async as products">
+            <div class="row row-align ms-5 pb-3" *ngIf="products$ | async as products">
                 <div class="card p-2 m-2" style="width: 16rem;"
                     *ngFor="let product of products">
                         

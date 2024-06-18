@@ -1,16 +1,16 @@
 <!-- <div class="row" style="background-color: rgba(246, 246, 246, 0.982); margin-top: 4rem;"> -->
-    <div style="border-radius: 6px; margin-top: 2rem; padding: 0 0.5rem;" >
+    <div class="cart-list" style="border-radius: 6px; margin-top: 2rem; padding: 0 0.5rem;">
         <div class="card">
-            <h5 class="card-header m-0 p-3"  >Cart ({{ cartQuantity }})</h5>
+            <h5 class="card-header card-text m-0 p-3"  >Cart ({{ cartQuantity }})</h5>
 
             <hr>
             <div *ngIf="allCart?.items?.length;" >
                 <div class="card-body cart-item" *ngFor="let cart of allCart?.items; let i = index" >
                     <div class="row" style="padding: 0.6rem 0.8rem;" >
-                        <div class="col-md-10 d-flex align-items-center p-0" >
+                        <div class="col-md-10 col-sm-10 d-flex align-items-center p-0" >
                             <img [src]="'/assets/img-details/800x800_' + cart.image" class="me-3" style="width: 5rem;" alt="">
             
-                            <div style="padding: 0 0.8rem;">
+                            <div style="padding: 0 0.7rem;">
                                 <p class="mb-0">{{cart.name}}</p>
                                 <p class="mb-0">{{cart.color}}</p>
                                 <p class="mb-0" 
@@ -30,10 +30,10 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-2 d-flex flex-column align-items-end">
-                            <p class="mb-2 fw-bold fs-5">{{cart.discountPrice | currency: 'USD': 'symbol': '1.2' }}</p>
+                        <div class="col-md-2 col-sm-2 price d-flex flex-column align-items-end">
+                            <p class="card-text mb-2 fw-bold fs-5">{{cart.discountPrice | currency: 'USD': 'symbol': '1.2' }}</p>
                             <div class="d-flex">
-                                <p class="mb-0 me-2" style="text-decoration-line: line-through; font-size: 1.1rem; color: rgba(109, 109, 109, 0.967);">{{ cart.discountPrice !== cart.price ? (cart.price | currency: 'USD': 'symbol': '1.2') : '' }} 
+                                <p class="card-text mb-0 me-2" style="text-decoration-line: line-through; font-size: 1.1rem; color: rgba(109, 109, 109, 0.967);">{{ cart.discountPrice !== cart.price ? (cart.price | currency: 'USD': 'symbol': '1.2') : '' }} 
                                 </p>
         
                                 <span style="color: red; background-color: #feecda; font-size: 0.92rem; padding: 1px 2px; border-radius: 4px;">{{ cart.discountPrice !== cart.price ? (((cart.price - cart.discountPrice) / cart.price) * 100).toFixed() + '%' : '' }}</span>
@@ -41,7 +41,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-between">
+                    <div class="footer d-flex justify-content-between">
                         <button class="btn button-delete d-flex align-items-center" style="color: #f68b1e;" (click)="deleteProduct(cart._id)" >
                             <span class="material-icons">
                                 delete_outline
@@ -64,6 +64,33 @@
                                 </span>
                             </button>
                         </div>
+                    </div>
+
+                    <div class="footer-small-screen d-flex justify-content-between">
+                        <div class="btn-height d-flex" style="height: 2rem">
+                            <button [disabled]="quantity === 0" class="button-adjust btn"
+                                (click)="decrement(cart._id)" >
+                                <span class="material-icons icon-size">
+                                    remove
+                                </span>
+                            </button>
+                            <p class="quantity" >{{ quantities[cart._id] }}</p>
+                            <button [disabled]="quantity === cart.maxQuantity" class="button-adjust btn"
+                                (click)="increment(cart._id, cart.maxQuantity)">
+                                <span class="material-icons icon-size">
+                                    add
+                                </span>
+                            </button>
+                        </div>
+
+                        <button class="btn button-delete d-flex align-items-center" style="color: #f68b1e;" (click)="deleteProduct(cart._id)" >
+                            <span class="material-icons">
+                                delete_outline
+                            </span>
+                            <span class="mb-0 ms-2 fw-semibold" style="font-size: 0.9rem;" >REMOVE</span>
+                        </button>
+        
+                        
                     </div>
                 </div>
     

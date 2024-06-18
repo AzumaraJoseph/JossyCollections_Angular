@@ -55,3 +55,50 @@ hr {
     padding: 0.8rem 0;
     border-bottom: 1px solid rgba(208, 208, 208, 0.97);
 }
+
+
+
+@media (min-width: 577px) {
+    .footer-small-screen {
+        display: none !important;
+        /* visibility: hidden; */
+    }
+}
+
+@media (max-width: 577px) {
+    .cart-list {
+        margin-top: 1rem !important;
+        padding: 0 1.6rem !important;
+    }
+
+    .price {
+        align-items: flex-start !important;
+        padding: 0 !important;
+    }
+
+    .footer {
+        display: none !important;
+    }
+
+    .footer-small-screen {
+        padding: 0 !important;
+        align-items: center !important;
+    }
+
+    .btn-height {
+        height: 1.9rem !important;
+    }
+
+    .icon-size {
+        font-size: 18px !important;
+        line-height: 1.3 !important;
+    }
+
+    .card-text {
+        font-size: 0.97rem !important;
+    }
+
+    .quantity {
+        font-size: 1rem !important;
+    }
+}

@@ -1,70 +1,67 @@
-<div class="card" style="border-radius: 6px; margin-top: 2rem;"  >
-    <div class="card-header" style="padding: 0.5rem 1rem;">
-        <h5 class="mb-0 fs-6"  >CUSTOMER ADDRESS</h5>
-    </div>
-
-    <div class="card-body" style="padding: 1rem;" *ngIf="cartItems$ | async as user" >
-        <div class="col-md fw-semibold">{{user.firstName}} {{user.lastName}}</div>
-        <div class="col-md">{{user.addresses[0].street}} {{user.addresses[0].city}} | {{user.addresses[0].state}} | {{user.addresses[0].country}}</div>
-        
-        <div class="col-md">{{user.email}}</div>
-        <div class="col-md">{{user.phone}}</div>
-
-    </div>
-</div>
-
-<div class="card" style="border-radius: 6px; margin-top: 1rem;"  >
-    <div class="card-header" style="padding: 0.5rem 1rem; background-color: white ;">
-        <h5 class="mb-0 fs-6 mb-2"  >ORDER DETAILS</h5>
-        <div style="font-size: 0.9rem; ">Delivery between {{todaysDateRange()}}</div>
-    </div>
-
-    <!-- <div *ngIf="allCart;" > -->
-        <div class="card-body cart-item" *ngFor="let cart of allCart.items; let i = index" >
-            <div class="row" style="padding: 0.8rem;" >
-
-                <!-- <div class="col-md-8 d-flex align-items-center p-0" > -->
-                    <img [src]="'/assets/img-details/800x800_' + cart.image" style="width: 20rem; margin-right: 6rem;" alt="{{cart.name}}">
-    
-                    <div class="col-md-6 align-content-center " style="padding: 0 0.8rem;">
-                        <div class="row ">
-                            <p class="col-md-3 mb-0">Name:</p>
-                            <p class="col-md-8 mb-0">{{cart.name}}</p>
-                        </div>
-                        <div class="row">
-                            <p class="col-md-3 mb-0">Amount:</p>
-                            <p class="col-md-6 mb-0 fw-bold" >{{ cart.discountPrice * cart.quantity | currency: 'USD': 'symbol': '1.2' }} 
-                            </p>
-                        </div>
-                        <div class="row">
-                            <p class="col-md-3 mb-0">Color:</p>
-                            <p class="col-md-6 mb-0">{{cart.color}}</p>
-                        </div>
-                        <div class="row">
-                            <p class="col-md-3 mb-0">Quantity:</p>
-                            <p class="col-md-6 mb-0">{{cart.quantity}}</p>
-                        </div>
-                        <div class="row">
-                            <p class="col-md-3 mb-0">Shipping fee:</p>
-                            <p class="col-md-6 mb-0 fw-semibold text-danger" *ngIf="cart.discountPrice * cart.quantity > 55">free</p>
-                            <p class="col-md-6 mb-0 fw-bold " *ngIf="cart.discountPrice * cart.quantity <= 55">{{ shippingFeePerItem }}</p>
-                        </div>
-
-                        <div>
-                            <span style="font-size: 0.8rem; font-weight: 700;">JOSSY</span>
-                            <img src="../../../assets/products/paper-plane-3.png" style="width: 0.8rem; margin: 0 2px;" alt="">
-                            <span style="color: red; font-size: 0.7rem; font-family:Verdana, Geneva, Tahoma, sans-serif">EXPRESS</span>
-                        </div>
-                    </div>
-                <!-- </div> -->
-            </div>
-           
+<div class="fluid-container">
+    <div class="card adddress" style="border-radius: 6px; margin-top: 2rem;"  >
+        <div class="card-header" style="padding: 0.5rem 1rem;">
+            <h5 class="mb-0 fs-6"  >CUSTOMER ADDRESS</h5>
         </div>
+    
+        <div class="card-body" style="padding: 1rem;" *ngIf="cartItems$ | async as user" >
+            <div class="col-md fw-semibold">{{user.firstName}} {{user.lastName}}</div>
+            <div class="col-md">{{user.addresses[0].street}} {{user.addresses[0].city}} | {{user.addresses[0].state}} | {{user.addresses[0].country}}</div>
+            
+            <div class="col-md">{{user.email}}</div>
+            <div class="col-md">{{user.phone}}</div>
+    
+        </div>
+    </div>
+    
+    <div class="card" style="border-radius: 6px; margin-top: 1rem;"  >
+        <div class="card-header" style="padding: 0.5rem 1rem; background-color: white ;">
+            <h5 class="mb-0 fs-6 mb-2"  >ORDER DETAILS</h5>
+            <div style="font-size: 0.9rem; ">Delivery between {{todaysDateRange()}}</div>
+        </div>
+    
+        <div class="card-body" *ngFor="let cart of allCart.items; let i = index" >
+            <div class="d-flex item-container" style="padding: 0.8rem;" >
 
-    <!-- </div> -->
+                <img [src]="'/assets/img-details/800x800_' + cart.image" style="width: 33%; margin-right: 1rem;" class="display" alt="{{cart.name}}">
 
-    <!-- <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
-        Error: {{errorMessage}}
-    </div> -->
+                <div class="item align-content-center " style="padding: 0 0.8rem; width: 100%;">
+                    <div class="d-flex  ">
+                        <p class="order mb-0">Name:</p>
+                        <p class=" mb-0">{{cart.name}}</p>
+                    </div>
+                    <div class="d-flex ">
+                        <p class="order mb-0">Amount:</p>
+                        <p class=" mb-0 fw-bold" >{{ cart.discountPrice * cart.quantity | currency: 'USD': 'symbol': '1.2' }} 
+                        </p>
+                    </div>
+                    <div class="d-flex ">
+                        <p class="order mb-0">Color:</p>
+                        <p class=" mb-0">{{cart.color}}</p>
+                    </div>
+                    <div class="d-flex ">
+                        <p class="order mb-0">Quantity:</p>
+                        <p class=" mb-0">{{cart.quantity}}</p>
+                    </div>
+                    <div class="d-flex mb-1 ">
+                        <p class="order mb-0">Shipping fee:</p>
+                        <p class=" mb-0 fw-semibold text-danger" *ngIf="cart.discountPrice * cart.quantity > 55">free</p>
+                        <p class=" mb-0 fw-bold " *ngIf="cart.discountPrice * cart.quantity <= 55">{{ shippingFeePerItem }}</p>
+                    </div>
 
+                    <div>
+                        <span style="font-size: 0.8rem; font-weight: 700;">JOSSY</span>
+                        <img src="../../../assets/products/paper-plane-3.png" style="width: 0.8rem; margin: 0 2px;" alt="">
+                        <span style="color: red; font-size: 0.7rem; font-family:Verdana, Geneva, Tahoma, sans-serif">EXPRESS</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    
+        <!-- <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
+            Error: {{errorMessage}}
+        </div> -->
+    
+    </div>
 </div>

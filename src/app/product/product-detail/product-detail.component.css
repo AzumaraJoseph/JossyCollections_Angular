@@ -1,25 +1,3 @@
-.detail {
-    margin-top: 2rem;
-    padding: 1rem 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.detail-title {
-    font-size: 1.2rem;
-    padding: 0.5rem;
-}
-
-.detail-description {
-    padding: 1rem;
-    font-size: 1.4rem;
-}
-
-.detail-align {
-    padding-left: 3rem;
-    padding-right: 3rem;
-}
-
 .rating {
     background-color: rgba(238, 238, 238, 0.977);
     padding: 1.5rem ;
@@ -59,30 +37,16 @@
     outline: none;
 }
 
-.similar-row {
-    padding: 0 0 1.5rem 0;
-}
 
-.similar {
-    width: 16rem;
-    padding: 0.5rem;
-    margin: 0.5rem;
-}
 
-/* .similar-product {
-    display: flex;
-    padding: 1.5rem;
-
-} */
-
-.similar:hover {
+.related:hover {
     transform: scale(1.03);
     transition: all 0.3s;
     box-shadow: 0px 0px 8px 2px rgba(202, 199, 199, 0.978);
     cursor: pointer;
 }
 
-.similar:hover .cart-btn {
+.related:hover .cart-btn {
     visibility: visible;
 }
 
@@ -92,38 +56,39 @@
 }
 
 .cart-btn {
-    background-color: orange;
+    background-color: #f68b1e;
     color: rgba(255, 255, 255, 0.982);
+    font-weight: 500;
     width: 95%;
     border-radius: 0.7rem;
     visibility: hidden;
 }
 
 .cart-btn:active {
-    border: 1px solid orange;
+    border: 1px solid #f68b1e;
 }
 
 
 
-@media (max-width: 600px) {
-
-    .similar {
-        width: 100%;
-        padding: 0.5rem;
-        margin: 0 0rem 0.7rem 0rem;
+@media (max-width: 607px) {
+    .related {
+        width: 100% !important;
+        padding: 0.5rem !important;
+        margin: 0 0rem 0.7rem 0rem !important;
     }
 
-    .similar-row {
-        padding: 0 0.8rem;
+    .row {
+        padding: 0 0.8rem !important;
     }
 
     .detail {
-        padding: 0;
+        padding: 1rem !important;
     }
 
     .detail-title {
-        font-size: 1rem;
-        /* padding: 0.5rem; */
+        margin-bottom: 0;
+        margin-top: 0.3rem;
+        font-size: 0.9rem !important;
     }
 
     .card-text {
@@ -131,9 +96,9 @@
     }
 
     .detail-align {
-        padding-left: 1rem;
-        padding-right: 1rem;
-        margin-bottom: 0.5rem;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        margin-bottom: 0.5rem !important;
     }
 
     .detail-description, .price {

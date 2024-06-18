@@ -96,7 +96,7 @@
     <div class="modal-dialog modal-fullscreen">
         <div class="modal-content"  *ngIf="product">
             <div class="modal-header">
-                <h1 class="modal-title fs-4 fw-bold"
+                <h1 class="modal-title fs-4 fw-bold" style="margin-left: 45%;"
                     id="colorModalLabel">
                     Product Options
                 </h1>
@@ -111,13 +111,13 @@
                         <img [src]="'/assets/img-details/800x800_' + product.color[indexer].colorImage " class="img-fluid" alt="Product Detail Image">
                     </div>
                 </div>
-    
+
                 <div class="price ps-4 pt-2 pb-2">
                     <p class="card-text fw-bold mb-1 mt-2" 
                         style="font-size: 1.3rem;">
                         {{product.color[indexer].discountPrice | currency: "USD": "symbol": "1.2-2" }}
                     </p>
-    
+
                     <p class="mt-2 mb-1" 
                     [style.color]="getColors(product.color[indexer].quantity)" style="font-size: 0.8rem;" 
                     *ngIf="product.color[indexer].quantity">
@@ -150,9 +150,9 @@
                     </div>
                 </div>
 
-                <form autocomplete="off" novalidate #cartForm="ngForm" (ngSubmit)="save(cartForm)" >
+                <form autocomplete="off" novalidate #cartForm="ngForm" (ngSubmit)="save(cartForm)">
 
-                    <div class=" options">
+                    <div class="options ms-4 me-4 p-3" style="border-bottom: 2px solid rgba(0, 0, 0, 0.977);">
                         <span class=" card-text fw-semibold" style="font-size: 1.1rem;" >Quantity: </span>
                         <span>({{ (product.color[indexer].quantity - product.sold) }}) Available</span>
                         <br>
@@ -161,17 +161,19 @@
                             <span>{{ product.sold }}</span>
                         </div>                         
 
-                        <div class="d-flex" style="height: 2.8rem">
+                        <div class="d-flex align-items-center" style="height: 2.8rem">
                             <button [disabled]="quantity === 1" type="button" class="button btn"
                                 (click)="decrement()" >
-                                <span class="material-icons">
+                                <span class="material-icons icon-size">
                                     remove
                                 </span>
                             </button>
-                            <p class="number card-text" >{{quantity}}</p>
+
+                            <p class="number" >{{quantity}}</p>
+
                             <button [disabled]="quantity === product.color[indexer].quantity" type="button" class="button btn"
                                 (click)="increment(product.color[indexer].quantity)">
-                                <span class="material-icons">
+                                <span class="material-icons icon-size">
                                     add
                                 </span>
                             </button>

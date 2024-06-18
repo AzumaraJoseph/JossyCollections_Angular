@@ -244,7 +244,7 @@
 
 }
 
-@media (max-width: 600px) {
+@media (max-width: 607px) {
     .search { display: none; }
     .search-btn { display: none;}
     
@@ -275,7 +275,7 @@
         margin-right: 0.5rem;
     }
 
-    .account { padding: 2px;}
+    .account { padding: 2px; }
 
     .user-btn {
         font-size: 1rem;

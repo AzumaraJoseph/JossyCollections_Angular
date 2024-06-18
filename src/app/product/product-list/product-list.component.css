@@ -1,8 +1,3 @@
-.fluid-container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-}
-
 .img-fluid {
     width: 100%;
     /* height: 37rem; */
@@ -36,10 +31,7 @@
     100% { transform: translateX(0%); }
 }
 
-.list-title {
-    margin-left: 1.5rem;
-    padding-left: 1.5rem;
-}
+
 
 
 .card:hover {
@@ -52,54 +44,42 @@
 .card:hover .cart-btn {
     visibility: visible;
     /* outline: orange; */
-
 }
 
-.row {
-    margin-left: 3rem;
-}
-
-.card {
-    width: 16rem;
-    /* margin-left: 3rem; */
-    padding: 0.5rem;
-    margin: 0.5rem;
-}
-
-@media (max-width: 600px) {
+@media (max-width: 607px) {
     .fluid-container {
-        padding-left: 0.8rem;
-        padding-right: 0.8rem;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
     }
 
     .card {
-      width: 100%;
-      margin: 0 0 0.7rem 0;
+      width: 100% !important;
+      margin: 0 0 0.7rem 0 !important;
     }
 
     .row {
-        margin-left: 0;
-        padding-right: 0.8rem;
+        margin-left: 0 !important;
+        padding-right: 0.9rem !important;
     }
 
     .list-title {
-        margin-left: 0.6rem;
-        padding-left: 0;
+        margin-left: 0.6rem !important;
+        padding-left: 0 !important;
+        font-size: 1rem !important;
     }
 
+    .page-title { font-size: 1rem !important; }
+
     .img-fluid {
-        /* width: 100%; */
-        height: 12rem;
-        /* border-radius: 10px; */
+        height: 12rem !important;
     }
 
     .slider {
         margin-top: 60px;
-        padding: 1rem;
+        margin-bottom: 0.5rem;
+        padding: 0rem;
     }
 
-    
-    
 }
 
 .btn-hover {
@@ -108,15 +88,16 @@
 }
 
 .cart-btn {
-    background-color: orange;
+    background-color: #f68b1e;
     color: rgba(255, 255, 255, 0.982);
+    font-weight: 500;
     width: 95%;
     border-radius: 0.7rem;
     visibility: hidden;
 }
 
 .cart-btn:active {
-    border: 1px solid orange;
+    border: 1px solid #f68b1e;
 }
 
 
