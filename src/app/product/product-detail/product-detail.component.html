@@ -1,18 +1,18 @@
-`<div class="fluid-container p-3 detail">
+`<div class="fluid-container detail">
     <!-- <app-toast></app-toast> -->
-    <div class="card" 
+    <div class="card"
         style="background-color: rgba(241, 241, 241, 0.982);" *ngIf="selectProduct$ | async as product">
-        <h3 class="card-text fs-5 p-2">Product Detail: {{product.name}}</h3>
+        <h3 class="detail-title ">Product Detail: {{product.name}}</h3>
         <div class="card-header" style="background-color: rgba(255, 255, 255, 0.993)">
-            <h3 class="card-text fs-4 p-3 text-center">{{product.description}}</h3>
+            <h3 class="detail-description text-center">{{product.description}}</h3>
             <div class="card-img-top d-flex justify-content-center" >
                 <img src="/assets/img-details/800x800_{{product.imageCover}}" class="img-fluid" alt="Product Detail Image">
             </div>
         </div>
 
-        <div class="card-text mb-2 ps-5 pt-3 pb-3" style="background-color: rgba(255, 255, 255, 0.993)">
+        <div class="detail-align  mb-2 pt-3 pb-3" style="background-color: rgba(255, 255, 255, 0.993)">
             <div>
-                <p class="fw-bold mb-1 mt-2" 
+                <p class="price fw-bold mb-1 mt-2" 
                     style="font-size: 1rem;">
                     {{product.discountedLowPrice | currency: "USD": "symbol": "1.2-2" }}
 
@@ -20,7 +20,7 @@
                 </p>
 
                 <div class="d-flex">
-                    <div class="fw-semibold text-decoration-line-through me-3"  style="font-size: 1rem; flex: 0 0 1;">
+                    <div class="price fw-semibold text-decoration-line-through me-3"  style="font-size: 1rem; flex: 0 0 1;">
                         {{product.lowPrice !== product.highPrice ? (product.lowPrice | currency: "USD": "symbol": "1.2-2"): "" }}
 
                         <ng-container>
@@ -28,13 +28,13 @@
                         </ng-container>
                     </div>
 
-                    <div style="color: rgba(255, 0, 0, 0.982); font-size: 0.92rem;"
+                    <div class="price" style="color: rgba(255, 0, 0, 0.982); font-size: 0.92rem;"
                         *ngIf="product.priceDiscountPercent && product.priceDiscountPercent > 0">
                         {{"up to " + product.priceDiscountPercent + "% off"}}
                     </div>
                 </div>
 
-                <p class="mt-2 mb-1" 
+                <p class="price mt-2 mb-1" 
                     [style.color]="getColors(product.quantity)"
                     style="font-size: 0.8rem;" 
                     *ngIf="product.quantity">
@@ -47,16 +47,16 @@
             </div>
             <div class="d-flex" style="align-items: center;">
                 <div style="width: fit-content;">
-                    <app-star [rating]="product.ratingsAverage" [title]="'rating ' + product.ratingsAverage" style="cursor: pointer;"></app-star>
+                    <app-star class="price" [rating]="product.ratingsAverage" [title]="'rating ' + product.ratingsAverage" style="cursor: pointer;"></app-star>
 
                 </div>
-                <div class="ms-4">
+                <div class="price ms-4">
                     {{product.ratingsQuantity && product.ratingsQuantity > 0 ? product.ratingsQuantity + " reviews" : "No reviews yet"}} 
                 </div>
             </div>
         </div>
 
-        <div class="mb-2 ps-5 pe-5 pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993); ">
+        <div class="detail-align mb-2 detail-align pt-2 pb-2" style="background-color: rgba(255, 255, 255, 0.993); ">
             <h4 class="card-text">Colors</h4>
             <div class="col-md-12"
                 style="background-color: rgba(237, 237, 237, 0.98); display: flex; padding: 0.5rem;">
@@ -75,12 +75,12 @@
             </div>
         </div>
   
-        <div class="mb-2 ps-5"
+        <div class="detail-align mb-2 detail-align "
         style="background-color: rgba(255, 255, 255, 0.993); cursor: pointer;"
         *ngIf="product.specification">
             <collapsible-well>
                 <div well-title>
-                    <h4 class="mb-0">Specification</h4>
+                    <h4 class="card-text mb-0">Specification</h4>
                 </div>
                 <div well-body>
                     <h4 class="text-center pt-4 pb-4">Product Specification</h4>
@@ -114,14 +114,14 @@
 
 
           <!-- Button trigger modal -->
-        <div class="mb-2 ps-5 pe-5"
+        <div class="detail-align"
             style="background-color: rgba(255, 255, 255, 0.993); cursor: pointer;"
             data-bs-toggle="modal"
             data-bs-target="#reviewsModal">
 
             <div class="d-flex justify-content-between align-items-baseline mb-2" >
                 <div class="pt-2 pb-2">
-                    <h4 class="mb-0">Reviews({{product.ratingsQuantity}})</h4>
+                    <h4 class="card-text mb-0">Reviews({{product.ratingsQuantity}})</h4>
                 </div>
                 <div style="width: fit-content;">
                     <app-star [rating]="product.ratingsAverage" [title]="'rating ' + product.ratingsAverage"></app-star>
@@ -242,15 +242,15 @@
             </div>
         </div>
 
-        <div class="ps-5">
-            <h4 class="mt-2">Related Products</h4>
+        <div class="detail-align">
+            <h4 class="card-text mt-2">Related Products</h4>
 
             <div class="col-md-12 mt-2">
-                <div class="row pb-3">
-                    <div class="card similar p-2 m-2" style="width: 16rem;"
+                <div class="row similar-row">
+                    <div class="card similar"
                         *ngFor="let related of relatedProducts$ | async">
                             
-                        <div class="card-body d-flex flex-column justify-content-between p-3" (click)="openRelated(related.id, related.name)">
+                        <div class="card-body flex-column justify-content-between p-2" (click)="openRelated(related.id, related.name)">
 
                             <img [src]="'/assets/products/250x250_' + related.imageCover"
                             class="card-img-top p-0"
@@ -259,7 +259,7 @@
                             <div>
                                 <p class="card-title fw-semibold mb-0" style="font-size: 14px;">{{related.name}}
                                 </p>
-                                <p class="card-text mb-0 fw-bold">{{related.discountedHighPrice | currency: 'USD': 'symbol': '1.2-2'}}
+                                <p class="mb-0 fw-bold">{{related.discountedHighPrice | currency: 'USD': 'symbol': '1.2-2'}}
                                     <ng-container *ngIf="related.discountedHighPrice !== related.discountedLowPrice">
                                         - {{related.discountedLowPrice  | currency: 'USD': 'symbol': '1.2-2'}}
                                     </ng-container>

@@ -90,3 +90,46 @@
 .navigateTo:active {
     border: 1px solid #f68b1e;
 }
+
+.modal-title {
+    margin-left: 45%;
+}
+
+@media (max-width: 600px) {
+    .modal-title {
+        margin-left: 0;
+        text-align: center;
+        
+    }
+
+    .card-text {
+        font-size: 1rem !important;
+        margin-bottom: 0;
+    }
+
+    .options {
+        margin: 0 0.5rem;
+        padding: 0.8rem 0 1rem;
+    }
+
+    .footer-btn, .colors {
+        margin: 0.5rem 0.5rem 0 !important;
+    }
+
+    .navigateTo {
+        /* background-color: #f68b1e;
+        color: white; */
+        padding: 0.5rem;
+        font-size: 0.9rem;
+        /* width: 100%;
+        font-weight: 700;
+        font-size: 0.9rem; */
+    }
+
+    .price {
+        padding: 0 0.5rem  !important;
+    }
+
+    
+
+}

@@ -1,11 +1,24 @@
 .detail {
     margin-top: 2rem;
-    padding: 0 2rem 0 2rem;
+    padding: 1rem 0;
     display: flex;
     flex-direction: column;
 }
 
+.detail-title {
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
 
+.detail-description {
+    padding: 1rem;
+    font-size: 1.4rem;
+}
+
+.detail-align {
+    padding-left: 3rem;
+    padding-right: 3rem;
+}
 
 .rating {
     background-color: rgba(238, 238, 238, 0.977);
@@ -46,11 +59,31 @@
     outline: none;
 }
 
+.similar-row {
+    padding: 0 0 1.5rem 0;
+}
+
+.similar {
+    width: 16rem;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+/* .similar-product {
+    display: flex;
+    padding: 1.5rem;
+
+} */
+
 .similar:hover {
     transform: scale(1.03);
     transition: all 0.3s;
     box-shadow: 0px 0px 8px 2px rgba(202, 199, 199, 0.978);
     cursor: pointer;
+}
+
+.similar:hover .cart-btn {
+    visibility: visible;
 }
 
 .btn-hover {
@@ -71,8 +104,42 @@
 }
 
 
-.similar:hover .cart-btn {
-    visibility: visible;
+
+@media (max-width: 600px) {
+
+    .similar {
+        width: 100%;
+        padding: 0.5rem;
+        margin: 0 0rem 0.7rem 0rem;
+    }
+
+    .similar-row {
+        padding: 0 0.8rem;
+    }
+
+    .detail {
+        padding: 0;
+    }
+
+    .detail-title {
+        font-size: 1rem;
+        /* padding: 0.5rem; */
+    }
+
+    .card-text {
+        font-size: 1rem !important;
+    }
+
+    .detail-align {
+        padding-left: 1rem;
+        padding-right: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .detail-description, .price {
+        font-size: 0.83rem !important;
+    }
+    
 }
 
 
