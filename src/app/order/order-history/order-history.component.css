@@ -78,6 +78,26 @@ textarea:focus {
     font-size: 0.9rem !important;
     padding: 0.4rem !important;
   }
+
+  .flex-direction {
+    flex-direction: column !important;
+  }
+
+  .img-fluid {
+    width: 30% !important;
+  }
+
+  .button-delete {
+    padding: 0rem 0.5rem !important;
+    color: white !important;
+    background-color: #f68b1e !important;
+
+  }
+
+  .font {
+    font-size: 0.85rem !important;
+  }
+  
 }
 
 

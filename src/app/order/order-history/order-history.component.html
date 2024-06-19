@@ -79,16 +79,16 @@
         </div>
 
         <div class="col-md-5 col-sm-5 align-2">
-            <div class="card" style="background-color: rgba(234, 234, 234, 0.982);">
+            <div class="card" style="margin-bottom: 1rem; background-color: rgba(234, 234, 234, 0.982);">
                 <h3 class="card-header fw-bold">Orders</h3>
 
                 <div style=" border-radius: 6px; padding: 0.5rem;" *ngIf="orderHistory$ | async as orders;">
                     <div *ngFor="let order of orders">
     
                         <div class="card-body each-item mb-2" style="background-color: white; border-radius: 6px; padding: 0.5rem;" *ngFor="let each of order?.products; let i = index " >
-                            <div class="d-flex">
+                            <div class="d-flex flex-direction">
     
-                                <img [src]="'/assets/img-details/75x75_' + each.image" style=" margin-right: 0.6rem;" alt="{{each.name}}">
+                                <img [src]="'/assets/img-details/75x75_' + each.image" style=" margin-right: 0.6rem;" class="img-fluid" alt="{{each.name}}">
                 
                                 <div class=" align-content-center" style="padding: 0.6rem; font-size: 1rem;">
                                     <div class=" mb-0">
@@ -103,7 +103,7 @@
                                 type="button" 
                                 data-bs-toggle="modal" 
                                 [attr.data-bs-target]="'#exampleModal' + each._id" >
-                                    <span class="mb-0 p-1 fw-bold" style="font-size: 1rem;" >RATE THIS PRODUCT</span>
+                                    <span class="font mb-0 p-1 fw-bold" style="font-size: 1rem;" >RATE THIS PRODUCT</span>
                                 </button>
 
                                 <!-- Button trigger modal -->
