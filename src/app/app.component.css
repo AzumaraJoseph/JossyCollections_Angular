@@ -9,9 +9,9 @@
     margin-right: 1rem;
 }
 
-.nav {
+/* .nav {
     display: flex;
-}
+} */
 
 .navBar-brand {
     display: flex;
@@ -245,8 +245,15 @@
 }
 
 @media (max-width: 577px) {
-    .search { display: none; }
-    .search-btn { display: none;}
+    /* .search { display: none; }
+    .search-btn { display: none;} */
+    /* .fluid-container {
+        margin-top: 2.5rem;
+    } */
+
+    .input {
+        display: none !important;
+    }
     
     .cart {
         margin: 0;
@@ -262,20 +269,28 @@
     }
 
     .image {
-        /* display: none; */
-        width: 2.4rem;
-        height: 2.4rem;
-        margin-right: 0.5rem;
+        width: 1.7rem;
+        height: 1.7rem;
+        margin-right: 0.3rem;
     }
 
-    .account { padding: 2px; }
+    .account { 
+        padding: 2px;
+        background-color: white;
+        color: black;
+    }
 
     .user-btn {
-        font-size: 1rem;
+        font-size: 1rem !important;
+    }
+
+    .h2 {
+        font-size: 1.1rem !important;
     }
 
     .nav {
         padding: 5px;
+        justify-content: space-between !important;
     }
 }
 
