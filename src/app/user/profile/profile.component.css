@@ -52,16 +52,40 @@ display: block;
     margin-top: 0.5rem;
     font-weight: 700;
     font-size: 1.3rem;
-
-    /* w-100 mt-2 fs-5 fw-bold" */
 }
 
 .button:active {
     border: 2px solid #f68b1e;
-    /* background-color: black; */
 }
 
 .active {
     color: #f68b1e;
+}
+
+@media (max-width: 577px) {
+    .styling {
+        padding: 1.15rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .menu { margin-bottom: 0 !important; }
+
+    .row {
+        padding: 0 2.5rem !important;
+    }
+
+    .align {
+        margin-right: 0 !important;
+    }
+
+    .align-2 {
+        padding: 0 !important;
+        margin-top: 1rem !important;
+    }
+
+    .button {
+        font-size: 1rem !important;
+        padding: 0.5rem !important;
+    }
 }
   

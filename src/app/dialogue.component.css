@@ -91,7 +91,7 @@
     border: 1px solid #f68b1e;
 }
 
-@media (max-width: 607px) {
+@media (max-width: 577px) {
 
     .modal-title {
         margin-left: 0 !important;

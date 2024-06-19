@@ -46,7 +46,7 @@
     /* outline: orange; */
 }
 
-@media (max-width: 607px) {
+@media (max-width: 577px) {
     .fluid-container {
         padding-left: 1rem !important;
         padding-right: 1rem !important;
