@@ -66,14 +66,16 @@ export class AddressComponent implements OnInit {
       //   }),
         tap(response => {
           this.addresses = response.addresses;
-          if (this.addresses.length === 0) this.showToast('No address found');
-          this.cdr.markForCheck();
+          // if (this.addresses.length === 0) this.showToast('No address found');
+          // this.cdr.markForCheck();
         }),
       catchError(err => {
         this.errorMessage = err.message || 'An unknown error occurred';
         this.errorMessageSubject.next(this.errorMessage);
+        // this.showToast('No address found' + this.errorMessage);
 
-        console.error('Address error:', this.errorMessage);        return EMPTY;
+        console.error('Address error:', this.errorMessage);        
+        return EMPTY;
       })
     );
 
@@ -88,9 +90,18 @@ export class AddressComponent implements OnInit {
     this.auth.deleteAddress(id).pipe(
       tap(res => {
         console.log('Address deleted', JSON.stringify(res));
+
         this.addresses = this.addresses.filter(address => address._id !== id);
-        this.showToast('One address deleted successfully');
         this.cdr.markForCheck();
+
+        if(this.addresses.length !== 0) {
+          this.showToast('One address deleted successfully');
+          // this.cdr.markForCheck();
+        } else {
+          this.showToast('No address found');
+        }
+
+
       }),
       // tap(() => {
       //   if (address) this.showToast('One address deleted successfully'),

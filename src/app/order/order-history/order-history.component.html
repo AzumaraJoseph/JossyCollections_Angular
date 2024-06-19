@@ -1,6 +1,6 @@
 <div class="fluid-container" style="background-color: rgba(234, 234, 234, 0.982); margin-top: 4rem;"  >
-    <div style="background-color: white; margin-bottom: 2rem; padding: 1rem 4rem;">
-        <div class="d-flex mb-3">
+    <div class="styling" style="background-color: white; margin-bottom: 2rem; padding: 1rem 4rem;">
+        <div class="menu d-flex mb-3">
             <a class="d-flex " [routerLink]="['/products']" >
                 <p class="mb-0" style="color: rgba(54, 54, 54, 0.995); font-family:sans-serif;">Home</p>
                 <span class="material-icons" style="font-size: 1.3rem; color: rgba(168, 168, 168, 0.985);">
@@ -17,13 +17,13 @@
                 <p class="mb-0" style="color: black; font-family:sans-serif;">My Order</p>
             </a>
         </div>
-        <h2 class="fw-bold mb-0">
+        <h2 class="heading fw-bold mb-0">
             Order History
         </h2>
     </div>
-    <div class="row justify-content-center">
+    <div class="row row-1 justify-content-center">
         
-        <div class="col-md-3 col-sm-3 p-2 me-3" style="background-color: white; border-radius: 6px; height: max-content;" >
+        <div class="col-md-3 col-sm-3 align p-2 me-3" style="background-color: white; border-radius: 6px; height: max-content;" >
             <div class="d-flex " >
                 <div class="me-3">
                     <span class="material-symbols-outlined" style="font-size: 1.9rem;">
@@ -78,17 +78,9 @@
             </div>
         </div>
 
-        <div class="col-md-5 col-sm-5">
+        <div class="col-md-5 col-sm-5 align-2">
             <div class="card" style="background-color: rgba(234, 234, 234, 0.982);">
                 <h3 class="card-header fw-bold">Orders</h3>
-
-
-
-                
-                  
-
-
-
 
                 <div style=" border-radius: 6px; padding: 0.5rem;" *ngIf="orderHistory$ | async as orders;">
                     <div *ngFor="let order of orders">

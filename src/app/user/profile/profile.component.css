@@ -63,6 +63,10 @@ display: block;
 }
 
 @media (max-width: 577px) {
+    .heading {
+        font-size: 1.3rem !important;
+    }
+    
     .styling {
         padding: 1.15rem !important;
         margin-bottom: 1rem !important;
@@ -71,7 +75,7 @@ display: block;
     .menu { margin-bottom: 0 !important; }
 
     .row {
-        padding: 0 2.5rem !important;
+        padding: 0 2rem !important;
     }
 
     .align {
