@@ -76,6 +76,24 @@ a {
     color: #f68b1e;
 }
 
+@media (min-width: 768px) and (max-width: 1020px) {
+    .location {
+        width: 100% !important;
+    }
+}
+
+@media (min-width: 577px) and (max-width: 768px) {
+    .align-2 {
+        padding: 0 !important;
+        margin-top: 1rem !important;    
+    }
+
+    .align {
+        margin-right: 0 !important;
+    }
+
+}
+
 @media (max-width: 577px) {
     .heading {
         font-size: 1.3rem !important;
@@ -88,8 +106,8 @@ a {
 
     .menu { margin-bottom: 0 !important; }
 
-    .row-1 {
-        padding: 0 2rem !important;
+    .location {
+        width: 100% !important;
     }
 
     .row-2 {

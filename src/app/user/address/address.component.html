@@ -22,7 +22,7 @@
                 Delivery Address
             </h2>
         </div>
-        <div class="row row-1 justify-content-center">
+        <div class="row justify-content-center" style=" padding: 0 2.5rem;">
             
             <div class="col-md-3 align p-2 me-3" style="background-color: white; border-radius: 6px;" >
                 <div class="d-flex" >
@@ -93,13 +93,13 @@
 
                         <div >
                             <div class="row row-2" *ngIf="addresses.length > 0">
-                                <div class="col-md-6 p-2" *ngFor="let address  of addresses; let i = index" >
+                                <div class="location w-50 p-2" *ngFor="let address  of addresses; let i = index" >
                                     <div class="card" style="font-size: 0.9rem; padding: 0; height: 12rem;" *ngIf="address">
                                         <div class="card-header d-flex justify-content-between align-items-center">
                                             <p class="mb-0 fs-6 fw-semibold">Address {{i + 1}}
                                             </p>
                                         </div>
-                                        <div class="card-body" style="padding: 0.5rem 0.7rem;" >
+                                        <div class="card-body" style="padding: 0 0.7rem;" >
                                              <!-- <div *ngIf="currentUser && currentUser.addresses && currentUser.addresses.length > 0" > -->
                                             <div class="d-flex flex-column mt-2 mb-2"  >
                                                 <div class="d-flex">

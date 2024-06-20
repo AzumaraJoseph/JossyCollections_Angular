@@ -18,7 +18,7 @@ a {
 }  
 
 .button-delete {
-    padding: 0.5rem;
+    padding: 0.2rem;
     background-color: white;
     align-self: flex-start;
 }
@@ -38,6 +38,25 @@ textarea:focus {
     outline: 1px solid #f68b1e;
     border: none;
     box-shadow: none;
+}
+/* 1130 */
+
+
+@media (min-width: 577px) and (max-width: 1131px) {
+  .flex-direction {
+    flex-direction: column !important;
+  }
+
+  .button-delete {
+    /* padding: 0.2rem !important; */
+    color: white !important;
+    background-color: #f68b1e !important;
+
+  }
+  
+  .font {
+    font-size: 0.85rem !important;
+  }
 }
 
 @media (max-width: 577px) {
@@ -79,25 +98,40 @@ textarea:focus {
     padding: 0.4rem !important;
   }
 
-  .flex-direction {
+  /* .flex-direction {
     flex-direction: column !important;
-  }
+  } */
 
   .img-fluid {
     width: 28% !important;
   }
 
   .button-delete {
-    padding: 0rem 0.5rem !important;
+    padding: 2px !important;
     color: white !important;
     background-color: #f68b1e !important;
 
   }
 
   .font {
-    font-size: 0.85rem !important;
+    font-size: 0.75rem !important;
   }
 
+}
+
+@media (max-width: 470px) {
+  .flex-direction {
+    flex-direction: column !important;
+  }
+
+  .button-delete {
+    /* padding: 0.3rem !important; */
+  }
+
+  .font {
+    font-size: 0.85rem !important;
+  }
+  
 }
 
 

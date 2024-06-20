@@ -74,9 +74,9 @@ display: block;
 
     .menu { margin-bottom: 0 !important; }
 
-    .row {
-        padding: 0 2rem !important;
-    }
+    /* .row {
+        padding: 0 2.5rem !important;
+    } */
 
     .align {
         margin-right: 0 !important;

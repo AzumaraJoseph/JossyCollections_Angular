@@ -86,9 +86,9 @@
                     <div *ngFor="let order of orders">
     
                         <div class="card-body each-item mb-2" style="background-color: white; border-radius: 6px; padding: 0.5rem;" *ngFor="let each of order?.products; let i = index " >
-                            <div class="d-flex flex-direction">
+                            <div class="d-flex align-items-start flex-direction ">
     
-                                <img [src]="'/assets/img-details/75x75_' + each.image" style=" margin-right: 0.6rem; height: 100%;" class="img-fluid" alt="{{each.name}}">
+                                <img [src]="'/assets/img-details/75x75_' + each.image" style="height: 100%;" class="img-fluid p-2" alt="{{each.name}}">
                 
                                 <div class=" align-content-center" style="padding: 0.6rem; font-size: 1rem;">
                                     <div class=" mb-0">
