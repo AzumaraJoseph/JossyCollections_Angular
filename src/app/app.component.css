@@ -21,38 +21,72 @@
     margin-top: 0.5rem; */
 }
 
-.search {
-    /* display: block; */
+/* .search {
     border: none;
     background-color: rgba(238, 238, 238, 0.977);
-    width: 47rem;
+    /* width: 47rem; *
+    width: 37rem;
     margin-top: 0.5rem;
-    padding: 0.5rem;
+    padding: 0 0.6rem;
     border-radius: 1rem;
     font-size: 0.85rem;
     outline: none;
     transition: all 0.3s ease-in-out;
     transform-origin: center;
-    /* margin-left: 16rem; */
+    /* margin-left: 16rem; *
 }
 
 .search:focus {
-    width: 54rem;
+    width: 45rem;
+    /* width: 54rem; *
     border: 0.25rem solid rgb(159, 192, 245);
     background-color: white;
 }
 .search::placeholder {
     font: inherit;
+} */
+
+.search-container {
+    transition: transform 0.3s ease-in-out;
+    transform-origin: center;
+    /* display: flex;
+    align-items: center; */
 }
 
-.material {
-    font-size: 2rem;
+.search {
+    border: none;
+    background-color: rgba(238, 238, 238, 0.977);
+    width: 43rem;
+    margin-top: 0.5rem;
+    padding: 0 0.6rem;
+    border-radius: 1rem;
+    font-size: 0.85rem;
+    outline: none;
+    transition: transform 0.3s ease-in-out;
+    transform-origin: center;
+}
+
+.search:focus {
+    
+    /* transform: scale(1.2); Adjust scale factor as needed */
+    /* border: 3px solid #f68b1e; */
+    border: 2px solid rgb(159, 192, 245);
+    background-color: white;
+}
+
+.search::placeholder {
+    font: inherit;
+}
+
+
+.material-icon {
+    font-size: 1.7rem;
     color: rgba(128, 128, 128, 0.997);
     margin-top: 8px;
 }
 
 
-.material:focus {
+.material-icon:focus {
     color: gray;
     outline: none;
     transform: translateY(1);
@@ -62,10 +96,21 @@
 .search-btn {
     margin-left: -3.8rem;
     outline: none;
+
+    /* padding: 0.6rem; */
+    line-height: 1;
 }
 
 .search-btn:focus {
     outline: none;
+}
+
+.search:focus ~ .search-btn {
+    transform: scale(1.2);
+}
+
+.search-container:focus-within {
+    transform: scale(1.2);
 }
 
 .user-btn {
@@ -242,6 +287,12 @@
     color: inherit;
     border: none;
 
+}
+
+@media (max-width: 700px) {
+    .search {
+        width: 100%;
+    }
 }
 
 @media (max-width: 577px) {

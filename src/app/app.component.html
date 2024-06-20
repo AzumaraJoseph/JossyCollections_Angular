@@ -1,6 +1,6 @@
 
   <nav class="navBar navBar-expand fixed-top" style="background-color: white;">
-    <div class="nav pb-2 d-flex align-items-center">
+    <div class="nav pb-2 d-flex align-items-center justify-content-between">
       <div class="col-md-2 brand-sizing">
         <div class="navBar-brand"
               [routerLink]="['/products']" >
@@ -10,11 +10,12 @@
           </span>
         </div>
       </div>
+      <!-- col-md-7 -->
       <div class="col-md-7 input ">
-        <div class="d-flex">
+        <div class="search-container d-flex justify-content-center ">
           <input type="text" placeholder="Search Products" class="search">
           <button class="btn search-btn" type="button">
-            <span class="material-icons material">
+            <span class="material-icons material-icon">
               search
               </span>
             <!-- <i class="material-symbols-outlined">search</i> -->

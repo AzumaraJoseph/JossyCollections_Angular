@@ -45,6 +45,7 @@ textarea:focus {
 @media (min-width: 577px) and (max-width: 1131px) {
   .flex-direction {
     flex-direction: column !important;
+    padding: 0.5rem !important;
   }
 
   .button-delete {
@@ -122,6 +123,7 @@ textarea:focus {
 @media (max-width: 470px) {
   .flex-direction {
     flex-direction: column !important;
+    padding: 0.5rem !important;
   }
 
   .button-delete {
