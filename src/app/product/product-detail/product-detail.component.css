@@ -68,7 +68,21 @@
     border: 1px solid #f68b1e;
 }
 
+@media (max-width: 767px) {
+    .related-product {
+        padding: 0 !important;
+        /* padding-right: 0 !important; */
+        /* margin-bottom: 0.5rem !important; */
+    }
 
+    .related-product .card-text {
+        padding-left: 3rem !important;
+    }
+
+    .detail {
+        padding: 2rem !important;
+    }
+}
 
 @media (max-width: 577px) {
     .related {
@@ -82,7 +96,7 @@
     }
 
     .detail {
-        padding: 1rem !important;
+        padding: 2rem !important;
     }
 
     .detail-title {

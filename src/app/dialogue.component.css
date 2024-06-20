@@ -91,6 +91,20 @@
     border: 1px solid #f68b1e;
 }
 
+/* @media (max-width: 1200px) {
+
+    .modal-title {
+        margin-left: 43% !important;
+    }
+} */
+
+@media (max-width: 767px) {
+
+    .modal-title {
+        margin-left: 38% !important;
+    }
+}
+
 @media (max-width: 577px) {
 
     .modal-title {
