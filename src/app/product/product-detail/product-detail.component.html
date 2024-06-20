@@ -1,7 +1,7 @@
 `<div class="fluid-container detail mt-4 pt-3 pb-3 d-flex flex-column" style="background-color: rgba(241, 241, 241, 0.982);">
     <!-- <app-toast></app-toast> -->
     <div class="card"
-        style="background-color: rgba(241, 241, 241, 0.982);" *ngIf="selectProduct$ | async as product">
+        style="background-color: rgba(241, 241, 241, 0.982); padding: 0.5rem 2rem;" *ngIf="selectProduct$ | async as product">
         <h3 class="detail-title p-2 fs-5">Product Detail: {{product.name}}</h3>
         <div class="card-header" style="background-color: rgba(255, 255, 255, 0.993)">
             <h3 class="detail-title p-2 fs-4 text-center">{{product.description}}</h3>

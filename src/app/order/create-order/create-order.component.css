@@ -3,10 +3,22 @@
     width: 30%;
 }
 
-@media (max-width: 577px) {
-    .fluid-container {
-        padding: 0 1.3rem !important;
+/* 967-945 */
+@media (min-width: 768px) and (max-width: 946px) {
+    .display {
+        width: 50% !important;
     }
+
+    .item-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+@media (max-width: 577px) {
+    /* .fluid-container {
+        padding: 0 1.3rem !important;
+    } */
 
     .card-body {
         font-size: 0.9rem !important;

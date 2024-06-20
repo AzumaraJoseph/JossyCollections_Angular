@@ -17,14 +17,14 @@
 }
 
 @media (max-width: 767px) {
-    .card {
-        margin: 1rem 2rem !important;
-    }
+    /* .card {
+        margin: 1rem 0 !important;
+    } */
 }
 
 @media (max-width: 577px) {
     .card {
-        margin: 1rem 2rem !important;
+        margin: 1rem 0 !important;
     }
 
     .card-text {

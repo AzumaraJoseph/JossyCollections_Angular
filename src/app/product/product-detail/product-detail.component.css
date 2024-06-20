@@ -79,9 +79,9 @@
         padding-left: 3rem !important;
     }
 
-    .detail {
+    /* .detail {
         padding: 2rem !important;
-    }
+    } */
 }
 
 @media (max-width: 577px) {
@@ -95,13 +95,13 @@
         padding: 0 0.8rem !important;
     }
 
-    .detail {
+    /* .detail {
         padding: 2rem !important;
-    }
+    } */
 
     .detail-title {
         margin-bottom: 0;
-        margin-top: 0.3rem;
+        /* margin-top: 0rem; */
         font-size: 0.9rem !important;
     }
 
