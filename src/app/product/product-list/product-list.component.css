@@ -78,6 +78,14 @@
     }
 } */
 
+@media (max-width: 700px) {
+}
+    /* .slider {
+        margin-top: 60px;
+        padding: 1rem 2rem;
+    } */
+
+
 @media (max-width: 577px) {
     /* .fluid-container {
         padding: 0 2rem !important;
@@ -106,12 +114,13 @@
     }
 
     .slider {
-        margin-top: 60px;
+        margin-top: 70px;
         margin-bottom: 0.5rem;
         padding: 0rem;
     }
 
 }
+
 
 
 
