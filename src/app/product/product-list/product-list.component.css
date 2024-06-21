@@ -79,17 +79,15 @@
 } */
 
 @media (max-width: 700px) {
-}
-    /* .slider {
-        margin-top: 60px;
-        padding: 1rem 2rem;
-    } */
+    .slider {
+        margin-top: 50px;
+        /* padding: 1rem 2rem; */
+    }
 
+}
+    
 
 @media (max-width: 577px) {
-    /* .fluid-container {
-        padding: 0 2rem !important;
-    } */
 
     .card {
       width: 100% !important;
@@ -114,9 +112,9 @@
     }
 
     .slider {
-        margin-top: 70px;
+        /* margin-top: 70px; */
         margin-bottom: 0.5rem;
-        padding: 0rem;
+        padding: 1rem;
     }
 
 }

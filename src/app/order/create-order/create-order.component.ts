@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EMPTY, Observable, Subject, catchError, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, finalize, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-create-order',
@@ -33,7 +34,7 @@ export class CreateOrderComponent implements OnInit {
   //   return this.auth.currentUser
   // }
 
-  constructor( private cartService: CartService, private auth: AuthService, private router: Router, private toastService: ToastService) { }
+  constructor( private cartService: CartService, private auth: AuthService, private router: Router, private toastService: ToastService, private spinnerService: SpinnerService) { }
 
 
   ngOnInit(): void {
@@ -41,7 +42,21 @@ export class CreateOrderComponent implements OnInit {
     //   this.user = data
     // })
 
-    this.cartItems$ = this.auth.getUser();
+    this.cartItems$ = this.auth.getUser().pipe(
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
+      catchError(err => {
+        this.errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(this.errorMessage);
+
+        console.error('Order user address:', this.errorMessage);
+        this.showToast(this.errorMessage);
+        this.spinnerService.hide();
+        return EMPTY;
+      })
+    );
 
     // console.log(this.currentUser);
 
@@ -51,12 +66,16 @@ export class CreateOrderComponent implements OnInit {
 
   loadCart() {
     this.auth.getCart(null).pipe(
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
       tap(data => {
         this.allCart = data;
       // this.shippingFee
       this.calculateTotalShippingFee()
       
-      console.log('Order list: ', JSON.stringify(this.allCart));
+      // console.log('Order list: ', JSON.stringify(this.allCart));
       
       } ),
       catchError(err => {
@@ -64,7 +83,8 @@ export class CreateOrderComponent implements OnInit {
         this.errorMessageSubject.next(this.errorMessage);
 
         console.error('Order history error:', this.errorMessage);
-        this.showToast(this.errorMessage)
+        this.showToast(this.errorMessage);
+        this.spinnerService.hide();
         return EMPTY;
       })
     ).subscribe();

@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
-import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, finalize, shareReplay } from 'rxjs';
 import { ToastComponent } from 'src/app/shared/toast.component';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
+import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 declare let $: any;
 
 @Component({
@@ -25,15 +27,20 @@ export class ProductListComponent implements OnInit {
   errorMessage: string = '';
 
 
-  constructor(private productService: ProductService, private toastService: ToastService) { }
+  constructor(private productService: ProductService, private toastService: ToastService, private router: Router, private spinnerService: SpinnerService) { }
 
 
-  ngOnInit(): void {
+  ngOnInit(): void { 
 
+    this.spinnerService.show();
 
     this.pageTitle = 'Products You May Love!';
 
     this.products$ = this.productService.products$.pipe(
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
       shareReplay(1),
       // tap(result => console.log(result)),
       catchError(err => {
@@ -41,7 +48,9 @@ export class ProductListComponent implements OnInit {
           this.errorMessageSubject.next(this.errorMessage);
           
           console.error('Product error:', this.errorMessage);
-          this.showToast(this.errorMessage)
+          this.showToast(this.errorMessage);
+          this.spinnerService.hide();
+
         return EMPTY;
       })
     );

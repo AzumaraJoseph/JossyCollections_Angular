@@ -130,21 +130,28 @@
 .material-icon:focus {
     color: gray;
     outline: none;
-    transform: translateY(1px);
-    transition: all 0.2s;
+   
 }
 
 .search-btn {
-    margin-left: -3.8rem;
+    margin-left: -2.5rem;
     outline: none;
     border: none;
     line-height: 1;
+
+    background: none;
+    padding: 0;
+    transition: transform 0.3s ease-in-out;
 }
 
 .search-btn:focus {
-    outline: none;
-    border: none;
+    /* outline: none;
+    border: none; */
 }
+
+/* .search-btn:focus .material-icon {
+    transform: translateY(10px); /* Translates the icon downwards *
+} */
 
 .search:focus ~ .search-btn {
     transform: scale(1.2);
@@ -153,12 +160,6 @@
 .search-container:focus-within {
     transform: scaleX(1.2); /* Scale horizontally to avoid changing height */
 }
-
-
-
-
-
-
 
 
 .user-btn {
@@ -266,6 +267,8 @@
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 } */
+
+
 
 .account {
     display: flex;
@@ -459,7 +462,7 @@
     }
 
     .h2 {
-        font-size: 1.1rem !important;
+        font-size: 1.3rem !important;
     }
 
 }

@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable, tap } from 'rxjs';
+import { Observable, finalize, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-cart-total',
@@ -15,14 +16,25 @@ export class CartTotalComponent implements OnInit {
   totalQuantity!: number;
 
 
-  constructor(private auth: AuthService, private cartService: CartService, private router: Router, private toastService: ToastService) { }
+  constructor(private auth: AuthService, private cartService: CartService, private router: Router, private toastService: ToastService,  private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
-    this.totalPrice$ = this.cartService.getTotalPrice().pipe(
-      tap(data => console.log('Total: ', JSON.stringify(data)))
-    ); // Subscribe to total price observable
-
-    this.cartService.getTotalQuantity().subscribe(data => this.totalQuantity = data); // Subscribepipe to total price observable
+    
+      this.totalPrice$ = this.cartService.getTotalPrice().pipe(
+        finalize(() => {
+          // Hide spinner after data fetch completes
+          this.spinnerService.hide();
+        }),
+        tap(data => console.log('Total: ', JSON.stringify(data)))
+      ); // Subscribe to total price observable
+  
+      this.cartService.getTotalQuantity().pipe(
+        finalize(() => {
+          // Hide spinner after data fetch completes
+          this.spinnerService.hide();
+        }),
+      ).subscribe(data => this.totalQuantity = data); // Subscribepipe to total price observable
+      
  
   } 
 

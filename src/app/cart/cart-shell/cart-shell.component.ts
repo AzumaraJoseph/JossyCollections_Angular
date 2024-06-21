@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, Subject, shareReplay, catchError, EMPTY } from 'rxjs';
+import { NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Router, Event } from '@angular/router';
+import { Observable, Subject, shareReplay, catchError, EMPTY, finalize } from 'rxjs';
 import { Product } from 'src/app/product/product';
 import { ProductService } from 'src/app/product/product.service';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-cart-shell',
@@ -30,15 +32,20 @@ export class CartShellComponent implements OnInit {
   errorMessage: string = '';
 
 
-  constructor(private productService: ProductService, private toastService: ToastService) { }
+  constructor(private productService: ProductService, private toastService: ToastService, private spinnerService: SpinnerService, private router: Router) { }
 
 
   ngOnInit(): void {
 
-
+    this.spinnerService.show();
     this.pageTitle = 'Recommended Products For You';
 
     this.products$ = this.productService.products$.pipe(
+      // finalize(() => {
+      //   // Hide spinner after data fetch completes
+      //   this.spinnerService.hide();
+      //   this.pageTitle = 'Recommended Products For You';
+      // }),
       shareReplay(1),
       // tap(result => console.log(result)),
       catchError(err => {

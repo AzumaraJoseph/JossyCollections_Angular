@@ -1,10 +1,11 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { EMPTY, Observable, Subject, catchError, map, observable, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, finalize, map, observable, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
 import { loadStripe, Stripe } from '@stripe/stripe-js';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-create-order-total',
@@ -30,7 +31,7 @@ export class CreateOrderTotalComponent implements OnInit {
   //   return this.auth.currentUser
   // }
 
-  constructor(private cartService: CartService, private auth: AuthService, private route: ActivatedRoute, private cdr: ChangeDetectorRef, private toastService: ToastService) {
+  constructor(private cartService: CartService, private auth: AuthService, private route: ActivatedRoute, private cdr: ChangeDetectorRef, private toastService: ToastService, private spinnerService: SpinnerService) {
     this.stripePromise = loadStripe(
       'pk_test_51OusquKAHvC2BbJggPo38R5ZkMpSs3mYled2GhhJEPZPSGmSEb32FXm6dw8F20bBLIra31Ju4H7SVCFLMG9yyP5J00b1G6HlKw'
     );
@@ -55,14 +56,18 @@ export class CreateOrderTotalComponent implements OnInit {
 
   loadCart() {
     this.auth.getCart(this.totalShippingFee).subscribe(data => {
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
       this.orderTotal = data;
-      console.log('Order total: ', JSON.stringify(this.orderTotal));
+      // console.log('Order total: ', JSON.stringify(this.orderTotal));
 
-      console.log('shipping total: ', this.totalShippingFee);
+      // console.log('shipping total: ', this.totalShippingFee);
 
       
       this.totalShippingFee
-      console.log('delivery ', JSON.stringify(this.totalShippingFee));
+      // console.log('delivery ', JSON.stringify(this.totalShippingFee));
 
       this.cdr.detectChanges()
       

@@ -62,13 +62,33 @@ display: block;
     color: #f68b1e;
 }
 
-@media (max-width: 577px) {
+@media (max-width: 700px) {
+    
+    /* .styling {
+        padding: 0 1.15rem 1.15rem 1.15rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .menu { margin-bottom: 0 !important; }
+
     .heading {
         font-size: 1.3rem !important;
+    } */
+
+    .styling {
+
+        padding: 0.5rem 4rem 1rem 4rem !important;
+    }
+
+}
+
+@media (max-width: 577px) {
+    .heading {
+        font-size: 1.4rem !important;
     }
     
     .styling {
-        padding: 0 1.15rem 1.15rem 1.15rem !important;
+        padding: 0.5rem 2rem 1rem 2rem !important;
         margin-bottom: 1rem !important;
     }
 

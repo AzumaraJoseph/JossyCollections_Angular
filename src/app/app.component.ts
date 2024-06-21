@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { Event, NavigationEnd, Router } from '@angular/router';
+import { Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { AuthService } from './shared/auth.service';
 import { Iuser } from './user/user.component';
 import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
 import { CartService } from './shared/cart.service';
 import { AuthGuard } from './auth.guard';
 import { ToastService } from './shared/toast.service';
+import { SpinnerService } from './spinner.service';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,8 @@ export class AppComponent implements OnInit {
   cartCount!: number;
   user: any;
   // isLoggedIn = false;
+
+  loading: boolean = true;
 
   errorMessageSubject = new Subject<string>();
   errorMessage$: Observable<string> = this.errorMessageSubject.asObservable();
@@ -49,15 +52,53 @@ export class AppComponent implements OnInit {
     this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
   }
 
-  constructor(private router: Router, private elementRef: ElementRef, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService, private toastService: ToastService ) { }
+  constructor(private router: Router, private elementRef: ElementRef, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService, private toastService: ToastService, private spinnerService: SpinnerService ) {
+    
+    router.events.subscribe((routerEvent: Event) => {
+      this.checkRouterEvent(routerEvent);
+    });
+
+   }
 
 
 
   ngOnInit(): void {
+
+      // this.spinnerService.show(); // Force spinner to show on load
+      // setTimeout(() => {
+      //   this.spinnerService.hide();
+      //   console.log('Spinner navEnd');
+      //   // Hide spinner after 5 seconds
+      // }, 10000);
+
+      
+
+      
+    
+
+
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0); // Scroll to top on navigation
       }  
+
+      // if (event instanceof NavigationStart) {
+      //   this.spinnerService.show();
+      //   // console.log('Spinner navStart');
+      // } else if (
+      //   event instanceof NavigationEnd ||
+      //   event instanceof NavigationCancel ||
+      //   event instanceof NavigationError
+      // ) {
+      //   this.spinnerService.hide();
+      //   // console.log('Spinner navEnd');
+      //   // setTimeout(() => {
+      //   //       this.spinnerService.hide();
+      //   //       console.log('Spinner navEnd');
+      //   //       // Hide spinner after 5 seconds
+      //   //     }, 3000);
+      // }    
+      
     }); 
 
 
@@ -146,6 +187,15 @@ export class AppComponent implements OnInit {
     console.log('showToast in CartIconComponent called with message:', message); // Debugging log
     if (this.cartCount > 0) {
       this.toastService.show(message);
+    }
+  }
+
+  checkRouterEvent(routerEvent: Event): void {
+    if (routerEvent instanceof NavigationStart) {
+      this.loading = true;
+    } 
+    if ( routerEvent instanceof NavigationEnd || routerEvent instanceof NavigationCancel || routerEvent instanceof NavigationError) {
+      this.loading = false;
     }
   }
   

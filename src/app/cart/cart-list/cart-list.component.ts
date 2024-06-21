@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, finalize, map, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Product } from 'src/app/product/product';
 import { ProductService } from 'src/app/product/product.service';
 import { CartService } from 'src/app/shared/cart.service';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-cart-list',
@@ -31,32 +32,19 @@ export class CartListComponent implements OnInit {
   errorMessage: string = '';
 
 
-  constructor(private route: ActivatedRoute, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService, private toastService: ToastService) { }
+  constructor(private route: ActivatedRoute, private auth: AuthService, private cdr: ChangeDetectorRef, private cartService: CartService, private toastService: ToastService, private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
 
-    // this.route.params.subscribe(params => {
-    //   const id = params['id']
-    //   this.product$ = this.productService.selectedProduct$(id).pipe(
-    //     catchError(err => {
-    //       this.errorMessageSuject.next(err)
-    //       return EMPTY
-    //     })
-    //   )
-    // });
+    // this.spinnerService.show();
 
 
-    // this.allCart$ = this.auth.getCart(null).pipe(
-    //   map(data => data),
-    //   tap(data => console.log('Cart Object: ', JSON.stringify(data))),
-    //   catchError(err => {
-    //     this.errorMessageSuject.next(err)
-    //     return EMPTY
-    //   })
-    // )
-    // 66599d85e1963ec543de2669
-
-    this.cartService.getTotalQuantity().subscribe(data => {this.cartQuantity = data
+    this.cartService.getTotalQuantity().pipe(
+      // finalize(() => {
+      //   // Hide spinner after data fetch completes
+      //   this.spinnerService.hide();
+      // }),
+    ).subscribe(data => {this.cartQuantity = data
      console.log('cart list quantity: ', JSON.stringify(data));
     })
 
@@ -67,24 +55,31 @@ export class CartListComponent implements OnInit {
 
   loadCart() {
     this.auth.getCart(null).pipe(
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
       map(data => data),
       tap(data => {
         this.allCart = data;
-      this.cartService.updateCart(this.allCart.items)
+        this.cartService.updateCart(this.allCart.items)
 
-      this.allCart.items.forEach((item: any) => {
-        this.quantities[item._id] = item.quantity;
+        this.allCart.items.forEach((item: any) => {
+          this.quantities[item._id] = item.quantity;
 
-        this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
-      });
-      } ),
+          this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
+        });
+      }),
+      
       tap(data => console.log('Cart Object: ', JSON.stringify(data))),
       catchError(err => {
         this.errorMessage = err.message || 'An unknown error occurred';
         this.errorMessageSubject.next(this.errorMessage);
 
         console.error('Cart List error:', this.errorMessage);
-        this.showToast(this.errorMessage)
+        this.showToast(this.errorMessage);
+        this.spinnerService.hide();
+
         return EMPTY;
       })
     ).subscribe();

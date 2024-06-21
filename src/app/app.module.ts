@@ -21,6 +21,7 @@ import { CreateOrderComponent } from './order/create-order/create-order.componen
 import { OrderShellComponent } from './order/order-shell.component';
 import { CreateOrderTotalComponent } from './order/create-order-total/create-order-total.component';
 import { OrderHistoryComponent } from './order/order-history/order-history.component';
+import { SpinnerComponent } from './spinner.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { OrderHistoryComponent } from './order/order-history/order-history.compo
     CreateOrderTotalComponent,
     OrderShellComponent,
     OrderHistoryComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

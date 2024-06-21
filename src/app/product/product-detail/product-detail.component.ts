@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
-import { EMPTY, Observable, Subject, catchError, shareReplay } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, finalize, shareReplay } from 'rxjs';
 import { Product } from '../product';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Event, NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/auth.service';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
 // import bootstrap from 'bootstrap'; // Import Bootstrap JavaScript (if not already imported)
 
 @Component({
@@ -27,9 +28,30 @@ export class ProductDetailComponent implements OnInit {
 
   errorMessage: string = '';
 
-  constructor(private productService: ProductService, private toastService: ToastService, private route: ActivatedRoute, private router: Router, private auth: AuthService) { }
+  constructor(private productService: ProductService, private toastService: ToastService, private route: ActivatedRoute, private router: Router, private auth: AuthService, private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
+
+    // this.router.events.subscribe((event: Event) => {
+    //   if (event instanceof NavigationStart) {
+    //     this.spinnerService.show();
+    //     console.log('Spinner navStart');
+    //   } else if (
+    //     event instanceof NavigationEnd ||
+    //     event instanceof NavigationCancel ||
+    //     event instanceof NavigationError
+    //   ) {
+    //     // this.spinnerService.hide();
+    //     console.log('Spinner navEnd');
+    //     setTimeout(() => {
+    //           this.spinnerService.hide();
+    //           console.log('Spinner navEnd');
+    //           // Hide spinner after 5 seconds
+    //         }, 10000);
+    //   }        
+    // }); 
+
+    this.spinnerService.show();
 
     this.route.params.subscribe(params => {
       const id = params['id'];
@@ -40,6 +62,10 @@ export class ProductDetailComponent implements OnInit {
       // this.openRelated(id);
 
       this.selectProduct$ = this.productService.selectedProduct$(id).pipe(
+        finalize(() => {
+          // Hide spinner after data fetch completes
+          this.spinnerService.hide();
+        }),
         shareReplay(1),
         // tap(product => console.log('single product: ', JSON.stringify(product))),
         catchError(err => {
@@ -52,6 +78,10 @@ export class ProductDetailComponent implements OnInit {
       )
 
       this.relatedProducts$ = this.productService.relatedProduct$(id).pipe(
+        finalize(() => {
+          // Hide spinner after data fetch completes
+          this.spinnerService.hide();
+        }),
         shareReplay(1),
         // tap( result=> console.log('related: ', JSON.stringify(result))),
         catchError(err => {
@@ -69,6 +99,7 @@ export class ProductDetailComponent implements OnInit {
   openRelated(id: string, message: any) {
     this.showToast(message)
     this.router.navigate(['/products', id]);
+    this.spinnerService.show()
   }
 
   eachProduct(index: number) {
