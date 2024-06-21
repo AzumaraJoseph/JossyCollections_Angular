@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/shared/auth.service';
 import { ProductService } from 'src/app/product/product.service';
 import { Iuser, address } from '../../user.component';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-create-address',
@@ -32,7 +33,7 @@ export class CreateAddressComponent implements OnInit {
 
   addressForm!: FormGroup;
   
-  constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService) { }
+  constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService, private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
 
@@ -120,6 +121,7 @@ export class CreateAddressComponent implements OnInit {
     if (this.addressForm.valid) {
       console.log('Form submitted: ', JSON.stringify(this.addressForm.value));
       const address = this.addressForm.value;
+      this.spinnerService.show();
       this.auth.createAddress(address).pipe(
         tap(response => {
           console.log('Address added successfully:', response);

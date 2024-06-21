@@ -2,9 +2,10 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { passwordsMatchValidator } from '../custom-validators';
 import { AuthService } from 'src/app/shared/auth.service';
-import { EMPTY, Observable, Subject, catchError, map, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, finalize, map, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-profile',
@@ -19,6 +20,7 @@ export class AddressComponent implements OnInit {
   address$!: Observable<any>;
   deleteAddress$!: Observable<any>;
   addresses: any[] =[];
+
 
   // get currentUser() {
   //   return this.auth.currentUser;
@@ -39,9 +41,10 @@ export class AddressComponent implements OnInit {
 
 
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private cdr: ChangeDetectorRef, private toastService: ToastService) { }
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private cdr: ChangeDetectorRef, private toastService: ToastService,  private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
+    this.spinnerService.show();
 
     this.profileForm = this.fb.group({
       firstName: ['', [ Validators.required, Validators.minLength(3) ]],
@@ -57,6 +60,10 @@ export class AddressComponent implements OnInit {
 
 
     this.address$ = this.auth.getUser().pipe(
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
       map(user => user),
       // tap(addresses => {
       //    console.log('Address user', JSON.stringify(addresses));
@@ -74,7 +81,8 @@ export class AddressComponent implements OnInit {
         this.errorMessageSubject.next(this.errorMessage);
         // this.showToast('No address found' + this.errorMessage);
 
-        console.error('Address error:', this.errorMessage);        
+        console.error('Address error:', this.errorMessage);   
+        this.spinnerService.hide();     
         return EMPTY;
       })
     );
@@ -133,4 +141,5 @@ export class AddressComponent implements OnInit {
     console.log('showToast in LoginComponent called with message:', message); // Debugging log
     this.toastService.show(message);
   }
+ 
 }

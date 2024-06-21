@@ -35,7 +35,7 @@
                     <div>
                         <a [routerLink]="['/user/profile']" >Account Information</a>
                     </div>
-                    <div><a [routerLink]="['/address/create']" routerLinkActive="active">Delivery Address</a></div>
+                    <div><a [routerLink]="['/user/address']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Delivery Address</a></div>
                 </div>
             </div>
             <hr style="color: rgba(132, 131, 131, 0.985);">

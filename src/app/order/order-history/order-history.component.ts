@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Subject, map, tap, catchError, EMPTY, Observable } from 'rxjs';
+import { Subject, map, tap, catchError, EMPTY, Observable, finalize } from 'rxjs';
 import { ProductService } from 'src/app/product/product.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-order-history',
@@ -34,19 +35,26 @@ export class OrderHistoryComponent implements OnInit {
 
 
   
-  constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService) { }
+  constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService, private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
+
+    this.spinnerService.show();
 
 
     this.orderHistory$ = this.auth.orderHistory().pipe(
       // tap(orders => console.log('All orders: ', JSON.stringify(orders))),
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
       catchError(err => {
         this.errorMessage = err.message || 'An unknown error occurred';
         this.errorMessageSubject.next(this.errorMessage);
 
         console.error('Login error:', this.errorMessage);
-        this.showToast(this.errorMessage + ' history')
+        this.showToast(this.errorMessage + ' history');
+        this.spinnerService.hide();
         return EMPTY;
       })
     )

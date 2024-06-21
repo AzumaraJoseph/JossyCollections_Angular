@@ -3,7 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Router } from '@angular/router';
 import { Iuser } from '../user.component';
-import { EMPTY, Subject, catchError, tap } from 'rxjs';
+import { EMPTY, Subject, catchError, finalize, tap } from 'rxjs';
+import { SpinnerService } from 'src/app/spinner.service';
+import { ToastService } from 'src/app/shared/toast.service';
 
 @Component({
   selector: 'app-profile',
@@ -27,13 +29,17 @@ export class ProfileComponent implements OnInit {
   errorMessageSubject = new Subject<string>();
   errorMessage$ = this.errorMessageSubject.asObservable();
 
+  errorMessage: string = '';
 
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router) { }
+
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService, private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
 
     
+    this.spinnerService.show();
+
 
     this.profileForm = this.fb.group({
       firstName: ['', [ Validators.required, Validators.minLength(3) ]],
@@ -44,19 +50,33 @@ export class ProfileComponent implements OnInit {
   });
 
 
-  this.auth.getUser().subscribe(response => {
-    const user = response
-    // console.log('tired', JSON.stringify(user));
-
-    this.profileForm.patchValue({
-      firstName: user.firstName ,
-      lastName: user.lastName,
-      email: user.email,
-      phone: user.phone
-
-    })
+  this.auth.getUser().pipe(
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
+      tap(response => {
+        this.profileForm.patchValue({
+          firstName: response.firstName ,
+          lastName: response.lastName,
+          email: response.email,
+          phone: response.phone
     
-  })
+        })
+      }),
+      catchError(err => {
+        this.errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(this.errorMessage);
+
+        console.error('User profile error:', this.errorMessage);
+        this.showToast(this.errorMessage);
+        this.spinnerService.hide();
+        return EMPTY;
+      })
+    ).subscribe();
+
+    
+    
     
 
   // this.auth.updateUser().subscribe()
@@ -94,4 +114,10 @@ export class ProfileComponent implements OnInit {
     }
     
   }
+
+  showToast(message: string) {
+    console.log('showToast in OrderHistoryComponent called with message:', message); // Debugging log
+    this.toastService.show(message);
+  }
+
 }
