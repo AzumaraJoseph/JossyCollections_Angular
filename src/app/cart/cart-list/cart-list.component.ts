@@ -23,6 +23,8 @@ export class CartListComponent implements OnInit {
   itemId!: string;
   allCart!: any;
   cartQuantity!: number
+  isLoadingQuantity: boolean = false;
+
 
   cartListForm!: NgForm;
 
@@ -85,10 +87,23 @@ export class CartListComponent implements OnInit {
     ).subscribe();
   }
 
+  // increment(itemId: string, maxQuantity: number): void {
+  //   if (this.quantities[itemId] < maxQuantity) {
+  //     this.quantities[itemId] += 1;
+  //     this.updateCart(itemId, this.quantities[itemId]);
+  //   }
+  // }
+
   increment(itemId: string, maxQuantity: number): void {
     if (this.quantities[itemId] < maxQuantity) {
+      this.isLoadingQuantity = true; // Set loading state to true
+      this.spinnerService.show();
+      setTimeout(() => {
+      this.spinnerService.hide();
+      this.isLoadingQuantity = false; // Set loading state to false
       this.quantities[itemId] += 1;
       this.updateCart(itemId, this.quantities[itemId]);
+      }, 450);
     }
   }
 

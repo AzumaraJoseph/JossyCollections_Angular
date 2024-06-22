@@ -249,7 +249,7 @@
                 <div class="row pb-4 justify-content-center ">
                     <div class="card related p-2 m-2" style="width: 16rem;"
                         *ngFor="let related of relatedProducts$ | async">
-                        <app-spinner></app-spinner>
+                        <!-- <app-spinner></app-spinner> -->
 
                         <div class="card-body flex-column justify-content-between p-2" (click)="openRelated(related.id, related.name)">
 

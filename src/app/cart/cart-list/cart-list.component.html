@@ -76,7 +76,19 @@
                                     remove
                                 </span>
                             </button>
-                            <p class="quantity" >{{ quantities[cart._id] }}</p>
+                            {{ quantities[cart._id] }}
+                            <p class="quantity" style="position: relative;" >
+                                <ng-container *ngIf="!isLoadingQuantity; else loadingQuantity">
+                                    {{quantity}}
+                                  </ng-container>
+                                  <ng-template #loadingQuantity>
+                                    <div class="spinner">
+                                        <div class="spinner-border"   role="status">
+                                        </div>
+                                      </div>
+                                  </ng-template>
+                                </p>
+
                             <button [disabled]="quantity === cart.maxQuantity" class="button-adjust btn"
                                 (click)="increment(cart._id, cart.maxQuantity)">
                                 <span class="material-icons icon-size">

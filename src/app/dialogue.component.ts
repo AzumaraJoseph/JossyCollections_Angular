@@ -25,6 +25,10 @@ export class DialogueComponent implements OnInit {
   product$: Observable<Product> | undefined;
   selectProduct$: Observable<Product> | undefined;
   quantity: number = 1;
+  // isLoading = false;
+  isLoadingQuantity: boolean = false;
+  isLoadingForm: boolean = false;
+
 
   returnUrl!: string;
 
@@ -59,12 +63,38 @@ constructor(private auth: AuthService, private router: Router, private guard: Au
     }
   }
 
+// increment(maxQuantity: number): void {
+//     if (this.quantity < maxQuantity) this.quantity += 1; 
+    
+// }
+
 increment(maxQuantity: number): void {
-  if (this.quantity < maxQuantity) this.quantity += 1;
+  if (this.quantity < maxQuantity) {
+    this.isLoadingQuantity = true; // Set loading state to true
+    this.spinnerService.show();
+    setTimeout(() => {
+      this.spinnerService.hide();
+      this.isLoadingQuantity = false; // Set loading state to false
+      this.quantity += 1;
+    }, 450);
+  }
 }
 
+// decrement(): void {
+//   if(this.quantity > 1)  this.quantity--;
+    
+//  }
+
 decrement(): void {
-  if(this.quantity > 1) this.quantity--;
+  if(this.quantity > 1) {
+    this.isLoadingQuantity = true; // Set loading state to true
+    this.spinnerService.show();
+    setTimeout(() => {
+      this.spinnerService.hide();
+      this.isLoadingQuantity = false; // Set loading state to true
+      this.quantity --
+    }, 450);
+  }
     
  }
 
@@ -87,12 +117,9 @@ save(cartForm: NgForm) {
   console.log(cartForm.value);
   
   if (cartForm.valid) {
-    this.spinnerService.show();
-
+    this.isLoadingForm = true; // Set loading state to true
     this.addCart(cartForm.value);
   } else {
-    this.spinnerService.hide();
-
     console.error('Form is invalid');
     // this.closeModal();
     // auth guard was used instead
@@ -103,12 +130,12 @@ save(cartForm: NgForm) {
 
 
 addCart(formData: any) {
+  this.isLoadingForm = true; // Set loading state to true
   this.spinnerService.show();
 
   this.auth.createCart(formData.id, formData.quantity, formData.color).subscribe(
     response => {
       console.log('Added to cart', JSON.stringify(response))
-      this.spinnerService.show();
 
       this.closeModal();
       this.showToast('Item(s) added to cart successfully')
