@@ -1,6 +1,6 @@
 <!-- <div class="row" style="background-color: rgba(246, 246, 246, 0.982); margin-top: 4rem;"> -->
     <div class="cart-list" style="border-radius: 6px; margin-top: 2rem; position: relative;">
-        <!-- <app-spinner></app-spinner> -->
+        <app-spinner></app-spinner>
 
         <div class="card">
             <h5 class="card-header m-0 p-3"  >Cart ({{ cartQuantity }})</h5>
@@ -58,7 +58,21 @@
                                     remove
                                 </span>
                             </button>
-                            <p class="quantity" >{{ quantities[cart._id] }}</p>
+
+                            <p class="quantity" style="position: relative;" >
+                                <ng-container *ngIf="!isLoadingQuantity[cart._id]; else loadingQuantity">
+                                    {{ quantities[cart._id] }}
+                                  </ng-container>
+
+                                  <ng-template #loadingQuantity>
+                                    <div class="spinner">
+                                        <div class="spinner-border"   role="status">
+                                        </div>
+                                      </div>
+                                  </ng-template>
+
+                            </p>
+
                             <button [disabled]="quantity === cart.maxQuantity" class="button-adjust btn"
                                 (click)="increment(cart._id, cart.maxQuantity)">
                                 <span class="material-icons">
@@ -70,16 +84,16 @@
 
                     <div class="footer-small-screen d-flex justify-content-between">
                         <div class="btn-height d-flex" style="height: 2rem">
-                            <button [disabled]="quantity === 0" class="button-adjust btn"
+                            <button [disabled]="quantity === 0" type="button" class="button-adjust btn"
                                 (click)="decrement(cart._id)" >
                                 <span class="material-icons icon-size">
                                     remove
                                 </span>
                             </button>
-                            {{ quantities[cart._id] }}
+                            <!-- {{ quantities[cart._id] }} -->
                             <p class="quantity" style="position: relative;" >
                                 <ng-container *ngIf="!isLoadingQuantity; else loadingQuantity">
-                                    {{quantity}}
+                                    {{ quantities[cart._id] }}
                                   </ng-container>
                                   <ng-template #loadingQuantity>
                                     <div class="spinner">
@@ -89,7 +103,7 @@
                                   </ng-template>
                                 </p>
 
-                            <button [disabled]="quantity === cart.maxQuantity" class="button-adjust btn"
+                            <button [disabled]="quantity === cart.maxQuantity" type="button" class="button-adjust btn"
                                 (click)="increment(cart._id, cart.maxQuantity)">
                                 <span class="material-icons icon-size">
                                     add
@@ -97,7 +111,7 @@
                             </button>
                         </div>
 
-                        <button class="btn button-delete d-flex align-items-center" style="color: #f68b1e;" (click)="deleteProduct(cart._id)" >
+                        <button class="btn button-delete d-flex align-items-center" type="button" style="color: #f68b1e;" (click)="deleteProduct(cart._id)" >
                             <span class="material-icons">
                                 delete_outline
                             </span>

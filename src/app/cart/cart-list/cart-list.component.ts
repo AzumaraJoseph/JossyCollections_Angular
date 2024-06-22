@@ -23,7 +23,7 @@ export class CartListComponent implements OnInit {
   itemId!: string;
   allCart!: any;
   cartQuantity!: number
-  isLoadingQuantity: boolean = false;
+  isLoadingQuantity: { [key: string]: boolean} = {};
 
 
   cartListForm!: NgForm;
@@ -38,7 +38,7 @@ export class CartListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.spinnerService.show();
+    this.spinnerService.show();
 
 
     this.cartService.getTotalQuantity().pipe(
@@ -94,23 +94,29 @@ export class CartListComponent implements OnInit {
   //   }
   // }
 
-  increment(itemId: string, maxQuantity: number): void {
-    if (this.quantities[itemId] < maxQuantity) {
-      this.isLoadingQuantity = true; // Set loading state to true
+  increment(cartId: string, maxQuantity: number): void {
+    if (this.quantities[cartId] < maxQuantity) {
+      this.isLoadingQuantity[cartId] = true;
       this.spinnerService.show();
       setTimeout(() => {
       this.spinnerService.hide();
-      this.isLoadingQuantity = false; // Set loading state to false
-      this.quantities[itemId] += 1;
-      this.updateCart(itemId, this.quantities[itemId]);
-      }, 450);
+      this.isLoadingQuantity[cartId] = false; 
+      this.quantities[cartId] += 1;
+      this.updateCart(cartId, this.quantities[cartId]);
+      }, 500);
     }
   }
 
-  decrement(itemId: string): void {
-    if (this.quantities[itemId] > 0) {
-      this.quantities[itemId] -= 1;
-      this.updateCart(itemId, this.quantities[itemId]);
+  decrement(cartId: string): void {
+    if (this.quantities[cartId] > 0) {
+      this.isLoadingQuantity[cartId] = true;
+      this.spinnerService.show();
+      setTimeout(() => {
+      this.spinnerService.hide();
+      this.isLoadingQuantity[cartId] = false; 
+      this.quantities[cartId] -= 1;
+      this.updateCart(cartId, this.quantities[cartId]);
+      }, 500);
     }
   }
 
