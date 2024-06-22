@@ -71,8 +71,9 @@ constructor(private auth: AuthService, private router: Router, private guard: Au
 increment(maxQuantity: number): void {
   if (this.quantity < maxQuantity) {
     this.isLoadingQuantity = true; // Set loading state to true
-    // this.spinnerService.show();
+    this.spinnerService.show();
     setTimeout(() => {
+      this.spinnerService.hide();
       this.isLoadingQuantity = false; // Set loading state to false
       this.quantity += 1;
     }, 450);
@@ -87,9 +88,9 @@ increment(maxQuantity: number): void {
 decrement(): void {
   if(this.quantity > 1) {
     this.isLoadingQuantity = true; // Set loading state to true
-    // this.spinnerService.show();
+    this.spinnerService.show();
     setTimeout(() => {
-      // this.spinnerService.hide();
+      this.spinnerService.hide();
       this.isLoadingQuantity = false; // Set loading state to true
       this.quantity --
     }, 450);

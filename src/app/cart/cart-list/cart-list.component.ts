@@ -38,14 +38,14 @@ export class CartListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.spinnerService.show();
+    // this.spinnerService.show();
 
 
     this.cartService.getTotalQuantity().pipe(
-      // finalize(() => {
-      //   // Hide spinner after data fetch completes
-      //   this.spinnerService.hide();
-      // }),
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
     ).subscribe(data => {this.cartQuantity = data
      console.log('cart list quantity: ', JSON.stringify(data));
     })
@@ -97,26 +97,28 @@ export class CartListComponent implements OnInit {
   increment(cartId: string, maxQuantity: number): void {
     if (this.quantities[cartId] < maxQuantity) {
       this.isLoadingQuantity[cartId] = true;
-      this.spinnerService.show();
+      // this.spinnerService.show();
       setTimeout(() => {
-      this.spinnerService.hide();
+      // this.spinnerService.hide();
       this.isLoadingQuantity[cartId] = false; 
       this.quantities[cartId] += 1;
       this.updateCart(cartId, this.quantities[cartId]);
-      }, 500);
+      this.showToast('One item(s) quantity added to cart');
+      }, 400);
     }
   }
 
   decrement(cartId: string): void {
     if (this.quantities[cartId] > 0) {
       this.isLoadingQuantity[cartId] = true;
-      this.spinnerService.show();
+      // this.spinnerService.show();
       setTimeout(() => {
-      this.spinnerService.hide();
-      this.isLoadingQuantity[cartId] = false; 
+      // this.spinnerService.hide();
+      this.isLoadingQuantity[cartId] = false;
       this.quantities[cartId] -= 1;
       this.updateCart(cartId, this.quantities[cartId]);
-      }, 500);
+      this.showToast('One item(s) quantity removed from cart');
+      }, 400);
     }
   }
 
@@ -129,9 +131,13 @@ export class CartListComponent implements OnInit {
           // Remove item from the allCart.items array
           this.allCart.items = this.allCart.items.filter((item: any) => item._id !== itemId);
           delete this.quantities[itemId];
+          this.showToast('One item(s) removed from cart');
+
         } else {
           // Update the quantity in the quantities dictionary
           this.quantities[itemId] = newQuantity;
+          // this.showToast('One item(s) added to cart');
+
         }
 
       //  OR  const index = this.allCart.items.findIndex((item: any) => item._id === itemId);
@@ -216,6 +222,7 @@ export class CartListComponent implements OnInit {
 
         if (index !== -1) {
           this.allCart.items.splice(index, 1);
+          this.showToast('One item(s) removed from cart');
         }
 
       this.cartService.updateCart(this.allCart.items); // Update cart in CartService
@@ -227,6 +234,8 @@ export class CartListComponent implements OnInit {
         console.error('Load Cart error:', err.message);
         const errorMessage = err.message || 'An unknown error occurred';
         this.errorMessageSubject.next(errorMessage);
+        this.showToast(errorMessage);
+
         return EMPTY
       }
     )
