@@ -7,6 +7,7 @@ import { UserRoutingModule } from './user-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { AddressComponent } from './address/address.component';
 import { CreateAddressComponent } from './address/create-address/create-address.component';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { CreateAddressComponent } from './address/create-address/create-address.
   imports: [
     ReactiveFormsModule,
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    SharedModule
   ]
 })
 export class UserModule { }

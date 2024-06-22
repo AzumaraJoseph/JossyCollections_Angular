@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
   template: `
   <div class="row justify-content-center" style="background-color: rgba(246, 246, 246, 0.982); margin-top: 4rem; padding: 0 2rem" >
   <app-spinner></app-spinner>
-  <div class="col-md-8">
+  <div class="col-md-7">
       <app-create-order></app-create-order>
     </div>
     <div class="col-md-4">

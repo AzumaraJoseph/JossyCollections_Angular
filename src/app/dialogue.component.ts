@@ -6,6 +6,9 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 import { ToastService } from './shared/toast.service';
+// import { SpinnerService } from './shared/spinner/spinner.service';
+import { SpinnerService } from 'src/app/spinner.service';
+
 declare let $: any;
 
 @Component({
@@ -35,9 +38,10 @@ export class DialogueComponent implements OnInit {
 
   errorMessage: string = '';
 
-  constructor(private auth: AuthService, private router: Router, private guard: AuthGuard, private route: ActivatedRoute, private toastService: ToastService) { }
+constructor(private auth: AuthService, private router: Router, private guard: AuthGuard, private route: ActivatedRoute, private toastService: ToastService, private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
+    // this.spinnerService.show();
 
     // Read the returnUrl query parameter from the route
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -83,8 +87,12 @@ save(cartForm: NgForm) {
   console.log(cartForm.value);
   
   if (cartForm.valid) {
+    this.spinnerService.show();
+
     this.addCart(cartForm.value);
   } else {
+    this.spinnerService.hide();
+
     console.error('Form is invalid');
     // this.closeModal();
     // auth guard was used instead
@@ -95,9 +103,13 @@ save(cartForm: NgForm) {
 
 
 addCart(formData: any) {
+  this.spinnerService.show();
+
   this.auth.createCart(formData.id, formData.quantity, formData.color).subscribe(
     response => {
       console.log('Added to cart', JSON.stringify(response))
+      this.spinnerService.show();
+
       this.closeModal();
       this.showToast('Item(s) added to cart successfully')
 

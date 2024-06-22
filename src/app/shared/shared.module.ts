@@ -4,6 +4,7 @@ import { StarComponent } from './star.component';
 import { FormsModule } from '@angular/forms';
 import { CollapsibleWellComponent } from './collapsible-well.component';
 import { StarReviewComponent } from './star-review.component';
+import { SpinnerComponent } from '../spinner.component';
 
 
 
@@ -12,6 +13,7 @@ import { StarReviewComponent } from './star-review.component';
     StarComponent,
     CollapsibleWellComponent,
     StarReviewComponent,
+    SpinnerComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { StarReviewComponent } from './star-review.component';
     FormsModule,
     StarComponent,
     StarReviewComponent,
-    CollapsibleWellComponent
+    CollapsibleWellComponent,
+    SpinnerComponent
   ]
 })
 export class SharedModule { }

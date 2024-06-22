@@ -134,11 +134,12 @@
       </div>
     </div>    
   </nav>
-
+  <!-- [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''" -->
+  <!-- #o="outlet" -->
 <div class="fluid-container" >
-  <div>
-    <router-outlet></router-outlet>
-    <app-spinner></app-spinner>
+  <div >
+    <router-outlet ></router-outlet>
+    <!-- <app-spinner></app-spinner> -->
     <app-toast></app-toast>
   </div>
 

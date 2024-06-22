@@ -94,6 +94,8 @@
     aria-hidden="true">
 
     <div class="modal-dialog modal-fullscreen">
+        <app-spinner></app-spinner>
+
         <div class="modal-content"  *ngIf="product">
             <div class="modal-header">
                 <h1 class="modal-title fs-4 fw-bold" style="margin-left: 43%;"
@@ -195,7 +197,7 @@
                         
                         <div class="col-md-1 col-lg-1 p-0 flex-center"
                         style="border-radius: 0.8px; align-self: end;"  >
-                        <button type="button"                                 
+                        <button type="submit"                                 
                             class="btn navigateTo" 
                             [disabled]="!cartForm.valid" 
                             type="submit" >Add to Cart</button>

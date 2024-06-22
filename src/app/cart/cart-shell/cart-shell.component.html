@@ -1,7 +1,7 @@
 <div class="fluid-container" style="background-color: rgba(246, 246, 246, 0.982);">
-    <!-- <app-spinner></app-spinner> -->
+    <app-spinner></app-spinner>
+
     <div class="row custom-layout justify-content-center" style= "margin-top: 4rem; margin-bottom: 1rem; padding: 0 2rem;" >
-        <app-spinner></app-spinner>
         <div class="col-md-7 custom-col">
           <app-cart-list></app-cart-list>
         </div>
@@ -17,7 +17,6 @@
     
         <div class="col-md-12">
             <app-toast></app-toast>
-            <!-- <app-spinner></app-spinner> -->
 
     
             <div class="row row-align justify-content-center pb-3" *ngIf="products$ | async as products">

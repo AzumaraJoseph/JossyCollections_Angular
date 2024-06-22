@@ -79,7 +79,9 @@
                 </div>
             </div>
 
-            <div class="col-md-7 align-2">
+            <div class="col-md-7 align-2" style="position: relative;">
+                <app-spinner></app-spinner>
+
                 <div style="background-color: white; border-radius: 6px;" *ngIf="address$ | async as currentUser">
                     <div class="d-flex justify-content-between align-items-center p-3">
                         <h5 class="button mb-0">Delivery Address</h5>

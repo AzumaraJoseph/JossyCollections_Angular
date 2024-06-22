@@ -7,11 +7,13 @@ import { CartService } from './shared/cart.service';
 import { AuthGuard } from './auth.guard';
 import { ToastService } from './shared/toast.service';
 import { SpinnerService } from './spinner.service';
+import { slideInAnimation } from './app.animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
+  animations: [slideInAnimation],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AppComponent implements OnInit {

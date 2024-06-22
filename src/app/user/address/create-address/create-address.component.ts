@@ -134,7 +134,9 @@ export class CreateAddressComponent implements OnInit {
           this.errorMessageSubject.next(this.errorMessage);
 
           console.error('Create address error:', this.errorMessage);
-          this.showToast(this.errorMessage)
+          this.showToast(this.errorMessage);
+          this.spinnerService.hide();
+
           return EMPTY;
         })
       ).subscribe(

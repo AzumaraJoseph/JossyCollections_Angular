@@ -23,6 +23,7 @@
             </h3>
         </div>
         <div class="row justify-content-center" style="padding: 0 2rem;">
+
             <div class="col-md-3 col-sm-3 align p-2 me-3" style="background-color: white; border-radius: 6px;" >
                 <div class="d-flex " >
                     <div class="me-3">
@@ -78,10 +79,12 @@
                 </div>
             </div>
 
-            <div class="col-md-7 col-sm-7 align-2">
+            <div class="col-md-7 col-sm-7 align-2" style="position: relative;">
                 <div style="background-color: white; border-radius: 6px;" >
+            <app-spinner></app-spinner>
                     <h5 class="mb-0 p-3">Account Information</h5>
                     <hr style="color: rgba(123, 122, 122, 0.985); margin: 0;">
+
                     <div style="padding: 1rem 2rem;">
                         <form novalidate autocomplete="off" [formGroup]="profileForm" (ngSubmit)="update()" >
                             <div class="col-md-12 mb-4">
