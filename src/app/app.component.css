@@ -141,10 +141,11 @@
 
     background: none;
     padding: 0;
-    transition: transform 0.3s ease-in-out;
+    transition: transform 0.2s ease-in-out;
 }
 
-.search-btn:focus {
+.search-btn:active {
+    transform: translateY(13px);
     /* outline: none;
     border: none; */
 }
@@ -154,7 +155,7 @@
 } */
 
 .search:focus ~ .search-btn {
-    transform: scale(1.2);
+    transform: scale(1.1); /* adjust the icon scaling size. or you can maintai its original size by using 1*/
 }
 
 .search-container:focus-within {

@@ -130,12 +130,14 @@ save(cartForm: NgForm) {
 
 
 addCart(formData: any) {
-  this.isLoadingForm = true; // Set loading state to true
+  // this.isLoadingForm = true; // Set loading state to true
   this.spinnerService.show();
 
   this.auth.createCart(formData.id, formData.quantity, formData.color).subscribe(
     response => {
       console.log('Added to cart', JSON.stringify(response))
+      this.spinnerService.hide();
+      this.isLoadingForm = false; // Set loading state to false
 
       this.closeModal();
       this.showToast('Item(s) added to cart successfully')

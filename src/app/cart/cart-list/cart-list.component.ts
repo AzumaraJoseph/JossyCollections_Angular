@@ -131,7 +131,7 @@ export class CartListComponent implements OnInit {
           // Remove item from the allCart.items array
           this.allCart.items = this.allCart.items.filter((item: any) => item._id !== itemId);
           delete this.quantities[itemId];
-          this.showToast('One item(s) removed from cart');
+          this.showToast('item(s) removed from cart');
 
         } else {
           // Update the quantity in the quantities dictionary
@@ -222,7 +222,7 @@ export class CartListComponent implements OnInit {
 
         if (index !== -1) {
           this.allCart.items.splice(index, 1);
-          this.showToast('One item(s) removed from cart');
+          this.showToast('item(s) removed from cart');
         }
 
       this.cartService.updateCart(this.allCart.items); // Update cart in CartService
