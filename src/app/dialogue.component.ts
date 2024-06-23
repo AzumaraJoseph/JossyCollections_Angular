@@ -144,6 +144,12 @@ addCart(formData: any) {
 
       // Route to Cart
       this.router.navigate(['/cart']);
+    },
+    error => {
+      this.spinnerService.hide();
+      this.isLoadingForm = false; // Set loading state to false
+      this.showToast(error);
+      console.error('Error adding to cart', error);
     });
   }
     

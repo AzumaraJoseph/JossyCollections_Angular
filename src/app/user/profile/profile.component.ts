@@ -98,6 +98,7 @@ export class ProfileComponent implements OnInit {
 
   update() {
     if(this.profileForm.valid) {
+      this.spinnerService.show();
       console.log('Form submitted:', this.profileForm.value);
       
       this.auth.updateUser(this.profileForm.value).pipe(
@@ -107,9 +108,12 @@ export class ProfileComponent implements OnInit {
           const errorMessage = err.message || 'An unknown error occurred';
           this.errorMessageSubject.next(errorMessage);
         return EMPTY;
-      })
+      }), finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
       ).subscribe()
-      this.router.navigate(['/products'])
+      this.router.navigate(['/profile'])
       console.log('Update successful');
     }
     

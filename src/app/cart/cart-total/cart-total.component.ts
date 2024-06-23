@@ -38,7 +38,8 @@ export class CartTotalComponent implements OnInit {
  
   } 
 
-  routeToOrder() {
+  routeToOrder(): void {
+    this.spinnerService.show();
     setTimeout(() => {
       this.router.navigate(['/order']);
       this.showToast('Order created successfully')

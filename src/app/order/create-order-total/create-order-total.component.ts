@@ -97,6 +97,8 @@ export class CreateOrderTotalComponent implements OnInit {
   // }
 
   placeOrder() {
+    this.spinnerService.show();
+
       this.auth.placeOrder().pipe(
         tap(async (response) => {
           const stripe = await this.stripePromise;

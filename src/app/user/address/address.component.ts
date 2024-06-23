@@ -60,10 +60,6 @@ export class AddressComponent implements OnInit {
 
 
     this.address$ = this.auth.getUser().pipe(
-      finalize(() => {
-        // Hide spinner after data fetch completes
-        this.spinnerService.hide();
-      }),
       map(user => user),
       // tap(addresses => {
       //    console.log('Address user', JSON.stringify(addresses));
@@ -84,7 +80,11 @@ export class AddressComponent implements OnInit {
         console.error('Address error:', this.errorMessage);   
         this.spinnerService.hide();     
         return EMPTY;
-      })
+      }),
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
     );
 
   }
@@ -95,12 +95,18 @@ export class AddressComponent implements OnInit {
   }
   
   deleteAddress(id: any) {
+    this.spinnerService.show();
+
     this.auth.deleteAddress(id).pipe(
       tap(res => {
+        this.spinnerService.show();
+
         console.log('Address deleted', JSON.stringify(res));
 
         this.addresses = this.addresses.filter(address => address._id !== id);
         this.cdr.markForCheck();
+
+        this.spinnerService.hide();
 
         if(this.addresses.length !== 0) {
           this.showToast('One address deleted successfully');
@@ -138,6 +144,8 @@ export class AddressComponent implements OnInit {
   }
 
   showToast(message: string) {
+    // this.spinnerService.show();
+
     console.log('showToast in LoginComponent called with message:', message); // Debugging log
     this.toastService.show(message);
   }

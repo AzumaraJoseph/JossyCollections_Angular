@@ -37,10 +37,6 @@ export class ProductListComponent implements OnInit {
     this.pageTitle = 'Products You May Love!';
 
     this.products$ = this.productService.products$.pipe(
-      finalize(() => {
-        // Hide spinner after data fetch completes
-        this.spinnerService.hide();
-      }),
       shareReplay(1),
       // tap(result => console.log(result)),
       catchError(err => {
@@ -52,6 +48,10 @@ export class ProductListComponent implements OnInit {
           this.spinnerService.hide();
 
         return EMPTY;
+      }),
+      finalize(() => {
+        // Hide spinner after data fetch completes or encounters an error
+        this.spinnerService.hide();
       })
     );
 
@@ -96,5 +96,13 @@ export class ProductListComponent implements OnInit {
     console.log('showToast in ProductListComponent called with message:', message); // Debugging log
     this.toastService.show(message);
   }
+
+  // routeToDetail(product: any): void {
+  //   this.spinnerService.show();
+  //   setTimeout(() => {
+  //     this.router.navigate(['/products', product.id]);
+  //     this.showToast(product.name)
+  //   }, 1000); // Adjust the timeout as needed
+  // }
 
 }

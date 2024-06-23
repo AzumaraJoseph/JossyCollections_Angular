@@ -57,10 +57,6 @@ export class CartListComponent implements OnInit {
 
   loadCart() {
     this.auth.getCart(null).pipe(
-      finalize(() => {
-        // Hide spinner after data fetch completes
-        this.spinnerService.hide();
-      }),
       map(data => data),
       tap(data => {
         this.allCart = data;
@@ -83,7 +79,11 @@ export class CartListComponent implements OnInit {
         this.spinnerService.hide();
 
         return EMPTY;
-      })
+      }),
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
     ).subscribe();
   }
 
