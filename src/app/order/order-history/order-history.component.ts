@@ -53,7 +53,7 @@ export class OrderHistoryComponent implements OnInit {
         this.errorMessageSubject.next(this.errorMessage);
 
         console.error('Login error:', this.errorMessage);
-        this.showToast(this.errorMessage + ' history');
+        this.showToastError(this.errorMessage);
         this.spinnerService.hide();
         return EMPTY;
       })
@@ -108,9 +108,23 @@ export class OrderHistoryComponent implements OnInit {
     this.productRating = 0
   }
 
-  showToast(message: string) {
-    console.log('showToast in OrderHistoryComponent called with message:', message); // Debugging log
-    this.toastService.show(message);
+  // showToast(message: string) {
+  //   console.log('showToast in OrderHistoryComponent called with message:', message); // Debugging log
+  //   this.toastService.show(message);
+  // }
+
+  showToastSuccess(message: string) {
+    console.log('showToast in addressComponent called with message'); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'success');
+
+  }
+
+  showToastError(message: string) {
+    console.log('showToastEror in addressComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'error');
+
   }
 
 }

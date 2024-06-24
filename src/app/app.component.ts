@@ -200,6 +200,13 @@ export class AppComponent implements OnInit {
       this.loading = false;
     }
   }
+
+  showToastSuccess(message: string) {
+    console.log('showToast in ProductDetailComponent called with message:', message); // Debugging log
+    // this.toastService.show(message);
+    this.toastService.show(message, 'success');
+
+  }
   
 } 
  

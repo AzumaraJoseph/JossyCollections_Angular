@@ -119,7 +119,7 @@
       </div>
      
       <div class="col-md-1 cart-sizing p-0">
-        <div class="cart" [routerLink]="['/cart']" (click)="showToast('Item(s) found in cart')" >
+        <div class="cart" [routerLink]="['/cart']" (click)="showToastSuccess('Item(s) found in cart')" >
           <span class="position-relative material-symbols-outlined me-1">
             {{ cartCount > 0 ? 'shopping_cart' : 'shopping_cart_off' }}
 
@@ -157,13 +157,13 @@
         </i>
         <p class="mb-0">Category</p>
     </a>
-    <a class="footer-link" [routerLink]="['/cart']" routerLinkActive="active" (click)="showToast('Item(s) found in cart')">
+    <a class="footer-link" [routerLink]="['/cart']" routerLinkActive="active" (click)="showToastSuccess('Item(s) found in cart')">
         <i class="material-icons footer-icon">
             shopping_cart
         </i>
         <p class="mb-0">Cart</p>
     </a>
-    <a class="footer-link" [routerLink]="['/order/history']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="showToast('Order history found')">
+    <a class="footer-link" [routerLink]="['/order/history']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="showToastSuccess('Order history found')">
         <i class="material-icons footer-icon">
             shopping_bag
         </i>
