@@ -47,14 +47,10 @@ export class ProfileComponent implements OnInit {
       email: [{value: '', disabled: true}, [ Validators.required, Validators.email ]],
       phone: [{value: '', disabled: true}, [ Validators.required ]]
 
-  });
+    });
 
 
-  this.auth.getUser().pipe(
-      finalize(() => {
-        // Hide spinner after data fetch completes
-        this.spinnerService.hide();
-      }),
+    this.auth.getUser().pipe(
       tap(response => {
         this.profileForm.patchValue({
           firstName: response.firstName ,
@@ -69,17 +65,17 @@ export class ProfileComponent implements OnInit {
         this.errorMessageSubject.next(this.errorMessage);
 
         console.error('User profile error:', this.errorMessage);
-        this.showToast(this.errorMessage);
+        this.showToastError(this.errorMessage);
         this.spinnerService.hide();
         return EMPTY;
+      }),
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
       })
     ).subscribe();
 
-    
-    
-    
-
-  // this.auth.updateUser().subscribe()
+    // this.auth.updateUser().subscribe()
 
   }
 
@@ -102,11 +98,15 @@ export class ProfileComponent implements OnInit {
       console.log('Form submitted:', this.profileForm.value);
       
       this.auth.updateUser(this.profileForm.value).pipe(
-        tap(response => console.log('UpdateOneUser:', JSON.stringify(response))),
+        tap(response => {
+          console.log('UpdateOneUser:', JSON.stringify(response))
+          this.showToastSuccess();
+      }),
        catchError(err => {
         console.error('Profile error:', err.message);
           const errorMessage = err.message || 'An unknown error occurred';
           this.errorMessageSubject.next(errorMessage);
+          this.showToastError(errorMessage);
         return EMPTY;
       }), finalize(() => {
         // Hide spinner after data fetch completes
@@ -119,9 +119,23 @@ export class ProfileComponent implements OnInit {
     
   }
 
-  showToast(message: string) {
-    console.log('showToast in OrderHistoryComponent called with message:', message); // Debugging log
-    this.toastService.show(message);
+  // showToast(message: string) {
+  //   console.log('showToast in OrderHistoryComponent called with message:', message); // Debugging log
+  //   this.toastService.show(message);
+  // }
+
+  showToastSuccess() {
+    console.log('showToast in ProfileComponent called with message'); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show('User profile updated successfully!', 'success');
+
+  }
+
+  showToastError(message: string) {
+    console.log('showToastEror in ProfileComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'error');
+
   }
 
 }

@@ -39,8 +39,6 @@ export class AddressComponent implements OnInit {
 
   errorMessage: string = '';
 
-
-
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private cdr: ChangeDetectorRef, private toastService: ToastService,  private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
@@ -67,15 +65,17 @@ export class AddressComponent implements OnInit {
       //    if (addresses.length === 0) this.showToast('No address found')
 
       //   }),
-        tap(response => {
-          this.addresses = response.addresses;
-          // if (this.addresses.length === 0) this.showToast('No address found');
-          // this.cdr.markForCheck();
-        }),
+      tap(response => {
+        this.addresses = response.addresses;
+
+        // if (this.addresses.length === 0) this.showToast('No address found');
+        // this.cdr.markForCheck();
+      }),
       catchError(err => {
         this.errorMessage = err.message || 'An unknown error occurred';
         this.errorMessageSubject.next(this.errorMessage);
         // this.showToast('No address found' + this.errorMessage);
+        this.showToastError(this.errorMessage)
 
         console.error('Address error:', this.errorMessage);   
         this.spinnerService.hide();     
@@ -109,14 +109,24 @@ export class AddressComponent implements OnInit {
         this.spinnerService.hide();
 
         if(this.addresses.length !== 0) {
-          this.showToast('One address deleted successfully');
+          this.showToastWarning('One address deleted!');
           // this.cdr.markForCheck();
         } else {
-          this.showToast('No address found');
+          this.showToastError('No address found');
         }
 
-
       }),
+      catchError(err => {
+        console.error('Related Product error:', err.message);
+        this.errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(this.errorMessage);
+        this.showToastError(this.errorMessage)
+        return EMPTY;
+      }),
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      })
       // tap(() => {
       //   if (address) this.showToast('One address deleted successfully'),
       //   // (address === 0 ? 'No address found' : 'One address deleted')
@@ -143,11 +153,38 @@ export class AddressComponent implements OnInit {
     this.confirmPasswordVisible = !this.confirmPasswordVisible;
   }
 
-  showToast(message: string) {
-    // this.spinnerService.show();
+  // showToast(message: string) {
+  //   // this.spinnerService.show();
 
-    console.log('showToast in LoginComponent called with message:', message); // Debugging log
-    this.toastService.show(message);
-  }
+  //   console.log('showToast in LoginComponent called with message:', message); // Debugging log
+  //   this.toastService.show(message);
+  // }
  
+  showToastSuccess() {
+    console.log('showToast in addressComponent called with message'); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show('One address deleted successfully!', 'success');
+
+  }
+
+  showToastInfo(message: string) {
+    console.log('showToast in AddressComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'info');
+
+  }
+
+  showToastWarning(message: string) {
+    console.log('showToast in AddressComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'warning');
+
+  }
+
+  showToastError(message: string) {
+    console.log('showToastEror in addressComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'error');
+
+  }
 }
