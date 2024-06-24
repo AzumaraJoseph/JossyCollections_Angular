@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EMPTY, Observable, Subject, catchError, finalize, tap } from 'rxjs';
+import { EMPTY, Observable, Subject, catchError, finalize, map, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { CartService } from 'src/app/shared/cart.service';
 import { ToastService } from 'src/app/shared/toast.service';
@@ -17,6 +17,9 @@ export class CreateOrderComponent implements OnInit {
   cartItems$!: Observable<any>;
   total!: number;
   allCart: any;
+
+  addresses: any[] =[];
+
   // allCart: { items: Array<any> } = { items: [] }; // Initialize allCart with an empty items array
   // shippingFee: number = 5.99;
 
@@ -43,6 +46,12 @@ export class CreateOrderComponent implements OnInit {
     // })
 
     this.cartItems$ = this.auth.getUser().pipe(
+      map(user => user),
+      // tap(res =>       ),
+      tap(response => {
+        console.log('Order listssssss: ', JSON.stringify(response))
+        this.addresses = response.addresses;
+      }),
       catchError(err => {
         this.errorMessage = err.message || 'An unknown error occurred';
         this.errorMessageSubject.next(this.errorMessage);
@@ -67,11 +76,11 @@ export class CreateOrderComponent implements OnInit {
   loadCart() {
     this.auth.getCart(null).pipe(
       tap(data => {
-        this.allCart = data;
+        this.allCart = data.items;
       // this.shippingFee
       this.calculateTotalShippingFee()
       
-      // console.log('Order list: ', JSON.stringify(this.allCart));
+      console.log('Order list: ', JSON.stringify(this.allCart));
       
       }),
       catchError(err => {
@@ -91,7 +100,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   calculateTotalShippingFee() {
-      const totalShippingFee = this.allCart.items.reduce((sum: number, item: { discountPrice: number; quantity: number}) => {
+      const totalShippingFee = this.allCart.reduce((sum: number, item: { discountPrice: number; quantity: number}) => {
         return sum + (item.discountPrice * item.quantity <= 55 ? this.shippingFeePerItem : 0);
       }, 0);
       console.log('shipping order: ', JSON.stringify(totalShippingFee));

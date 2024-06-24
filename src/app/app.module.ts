@@ -23,6 +23,7 @@ import { OrderShellComponent } from './order/order-shell.component';
 import { CreateOrderTotalComponent } from './order/create-order-total/create-order-total.component';
 import { OrderHistoryComponent } from './order/order-history/order-history.component';
 import { SpinnerComponent } from './spinner.component';
+import { AddressLinkComponent } from './user/address/addressLink/address-link.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { SpinnerComponent } from './spinner.component';
     CreateOrderTotalComponent,
     OrderShellComponent,
     OrderHistoryComponent,
+    AddressLinkComponent,
     // SpinnerComponent,
   ],
   imports: [

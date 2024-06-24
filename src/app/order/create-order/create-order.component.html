@@ -5,11 +5,14 @@
         </div>
     
         <div class="card-body" style="padding: 1rem;" *ngIf="cartItems$ | async as user" >
-            <div class="col-md fw-semibold">{{user.firstName}} {{user.lastName}}</div>
-            <div class="col-md">{{user.addresses[0].street}} {{user.addresses[0].city}} | {{user.addresses[0].state}} | {{user.addresses[0].country}}</div>
-            
-            <div class="col-md">{{user.email}}</div>
-            <div class="col-md">{{user.phone}}</div>
+            <div *ngIf="addresses.length">
+
+                <div class="col-md fw-semibold">{{user.firstName}} {{user.lastName}}</div>
+                <div class="col-md">{{addresses[0]?.street}} {{addresses[0]?.city}} | {{addresses[0]?.state}} | {{addresses[0]?.country}}</div>
+                
+                <div class="col-md">{{user.email}}</div>
+                <div class="col-md">{{user.phone}}</div>
+            </div>
     
         </div>
     </div>
@@ -20,13 +23,13 @@
             <div style="font-size: 0.9rem; ">Delivery between {{todaysDateRange()}}</div>
         </div>
     
-        <div class="card-body" *ngFor="let cart of allCart.items; let i = index" >
+        <div class="card-body" *ngFor="let cart of allCart; let i = index" >
             <div class="d-flex item-container" style="padding: 0.8rem;" >
 
                 <img [src]="'/assets/img-details/800x800_' + cart.image" style="width: 33%; margin-right: 1rem;" class="display" alt="{{cart.name}}">
 
                 <div class="item align-content-center " style="padding: 0 0.8rem; width: 100%;">
-                    <div class="d-flex  ">
+                    <div class="d-flex">
                         <p class="order mb-0">Name:</p>
                         <p class=" mb-0">{{cart.name}}</p>
                     </div>

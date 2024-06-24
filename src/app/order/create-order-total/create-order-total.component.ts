@@ -26,32 +26,38 @@ export class CreateOrderTotalComponent implements OnInit {
 
   errorMessage: string = '';
 
+  address$!: Observable<any>;
+  addresses: any[] =[];
+
   
   // get currentUser() {
   //   return this.auth.currentUser
   // }
 
-  constructor(private cartService: CartService, private auth: AuthService, private route: ActivatedRoute, private cdr: ChangeDetectorRef, private toastService: ToastService, private spinnerService: SpinnerService) {
+  constructor(private cartService: CartService, private auth: AuthService, private route: ActivatedRoute, private cdr: ChangeDetectorRef, private toastService: ToastService, private spinnerService: SpinnerService, private router: Router) {
     this.stripePromise = loadStripe(
       'pk_test_51OusquKAHvC2BbJggPo38R5ZkMpSs3mYled2GhhJEPZPSGmSEb32FXm6dw8F20bBLIra31Ju4H7SVCFLMG9yyP5J00b1G6HlKw'
     );
     
    }
 
-
   ngOnInit(): void {
-  
 
     this.totalShippingFee = this.cartService.getTotalShippingFee();
     console.log('total', this.totalShippingFee);
     
-   this.loadCart();
+    this.loadCart();
 
   //  this.loadOrderTotal$ =     this.auth.getCart(this.totalShippingFee).pipe(
   //   tap(data => console.log('Order total: ', JSON.stringify(data)))
   //  )
 
-    
+    this.auth.getUser().pipe(
+      tap(response => {
+        this.addresses = response.addresses;
+      })
+    ).subscribe()
+
   }
 
   loadCart() {
@@ -61,7 +67,7 @@ export class CreateOrderTotalComponent implements OnInit {
         this.spinnerService.hide();
       }),
       this.orderTotal = data;
-      // console.log('Order total: ', JSON.stringify(this.orderTotal));
+      console.log('Order total: ', JSON.stringify(this.orderTotal));
 
       // console.log('shipping total: ', this.totalShippingFee);
 
@@ -97,36 +103,41 @@ export class CreateOrderTotalComponent implements OnInit {
   // }
 
   placeOrder() {
-    this.spinnerService.show();
-
-      this.auth.placeOrder().pipe(
-        tap(async (response) => {
-          const stripe = await this.stripePromise;
-          console.log(response)
-          if (stripe) {
-            this.showToastSuccess()
-            const sessionId = response.session;
-            const { error } = await stripe.redirectToCheckout({ sessionId });
-            if (error) {
-              console.error('Error redirecting to checkout:', error);
+    if (this.addresses.length) {
+      this.spinnerService.show();
+  
+        this.auth.placeOrder().pipe(
+          tap(async (response) => {
+            const stripe = await this.stripePromise;
+            console.log(response)
+            if (stripe) {
+              this.showToastSuccess()
+              const sessionId = response.session;
+              const { error } = await stripe.redirectToCheckout({ sessionId });
+              if (error) {
+                console.error('Error redirecting to checkout:', error);
+              }
+            } else {
+              console.error('Stripe could not be loaded.');
             }
-          } else {
-            console.error('Stripe could not be loaded.');
-          }
-        }),
-        catchError(err => {
-          this.errorMessage = err.message || 'An unknown error occurred';
-          this.errorMessageSubject.next(this.errorMessage);
+          }),
+          catchError(err => {
+            this.errorMessage = err.message || 'An unknown error occurred';
+            this.errorMessageSubject.next(this.errorMessage);
+  
+            console.error('Create Order Total error:', this.errorMessage);
+            this.showToastError(this.errorMessage)
+            return EMPTY;
+          }),
+          finalize(() => {
+            // Hide spinner after data fetch completes
+            this.spinnerService.hide();
+          }),
+        ).subscribe();
 
-          console.error('Create Order Total error:', this.errorMessage);
-          this.showToastError(this.errorMessage)
-          return EMPTY;
-        }),
-        finalize(() => {
-          // Hide spinner after data fetch completes
-          this.spinnerService.hide();
-        }),
-      ).subscribe();
+    } else {
+      this.router.navigate(['/user/addressLink']);
+    }
   }
 
   // showToast(message: string) {
