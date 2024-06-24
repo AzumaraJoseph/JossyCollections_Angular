@@ -1,11 +1,30 @@
-
+<!-- toast.component.html -->
 <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 10000; margin-top: 3.5rem;">
-  <div *ngFor="let message of messages" class="toast" role="alert" aria-live="assertive" aria-atomic="true" [ngClass]="{'show': show}">
-    <div class="toast-body d-flex">
-      <span class="material-icons" style="font-weight: 1000;">
+  <div *ngFor="let toast of messages" class="toast" role="alert" aria-live="assertive" aria-atomic="true" [ngClass]="{ 'show': show, 'success': toast.type === 'success', 'info': toast.type === 'info', 'warning': toast.type === 'warning', 'error': toast.type === 'error' }">
+    <div class="toast-body d-flex ">
+      <span *ngIf="toast.type === 'success'" class="material-icons" style="font-weight: 1000;">
         done
       </span>
-      <p class="mb-0 ms-2 fs-6">{{ message }}</p>
+
+      <span *ngIf=" toast.type === 'info'" class="material-icons" style="font-weight:700;">
+        info_outline
+      </span>
+
+      <span *ngIf=" toast.type === 'warning'" class="material-icons" style="font-weight:700;">
+        warning_amber
+      </span>
+
+      <span *ngIf=" toast.type === 'error'" class="material-icons" style="font-weight:700;">
+        dangerous
+      </span>
+
+      <p class="mb-0 ms-2 fs-6">{{ toast.message }}</p>
     </div>
   </div>
 </div>
+
+<span class="material-icons-outlined">
+  <span class="material-icons-outlined">
+    warning_amber
+    </span>
+  </span>

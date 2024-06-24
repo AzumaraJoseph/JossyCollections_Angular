@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError, Event } from '@angular/router';
 import { SpinnerService } from '../spinner.service';
 import { Subscription } from 'rxjs';
+import { ToastService } from '../shared/toast.service';
 
 @Component({
   selector: 'app-create-order-shell',
@@ -19,12 +20,20 @@ import { Subscription } from 'rxjs';
 })
 export class OrderShellComponent implements OnInit {
 
-  constructor(private spinnerService: SpinnerService, private router: Router) {}
+  constructor(private spinnerService: SpinnerService, private router: Router, private toastService: ToastService) {}
   
   ngOnInit(): void {
     this.spinnerService.show();
+    this.showToastSuccess()
       
   }
+
+  showToastSuccess() {
+    console.log('showToast in OrderListComponent called'); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show('Order list loaded successfully!', 'success');
+
+  } 
 
  
 

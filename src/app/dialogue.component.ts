@@ -76,7 +76,7 @@ increment(maxQuantity: number): void {
       this.spinnerService.hide();
       this.isLoadingQuantity = false; // Set loading state to false
       this.quantity += 1;
-    }, 450);
+    }, 600);
   }
 }
 
@@ -93,7 +93,7 @@ decrement(): void {
       this.spinnerService.hide();
       this.isLoadingQuantity = false; // Set loading state to true
       this.quantity --
-    }, 450);
+    }, 600);
   }
     
  }
@@ -140,7 +140,9 @@ addCart(formData: any) {
       this.isLoadingForm = false; // Set loading state to false
 
       this.closeModal();
-      this.showToast('Item(s) added to cart successfully')
+      // this.showToast('Item(s) added to cart successfully')
+      this.toastService.show('Item(s) added to cart successfully', 'success');
+
 
       // Route to Cart
       this.router.navigate(['/cart']);
@@ -148,7 +150,7 @@ addCart(formData: any) {
     error => {
       this.spinnerService.hide();
       this.isLoadingForm = false; // Set loading state to false
-      this.showToast(error);
+      this.showToastError(error);
       console.error('Error adding to cart', error);
     });
   }
@@ -160,9 +162,49 @@ addCart(formData: any) {
   }
 
   
-  showToast(message: string) {
-    console.log('showToast in ProductDetailComponent modal called with message:', message); // Debugging log
-    this.toastService.show(message);
+  // showToast(message: string) {
+  //   console.log('showToast in ProductDetailComponent modal called with message:', message); // Debugging log
+  //   this.toastService.show(message);
+  // }
+
+  
+  // showToastSuccess(product: any) {
+  //   console.log('showToast in ProductDetailModal called with message:', product); // Debugging log
+  //   // this.toastService.show(product);
+  //   this.toastService.show(`${product.name} details loaded successfully!`, 'success');
+
+  // }
+
+  showToastInfo(color: any) {
+    console.log('showToastColor in ProductDetailComponent called with message:', color); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(`Color ${color.color} is selected!`, 'info');
+
   }
+
+  showToastError(message: string) {
+    console.log('showToastEror in ProductDetailComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'error');
+
+  }
+  
+  // Some component
+
+  // showSuccess() {
+  //   this.toastService.show('This is a success message!', 'success');
+  // }
+
+  // showInfo() {
+  //   this.toastService.show('This is an info message.', 'info');
+  // }
+
+  // showWarning() {
+  //   this.toastService.show('This is a warning message.', 'warning');
+  // }
+
+  // showError() {
+  //   this.toastService.show('This is an error message.', 'error');
+  // }
 
 }

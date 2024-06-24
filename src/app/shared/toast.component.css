@@ -1,4 +1,4 @@
-.toast {
+/* .toast {
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s 0.5s, opacity 0.5s ease-in-out;
@@ -13,7 +13,7 @@
   /* background-color: #51A351; */
   /* background-color: #459a45; */
   /* background-color: #48aa48; */
-  /* background-color: #43ad43; */
+  /* background-color: #43ad43; *
   background-color: #3fa73f;
   cursor: pointer;
   box-shadow: 0 0 10px grey;
@@ -27,5 +27,69 @@
   opacity: 1;
   transform: scale(1.02);
   transition: all 0.3s;
-  /* transition: opacity 0.2s, transform 0.2s; */
+  /* transition: opacity 0.2s, transform 0.2s; *
+}
+
+* Specific toast type styles *
+.toast.success {
+  background-color: #3fa73f;
+}
+
+.toast.info {
+  background-color: #17a2b8;
+}
+
+.toast.warning {
+  background-color: #ffc107;
+}
+
+.toast.error {
+  background-color: #dc3545;
+} */
+
+
+
+/* toast.component.css */
+.toast {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.5s, opacity 0.5s ease-in-out;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 0.8;
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  cursor: pointer;
+  box-shadow: 0 0 10px grey;
+  margin-bottom: 6px;
+  color: white;
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.toast.show:hover {
+  opacity: 1;
+  transform: scale(1.02);
+  transition: all 0.3s;
+}
+
+/* Specific toast type styles */
+.toast.success {
+  background-color: #3fa73f;
+}
+
+.toast.info {
+  background-color: #17a2b8;
+}
+
+.toast.warning {
+  /* background-color: #ffc107; */
+  background-color: #e0a800;
+
+}
+
+.toast.error {
+  background-color: #dc3545;
 }

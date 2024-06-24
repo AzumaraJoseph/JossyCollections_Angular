@@ -53,16 +53,29 @@ export class CartShellComponent implements OnInit {
         this.errorMessageSubject.next(this.errorMessage);
 
         console.error('CartListRecommended error:', this.errorMessage);
-        this.showToast(this.errorMessage)
+        this.showToastError(this.errorMessage)
         return EMPTY;
       })
     );
 
   }
 
-  showToast(message: string) {
-    console.log('showToast in LoginComponent called with message:', message); // Debugging log
-    this.toastService.show(message);
+  // showToast(message: string) {
+  //   console.log('showToast in LoginComponent called with message:', message); // Debugging log
+  //   this.toastService.show(message);
+  // }
+
+  showToastSuccess(product: any) {
+    console.log('showToast in CartShellComponent called with message:', product); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(`${product.name} loaded successfully!`, 'success');
+
   }
 
+  showToastError(message: string) {
+    console.log('showToastEror in ProductDetailComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'error');
+
+  }
 }

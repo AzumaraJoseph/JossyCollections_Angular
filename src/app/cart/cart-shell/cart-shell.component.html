@@ -25,7 +25,7 @@
                     *ngFor="let product of products">
                         
                     <div class="card-body d-flex flex-column justify-content-between p-3" 
-                        [routerLink]="['/products', product.id ]" (click)="showToast(product.name)">
+                        [routerLink]="['/products', product.id ]" (click)="showToastSuccess(product)">
     
                         <img [src]="'/assets/products/250x250_' + product.imageCover"
                         class="card-img-top p-0"

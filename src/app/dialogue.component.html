@@ -147,7 +147,7 @@
                             data-bs-toggle="modal"
                             [attr.data-bs-target]="'#colorModal' + i"
                             [class.selected]="i === indexer">
-                            <img (click)="showToast('Color ' + color.color + ' clicked')
+                            <img (click)="showToastInfo(color)
                             " Style="border: 1px solid black; cursor: pointer;" [src]="'/assets/img-details/75x75_' + color.colorImage" class="img-fluid p-2" alt="{{color.color}}">
                         </div>
                     </div>

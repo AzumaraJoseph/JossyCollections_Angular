@@ -62,9 +62,8 @@
             <div class="col-md-12"
                 style="background-color: rgba(237, 237, 237, 0.98); display: flex; padding: 0.5rem;">
 
-                <!-- (click)="eachProduct(i)" -->
                 <div class="me-2" *ngFor="let color of product.color; let i = index;">
-                    <img (click)="showToast('Color ' + color.color + ' clicked')" Style="border: 1px solid black; cursor: pointer;"
+                    <img (click)="showToastInfo(color)" Style="border: 1px solid black; cursor: pointer;"
                         data-bs-toggle="modal"
                         [attr.data-bs-target]="'#colorModal' + i" 
                         [src]="'/assets/img-details/75x75_' + color.colorImage" 
@@ -251,7 +250,7 @@
                         *ngFor="let related of relatedProducts$ | async">
                         <!-- <app-spinner></app-spinner> -->
 
-                        <div class="card-body flex-column justify-content-between p-2" (click)="openRelated(related.id, related.name)">
+                        <div class="card-body flex-column justify-content-between p-2" (click)="openRelated(related.id, related)">
 
                             <img [src]="'/assets/products/250x250_' + related.imageCover"
                             class="card-img-top p-0"

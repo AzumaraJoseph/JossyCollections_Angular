@@ -43,19 +43,19 @@ export class CreateOrderComponent implements OnInit {
     // })
 
     this.cartItems$ = this.auth.getUser().pipe(
-      finalize(() => {
-        // Hide spinner after data fetch completes
-        this.spinnerService.hide();
-      }),
       catchError(err => {
         this.errorMessage = err.message || 'An unknown error occurred';
         this.errorMessageSubject.next(this.errorMessage);
 
         console.error('Order user address:', this.errorMessage);
-        this.showToast(this.errorMessage);
+        this.showToastError(this.errorMessage);
         this.spinnerService.hide();
         return EMPTY;
-      })
+      }),
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
     );
 
     // console.log(this.currentUser);
@@ -66,10 +66,6 @@ export class CreateOrderComponent implements OnInit {
 
   loadCart() {
     this.auth.getCart(null).pipe(
-      finalize(() => {
-        // Hide spinner after data fetch completes
-        this.spinnerService.hide();
-      }),
       tap(data => {
         this.allCart = data;
       // this.shippingFee
@@ -77,16 +73,20 @@ export class CreateOrderComponent implements OnInit {
       
       // console.log('Order list: ', JSON.stringify(this.allCart));
       
-      } ),
+      }),
       catchError(err => {
         this.errorMessage = err.message || 'An unknown error occurred';
         this.errorMessageSubject.next(this.errorMessage);
 
         console.error('Order history error:', this.errorMessage);
-        this.showToast(this.errorMessage);
+        this.showToastError(this.errorMessage);
         this.spinnerService.hide();
         return EMPTY;
-      })
+      }),
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      }),
     ).subscribe();
   }
 
@@ -136,9 +136,16 @@ export class CreateOrderComponent implements OnInit {
     return monthNames[month];
   }
 
-  showToast(message: string) {
-    console.log('showToast in OrderHistoryComponent called with message:', message); // Debugging log
-    this.toastService.show(message);
+  // showToast(message: string) {
+  //   console.log('showToast in OrderHistoryComponent called with message:', message); // Debugging log
+  //   this.toastService.show(message);
+  // }
+
+  showToastError(message: string) {
+    console.log('showToastEror in ProductDetailComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'error');
+
   }
   
 }

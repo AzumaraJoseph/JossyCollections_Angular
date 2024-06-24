@@ -104,7 +104,7 @@ export class CreateOrderTotalComponent implements OnInit {
           const stripe = await this.stripePromise;
           console.log(response)
           if (stripe) {
-            this.showToast('Confirm your payment')
+            this.showToastSuccess()
             const sessionId = response.session;
             const { error } = await stripe.redirectToCheckout({ sessionId });
             if (error) {
@@ -119,15 +119,33 @@ export class CreateOrderTotalComponent implements OnInit {
           this.errorMessageSubject.next(this.errorMessage);
 
           console.error('Create Order Total error:', this.errorMessage);
-          this.showToast(this.errorMessage)
+          this.showToastError(this.errorMessage)
           return EMPTY;
-        })
+        }),
+        finalize(() => {
+          // Hide spinner after data fetch completes
+          this.spinnerService.hide();
+        }),
       ).subscribe();
   }
 
-  showToast(message: string) {
-    console.log('showToast in OrderTotalComponent called with message:', message); // Debugging log
-    this.toastService.show(message);
+  // showToast(message: string) {
+  //   console.log('showToast in OrderTotalComponent called with message:', message); // Debugging log
+  //   this.toastService.show(message);
+  // }
+
+  showToastSuccess() {
+    console.log('showToast in OrderListComponent called with message'); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show('Proceed to make payment', 'success');
+
+  }
+
+  showToastError(message: string) {
+    console.log('showToastEror in ProductDetailComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'error');
+
   }
 
 }

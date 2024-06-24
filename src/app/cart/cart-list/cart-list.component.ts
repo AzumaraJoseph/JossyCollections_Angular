@@ -52,7 +52,6 @@ export class CartListComponent implements OnInit {
 
    this.loadCart()
 
-
   }
 
   loadCart() {
@@ -61,21 +60,22 @@ export class CartListComponent implements OnInit {
       tap(data => {
         this.allCart = data;
         this.cartService.updateCart(this.allCart.items)
+        // this.toastService.show('Cart list found succesfully', 'success');
+
 
         this.allCart.items.forEach((item: any) => {
           this.quantities[item._id] = item.quantity;
 
           this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
         });
-      }),
-      
+      }),      
       tap(data => console.log('Cart Object: ', JSON.stringify(data))),
       catchError(err => {
         this.errorMessage = err.message || 'An unknown error occurred';
         this.errorMessageSubject.next(this.errorMessage);
 
         console.error('Cart List error:', this.errorMessage);
-        this.showToast(this.errorMessage);
+        this.showToastError(this.errorMessage);
         this.spinnerService.hide();
 
         return EMPTY;
@@ -103,7 +103,8 @@ export class CartListComponent implements OnInit {
       this.isLoadingQuantity[cartId] = false; 
       this.quantities[cartId] += 1;
       this.updateCart(cartId, this.quantities[cartId]);
-      this.showToast('One item(s) quantity added to cart');
+      // this.showToast('One item(s) quantity added to cart');
+      this.toastService.show('One item(s) quantity added to cart', 'info');
       }, 400);
     }
   }
@@ -117,7 +118,9 @@ export class CartListComponent implements OnInit {
       this.isLoadingQuantity[cartId] = false;
       this.quantities[cartId] -= 1;
       this.updateCart(cartId, this.quantities[cartId]);
-      this.showToast('One item(s) quantity removed from cart');
+      // this.showToast('One item(s) quantity removed from cart');
+      this.toastService.show('One item(s) quantity removed from cart', 'info');
+
       }, 400);
     }
   }
@@ -131,7 +134,7 @@ export class CartListComponent implements OnInit {
           // Remove item from the allCart.items array
           this.allCart.items = this.allCart.items.filter((item: any) => item._id !== itemId);
           delete this.quantities[itemId];
-          this.showToast('item(s) removed from cart');
+          this.showToastSuccess();
 
         } else {
           // Update the quantity in the quantities dictionary
@@ -162,7 +165,11 @@ export class CartListComponent implements OnInit {
         this.errorMessageSubject.next(errorMessage);
         return EMPTY
       }
-    )
+    ),
+    finalize(() => {
+      // Hide spinner after data fetch completes
+      this.spinnerService.hide();
+    })
   ).subscribe();
 }
 
@@ -222,7 +229,7 @@ export class CartListComponent implements OnInit {
 
         if (index !== -1) {
           this.allCart.items.splice(index, 1);
-          this.showToast('item(s) removed from cart');
+          this.showToastSuccess();
         }
 
       this.cartService.updateCart(this.allCart.items); // Update cart in CartService
@@ -234,16 +241,32 @@ export class CartListComponent implements OnInit {
         console.error('Load Cart error:', err.message);
         const errorMessage = err.message || 'An unknown error occurred';
         this.errorMessageSubject.next(errorMessage);
-        this.showToast(errorMessage);
+        this.showToastError(errorMessage);
 
         return EMPTY
-      }
-    )
-  ).subscribe();
+      }),
+      finalize(() => {
+        // Hide spinner after data fetch completes
+        this.spinnerService.hide();
+      })).subscribe();
   }
 
-  showToast(message: string) {
-    console.log('showToast in CartListComponent called with message:', message); // Debugging log
-    this.toastService.show(message);
+  // showToast(message: string) {
+  //   console.log('showToast in CartListComponent called with message:', message); // Debugging log
+  //   this.toastService.show(message);
+  // }
+
+  showToastSuccess() {
+    console.log('showToast in cartListComponent called with message'); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show('item(s) removed from cart successfully', 'success');
+
+  }
+
+  showToastError(message: string) {
+    console.log('showToastEror in ProductDetailComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'error');
+
   }
 }

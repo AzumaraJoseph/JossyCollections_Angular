@@ -42,13 +42,20 @@ export class CartTotalComponent implements OnInit {
     this.spinnerService.show();
     setTimeout(() => {
       this.router.navigate(['/order']);
-      this.showToast('Order created successfully')
+      this.showToastWarning()
     }, 1000); // Adjust the timeout as needed
   }
 
-  showToast(message: string) {
-    console.log('showToast in LoginComponent called with message:', message); // Debugging log
-    this.toastService.show(message);
+  // showToast(message: string) {
+  //   console.log('showToast in LoginComponent called with message:', message); // Debugging log
+  //   this.toastService.show(message);
+  // }
+
+  showToastWarning() {
+    console.log('showToast in CartTotalComponent called'); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show('Please confirm your order!', 'warning');
+
   }
 
 }

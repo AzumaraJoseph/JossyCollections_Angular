@@ -44,7 +44,9 @@ export class ProductListComponent implements OnInit {
           this.errorMessageSubject.next(this.errorMessage);
           
           console.error('Product error:', this.errorMessage);
-          this.showToast(this.errorMessage);
+          // this.showToast(this.errorMessage);
+          this.toastService.show(this.errorMessage, 'error');      
+        
           this.spinnerService.hide();
 
         return EMPTY;
@@ -77,32 +79,39 @@ export class ProductListComponent implements OnInit {
       }
     }, 0);
   }
-  
 
-  // @ViewChild(ToastComponent) toast!: ToastComponent;
-
-
-  // showToast(message: string) {
-  //   // this.toast.showToast(message);
-  //   // console.log('showToast method in ProductListComponent called'); // Debugging log
-  //   if (this.toast) {
-  //     this.toast.showToast(message);
-  //   }
-  //   console.log(this.toast); // Debugging log
-
-  // }
-
-  showToast(message: string) {
-    console.log('showToast in ProductListComponent called with message:', message); // Debugging log
-    this.toastService.show(message);
+  routeToDetail(product: any): void {
+    this.showToastSuccess(product);
+    this.router.navigate(['/products', product.id])
   }
 
-  // routeToDetail(product: any): void {
-  //   this.spinnerService.show();
-  //   setTimeout(() => {
-  //     this.router.navigate(['/products', product.id]);
-  //     this.showToast(product.name)
-  //   }, 1000); // Adjust the timeout as needed
+
+  showToastSuccess(product: any) {
+    console.log('showToastSuccess in ProductListComponent called with message:', product.name); // Debugging log
+    this.toastService.show(`${product.name} loaded successfully!`, 'success');
+    // this.toastService.show(product.name, 'success');
+
+  }
+
+
+  // Some component
+
+  // showSuccess() {
+  //   this.toastService.show('This is a success message!', 'success');
   // }
+
+  // showInfo() {
+  //   this.toastService.show('This is an info message.', 'info');
+  // }
+
+  // showWarning() {
+  //   this.toastService.show('This is a warning message.', 'warning');
+  // }
+
+  // showError() {
+  //   this.toastService.show('This is an error message.', 'error');
+  // }
+
+
 
 }
