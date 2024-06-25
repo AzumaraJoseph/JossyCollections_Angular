@@ -130,7 +130,10 @@ export class CreateOrderTotalComponent implements OnInit {
             this.errorMessageSubject.next(this.errorMessage);
   
             console.error('Create Order Total error:', this.errorMessage);
-            this.showToastError(this.errorMessage)
+            this.spinnerService.hide()
+
+            this.showToastError(this.errorMessage);
+
             return EMPTY;
           }),
           finalize(() => {
