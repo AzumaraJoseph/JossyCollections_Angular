@@ -126,7 +126,18 @@ export class CreateAddressComponent implements OnInit {
         tap(response => {
           console.log('Address added successfully:', response);
           this.addressForm.reset();
+          // this.router.navigate(['/user/address']);
+
+          // Get the stored redirect URL
+        const redirectUrl = this.auth.getRedirectUrl();
+        this.auth.clearRedirectUrl();
+
+        if (redirectUrl) {
+          this.router.navigate([redirectUrl]);
+        } else {
           this.router.navigate(['/user/address']);
+        }
+
           this.showToastSuccess()
         }),
         catchError(err => {
@@ -156,10 +167,10 @@ export class CreateAddressComponent implements OnInit {
   }
   
   
-  showToast(message: string) {
-    console.log('showToast in createAddressComponent called with message:', message); // Debugging log
-    this.toastService.show(message);
-  }
+  // showToast(message: string) {
+  //   console.log('showToast in createAddressComponent called with message:', message); // Debugging log
+  //   this.toastService.show(message);
+  // }
 
   showToastSuccess() {
     console.log('showToast in createAddressComponent called with message'); // Debugging log

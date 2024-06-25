@@ -145,6 +145,7 @@ export class CreateOrderTotalComponent implements OnInit {
       }, 250);
     } else {
       // this.spinnerService.show()
+      this.auth.setRedirectUrl('/order');
       setTimeout(() => {
         this.spinnerService.hide()
         this.toastService.show('No shipping address yet', 'warning')

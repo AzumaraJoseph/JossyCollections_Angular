@@ -36,6 +36,18 @@ export class AuthService {
     this.currentUser$ = this.currentUserSubject.asObservable();
    }
 
+   setRedirectUrl(url: string) {
+    this.redirectUrl = url;
+  }
+
+  getRedirectUrl(): string | null {
+    return this.redirectUrl;
+  }
+
+  clearRedirectUrl() {
+    this.redirectUrl = null;
+  }
+
 
   login(email: string, password: string): Observable<Iuser> {
     
