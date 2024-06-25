@@ -130,29 +130,42 @@ save(cartForm: NgForm) {
 
 
 addCart(formData: any) {
-  // this.isLoadingForm = true; // Set loading state to true
+  // if (!this.auth.isLoggedIn) {
+  //   // Store the attempted action
+  //   this.auth.redirectUrl = '/cart'; // or any specific URL you want to redirect to after login
+  //   this.toastService.show('Please log in to add items to cart', 'warning');
+    
+  //   // Redirect to login page
+  //   this.router.navigate(['/login']);
+  //   return;
+  // }
+
+  // If the user is logged in, proceed with adding to the cart
   this.spinnerService.show();
+  if (this.auth.isLoggedIn) {
 
-  this.auth.createCart(formData.id, formData.quantity, formData.color).subscribe(
-    response => {
-      console.log('Added to cart', JSON.stringify(response))
-      this.spinnerService.hide();
-      this.isLoadingForm = false; // Set loading state to false
+    this.auth.createCart(formData.id, formData.quantity, formData.color).subscribe(
+      response => {
+        console.log('Added to cart', JSON.stringify(response))
+        this.spinnerService.hide();
+        this.isLoadingForm = false; // Set loading state to false
+  
+        this.closeModal();
+        // this.showToast('Item(s) added to cart successfully')
+        this.toastService.show('Item(s) added to cart successfully', 'success');
+  
+  
+        // Route to Cart
+        this.router.navigate(['/cart']);
+      },
+      error => {
+        this.spinnerService.hide();
+        this.isLoadingForm = false; // Set loading state to false
+        this.showToastError(error);
+        console.error('Error adding to cart', error);
+      });
+  }
 
-      this.closeModal();
-      // this.showToast('Item(s) added to cart successfully')
-      this.toastService.show('Item(s) added to cart successfully', 'success');
-
-
-      // Route to Cart
-      this.router.navigate(['/cart']);
-    },
-    error => {
-      this.spinnerService.hide();
-      this.isLoadingForm = false; // Set loading state to false
-      this.showToastError(error);
-      console.error('Error adding to cart', error);
-    });
   }
     
 

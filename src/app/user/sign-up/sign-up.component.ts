@@ -107,11 +107,15 @@ export class SignUpComponent implements OnInit {
         tap((user: Iuser) => {
           if (user) {
             this.signUpForm.reset();
-            this.showToast('SignUp successful')
-            this.router.navigate(['/products']);
+            // this.router.navigate(['/products']);
             console.log('Sign up success');
-            this.errorMessageSubject.next(''); // Clear error message on successful login
-          } else {
+            const redirectUrl = this.auth.redirectUrl ? this.auth.redirectUrl : '/';
+            this.router.navigateByUrl(redirectUrl);
+            this.showToastSuccess()
+  
+            // Clear the redirect URL
+            this.auth.redirectUrl = null;
+            this.errorMessageSubject.next(''); // Clear error message on successful login          } else {
             console.error('sign up failed');
           }
         }),
@@ -120,16 +124,30 @@ export class SignUpComponent implements OnInit {
           this.errorMessageSubject.next(this.errorMessage);
           
           console.error('Sign up error:', this.errorMessage);
-          this.showToast(this.errorMessage)
+          this.showToastError(this.errorMessage)
           return EMPTY;
         })
       ).subscribe();
     }
   }
 
-  showToast(message: string) {
-    console.log('showToast in SignUpComponent called with message:', message); // Debugging log
-    this.toastService.show(message);
+  // showToast(message: string) {
+  //   console.log('showToast in SignUpComponent called with message:', message); // Debugging log
+  //   this.toastService.show(message);
+  // }
+
+  showToastSuccess() {
+    console.log('showToast in signUpComponent called with message'); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show('SignUp successful', 'success');
+
+  }
+
+  showToastError(message: string) {
+    console.log('showToastEror in SignUpComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'error');
+
   }
 
 }

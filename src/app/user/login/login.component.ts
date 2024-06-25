@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
           this.currentUser = user;
           if (user) {
             this.loginForm.reset();
-            this.showToast('Login successful')
+            this.showToastSuccess();
             
           // Redirect to the stored URL or default to home
           const redirectUrl = this.auth.redirectUrl ? this.auth.redirectUrl : '/';
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
           this.errorMessageSubject.next(this.errorMessage);
 
           console.error('Login error:', this.errorMessage);
-          this.showToast(this.errorMessage)
+          this.showToastError(this.errorMessage)
           return EMPTY;
         })
       ).subscribe();
@@ -78,5 +78,18 @@ export class LoginComponent implements OnInit {
   }
   
 
+  showToastSuccess() {
+    console.log('showToast in loginComponent called with message'); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show('Login successful', 'success');
+
+  }
+
+  showToastError(message: string) {
+    console.log('showToastEror in ProductDetailComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'error');
+
+  }
 
 }

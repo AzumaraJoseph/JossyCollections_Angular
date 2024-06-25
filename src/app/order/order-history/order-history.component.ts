@@ -38,6 +38,7 @@ export class OrderHistoryComponent implements OnInit {
   constructor(private productService: ProductService, private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService, private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
+    this.toastService.show('Order history loaded successfully', 'success');
 
     this.spinnerService.show();
 

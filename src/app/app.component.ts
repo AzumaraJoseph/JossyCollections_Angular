@@ -66,40 +66,10 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
 
-      // this.spinnerService.show(); // Force spinner to show on load
-      // setTimeout(() => {
-      //   this.spinnerService.hide();
-      //   console.log('Spinner navEnd');
-      //   // Hide spinner after 5 seconds
-      // }, 10000);
-
-      
-
-      
-    
-
-
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationEnd) {
         window.scrollTo(0, 0); // Scroll to top on navigation
       }  
-
-      // if (event instanceof NavigationStart) {
-      //   this.spinnerService.show();
-      //   // console.log('Spinner navStart');
-      // } else if (
-      //   event instanceof NavigationEnd ||
-      //   event instanceof NavigationCancel ||
-      //   event instanceof NavigationError
-      // ) {
-      //   this.spinnerService.hide();
-      //   // console.log('Spinner navEnd');
-      //   // setTimeout(() => {
-      //   //       this.spinnerService.hide();
-      //   //       console.log('Spinner navEnd');
-      //   //       // Hide spinner after 5 seconds
-      //   //     }, 3000);
-      // }    
       
     }); 
 
@@ -133,8 +103,6 @@ export class AppComponent implements OnInit {
   
   }
 
-  
-
   cartCounts() {
     this.auth.getCart(null).pipe(
       tap(cart => {
@@ -147,6 +115,7 @@ export class AppComponent implements OnInit {
     catchError(err => {
       this.errorMessage = err.message || 'An unknown error occurred';
       this.errorMessageSubject.next(this.errorMessage);
+      this.showToastError(this.errorMessage);
 
       console.error('Cart count error:', this.errorMessage);
       // this.showToast(this.errorMessage)
@@ -154,14 +123,6 @@ export class AppComponent implements OnInit {
     })
     ).subscribe();
   }
-  // updateCartIcon() {
-  //   return this.auth.getCart(null).subscribe(data =>{
-  //     this.cartCount = data.items.length
-  //     this.cdr.markForCheck(); // Manually trigger change detection
-  //     this.cdr.detectChanges()
-
-  //   })
-  // }
 
 
   toggleArrow(): void {
@@ -185,12 +146,12 @@ export class AppComponent implements OnInit {
     ); 
   }
 
-  showToast(message: string) {
-    console.log('showToast in CartIconComponent called with message:', message); // Debugging log
-    if (this.cartCount > 0) {
-      this.toastService.show(message);
-    }
-  }
+  // showToast(message: string) {
+  //   console.log('showToast in CartIconComponent called with message:', message); // Debugging log
+  //   if (this.cartCount > 0) {
+  //     this.toastService.show(message);
+  //   }
+  // }
 
   checkRouterEvent(routerEvent: Event): void {
     if (routerEvent instanceof NavigationStart) {
@@ -201,10 +162,24 @@ export class AppComponent implements OnInit {
     }
   }
 
-  showToastSuccess(message: string) {
-    console.log('showToast in ProductDetailComponent called with message:', message); // Debugging log
-    // this.toastService.show(message);
-    this.toastService.show(message, 'success');
+  // routeToCart() {
+  //   if (this.isLoggedIn) {
+  //     this.router.navigate(['/cart']);
+  //     this.showToastSuccess('Item(s) found in cart')
+  //   }
+  // }
+
+  // showToastSuccess(message: string) {
+  //   console.log('showToast in ProductDetailComponent called with message:', message); // Debugging log
+  //   // this.toastService.show(message);
+  //   this.toastService.show(message, 'success');
+
+  // }
+
+  showToastError(message: string) {
+    console.log('showToastEror in appComponent called with message:', message); // Debugging log
+    // this.toastService.show(product);
+    this.toastService.show(message, 'error');
 
   }
   

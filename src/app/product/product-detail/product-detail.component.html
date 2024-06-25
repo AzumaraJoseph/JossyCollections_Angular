@@ -135,8 +135,8 @@
                 margin-bottom: 1rem;"
                 *ngIf="product.reviews.length > 0"  >
                 <div class="d-flex justify-content-between fw-bold">
-                    <span class="card-text">{{ product.reviews[0].user.firstName }} {{ product.reviews[0].user.lastName }}</span>
-                    <span class="card-text">{{ product.reviews[0].updatedAt | date: 'longDate' }}</span>
+                    <span>{{ product.reviews[0].user.firstName }} {{ product.reviews[0].user.lastName }}</span>
+                    <span>{{ product.reviews[0].updatedAt | date: 'longDate' }}</span>
                 </div>
                 <div style="width: fit-content; margin-bottom: 4px;">
                     <app-star [rating]="product.reviews[0].rating" [title]="'rating ' + product.reviews[0].rating"></app-star>

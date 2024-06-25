@@ -36,7 +36,7 @@ export class CartShellComponent implements OnInit {
 
 
   ngOnInit(): void {
-
+    this.toastService.show('Item(s) found in cart', 'success');
     this.spinnerService.show();
     this.pageTitle = 'Recommended Products For You';
 
