@@ -130,19 +130,9 @@ save(cartForm: NgForm) {
 
 
 addCart(formData: any) {
-  // if (!this.auth.isLoggedIn) {
-  //   // Store the attempted action
-  //   this.auth.redirectUrl = '/cart'; // or any specific URL you want to redirect to after login
-  //   this.toastService.show('Please log in to add items to cart', 'warning');
-    
-  //   // Redirect to login page
-  //   this.router.navigate(['/login']);
-  //   return;
-  // }
 
   // If the user is logged in, proceed with adding to the cart
   this.spinnerService.show();
-  if (this.auth.isLoggedIn) {
 
     this.auth.createCart(formData.id, formData.quantity, formData.color).subscribe(
       response => {
@@ -164,7 +154,6 @@ addCart(formData: any) {
         this.showToastError(error);
         console.error('Error adding to cart', error);
       });
-  }
 
   }
     
