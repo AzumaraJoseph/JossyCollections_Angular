@@ -47,12 +47,17 @@ export class LoginComponent implements OnInit {
           if (user) {
             this.loginForm.reset();
             this.showToast('Login successful')
-            this.router.navigate(['/products']);
-            console.log('Login res:', this.currentUser);
-            this.errorMessageSubject.next(''); // Clear error message on successful login
-          } else {
-            console.error('Login failed');
-          }
+            
+          // Redirect to the stored URL or default to home
+          const redirectUrl = this.auth.redirectUrl ? this.auth.redirectUrl : '/';
+          this.router.navigateByUrl(redirectUrl);
+
+          // Clear the redirect URL
+          this.auth.redirectUrl = null;
+          this.errorMessageSubject.next(''); // Clear error message on successful login
+        } else {
+          console.error('Login failed');
+        }
         }),
         catchError(err => {
           this.errorMessage = err.message || 'An unknown error occurred';
@@ -63,6 +68,7 @@ export class LoginComponent implements OnInit {
           return EMPTY;
         })
       ).subscribe();
+
     }
   }
 
@@ -71,5 +77,6 @@ export class LoginComponent implements OnInit {
     this.toastService.show(message);
   }
   
+
 
 }

@@ -1,7 +1,16 @@
-.addressLink {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* z-index: 300000; */
+.create-address-link {
+    text-decoration: none;
+    /* display: inline-block; */
+    margin-right: 8px; /* Add some spacing between the link and the icon */
+    /* color: inherit; Ensures the link color inherits from the parent element */
+    transition: color 0.3s ease; /* Smooth color transition */
 }
+
+.create-address-link:hover {
+    color: #006adb; /* Change color on hover, for example */
+    text-decoration:underline;
+}
+
+.material-icons{
+    vertical-align: middle; /* Align the icon with the text */
+} 

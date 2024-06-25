@@ -73,7 +73,7 @@ export class CreateOrderComponent implements OnInit {
     
   }
 
-  loadCart() {
+  loadCart(): any {
     this.auth.getCart(null).pipe(
       tap(data => {
         this.allCart = data.items;

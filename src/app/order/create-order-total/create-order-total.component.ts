@@ -103,16 +103,20 @@ export class CreateOrderTotalComponent implements OnInit {
   // }
 
   placeOrder() {
+    this.spinnerService.show();
+
     if (this.addresses.length) {
-      this.spinnerService.show();
-  
+      setTimeout(() => {
         this.auth.placeOrder().pipe(
           tap(async (response) => {
+  
+            
             const stripe = await this.stripePromise;
             console.log(response)
             if (stripe) {
               this.showToastSuccess()
               const sessionId = response.session;
+              this.spinnerService.hide()
               const { error } = await stripe.redirectToCheckout({ sessionId });
               if (error) {
                 console.error('Error redirecting to checkout:', error);
@@ -134,9 +138,16 @@ export class CreateOrderTotalComponent implements OnInit {
             this.spinnerService.hide();
           }),
         ).subscribe();
-
+        
+      }, 250);
     } else {
-      this.router.navigate(['/user/addressLink']);
+      // this.spinnerService.show()
+      setTimeout(() => {
+        this.spinnerService.hide()
+        this.toastService.show('No shipping address yet', 'warning')
+        this.router.navigate(['/user/addressLink']);
+        
+      }, 1500);
     }
   }
 
