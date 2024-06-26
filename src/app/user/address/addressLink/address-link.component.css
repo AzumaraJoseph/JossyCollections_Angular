@@ -1,13 +1,13 @@
-.create-address-link {
+a {
     text-decoration: none;
     /* display: inline-block; */
     margin-right: 8px; /* Add some spacing between the link and the icon */
     /* color: inherit; Ensures the link color inherits from the parent element */
-    transition: color 0.3s ease; /* Smooth color transition */
+    transition: color 0.3s ease; 
 }
 
-.create-address-link:hover {
-    color: #006adb; /* Change color on hover, for example */
+a:hover {
+    /* color: #006adb;  */
     text-decoration:underline;
 }
 

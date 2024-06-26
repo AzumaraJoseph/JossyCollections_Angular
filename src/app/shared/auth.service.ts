@@ -34,9 +34,9 @@ export class AuthService {
     const storedUser = localStorage.getItem('currentUser');
     this.currentUserSubject = new BehaviorSubject<Iuser | null>(storedUser ? JSON.parse(storedUser) : null);
     this.currentUser$ = this.currentUserSubject.asObservable();
-   }
+  }
 
-   setRedirectUrl(url: string) {
+  setRedirectUrl(url: string) {
     this.redirectUrl = url;
   }
 

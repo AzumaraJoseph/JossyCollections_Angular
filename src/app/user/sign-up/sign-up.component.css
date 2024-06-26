@@ -82,3 +82,55 @@ label {
 .form-floating:focus-within label {
     color: #f68b1e;
 }
+
+@media(max-width: 1200px)  {
+    .container {
+        width: 49% !important;
+    }
+
+    /* .material-icons {
+        font-size: 1rem !important;
+    } */
+
+    /* .icon {
+        font-size: 1rem !important;
+    } */
+}
+
+@media(max-width: 785px)  {
+    .container {
+        width: 60% !important;
+    }
+}
+
+@media(max-width: 641px)  {
+    .container {
+        width: 80% !important;
+
+    }
+
+    .text {
+        font-size: 0.95rem !important;
+    }
+
+    .terms {
+        font-size: 0.7rem !important;
+    }
+
+    .enquiry {
+        font-size: 0.8rem !important;
+    }
+
+    .login {
+        font-size: 0.78rem !important;
+    }
+    
+}
+
+@media(max-width: 400px)  {
+    .container {
+        width: 90% !important;
+
+
+    }
+}
