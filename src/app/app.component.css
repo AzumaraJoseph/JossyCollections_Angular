@@ -102,7 +102,7 @@
     border: none;
     background-color: rgba(238, 238, 238, 0.977);
     width: 37rem; /* Adjust width as needed */
-    height: 3rem; /* Explicit height to prevent growing too tall */
+    height: 2.7rem; /* Explicit height to prevent growing too tall */
     margin-top: 0.5rem;
     padding: 0 0.6rem 0 1rem;
     border-radius: 5rem;
@@ -122,16 +122,16 @@
 }
 
 .material-icon {
-    font-size: 1.7rem;
-    color: rgba(128, 128, 128, 0.997);
-    margin-top: 8px;
+    font-size: 1.9rem;
+    color: rgba(85, 85, 85, 0.997);
+    margin-top: 0.5rem;
 }
 
-.material-icon:focus {
+/* .material-icon:focus {
     color: gray;
     outline: none;
    
-}
+} */
 
 .search-btn {
     margin-left: -2.5rem;
@@ -145,7 +145,7 @@
 }
 
 .search-btn:active {
-    transform: translateY(13px);
+    transform: translateY(6px);
     /* outline: none;
     border: none; */
 }
@@ -155,7 +155,7 @@
 } */
 
 .search:focus ~ .search-btn {
-    transform: scale(1.1); /* adjust the icon scaling size. or you can maintai its original size by using 1*/
+    transform: scale(1); /* adjust the icon scaling size. or you can maintai its original size by using 1*/
 }
 
 .search-container:focus-within {
