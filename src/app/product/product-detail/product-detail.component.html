@@ -1,5 +1,4 @@
 `<div class="fluid-container detail mt-4 pt-3 pb-3 d-flex flex-column" style="background-color: rgba(241, 241, 241, 0.982);">
-    <!-- <app-toast></app-toast> -->
     <app-spinner></app-spinner>
     <div class="card"
         style="background-color: rgba(241, 241, 241, 0.982); padding: 0.5rem 2rem;" *ngIf="selectProduct$ | async as product">
@@ -128,7 +127,6 @@
                 </div>
             </div>
 
-            <!-- background-color: rgba(238, 238, 238, 0.977); -->
             <div style="background-color: rgb(237 237 237 / 98%);
                 border-radius: 0.5rem;
                 padding: 0.8rem;
@@ -177,47 +175,6 @@
                                         <p class="col-md-1 mb-0" style="margin-left: 10px;">{{product.reviewStat['star' + star]}}
                                         </p>
                                     </div>
-                                                        
-                                    <!-- <div class="col-md-12 rating-bar mt-5">
-                                        <p class="col-md-1 mb-0">5</p>
-                                        <p class="col-md-1 star">&#9733;</p>
-                                        <div class="progress w-100" style="height: 0.8rem;">
-                                            <div class="progress-bar w-75" style="background-color: rgba(233, 172, 16, 0.978); height: 100%;"></div>
-                                        </div>
-                                        <p class="col-md-1 mb-0" style="margin-left: 10px;">{{product.reviewStat.star5}}</p>
-                                    </div>
-                                    <div class="col-md-12 rating-bar">
-                                        <p class="col-md-1 mb-0">4</p>
-                                        <p class="col-md-1 star">&#9733;</p>
-                                        <div class="progress w-100" style="height: 0.8rem;">
-                                            <div class="progress-bar w-75" style="background-color: rgba(233, 172, 16, 0.978); height: 100%;"></div>
-                                        </div>
-                                        <p class="col-md-1 mb-0" style="margin-left: 10px;">{{product.reviewStat.star4}}</p>
-                                    </div>
-                                    <div class="col-md-12 rating-bar">
-                                        <p class="col-md-1 mb-0">3</p>
-                                        <p class="col-md-1 star">&#9733;</p>
-                                        <div class="progress w-100" style="height: 0.8rem;">
-                                            <div class="progress-bar w-75" style="background-color: rgba(233, 172, 16, 0.978); height: 100%;"></div>
-                                        </div>
-                                        <p class="col-md-1 mb-0" style="margin-left: 10px;">{{product.reviewStat.star3}}</p>
-                                    </div>
-                                    <div class="col-md-12 rating-bar">
-                                        <p class="col-md-1 mb-0">2</p>
-                                        <p class="col-md-1 star">&#9733;</p>
-                                        <div class="progress w-100" style="height: 0.8rem;">
-                                            <div class="progress-bar w-75" style="background-color: rgba(233, 172, 16, 0.978); height: 100%;"></div>
-                                        </div>
-                                        <p class="col-md-1 mb-0" style="margin-left: 10px;">{{product.reviewStat.star2}}</p>
-                                    </div>
-                                    <div class="col-md-12 rating-bar mb-3">
-                                        <p class="col-md-1 mb-0">1</p>
-                                        <p class="col-md-1 star">&#9733;</p>
-                                        <div class="progress w-100" style="height: 0.8rem;">
-                                            <div class="progress-bar w-75" style="background-color: rgba(233, 172, 16, 0.978); height: 100%;"></div>
-                                        </div>
-                                        <p class="col-md-1 mb-0" style="margin-left: 10px;">{{product.reviewStat.star1}}</p>
-                                    </div>                      -->
                                 </div>
                     
                                 <div class="col-md-12 mt-2"
@@ -248,7 +205,6 @@
                 <div class="row related-row pb-4 justify-content-center ">
                     <div class="card related p-2 m-2" style="width: 16rem;"
                         *ngFor="let related of relatedProducts$ | async">
-                        <!-- <app-spinner></app-spinner> -->
 
                         <div class="card-body flex-column justify-content-between p-2" (click)="openRelated(related.id, related)">
 

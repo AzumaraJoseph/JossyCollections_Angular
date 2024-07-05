@@ -33,7 +33,6 @@
     <div class="col-md-6 list-title ms-4 me-4">
         <h3 class="page-title mb-0">{{pageTitle}}</h3>
     </div>
-    <!-- <app-toast></app-toast> -->
 
     <div class="col-md-12 mt-2">
 
@@ -92,36 +91,3 @@
 <div class="alert alert-danger" *ngIf="errorMessage$ | async as errorMessage">
     Error: {{errorMessage}}
 </div>
-<!-- 
-This part of the code is responsible for determining the scroll direction based on the comparison between the current scroll position (currentScroll) and the last known scroll position (this.lastScrollTop).
-
-Variables Initialization:
-isScrolledDown: boolean = false;: This variable is used to track whether the page is currently scrolled down (true) or not (false). Initially, it is set to false assuming that the page is not scrolled down initially.
-lastScrollTop: number = 0;: This variable is used to store the last known scroll position of the page. Initially, it is set to 0 indicating that the page is at the top.
-HostListener and onWindowScroll Method:
-@HostListener('window:scroll', []): This decorator is used to listen for the scroll event on the window.
-onWindowScroll(): This method is executed whenever a scroll event is detected on the window.
-Detecting Scroll Direction:
-let currentScroll = window.pageYOffset || document.documentElement.scrollTop;: This line calculates the current scroll position of the page. It checks window.pageYOffset first, and if it's not available (for older browsers), it falls back to document.documentElement.scrollTop.
-if (currentScroll > this.lastScrollTop) { this.isScrolledDown = true; } else { this.isScrolledDown = false; }: This condition compares the current scroll position (currentScroll) with the last known scroll position (this.lastScrollTop). If the current scroll position is greater than the last known scroll position, it means the page is scrolled down, so isScrolledDown is set to true. Otherwise, it means the page is scrolled up, so isScrolledDown is set to false.
-this.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;: This line updates the lastScrollTop variable with the current scroll position. If the current scroll position is less than or equal to 0, it sets lastScrollTop to 0, indicating that the page is at the top.
-
-    currentScroll represents the current scroll position of the page.
-    this.lastScrollTop stores the last known scroll position of the page.
-    Here's what happens within the if-else statement:
-
-    If the Current Scroll Position is Greater than the Last Known Scroll Position:
-This condition (currentScroll > this.lastScrollTop) checks if the current scroll position is greater than the last known scroll position.
-    If this condition is true, it means that the page has scrolled down.
-Therefore, this.isScrolledDown is set to true, indicating that the page is currently scrolled down.
-    If the Current Scroll Position is Not Greater than the Last Known Scroll Position:
-If the condition (currentScroll > this.lastScrollTop) is false, it means that the current scroll position is either equal to or less than the last known scroll position.
-In this case, it implies that the page has scrolled up or remained stationary.
-Therefore, this.isScrolledDown is set to false, indicating that the page is currently not scrolled down. -->
-
-
-
-<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script> -->
-
