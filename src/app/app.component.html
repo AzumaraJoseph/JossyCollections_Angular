@@ -3,7 +3,6 @@
 </span>
   <nav class="navBar navBar-expand fixed-top" style="background-color: white;">
     <div class="nav pt-2 pb-2 ps-3 pe-3 d-flex align-items-center justify-content-between">
-      <!-- col-md-2 -->
       <div class=" brand-sizing">
         <div class="navBar-brand"
               [routerLink]="['/products']" >
@@ -13,7 +12,6 @@
           </span>
         </div>
       </div>
-      <!-- col-md-7 -->
       <div class=" input ">
         <div class="search-container d-flex justify-content-center ">
           <input type="text" placeholder="Search Products" class="search">
@@ -21,7 +19,6 @@
             <span class="material-icons material-icon">
               search
               </span>
-            <!-- <i class="material-symbols-outlined">search</i> -->
           </button>
         </div>
       </div>
@@ -35,22 +32,6 @@
             <span class="material-icons ms-1">{{ isClicked ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</span>
           </div>        
 
-          <!-- <div class="account" [ngClass]="{'clicked': isClicked}" *ngIf="isLoggedIn" data-bs-toggle="dropdown" aria-expanded="false" (click)="toggleArrow()">
-            <span class="material-icons me-1" style="font-size: 29px; ">person
-            </span>
-            <button class="btn p-0 fw-semibold" style="font-size: 1.1rem; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-style: italic;" type="button" >{{ 'Hi, ' + (user?.firstName ||"" )}}</button>
-
-            <span class="material-icons ms-1">{{ isClicked ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</span>
-          </div>  -->
-
-          <!-- <div class="account" [ngClass]="{'clicked': isClicked}" *ngIf="!isLoggedIn" data-bs-toggle="dropdown" aria-expanded="false" (click)="toggleArrow()">
-            <span class="material-icons me-1" style="font-size: 29px; ">person_outline
-            </span>
-            <button class="btn p-0 fw-semibold" style="font-size: 1.1rem; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-style: italic;" type="button" >Account</button>
-
-            <span class="material-icons ms-1">{{ isClicked ? 'keyboard_arrow_up' : 'keyboard_arrow_down' }}</span>
-          </div>  -->
-          
           <ul class="dropdown-menu dropdown-menu-light p-0" style="width: 200px; box-shadow: 1px 2px 6px rgba(132, 132, 132, 0.974);">
             <div class="p-2" 
             [routerLink]="['/user/login']" 
@@ -123,7 +104,6 @@
           <span class="position-relative material-symbols-outlined me-1">
             {{ cartCount > 0 ? 'shopping_cart' : 'shopping_cart_off' }}
 
-            <!-- shopping_cart -->
             <span class="badge"> {{isLoggedIn ? cartCount : 0 }}
               <span class="visually-hidden">New alerts</span>
             </span>

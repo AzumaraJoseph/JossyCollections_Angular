@@ -27,7 +27,6 @@ export class AuthService {
   private currentUserSubject: BehaviorSubject<Iuser| null>;
   currentUser$: Observable<Iuser | null>;
 
-  // redirectUrl?: string;
   redirectUrl: string | null = null;
 
   constructor(private http: HttpClient) {
