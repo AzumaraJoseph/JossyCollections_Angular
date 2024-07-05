@@ -56,11 +56,11 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 - Local storage for user data persistence.
 
 ## Usage
-- Browsing Products: Users can browse products by category, view detailed descriptions, and add items to their cart.
-- User Authentication: Users can register, log in, and manage their profiles.
-- Shopping Cart: Users can add products to their cart, adjust quantities, and proceed to checkout.
-- Checkout: Users can enter their shipping information and complete their purchase using integrated payment services.
-- Admin Panel: Admin users can manage product listings, update details, and track orders.
+- Users can browse products by category, view detailed descriptions, and add items to their cart.
+- Users can register, log in, and manage their profiles.
+- Users can add products to their cart, adjust quantities, and proceed to checkout.
+- Users can enter their shipping information and complete their purchase using integrated payment services.
+- Admin users can manage product listings, update details, and track orders.
 
 ## Contributing
  We welcome contributions from the community! If you'd like to contribute, please follow these steps:
