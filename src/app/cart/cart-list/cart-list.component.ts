@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { EMPTY, Observable, Subject, catchError, finalize, map, tap } from 'rxjs';
 import { AuthService } from 'src/app/shared/auth.service';
 import { Product } from 'src/app/product/product';
-import { ProductService } from 'src/app/product/product.service';
 import { CartService } from 'src/app/shared/cart.service';
 import { ToastService } from 'src/app/shared/toast.service';
 import { SpinnerService } from 'src/app/spinner.service';
@@ -54,7 +53,7 @@ export class CartListComponent implements OnInit {
 
   }
 
-  loadCart() {
+  loadCart(): void {
     this.auth.getCart(null).pipe(
       map(data => data),
       tap(data => {
@@ -125,7 +124,7 @@ export class CartListComponent implements OnInit {
     }
   }
 
-  updateCart(itemId: string, newQuantity: number) {
+  updateCart(itemId: string, newQuantity: number): void {
     this.auth.updateCart(itemId, Number(newQuantity)).pipe(
       tap(() => {
         console.log('Cart updated');
@@ -220,7 +219,7 @@ export class CartListComponent implements OnInit {
   //   );
   // }
 
-  deleteProduct(itemId: string) {
+  deleteProduct(itemId: string): void {
     this.auth.updateCart(itemId, 0).pipe(
       tap(() => {
         console.log('Cart updated');
@@ -256,14 +255,14 @@ export class CartListComponent implements OnInit {
   //   this.toastService.show(message);
   // }
 
-  showToastSuccess() {
+  showToastSuccess(): void {
     console.log('showToast in cartListComponent called with message'); // Debugging log
     // this.toastService.show(product);
     this.toastService.show('item(s) removed from cart successfully', 'success');
 
   }
 
-  showToastError(message: string) {
+  showToastError(message: string): void {
     console.log('showToastEror in ProductDetailComponent called with message:', message); // Debugging log
     // this.toastService.show(product);
     this.toastService.show(message, 'error');

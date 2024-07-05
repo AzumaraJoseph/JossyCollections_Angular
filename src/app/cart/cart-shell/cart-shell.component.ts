@@ -65,14 +65,14 @@ export class CartShellComponent implements OnInit {
   //   this.toastService.show(message);
   // }
 
-  showToastSuccess(product: any) {
+  showToastSuccess(product: any): void {
     console.log('showToast in CartShellComponent called with message:', product); // Debugging log
     // this.toastService.show(product);
     this.toastService.show(`${product.name} loaded successfully!`, 'success');
 
   }
 
-  showToastError(message: string) {
+  showToastError(message: string): void {
     console.log('showToastEror in ProductDetailComponent called with message:', message); // Debugging log
     // this.toastService.show(product);
     this.toastService.show(message, 'error');

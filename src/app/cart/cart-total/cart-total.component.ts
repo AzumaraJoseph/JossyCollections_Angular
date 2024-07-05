@@ -51,7 +51,7 @@ export class CartTotalComponent implements OnInit {
   //   this.toastService.show(message);
   // }
 
-  showToastWarning() {
+  showToastWarning(): void {
     console.log('showToast in CartTotalComponent called'); // Debugging log
     // this.toastService.show(product);
     this.toastService.show('Please confirm your order!', 'warning');

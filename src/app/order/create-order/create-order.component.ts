@@ -150,7 +150,7 @@ export class CreateOrderComponent implements OnInit {
   //   this.toastService.show(message);
   // }
 
-  showToastError(message: string) {
+  showToastError(message: string): void {
     console.log('showToastEror in ProductDetailComponent called with message:', message); // Debugging log
     // this.toastService.show(product);
     this.toastService.show(message, 'error');
