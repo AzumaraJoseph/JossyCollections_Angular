@@ -46,14 +46,24 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## Features
-- User-friendly interface and responsive design.
+- Designed with Angular Material and Bootstrap for a responsive and intuitive user interface.
+- Utilizes Angular's powerful data-binding and component-based architecture to dynamically load content.
 - Product browsing with detailed descriptions and images.
 - Shopping cart and checkout functionality.
-- Integration with external payment and mailing services.
+- Seamlessly integrated external services such as mailing and payment systems.
 - User authentication and profile management.
 - Admin panel for product management.
-- Dynamic content loading using AngularJS and the Fetch API.
+- Integrated secure payment gateways to ensure safe and reliable transactions.
 - Local storage for user data persistence.
+
+## Technologies Used
+- Angular
+- TypeScript
+- Angular CLI
+- CSS
+- SASS
+- Bootstrap
+- Git/GitHub
 
 ## Usage
 - Users can browse products by category, view detailed descriptions, and add items to their cart.
