@@ -45,6 +45,14 @@ input:autofill {
     background-color: white !important;
 }
 
+.gender {
+    border: none;
+    outline: 2px solid rgba(222, 222, 222, 0.995);
+    padding: 0.75rem;
+    width: 100%;
+    border-radius: 7px;
+}
+
 .is-invalid {
     border-color: red;
   }

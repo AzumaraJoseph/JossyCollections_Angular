@@ -8,7 +8,7 @@
                 <div class="card-body cart-item" *ngFor="let cart of allCart?.items; let i = index" >
                     <div class="row" style="padding: 0.6rem 0.8rem;" >
                         <div class="col-md-10 col-sm-10 d-flex align-items-center p-0" >
-                            <img [src]="'/assets/img-details/800x800_' + cart.image" class="me-3" style="width: 5rem;" alt="">
+                            <img [src]="'https://anneth.s3.eu-north-1.amazonaws.com/product/800x800_' + cart.image" class="me-3" style="width: 5rem;" alt="">
             
                             <div style="padding: 0 0.7rem;">
                                 <p class="mb-0">{{cart.name}}</p>

@@ -53,81 +53,87 @@
                   </div>
               </div>
 
-                <div class="form-floating form-group mb-3">
-                    <input type="email"
-                        class="form-control" 
-                        id="emailId"
-                        formControlName="email"
-                        placeholder=" Enter Your Email" 
-                        [ngClass]="{'is-invalid': (signUpForm.controls['email'].touched || signUpForm.get('email')?.dirty) && !signUpForm.get('email')?.valid }" >
+              <div class="form-floating form-group mb-3">
+                  <input type="email"
+                      class="form-control" 
+                      id="emailId"
+                      formControlName="email"
+                      placeholder=" Enter Your Email" 
+                      [ngClass]="{'is-invalid': (signUpForm.controls['email'].touched || signUpForm.get('email')?.dirty) && !signUpForm.get('email')?.valid }" >
 
-                    <label for="emailId">Email</label>
-                    
-
-                    <div *ngIf="(signUpForm.controls['email'].touched || signUpForm.controls['email'].dirty)  && !signUpForm.controls['email'].valid">
-                        <span class="invalid-feedback" *ngIf="signUpForm.controls['email'].errors?.['required']">
-                            <em>Please enter your email</em>
-                        </span>
-                        <span class="invalid-feedback" *ngIf="signUpForm.controls['email'].errors?.['email']">
-                            Please enter a valid email address
-                        </span>
-                    </div>
-                </div>
-
-                    <div class="form-floating form-group mb-3">
-                      <input type="password"
-                        class="form-control"
-                        id="passwordId"
-                        formControlName="password"
-                        placeholder=" Enter Your Password"
-                        [ngClass]="{'is-invalid': (signUpForm.get('password')?.touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid }">
-                      <label for="passwordId">Password</label>
-                      <div *ngIf="(signUpForm.get('password')?.touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid">
-                        <span class="invalid-feedback" *ngIf="signUpForm.get('password')?.errors?.['required']">
-                          <em>Please enter your password</em>
-                        </span>
-                        <span class="invalid-feedback" *ngIf="signUpForm.get('password')?.errors?.['minlength']">
-                          Password must be more than 8 characters
-                        </span>
-                      </div>
-                    </div>
-                
-                    <div class="form-floating form-group mb-3">
-                      <input type="password"
-                        class="form-control"
-                        id="confirmPasswordId"
-                        formControlName="confirmPassword"
-                        placeholder=" Enter Your Confirm Password"
-                        [ngClass]="{'is-invalid': (signUpForm.get('confirmPassword')?.touched || signUpForm.get('confirmPassword')?.dirty) && (!signUpForm.get('confirmPassword')?.valid || signUpForm.hasError('passwordsMismatch')) }">
-                      <label for="confirmPasswordId">Confirm Password</label>
-                      <div class="invalid-feedback" *ngIf="signUpForm.hasError('passwordsMismatch') && signUpForm.controls['confirmPassword'].touched">
-                          <em>Password does not match.</em>
-                      </div>
-                    </div>
+                  <label for="emailId">Email</label>
                   
 
-                <div class="form-floating form-group mb-2">
-                    <input type="number" 
-                            class="form-control" 
-                            id="phoneId" 
-                            formControlName="phone" 
-                            placeholder=" Enter Your Phone" 
-                            [ngClass]="{'is-invalid': (signUpForm.controls['phone'].touched || signUpForm.get('phone')?.dirty) && !signUpForm.get('phone')?.valid }" >
-                    <label for="phoneId">Phone</label>
+                  <div *ngIf="(signUpForm.controls['email'].touched || signUpForm.controls['email'].dirty)  && !signUpForm.controls['email'].valid">
+                      <span class="invalid-feedback" *ngIf="signUpForm.controls['email'].errors?.['required']">
+                          <em>Please enter your email</em>
+                      </span>
+                      <span class="invalid-feedback" *ngIf="signUpForm.controls['email'].errors?.['email']">
+                          Please enter a valid email address
+                      </span>
+                  </div>
+              </div>
+              <select class="gender mb-3" formControlName="gender">
+                <option value="" hidden>Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+              </select>
 
-                    <div *ngIf="(signUpForm.controls['phone'].touched || signUpForm.controls['phone'].dirty)  && !signUpForm.controls['phone'].valid">
-                        <span class="invalid-feedback" *ngIf="signUpForm.controls['phone'].errors?.['required']">
-                            <em>Please enter your phone</em>
-                        </span>
-                    </div>
-                    
+
+              <div class="form-floating form-group mb-3">
+                <input type="password"
+                  class="form-control"
+                  id="passwordId"
+                  formControlName="password"
+                  placeholder=" Enter Your Password"
+                  [ngClass]="{'is-invalid': (signUpForm.get('password')?.touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid }">
+                <label for="passwordId">Password</label>
+                <div *ngIf="(signUpForm.get('password')?.touched || signUpForm.get('password')?.dirty) && !signUpForm.get('password')?.valid">
+                  <span class="invalid-feedback" *ngIf="signUpForm.get('password')?.errors?.['required']">
+                    <em>Please enter your password</em>
+                  </span>
+                  <span class="invalid-feedback" *ngIf="signUpForm.get('password')?.errors?.['minlength']">
+                    Password must be more than 8 characters
+                  </span>
                 </div>
-
-                <div *ngIf="errorMessage$ | async as errorMessage" style="color: red;" >{{ errorMessage }}</div>
-
-                <div class="button">
-                    <button class="btn fw-bold w-100 p-2" type="submit" [disabled]="!signUpForm.valid" style="color: white; font-size: 1rem; border: none;">Continue</button>
+              </div>
+          
+              <div class="form-floating form-group mb-3">
+                <input type="password"
+                  class="form-control"
+                  id="confirmPasswordId"
+                  formControlName="confirmPassword"
+                  placeholder=" Enter Your Confirm Password"
+                  [ngClass]="{'is-invalid': (signUpForm.get('confirmPassword')?.touched || signUpForm.get('confirmPassword')?.dirty) && (!signUpForm.get('confirmPassword')?.valid || signUpForm.hasError('passwordsMismatch')) }">
+                <label for="confirmPasswordId">Confirm Password</label>
+                <div class="invalid-feedback" *ngIf="signUpForm.hasError('passwordsMismatch') && signUpForm.controls['confirmPassword'].touched">
+                    <em>Password does not match.</em>
                 </div>
+              </div>
+                  
+
+              <div class="form-floating form-group mb-2">
+                  <input type="number" 
+                          class="form-control" 
+                          id="phoneId" 
+                          formControlName="phone" 
+                          placeholder=" Enter Your Phone" 
+                          [ngClass]="{'is-invalid': (signUpForm.controls['phone'].touched || signUpForm.get('phone')?.dirty) && !signUpForm.get('phone')?.valid }" >
+                  <label for="phoneId">Phone</label>
+
+                  <div *ngIf="(signUpForm.controls['phone'].touched || signUpForm.controls['phone'].dirty)  && !signUpForm.controls['phone'].valid">
+                      <span class="invalid-feedback" *ngIf="signUpForm.controls['phone'].errors?.['required']">
+                          <em>Please enter your phone</em>
+                      </span>
+                  </div>
+                  
+              </div>
+
+              <div *ngIf="errorMessage$ | async as errorMessage" style="color: red;" >{{ errorMessage }}</div>
+
+              <div class="button">
+                  <button class="btn fw-bold w-100 p-2" type="submit" [disabled]="!signUpForm.valid" style="color: white; font-size: 1rem; border: none;">Continue</button>
+              </div>
             </form> 
 
             <!-- <form [formGroup]="userForm">

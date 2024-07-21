@@ -6,7 +6,7 @@
         <div class="card-header" style="background-color: rgba(255, 255, 255, 0.993)">
             <h3 class="detail-title p-2 fs-4 text-center">{{product.description}}</h3>
             <div class="card-img-top d-flex justify-content-center" >
-                <img src="/assets/img-details/800x800_{{product.imageCover}}" class="img-fluid" alt="Product Detail Image">
+                <img src="https://anneth.s3.eu-north-1.amazonaws.com/product/800x800_{{product.imageCover}}" class="img-fluid" alt="Product Detail Image">
             </div>
         </div>
 
@@ -65,7 +65,7 @@
                     <img (click)="showToastInfo(color)" Style="border: 1px solid black; cursor: pointer;"
                         data-bs-toggle="modal"
                         [attr.data-bs-target]="'#colorModal' + i" 
-                        [src]="'/assets/img-details/75x75_' + color.colorImage" 
+                        [src]="'https://anneth.s3.eu-north-1.amazonaws.com/product/75x75_' + color.colorImage" 
                         class="img-fluid p-2" 
                         alt="{{color.color}}"
                     >
@@ -208,7 +208,7 @@
 
                         <div class="card-body flex-column justify-content-between p-2" (click)="openRelated(related.id, related)">
 
-                            <img [src]="'/assets/products/250x250_' + related.imageCover"
+                            <img [src]="'https://anneth.s3.eu-north-1.amazonaws.com/product/250x250_' + related.imageCover"
                             class="card-img-top p-0"
                             alt="Products Image">
         

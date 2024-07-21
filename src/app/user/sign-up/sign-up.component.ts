@@ -68,6 +68,7 @@ export class SignUpComponent implements OnInit {
       firstName: ['', [Validators.required, Validators.minLength(3)]],
       lastName: ['', [Validators.required, Validators.maxLength(10)]],
       email: ['', [Validators.required, Validators.email]],
+      gender: ['', Validators.required],
       phone: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
@@ -97,13 +98,14 @@ export class SignUpComponent implements OnInit {
       const firstNameControl = this.signUpForm.controls['firstName'].value;
       const lastNameControl = this.signUpForm.controls['lastName'].value;
       const emailControl = this.signUpForm.controls['email'].value;
+      const genderControl = this.signUpForm.controls['gender'].value;
       const passwordControl = this.signUpForm.controls['password'].value;
       const confirmPasswordControl = this.signUpForm.controls['confirmPassword'].value;
       const phoneControl = this.signUpForm.controls['phone'].value;
   
       console.log(this.signUpForm.value);
     
-      this.auth.signUp(firstNameControl, lastNameControl, emailControl, passwordControl, confirmPasswordControl, phoneControl).pipe(
+      this.auth.signUp(firstNameControl, lastNameControl, emailControl, passwordControl, genderControl, confirmPasswordControl, phoneControl).pipe(
         tap((user: Iuser) => {
           if (user) {
             this.signUpForm.reset();

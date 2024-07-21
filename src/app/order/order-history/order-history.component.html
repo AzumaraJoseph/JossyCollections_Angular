@@ -90,7 +90,7 @@
                         <div class="card-body each-item mb-2" style="background-color: white; border-radius: 6px; padding: 0.5rem;" *ngFor="let each of order?.products; let i = index " >
                             <div class="d-flex align-items-start flex-direction ">
     
-                                <img [src]="'/assets/img-details/75x75_' + each.image" style="height: 100%;" class="img-fluid p-2" alt="{{each.name}}">
+                                <img [src]="'https://anneth.s3.eu-north-1.amazonaws.com/product/75x75_' + each.image" style="height: 100%;" class="img-fluid p-2" alt="{{each.name}}">
                 
                                 <div class=" align-content-center" style="padding: 0.6rem; font-size: 1rem;">
                                     <div class=" mb-0">
@@ -124,7 +124,7 @@
                                             <div class="modal-body">
                                                 <form #orderHistoryForm="ngForm" (ngSubmit)="save(orderHistoryForm)" >
                                                     <div class="row">
-                                                        <img [src]="'/assets/img-details/800x800_' + each.image" style="width: 7rem; height: 7rem; margin-right: 0.6rem;" alt="{{each.name}}">
+                                                        <img [src]="'https://anneth.s3.eu-north-1.amazonaws.com/product/800x800_' + each.image" style="width: 7rem; height: 7rem; margin-right: 0.6rem;" alt="{{each.name}}">
                                                         <div class="col-md-9">
                                                             <p class="mb-0">{{each.name}}</p>
                                                             <app-star-review [(rating)]="productRating"></app-star-review>

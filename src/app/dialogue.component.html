@@ -23,7 +23,7 @@
                 <div class="card-header p-0" style="background-color: rgba(255, 255, 255, 0.993)">
                     <h3 class="card-text fs-4 p-2 ps-3">{{ product.name }}</h3>
                     <div class="d-flex justify-content-center p-2" >
-                        <img [src]="'/assets/img-details/800x800_' + product.color[indexer].colorImage " class="img-fluid" alt="Product Detail Image">
+                        <img [src]="'https://anneth.s3.eu-north-1.amazonaws.com/product/800x800_' + product.color[indexer].colorImage " class="img-fluid" alt="Product Detail Image">
                     </div>
                 </div>
 
@@ -60,7 +60,7 @@
                             [attr.data-bs-target]="'#colorModal' + i"
                             [class.selected]="i === indexer">
                             <img (click)="showToastInfo(color)
-                            " Style="border: 1px solid black; cursor: pointer;" [src]="'/assets/img-details/75x75_' + color.colorImage" class="img-fluid p-2" alt="{{color.color}}">
+                            " Style="border: 1px solid black; cursor: pointer;" [src]="'https://anneth.s3.eu-north-1.amazonaws.com/product/75x75_' + color.colorImage" class="img-fluid p-2" alt="{{color.color}}">
                         </div>
                     </div>
                 </div>

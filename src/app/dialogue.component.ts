@@ -153,6 +153,12 @@ addCart(formData: any) {
         this.isLoadingForm = false; // Set loading state to false
         this.showToastError(error);
         console.error('Error adding to cart', error);
+
+        this.router.navigate(['/login']);
+        this.closeModal();
+
+
+
       });
 
   }

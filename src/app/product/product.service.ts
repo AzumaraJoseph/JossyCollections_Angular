@@ -7,8 +7,9 @@ import { BehaviorSubject, Observable, combineLatest, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class ProductService {
-  private productsUrl = 'http://127.0.0.1:5000/api/v1/products';
-  private review = 'http://127.0.0.1:5000/api/v1/reviews';
+  // private review = 'http://127.0.0.1:5000/api/v1/reviews';
+  private productsUrl = 'https://anneth.anneth.online/api/v1/products';
+  private review = 'https://anneth.anneth.online/api/v1/reviews';
   // private countries = 'https://countriesnow.space/api/v0.1/countries/population/cities';
   private countries = 'https://countriesnow.space/api/v0.1/countries/states';
 

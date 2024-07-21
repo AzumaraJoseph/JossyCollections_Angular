@@ -8,20 +8,21 @@ import { Iuser } from '../user/user.component';
   providedIn: 'root'
 })
 export class AuthService {
+  // private loginUrl = 'http://127.0.0.1:5000/api/v1/user/login';
 
-  private loginUrl = 'http://127.0.0.1:5000/api/v1/user/login';
-  private signupUrl = 'http://127.0.0.1:5000/api/v1/user/signup';
-  private logOutUrl = 'http://127.0.0.1:5000/api/v1/user/logout';
-  private currentUserUrl = 'http://127.0.0.1:5000/api/v1/user/getMe';
-  private updateUserUrl = 'http://127.0.0.1:5000/api/v1/user/updateMe';
-  private createAddressUrl = 'http://127.0.0.1:5000/api/v1/user/address';
-  private deleteAddressUrl = 'http://127.0.0.1:5000/api/v1/user/address';
-  private createCartUrl = 'http://127.0.0.1:5000/api/v1/user/create-cart';
-  private getCartUrl = 'http://127.0.0.1:5000/api/v1/user/get-cart';
-  private updateCartUrl = 'http://127.0.0.1:5000/api/v1/user/update-cart';
-  private placeOrderUrl = 'http://127.0.0.1:5000/api/v1/order/checkout-session';
-  private orderHistoryrUrl = 'http://127.0.0.1:5000/api/v1/order';
-  private reviewUrl = 'http://127.0.0.1:5000/api/v1/products';
+  private loginUrl = 'https://anneth.anneth.online/api/v1/user/login';
+  private signupUrl = 'https://anneth.anneth.online/api/v1/user/signup';
+  private logOutUrl = 'https://anneth.anneth.online/api/v1/user/logout';
+  private currentUserUrl = 'https://anneth.anneth.online/api/v1/user/getMe';
+  private updateUserUrl = 'https://anneth.anneth.online/api/v1/user/updateMe';
+  private createAddressUrl = 'https://anneth.anneth.online/api/v1/user/address';
+  private deleteAddressUrl = 'https://anneth.anneth.online/api/v1/user/address';
+  private createCartUrl = 'https://anneth.anneth.online/api/v1/user/create-cart';
+  private getCartUrl = 'https://anneth.anneth.online/api/v1/user/get-cart';
+  private updateCartUrl = 'https://anneth.anneth.online/api/v1/user/update-cart';
+  private placeOrderUrl = 'https://anneth.anneth.online/api/v1/order/checkout-session';
+  private orderHistoryrUrl = 'https://anneth.anneth.online/api/v1/order';
+  private reviewUrl = 'https://anneth.anneth.online/api/v1/products';
 
 
   private currentUserSubject: BehaviorSubject<Iuser| null>;
@@ -70,12 +71,12 @@ export class AuthService {
     );
   }
   
-  signUp(firstName: string, lastName: string, email: string, password: string, confirmPassword: string, phone: number): Observable<any> {
+  signUp(firstName: string, lastName: string, email: string, genderControl: string, password: string, confirmPassword: string, phone: number): Observable<any> {
     // const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true};
-    const signupInfo = { firstName, lastName, email, password, confirmPassword, phone };
+    const signupInfo = { firstName, lastName, email, genderControl, password, confirmPassword, phone };
 
     return this.http.post<any>(this.signupUrl, signupInfo, options).pipe(
       // map(data => data.data),
