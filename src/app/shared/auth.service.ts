@@ -72,7 +72,6 @@ export class AuthService {
   }
   
   signUp(firstName: string, lastName: string, email: string, genderControl: string, password: string, confirmPassword: string, phone: number): Observable<any> {
-    // const options = { headers: new HttpHeaders({'Content-Type': 'application/json'}) };
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true};
@@ -116,7 +115,6 @@ export class AuthService {
 
 
   getUser(): Observable<any> {
-    // const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { withCredentials: true};
   
     return this.http.get<any>(this.currentUserUrl, options).pipe(
@@ -223,17 +221,7 @@ export class AuthService {
       catchError(this.handleError)
     )
   }
-
-  // placeOrder(): Observable<any> {
-  //   const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-  //   const options = { headers, withCredentials: true };
-
-  //   return this.http.post<any>(this.placeOrderUrl, {}, options).pipe(
-  //     map(data => data.res.url),
-  //     catchError(this.handleError)
-  //   )
-  // }
-
+  
   placeOrder(): Observable<any> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true };

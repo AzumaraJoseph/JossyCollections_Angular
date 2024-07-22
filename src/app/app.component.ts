@@ -87,7 +87,6 @@ export class AppComponent implements OnInit {
       })
     }
 
-    // this.currentUser = this.currentUser ? this.user.firstName
 
     this.cartCounts()
 
@@ -97,7 +96,6 @@ export class AppComponent implements OnInit {
 
   })
 
-    // this.updateCartIcon()
   
   }
 
@@ -116,7 +114,6 @@ export class AppComponent implements OnInit {
       this.showToastError(this.errorMessage);
 
       console.error('Cart count error:', this.errorMessage);
-      // this.showToast(this.errorMessage)
       return EMPTY;
     })
     ).subscribe();
@@ -144,13 +141,6 @@ export class AppComponent implements OnInit {
     ); 
   }
 
-  // showToast(message: string) {
-  //   console.log('showToast in CartIconComponent called with message:', message); // Debugging log
-  //   if (this.cartCount > 0) {
-  //     this.toastService.show(message);
-  //   }
-  // }
-
   checkRouterEvent(routerEvent: Event): void {
     if (routerEvent instanceof NavigationStart) {
       this.loading = true;
@@ -160,19 +150,6 @@ export class AppComponent implements OnInit {
     }
   }
 
-  // routeToCart() {
-  //   if (this.isLoggedIn) {
-  //     this.router.navigate(['/cart']);
-  //     this.showToastSuccess('Item(s) found in cart')
-  //   }
-  // }
-
-  // showToastSuccess(message: string) {
-  //   console.log('showToast in ProductDetailComponent called with message:', message); // Debugging log
-  //   // this.toastService.show(message);
-  //   this.toastService.show(message, 'success');
-
-  // }
 
   showToastError(message: string) {
     console.log('showToastEror in appComponent called with message:', message); // Debugging log

@@ -6,14 +6,6 @@ import { passwordsMatchValidator } from '../custom-validators';
 import { tap, catchError, EMPTY, Observable, Subject } from 'rxjs';
 import { Iuser } from '../user.component';
 import { ToastService } from 'src/app/shared/toast.service';
-// import { confirmPasswordValidator } from '../custom-validators';
-
-
-
-
-
-
-
 
 
 @Component({
@@ -30,33 +22,6 @@ export class SignUpComponent implements OnInit {
   errorMessage: string = '';
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService) { }
-
-  // ngOnInit(): void {
-
-  // this.signUpForm = this.fb.group({
-  //   fullName: ['', [Validators.required, Validators.minLength(3)]],
-  //   email: ['', [Validators.required, Validators.email]],
-  //   passwordGroup: this.fb.group({
-  //     password: ['', [Validators.required, Validators.minLength(8)]],
-  //     confirmPassword: ['', Validators.required]
-  //   }),
-  //   phone: ['', [Validators.required]]
-  // });
-
-  // }
-
-
-  // ngOnInit(): void {
-
-  //   this.signUpForm = this.fb.group({
-  //     fullName: ['', [Validators.required, Validators.minLength(3)]],
-  //     email: ['', [Validators.required, Validators.email]],
-  //     password: ['', [Validators.required, Validators.minLength(8)]],
-  //     confirmPassword: ['', Validators.required],
-  //     phone: ['', [Validators.required]]
-  //   }, { validators: this.passwordsMatchValidator } );
-  
-  //   }
   
   passwordForm!: FormGroup;
 
@@ -74,18 +39,6 @@ export class SignUpComponent implements OnInit {
       confirmPassword: ['', Validators.required],
     }, { validators: passwordsMatchValidator('password', 'confirmPassword') });
   }
-
-
-
-
-  // passwordsMatchValidator(control: AbstractControl): { [key: string]: boolean } | null {
-  //   const password = control.get('password');
-  //   const confirmPassword = control.get('confirmPassword');
-  //   if (password && confirmPassword && password.value !== confirmPassword.value) {
-  //     return { passwordsMismatch: true };
-  //   }
-  //   return null;
-  // }
 
 
   // togglePasswordVisibility(): void {
@@ -153,18 +106,3 @@ export class SignUpComponent implements OnInit {
   }
 
 }
-
-// subscribe(response => {
-//   if (response) {
-//     this.signUpForm.reset();
-//     this.router.navigate(['/products']);
-//     console.log('Sign up success');
-//   } else {
-//     console.error('sign up failed');
-//   }
-// },
-// error => {
-//   // Handle error response from the login API
-//   console.error('An error occurred during login:', error);
-// })
-
