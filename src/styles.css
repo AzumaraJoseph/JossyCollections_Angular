@@ -2,12 +2,11 @@
 
 @import "~bootstrap/dist/css/bootstrap.min.css";
 
-
+/* 
 body {
-    width: 90%;
-    height: 100vh; /* Make sure the body takes up the full height of the viewport */
+    /* height: 100vh; Make sure the body takes up the full height of the viewport *
     display: flex;
-    justify-content: center; /* Horizontally center */
-    align-items: center; /* Vertically center */
-    margin: 0; /* Remove default margin */
-}
+    justify-content: center; /* Horizontally center *
+    align-items: center; /* Vertically center *
+    margin: 0; /* Remove default margin *
+} */

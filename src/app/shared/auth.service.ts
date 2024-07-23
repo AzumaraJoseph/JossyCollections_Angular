@@ -71,11 +71,11 @@ export class AuthService {
     );
   }
   
-  signUp(firstName: string, lastName: string, email: string, genderControl: string, password: string, confirmPassword: string, phone: number): Observable<any> {
+  signUp(firstName: string, lastName: string, email: string, gender: string, password: string, confirmPassword: string, phone: number): Observable<any> {
 
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers, withCredentials: true};
-    const signupInfo = { firstName, lastName, email, genderControl, password, confirmPassword, phone };
+    const signupInfo = { firstName, lastName, email, gender, password, confirmPassword, phone };
 
     return this.http.post<any>(this.signupUrl, signupInfo, options).pipe(
       // map(data => data.data),

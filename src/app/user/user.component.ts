@@ -3,6 +3,7 @@ export interface Iuser {
     firstName: any,
     lastName: string,
     email: string,
+    gender: string,
     password: string;
     confirmPassword: string;
     role: string;

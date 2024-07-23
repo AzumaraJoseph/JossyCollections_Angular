@@ -2,7 +2,7 @@
         *ngIf="loading" style="margin-top: 5rem;">
 </span>
   <nav class="navBar navBar-expand fixed-top" style="background-color: white;">
-    <div class="pt-2 pb-2 ps-3 pe-3 d-flex align-items-center justify-content-between">
+    <div class="nav pt-2 pb-2 ps-3 pe-3 d-flex align-items-center justify-content-between">
       <div class=" brand-sizing">
         <div class="navBar-brand"
               [routerLink]="['/products']" >
@@ -116,47 +116,49 @@
   </nav>
     <!-- [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''" -->
     <!-- #o="outlet" -->
-  <div class="fluid-container" >
-    <div [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
-      <router-outlet #o="outlet"></router-outlet>
-      <!-- <app-spinner></app-spinner> -->
-      <app-toast></app-toast>
+     <div style="background-color: rgba(246, 246, 246, 0.982);">
+       <div class="fluid-container" >
+         <div [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
+           <router-outlet #o="outlet"></router-outlet>
+           <!-- <app-spinner></app-spinner> -->
+           <app-toast></app-toast>
+         </div>
+     
+         <footer class="footer d-flex" align="center" style="font-size: 13px;" [ngClass]="{ 'hidden': isScrolledDown }">
+         
+           <a class="footer-link" [routerLink]="['/products']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+               <i class="material-icons footer-icon" >
+                   home
+               </i>
+               <p class="mb-0">Home</p>
+           </a>
+           <a class="footer-link" >
+               <i class="material-icons footer-icon">
+                   format_list_bulleted
+               </i>
+               <p class="mb-0">Category</p>
+           </a>
+           <a class="footer-link" [routerLink]="['/cart']" routerLinkActive="active">
+               <i class="material-icons footer-icon">
+                   shopping_cart
+               </i>
+               <p class="mb-0">Cart</p>
+           </a>
+           <a class="footer-link" [routerLink]="['/order/history']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >
+               <i class="material-icons footer-icon">
+                   shopping_bag
+               </i>
+               <p class="mb-0">Order</p>
+           </a>
+           <a class="footer-link" [routerLink]="['login']" routerLinkActive="active">
+               <i class="material-icons footer-icon">
+                   person
+               </i>
+               <p class="mb-0">Account</p>
+           </a>        
+         </footer>
+     
+     
+       </div>
     </div>
-
-    <footer class="footer d-flex" align="center" style="font-size: 13px;" [ngClass]="{ 'hidden': isScrolledDown }">
-    
-      <a class="footer-link" [routerLink]="['/products']" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-          <i class="material-icons footer-icon" >
-              home
-          </i>
-          <p class="mb-0">Home</p>
-      </a>
-      <a class="footer-link" >
-          <i class="material-icons footer-icon">
-              format_list_bulleted
-          </i>
-          <p class="mb-0">Category</p>
-      </a>
-      <a class="footer-link" [routerLink]="['/cart']" routerLinkActive="active">
-          <i class="material-icons footer-icon">
-              shopping_cart
-          </i>
-          <p class="mb-0">Cart</p>
-      </a>
-      <a class="footer-link" [routerLink]="['/order/history']" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" >
-          <i class="material-icons footer-icon">
-              shopping_bag
-          </i>
-          <p class="mb-0">Order</p>
-      </a>
-      <a class="footer-link" [routerLink]="['login']" routerLinkActive="active">
-          <i class="material-icons footer-icon">
-              person
-          </i>
-          <p class="mb-0">Account</p>
-      </a>        
-    </footer>
-
-
-  </div>
 

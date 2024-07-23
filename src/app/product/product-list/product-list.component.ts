@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product.service';
 import { EMPTY, Observable, Subject, catchError, finalize, shareReplay } from 'rxjs';
@@ -27,7 +27,17 @@ export class ProductListComponent implements OnInit {
   errorMessage: string = '';
 
 
-  constructor(private productService: ProductService, private toastService: ToastService, private router: Router, private spinnerService: SpinnerService) { }
+  constructor(private productService: ProductService, private toastService: ToastService, private router: Router, private spinnerService: SpinnerService, private cdr: ChangeDetectorRef) {
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        setTimeout(() => {
+          this.initializeCarousel();
+        }, 0);
+      }
+    });
+
+   }
 
 
   ngOnInit(): void { 
@@ -54,30 +64,40 @@ export class ProductListComponent implements OnInit {
       finalize(() => {
         // Hide spinner after data fetch completes or encounters an error
         this.spinnerService.hide();
+        this.cdr.detectChanges(); // Trigger change detection after data load
+        this.initializeCarousel(); // Initialize the carousel after data fetch
       })
     );
 
   }
 
   // ngAfterViewInit(): void {
-  //   // Initialize carousel
-  //   $('#carouselid').carousel();
-
+  //   // console.log('Initializing carousel');
+  //   setTimeout(() => {
+  //     const carouselElement = $('#carouselid');
+  //     if (carouselElement.length) {
+  //       // console.log('Carousel element found:', carouselElement);
+  //       carouselElement.carousel({
+  //         interval: 2000 // Customize interval as needed
+  //       });
+  //     }
+  //   }, 0);
   // }
 
   ngAfterViewInit(): void {
-    // console.log('Initializing carousel');
     setTimeout(() => {
-      const carouselElement = $('#carouselid');
-      if (carouselElement.length) {
-        // console.log('Carousel element found:', carouselElement);
-        carouselElement.carousel({
-          interval: 2000 // Customize interval as needed
-        });
-      } else {
-        // console.error('Carousel element not found');
-      }
+      this.cdr.detectChanges(); // Trigger change detection after view init
+      this.initializeCarousel();
     }, 0);
+  }
+
+  initializeCarousel(): void {
+    const carouselElement = $('#carouselid');
+    if (carouselElement.length) {
+      carouselElement.carousel({
+        interval: 2000 // Customize interval as needed
+      });
+    }
   }
 
   routeToDetail(product: any): void {

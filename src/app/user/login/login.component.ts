@@ -6,6 +6,7 @@ import { Iuser } from '../user.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EMPTY, Observable, Subject, catchError, tap, throwError } from 'rxjs';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +24,7 @@ export class LoginComponent implements OnInit {
   errorMessage: string = '';
 
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService) { }
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService, private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
 
@@ -35,6 +36,8 @@ export class LoginComponent implements OnInit {
   }
 
   save() {
+    this.spinnerService.show();
+
     if (this.loginForm.valid) {
       const emailControl = this.loginForm.controls['email'].value;
       const passwordControl = this.loginForm.controls['password'].value;
@@ -46,6 +49,8 @@ export class LoginComponent implements OnInit {
           this.currentUser = user;
           if (user) {
             this.loginForm.reset();
+            this.spinnerService.hide();
+
             this.showToastSuccess();
             
           // Redirect to the stored URL or default to home
@@ -65,6 +70,7 @@ export class LoginComponent implements OnInit {
 
           console.error('Login error:', this.errorMessage);
           this.showToastError(this.errorMessage)
+          this.spinnerService.hide();
           return EMPTY;
         })
       ).subscribe();

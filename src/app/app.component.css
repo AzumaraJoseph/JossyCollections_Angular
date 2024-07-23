@@ -1,12 +1,21 @@
 .fluid-container {
     /* width: 97rem; */
+    width: 85%;
+    margin: 0 auto;
     overflow: hidden;
+    /* background-color: rgba(246, 246, 246, 0.982); */
 }
 
 .image {
     width: 2.8rem;
     height: 2.8rem;
     margin-right: 1rem;
+}
+
+.nav {
+    width: 85%;
+    margin: 0 auto;
+    
 }
 
 .navBar-brand {
@@ -302,6 +311,18 @@
         font-size: 1.3rem !important;
     }
 
+}
+
+@media (max-width: 450px) {
+    .nav {
+        width: 90% !important;
+    }
+}
+
+@media (max-width: 376px) {
+    .nav {
+        width: 100% !important;
+    }
 }
 
 

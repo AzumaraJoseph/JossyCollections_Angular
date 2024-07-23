@@ -6,6 +6,7 @@ import { passwordsMatchValidator } from '../custom-validators';
 import { tap, catchError, EMPTY, Observable, Subject } from 'rxjs';
 import { Iuser } from '../user.component';
 import { ToastService } from 'src/app/shared/toast.service';
+import { SpinnerService } from 'src/app/spinner.service';
 
 
 @Component({
@@ -21,12 +22,8 @@ export class SignUpComponent implements OnInit {
 
   errorMessage: string = '';
 
-  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService) { }
+  constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private toastService: ToastService, private spinnerService: SpinnerService) { }
   
-  passwordForm!: FormGroup;
-
-  userForm!: FormGroup;
-
   ngOnInit(): void {
 
     this.signUpForm = this.fb.group({
@@ -34,9 +31,9 @@ export class SignUpComponent implements OnInit {
       lastName: ['', [Validators.required, Validators.maxLength(10)]],
       email: ['', [Validators.required, Validators.email]],
       gender: ['', Validators.required],
-      phone: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(8)]],
       confirmPassword: ['', Validators.required],
+      phone: ['', Validators.required],
     }, { validators: passwordsMatchValidator('password', 'confirmPassword') });
   }
 
@@ -46,32 +43,37 @@ export class SignUpComponent implements OnInit {
   // }
 
   save() {
-    if(this.signUpForm.valid) {
+    this.spinnerService.show();
 
-      const firstNameControl = this.signUpForm.controls['firstName'].value;
-      const lastNameControl = this.signUpForm.controls['lastName'].value;
-      const emailControl = this.signUpForm.controls['email'].value;
-      const genderControl = this.signUpForm.controls['gender'].value;
-      const passwordControl = this.signUpForm.controls['password'].value;
-      const confirmPasswordControl = this.signUpForm.controls['confirmPassword'].value;
-      const phoneControl = this.signUpForm.controls['phone'].value;
+    if (this.signUpForm.valid) {
+      const { firstName, lastName, email, gender, password, confirmPassword, phone } = this.signUpForm.value;
   
       console.log(this.signUpForm.value);
-    
-      this.auth.signUp(firstNameControl, lastNameControl, emailControl, passwordControl, genderControl, confirmPasswordControl, phoneControl).pipe(
-        tap((user: Iuser) => {
-          if (user) {
+
+      // if (password !== confirmPassword) {
+      //   this.errorMessage = 'Passwords do not match';
+      //   this.errorMessageSubject.next(this.errorMessage);
+      //   this.showToastError(this.errorMessage);
+      //   return;
+      // }
+  
+      this.auth.signUp(firstName, lastName, email, gender, password, confirmPassword, phone).pipe(
+        tap(response => {
+          if (response) {
             this.signUpForm.reset();
-            // this.router.navigate(['/products']);
+            this.spinnerService.hide();
+
             console.log('Sign up success');
+            this.router.navigate(['/products']);
             const redirectUrl = this.auth.redirectUrl ? this.auth.redirectUrl : '/';
             this.router.navigateByUrl(redirectUrl);
-            this.showToastSuccess()
+            this.showToastSuccess();
   
             // Clear the redirect URL
             this.auth.redirectUrl = null;
-            this.errorMessageSubject.next(''); // Clear error message on successful login          } else {
-            console.error('sign up failed');
+            this.errorMessageSubject.next(''); // Clear error message on successful sign-up
+          } else {
+            console.error('Sign up failed');
           }
         }),
         catchError(err => {
@@ -79,16 +81,25 @@ export class SignUpComponent implements OnInit {
           this.errorMessageSubject.next(this.errorMessage);
           
           console.error('Sign up error:', this.errorMessage);
-          this.showToastError(this.errorMessage)
+          this.showToastError(this.errorMessage);
+          this.spinnerService.hide();
+
           return EMPTY;
         })
       ).subscribe();
+    } else {
+      this.errorMessage = 'Form is not valid';
+      this.errorMessageSubject.next(this.errorMessage);
+      this.showToastError(this.errorMessage);
+      this.spinnerService.hide();
+
     }
   }
 
-  // showToast(message: string) {
-  //   console.log('showToast in SignUpComponent called with message:', message); // Debugging log
-  //   this.toastService.show(message);
+  // passwordsMatch(group: FormGroup): { [key: string]: boolean } | null {
+  //   const password = group.get('password')?.value;
+  //   const confirmPassword = group.get('confirmPassword')?.value;
+  //   return password === confirmPassword ? null : { passwordsMismatch: true };
   // }
 
   showToastSuccess() {
@@ -106,3 +117,11 @@ export class SignUpComponent implements OnInit {
   }
 
 }
+
+
+
+
+
+
+
+
