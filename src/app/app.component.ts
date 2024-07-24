@@ -133,9 +133,13 @@ export class AppComponent implements OnInit {
   }
   
   logOut(): void {
+    this.spinnerService.show();
+
     this.auth.logOut().subscribe(
       () => {
         this.router.navigate(['/login']);
+        this.spinnerService.hide();
+
         console.log('Log out success');
       }
     ); 

@@ -10,8 +10,7 @@
         <div class="container">
             <div class="center">
                 <h5 class="fw-bold fs-4">Welcome to Jossy</h5>
-                <p class="text" style="color: rgba(84, 83, 83, 0.978); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; margin-bottom: 0; ">Let's get started by creating your account. <br>
-                To keep your account safe, we need a strong password</p>
+                <p class="text" style="color: rgba(84, 83, 83, 0.978); font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; margin-bottom: 0; ">Type your e-mail to log in or create a new account.</p>
             </div>
             <div>
                 <form novalidate autocomplete="off" [formGroup]="loginForm" (ngSubmit)="save()">
@@ -66,12 +65,14 @@
     
                 <p class="enquiry text-center mt-2" style="font-size: 0.93rem; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">For further support, you may visit the Help Center or contact our customer service team.</p>
                     
+                <p class="signup text-center mt-3 mb-5" style="font-size: 0.9rem; font-family: Roboto, Helvetica Neue, sans-serif;">Don't have an account? <a style="font-size: 0.95rem;" [routerLink]="['/user/signup']" routerLinkActive="router-link-active" >Sign Up Here</a>
+                </p>
+                
                 <div class="header d-flex align-items-center">
                     <h5 class="mb-0 fw-bold me-1" >JOSSY</h5>
     
                     <span class="material-icons icon">star</span>
                 </div>
-                <p class="signup text-center mt-0" style="font-size: 0.9rem; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Don't have an account? <a [routerLink]="['/user/signup']" routerLinkActive="router-link-active" >Sign Up</a></p>
             </div>
         </div>
 
