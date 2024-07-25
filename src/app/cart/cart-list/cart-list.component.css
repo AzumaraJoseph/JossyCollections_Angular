@@ -79,15 +79,16 @@ hr {
   
   @keyframes spinner-border {
     to { transform: rotate(360deg); }
+
   }
 
 
-@media (min-width: 577px) {
+/* @media (min-width: 577px) {
     .footer-small-screen {
         display: none !important;
-        /* visibility: hidden; */
+        /* visibility: hidden; *
     }
-}
+} */
 
 @media (max-width: 577px) {
     .cart-list {
@@ -96,12 +97,18 @@ hr {
     }
 
     .price {
+        flex-direction: row !important;
+        justify-content: space-between !important;
         align-items: flex-start !important;
         padding: 0 !important;
     }
 
+    .button-delete {
+        padding: 0 !important;
+    }
+
     .footer {
-        display: none !important;
+        /* display: none !important; */
     }
 
     .footer-small-screen {
@@ -125,4 +132,46 @@ hr {
     .quantity {
         font-size: 1rem !important;
     }
+
+    .detail {
+        font-size: 0.93rem !important;
+    }
+}
+
+
+@media (max-width: 450px) {
+    .detail {
+        width: 100% !important;
+        padding: 0 !important;
+        margin-bottom: 0.3rem !important;
+    }
+
+    .description {
+        align-self: flex-start !important;
+    }
+
+    .reAlign {
+        flex-direction: column !important;
+    }
+
+    .tradeMark {
+        font-size: 0.5rem !important;
+    }
+
+    .tradeMArk-img {
+        width: 0.5rem !important;
+    }
+
+    .color {
+        display: none !important;
+    }
+
+    .name {
+        font-size: 0.85rem !important;
+    }
+
+    .detail-quantity {
+        font-size: 0.7rem !important;
+    }
+
 }

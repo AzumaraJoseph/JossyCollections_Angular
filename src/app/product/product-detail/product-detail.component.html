@@ -1,10 +1,10 @@
 `<div class="fluid-container detail mt-4 pt-3 pb-3 d-flex flex-column" style="background-color: rgba(241, 241, 241, 0.982);">
     <app-spinner></app-spinner>
     <div class="card"
-        style="background-color: rgba(241, 241, 241, 0.982); padding: 0.5rem 2rem;" *ngIf="selectProduct$ | async as product">
-        <h3 class="detail-title p-2 fs-5">Product Detail: {{product.name}}</h3>
+        style="background-color: rgba(241, 241, 241, 0.982);" *ngIf="selectProduct$ | async as product">
+        <h3 class="detail-title mb-0 p-2 fs-5">Product Detail: {{product.name}}</h3>
         <div class="card-header" style="background-color: rgba(255, 255, 255, 0.993)">
-            <h3 class="detail-title p-2 fs-4 text-center">{{product.description}}</h3>
+            <p class="detail-title p-2 fs-4 text-center">{{product.description}}</p>
             <div class="card-img-top d-flex justify-content-center" >
                 <img src="https://anneth.s3.eu-north-1.amazonaws.com/product/800x800_{{product.imageCover}}" class="img-fluid" alt="Product Detail Image">
             </div>
@@ -83,7 +83,7 @@
                 </div>
                 <div well-body>
                     <h4 class="card-text text-center pt-4 pb-4">Product Specification</h4>
-                    <table class="card-text table table-responsive">
+                    <table class="table table-responsive">
                         <tbody>
                             <tr>
                                 <th scope="row">1</th>

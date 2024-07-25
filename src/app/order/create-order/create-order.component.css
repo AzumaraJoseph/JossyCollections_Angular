@@ -1,6 +1,8 @@
 
 .order {
-    width: 30%;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: rgb(212 5 5 / 96%);
 }
 
 /* 967-945 */
@@ -10,8 +12,8 @@
     }
 
     .item-container {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: column !important;
+        align-items: flex-start !important;
     }
 }
 
@@ -29,8 +31,8 @@
     }
 
     .item-container {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: column !important;
+        align-items: flex-start !important;
     }
 
     /* .item {
@@ -43,4 +45,24 @@
         margin-top: 1rem !important;
     }
 
+    .order {
+        /* display: none !important; */
+    }
+
+    .tradeMark {
+        font-size: 0.5rem !important;
+    }
+
+    .tradeMArk-img {
+        width: 0.5rem !important;
+    }
+
+    .order-1 {
+        font-size: 0.8rem !important;
+        
+    }
+    
+
 }
+
+

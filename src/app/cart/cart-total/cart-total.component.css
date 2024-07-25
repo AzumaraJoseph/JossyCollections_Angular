@@ -28,10 +28,14 @@
     }
 
     .card-text {
-        font-size: 1rem;
+        font-size: 1rem !important;
     }
 
     .checkOut {
+        font-size: 0.9rem !important;
+    }
+
+    .card-body {
         font-size: 0.9rem !important;
     }
 }

@@ -29,6 +29,7 @@ export class SpinnerService {
   show() {
     // console.log('Spinner show called');
     this.loadingSubject.next(true);
+  
   }
   
   hide() {

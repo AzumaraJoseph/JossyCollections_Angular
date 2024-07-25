@@ -99,7 +99,7 @@
 
     .related-product .card-text {
         font-size: 1rem !important;
-        padding-left: 0 !important;
+        padding-left: 1rem !important;
     }
 
     .row {
@@ -120,10 +120,14 @@
         font-size: 1.1rem !important;
     }
 
+    .table {
+        font-size: 0.8rem !important;
+    }
+
     .detail-align {
         /* padding: 0 !important; */
-        padding-left: 1rem !important;
-        padding-right: 1rem !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
         margin-bottom: 0.5rem !important;
     }
 
@@ -131,6 +135,16 @@
         font-size: 0.83rem !important;
     }
     
+}
+
+@media (max-width: 500px) {
+    .detail-title {
+        font-size: 0.9rem !important;
+    }
+
+    .detail-description, .price {
+        font-size: 0.7rem !important;
+    }
 }
 
 

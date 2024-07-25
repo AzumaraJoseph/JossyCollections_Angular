@@ -6,6 +6,17 @@
     /* background-color: rgba(246, 246, 246, 0.982); */
 }
 
+.opacity {
+    background: rgba(0, 0, 0, 0.5); /* Background with opacity */
+    opacity: 1;
+    z-index: 500000;
+}
+
+.opacity .hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
 .image {
     width: 2.8rem;
     height: 2.8rem;
@@ -317,6 +328,10 @@
     .nav {
         width: 90% !important;
     }
+
+    .fst-italic {
+        font-size: 1.1rem !important;
+    } 
 }
 
 @media (max-width: 376px) {

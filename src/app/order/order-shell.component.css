@@ -1,0 +1,14 @@
+@media (min-width: 768px) and (max-width: 900px) {
+    .col-md-7 {
+        width: 90%;
+    }  
+    .col-md-4 {
+        width: 90%;
+    }  
+}
+@media (max-width: 577px) { 
+    .row {
+        padding: 0rem !important;
+        margin-top: 2rem !important;
+    }
+}

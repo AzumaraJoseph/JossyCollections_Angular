@@ -34,6 +34,16 @@
 
 }
 
+@media (min-width: 768px) and (max-width: 900px) {
+    .col-md-7 {
+        width: 90%;
+    }  
+    .col-md-4 {
+        width: 90%;
+    }  
+}
+  
+
 @media (max-width: 767px) {
     /* .custom-layout .custom-col {
         flex: 0 0 100% !important;
@@ -46,10 +56,10 @@
 }
 
 @media (max-width: 577px) {
-    /* .card-align {
-        padding: 0 2rem !important;
-        /* padding-right: 1.2rem !important; *
-    } */
+    .card-align {
+        padding: 0rem !important;
+        /* padding-right: 1.2rem !important; */
+    }
 
     .card-align-title {
         margin: 0 0 0.7rem !important;
@@ -73,6 +83,10 @@
 
     .card-text {
         font-size: 1rem !important;
+    }
+
+    .custom-layout {
+        padding: 0rem !important;
     }
 }
 

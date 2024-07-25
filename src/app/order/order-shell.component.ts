@@ -12,11 +12,12 @@ import { ToastService } from '../shared/toast.service';
   <div class="col-md-7">
       <app-create-order></app-create-order>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-4 mb-4">
       <app-create-order-total></app-create-order-total>
     </div>
   </div>
-`
+`,
+styleUrls: ['./order-shell.component.css'],
 })
 export class OrderShellComponent implements OnInit {
 

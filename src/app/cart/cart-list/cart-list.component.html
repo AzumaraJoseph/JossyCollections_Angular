@@ -7,13 +7,13 @@
             <div *ngIf="allCart?.items?.length;" >
                 <div class="card-body cart-item" *ngFor="let cart of allCart?.items; let i = index" >
                     <div class="row" style="padding: 0.6rem 0.8rem;" >
-                        <div class="col-md-10 col-sm-10 d-flex align-items-center p-0" >
-                            <img [src]="'https://anneth.s3.eu-north-1.amazonaws.com/product/800x800_' + cart.image" class="me-3" style="width: 5rem;" alt="">
+                        <div class="col-md-10 col-sm-10 d-flex align-items-center p-0 reAlign">
+                            <img [src]="'https://anneth.s3.eu-north-1.amazonaws.com/product/800x800_' + cart.image" class="description me-3" style="width: 5rem;" alt="">
             
-                            <div style="padding: 0 0.7rem;">
-                                <p class="mb-0">{{cart.name}}</p>
-                                <p class="mb-0">{{cart.color}}</p>
-                                <p class="mb-0" 
+                            <div class="detail" style="padding: 0 0.7rem;">
+                                <p class="name mb-0">{{cart.name}}</p>
+                                <p class="color mb-0">{{cart.color}}</p>
+                                <p class="detail-quantity mb-0" 
                                     [style.color]="getColors(cart.maxQuantity)"
                                     style="font-size: 0.8rem;" 
                                     *ngIf="cart.maxQuantity">
@@ -24,9 +24,9 @@
                                     cart.maxQuantity > 110 ? "In Stock" : ""}}
                                 </p>
                                 <div>
-                                    <span style="font-size: 0.8rem; font-weight: 700;">JOSSY</span>
-                                    <img src="../../../assets/products/paper-plane-3.png" style="width: 0.8rem; margin: 0 2px;" alt="">
-                                    <span style="color: red; font-size: 0.7rem; font-family:Verdana, Geneva, Tahoma, sans-serif">EXPRESS</span>
+                                    <span class="tradeMark" style="font-size: 0.8rem; font-weight: 700;">JOSSY</span>
+                                    <img src="../../../assets/products/paper-plane-3.png" class="tradeMArk-img" style="width: 0.8rem; margin: 0 2px;" alt="">
+                                    <span class="tradeMark" style="color: red; font-size: 0.7rem; font-family:Verdana, Geneva, Tahoma, sans-serif">EXPRESS</span>
                                 </div>
                             </div>
                         </div>
@@ -80,7 +80,7 @@
                         </div>
                     </div>
 
-                    <div class="footer-small-screen d-flex justify-content-between">
+                    <!-- <div class="footer-small-screen d-flex justify-content-between">
                         <div class="btn-height d-flex" style="height: 2rem">
                             <button [disabled]="quantity === 0" type="button" class="button-adjust btn"
                                 (click)="decrement(cart._id)" >
@@ -88,11 +88,17 @@
                                     remove
                                 </span>
                             </button>
-                            <!-- {{ quantities[cart._id] }} -->
+                            <!-- {{ quantities[cart._id] }} --
                             <p class="quantity" style="position: relative;" >
                                 <ng-container *ngIf="!isLoadingQuantity; else loadingQuantity">
                                     {{ quantities[cart._id] }}
                                   </ng-container>
+                                  <!-- <ng-template #loadingQuantity>
+                                    <div class="spinner">
+                                        <div class="spinner-border"   role="status">
+                                        </div>
+                                      </div>
+                                  </ng-template> --
                                   <ng-template #loadingQuantity>
                                     <div class="spinner">
                                         <div class="spinner-border"   role="status">
@@ -117,7 +123,7 @@
                         </button>
         
                         
-                    </div>
+                    </div> -->
                 </div>
     
             </div>

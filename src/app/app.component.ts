@@ -25,6 +25,9 @@ export class AppComponent implements OnInit {
   user: any;
   // isLoggedIn = false;
 
+  isLoading!: Observable<boolean>;
+
+
   loading: boolean = true;
 
   errorMessageSubject = new Subject<string>();
@@ -58,6 +61,8 @@ export class AppComponent implements OnInit {
     
     router.events.subscribe((routerEvent: Event) => {
       this.checkRouterEvent(routerEvent);
+      this.isLoading = this.spinnerService.isLoading;
+
     });
 
    }
