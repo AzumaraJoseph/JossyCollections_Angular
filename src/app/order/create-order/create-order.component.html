@@ -47,7 +47,7 @@
                         <!-- <p class=" mb-0">{{cart.quantity}}</p> -->
                     <!-- </div> -->
                     <div class="d-flex mb-1 ">
-                        <p *ngIf="cart.discountPrice * cart.quantity <= 55" class="order-1 order mb-0">Shipping fee: {{ shippingFeePerItem }}</p>
+                        <p *ngIf="cart.discountPrice * cart.quantity <= 55" class="order-1 order mb-0">Shipping fee: {{"$" + shippingFeePerItem }}</p>
                         <!-- <p class=" mb-0 fw-semibold text-danger" *ngIf="cart.discountPrice * cart.quantity > 55">free</p>
                         <p class=" mb-0 fw-bold " *ngIf="cart.discountPrice * cart.quantity <= 55">{{ shippingFeePerItem }}</p> -->
                     </div>

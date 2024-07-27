@@ -1,6 +1,4 @@
-<span class="spinner spinner-border"
-        *ngIf="loading" style="margin-top: 5rem;">
-</span>
+
   <nav class="navBar navBar-expand fixed-top" style="background-color: white;">
     <div class="nav pt-2 pb-2 ps-3 pe-3 d-flex align-items-center justify-content-between">
       <div class=" brand-sizing">
@@ -120,7 +118,6 @@
        <div class="fluid-container">
          <div [@slideInAnimation]="o.isActivated ? o.activatedRoute : ''">
            <router-outlet #o="outlet"></router-outlet>
-           <!-- <app-spinner></app-spinner> -->
            <app-toast></app-toast>
          </div>
      

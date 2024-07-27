@@ -30,7 +30,6 @@ input:autofill {
     box-shadow: 0 0 0 1000px white inset !important;
     background-color: white !important;
 }
-  
 
 .is-invalid {
     border-color: red;

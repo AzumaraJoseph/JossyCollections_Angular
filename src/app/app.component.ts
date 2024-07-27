@@ -21,7 +21,7 @@ export class AppComponent implements OnInit {
   isClicked: boolean = false;
   currentUser: any;
   cart$!: Observable<any>;
-  cartCount!: number;
+  cartCount: number = 0;
   user: any;
   // isLoggedIn = false;
 
@@ -90,10 +90,18 @@ export class AppComponent implements OnInit {
         this.user = response
         // console.log('hahahahahaa', JSON.stringify(this.user));
       })
+
+      // this.cartCounts()
+
+      // this.cartService.getTotalQuantity().subscribe(data => {
+      //   this.cartCount = data
+      //   // console.log('cartBag', JSON.stringify(data));
+    
+      // })
     }
 
 
-    this.cartCounts()
+  this.cartCounts()
 
   this.cartService.getTotalQuantity().subscribe(data => {
     this.cartCount = data
@@ -105,23 +113,26 @@ export class AppComponent implements OnInit {
   }
 
   cartCounts() {
-    this.auth.getCart(null).pipe(
-      tap(cart => {
-      this.cartCount = cart.totalQuantityOrdered;
-      this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
+    // if (this.isLoggedIn) {
 
-      // console.log('cartBag', JSON.stringify(cart))
-
-    }),
-    catchError(err => {
-      this.errorMessage = err.message || 'An unknown error occurred';
-      this.errorMessageSubject.next(this.errorMessage);
-      this.showToastError(this.errorMessage);
-
-      console.error('Cart count error:', this.errorMessage);
-      return EMPTY;
-    })
-    ).subscribe();
+      this.auth.getCart(null).pipe(
+        tap(cart => {
+        this.cartCount = cart.totalQuantityOrdered;
+        this.cdr.markForCheck(); // instead of refreshing the page to see changes, call this method and also make sure changedetection set to onPush is on
+  
+        // console.log('cartBag', JSON.stringify(cart))
+  
+      }),
+      catchError(err => {
+        this.errorMessage = err.message || 'An unknown error occurred';
+        this.errorMessageSubject.next(this.errorMessage);
+        // this.showToastError(this.errorMessage);
+  
+        console.error('Cart count error:', this.errorMessage);
+        return EMPTY;
+      })
+      ).subscribe();
+    // }
   }
 
 

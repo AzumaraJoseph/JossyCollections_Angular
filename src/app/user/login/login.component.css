@@ -29,7 +29,7 @@
 }
 
 .form-control {
-    padding: 0rem;
+    /* padding: 0rem; */
 }
 
 input {
@@ -79,7 +79,6 @@ input:autofill {
 a {
     text-decoration: none;
     color: #f68b1e; 
-
 }
 
 label {

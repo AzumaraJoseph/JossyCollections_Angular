@@ -45,7 +45,6 @@ export class DialogueComponent implements OnInit {
 constructor(private auth: AuthService, private router: Router, private guard: AuthGuard, private route: ActivatedRoute, private toastService: ToastService, private spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
-    // this.spinnerService.show();
 
     // Read the returnUrl query parameter from the route
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
@@ -71,7 +70,6 @@ constructor(private auth: AuthService, private router: Router, private guard: Au
 increment(maxQuantity: number): void {
   if (this.quantity < maxQuantity) {
     this.isLoadingQuantity = true; // Set loading state to true
-    this.spinnerService.show();
     setTimeout(() => {
       this.spinnerService.hide();
       this.isLoadingQuantity = false; // Set loading state to false
@@ -88,7 +86,6 @@ increment(maxQuantity: number): void {
 decrement(): void {
   if(this.quantity > 1) {
     this.isLoadingQuantity = true; // Set loading state to true
-    this.spinnerService.show();
     setTimeout(() => {
       this.spinnerService.hide();
       this.isLoadingQuantity = false; // Set loading state to true
@@ -112,27 +109,9 @@ decrement(): void {
 // }
 
 
-
-save(cartForm: NgForm) {
-  console.log(cartForm.value);
-  
-  if (cartForm.valid) {
-    this.isLoadingForm = true; // Set loading state to true
-    this.addCart(cartForm.value);
-  } else {
-    console.error('Form is invalid');
-    // this.closeModal();
-    // auth guard was used instead
-    // this.router.navigate(['/user/login'])
-
-  }
-}
-
-
 addCart(formData: any) {
 
   // If the user is logged in, proceed with adding to the cart
-  this.spinnerService.show();
 
     this.auth.createCart(formData.id, formData.quantity, formData.color).subscribe(
       response => {
@@ -142,9 +121,11 @@ addCart(formData: any) {
   
         this.closeModal();
         // this.showToast('Item(s) added to cart successfully')
-        this.toastService.show('Item(s) added to cart successfully', 'success');
-  
-  
+
+          
+        if (this.isLoggedIn) this.toastService.show('Item(s) added to cart successfully', 'success');
+        
+        
         // Route to Cart
         this.router.navigate(['/cart']);
       },
@@ -154,7 +135,7 @@ addCart(formData: any) {
         this.showToastError(error);
         console.error('Error adding to cart', error);
 
-        this.router.navigate(['/login']);
+        this.router.navigate(['/cart']);
         this.closeModal();
 
 
@@ -163,7 +144,24 @@ addCart(formData: any) {
 
   }
     
+  save(cartForm: NgForm) {
+    console.log(cartForm.value);
+    
+    if (cartForm.valid) {
+      // this.isLoadingForm = true; // Set loading state to true
+      this.spinnerService.show();
+      this.isLoadingForm = true; // Set loading state to true
+      this.addCart(cartForm.value);
+    } else {
+      console.error('Form is invalid');
+      // this.closeModal();
+      // auth guard was used instead
+      // this.router.navigate(['/user/login'])
+  
+    }
+  }
 
+  
   closeModal() {
     // Hide the Bootstrap modal
     $('.modal').modal('hide');

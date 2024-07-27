@@ -28,7 +28,8 @@ export class ToastService {
 
   show(message: string, type: ToastType = 'success') {
     console.log('ToastService.show called with message:', message, 'and type:', type); // Debugging log
-    this.messages.push({ message, type });
+    // this.messages.push({ message, type }); // stack multiple messages
+    this.messages = [{ message, type }]; // Clear existing messages and add the new one
     this.toastSubject.next(this.messages);
   }
 
